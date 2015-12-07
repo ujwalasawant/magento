@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <ArtyCart_Customer>
+            <version>0.1.0</version>
+        </ArtyCart_Customer>
+    </modules>
+    <global>
+        <models>
+            <artycart_customer>
+                <class>ArtyCart_Customer_Model</class>
+                <resourceModel>artycart_customer_resource</resourceModel>
+            </artycart_customer>
+            <artycart_customer_resource>
+                <class>ArtyCart_Customer_Model_Resource</class>
+            </artycart_customer_resource>
+        </models>
+        <blocks>
+            <artycart_customer>
+                <class>ArtyCart_Customer_Block</class>
+            </artycart_customer>
+        </blocks>
+        <helpers>
+            <artycart_customer>
+                <class>ArtyCart_Customer_Helper</class>
+            </artycart_customer>
+        </helpers>
+    </global>
+</config>

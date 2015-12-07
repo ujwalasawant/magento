@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <ArtyCart_Customer>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Customer/>
+
+            </depends>
+        </ArtyCart_Customer>
+    </modules>
+</config>
