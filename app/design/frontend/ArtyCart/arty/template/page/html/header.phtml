@@ -19,8 +19,8 @@
  * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
- * @package     rwd_default
- * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 /**
@@ -28,77 +28,113 @@
  */
 ?>
 
-<div class="header-language-background">
-    <div class="header-language-container">
-        <div class="store-language-container">
-            <?php echo $this->getChildHtml('store_language') ?>
+
+<!-- Top Bar -->
+
+<div id="topbar ">
+    <div class="container">
+        <div class="row topmenu">
+            <div class="col-md-4 pull-right" >
+                <?php echo $this->getChildHtml('topbar_cmslinks') ?>
+                <ul class="list-inline float">
+                    <?php if ($this->helper('customer')->isLoggedIn()): ?>
+                        <li>
+                            <a title="<?php echo $this->__('My Account') ?>" href="<?php echo Mage::getUrl('customer/account') ?>">   <?php echo $this->__('My Account') ?>     </a>
+                        </li>
+                        <li>
+                            <a title="Log Out" href="<?php echo Mage::getUrl('customer/account/logout') ?>">     <?php echo $this->__('Logout') ?></a>
+                        </li>
+                    <?php else: ?>
+
+                        <li>
+                            <a href="<?php echo Mage::getUrl('customer/account/create/')?>">  <?php echo $this->__('Sign up') ?></a>
+                        </li>
+
+                        <li >
+                            <?php echo $this->getChildHtml('header_customer_form_mini_login') ?>
+
+                        </li>
+
+
+
+                    <?php endif; ?>
+                </ul>
+            </div>
+            <div class="user-links col-md-8" >
+	  	  	           	  <span class="welcome pull-left">
+	  	  	           	  	   <!--<?php echo $this->getLayout()->getBlock('header')->getWelcome() ?>-->
+	  	  	           	 </span>
+            </div>
         </div>
 
-        <?php echo $this->getChildHtml('currency_switcher') ?>
-
-        <p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getChildHtml('accountLinks') ?></p>
-    </div>
-</div>
-
-<header id="header" class="page-header">
-    <div class="page-header-container">
-        <a class="logo" href="<?php echo $this->getUrl('') ?>">
-            <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
-            <img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small" />
-        </a>
-
-        <?php // In order for the language switcher to display next to logo on smaller viewports, it will be moved here.
-              // See app.js for details ?>
-        <div class="store-language-container"></div>
-
-        <!-- Skip Links -->
-
-        <div class="skip-links">
-            <a href="#header-nav" class="skip-link skip-nav">
-                <span class="icon"></span>
-                <span class="label"><?php echo $this->__('Menu'); ?></span>
-            </a>
-
-            <a href="#header-search" class="skip-link skip-search" style="border: solid black">
-                <span class="icon"></span>
-                <span class="label"><?php echo $this->__('Search'); ?></span>
-            </a>
-
-            <div class="account-cart-wrapper">
-                <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account" class="skip-link skip-account">
-                    <span class="icon"></span>
-                    <span class="label"><?php echo $this->__('Account'); ?></span>
-                </a>
-
-                <!-- Cart -->
-
-                <div class="header-minicart">
-                    <?php echo $this->getChildHtml('minicart_head'); ?>
+        <div class="row" >
+            <div class="col-md-4 vbottom" style="border: solid red ;width= 30% ; height=60%">
+                <div class="logobox">
+                    <?php if ($this->getIsHomePage()):?>
+                        <h1 >
+                            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+                                <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>"  class="img img-responsive logo" style="padding: 0%" /></a></h1>
+                    <?php else: ?>
+                        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+                    <?php endif ?>
+                </div>
+            </div>
+            <div class="col-md-5 vbottom" style="border: solid">
+                <div class="searchbox">
+                    <?php echo $this->getChildHtml('topSearch') ?>
                 </div>
             </div>
 
+            <div class="col-md-2 vbottom" style="border: solid" >
 
+                <div class=" cartbox " >
+                    <?php $_cartQty = $this -> getSummaryCount();
+                    if (empty($_cartQty)) {
+                        $_cartQty = 0;
+                    }
+                    ?>
+                    <a href="<?php echo $this -> helper('checkout/cart') -> getCartUrl(); ?>" data-target-element="#header-cart" class=" skip-cart <?php if($_cartQty <= 0): ?> no-count<?php endif; ?>">
+                        <span ><img src="<?php echo $this->getSkinUrl('images/artcrt.png') ?>" /></span>
+                        <span ><?php echo $this -> __('Cart'); ?></span>
+                        <span class="count"><?php echo $_cartQty; ?></span>
+                    </a>
+
+                    <div id="header-cart" class=" block block-cart skip-content" style="padding-top: 10%">
+                        <?php echo $this -> getChildHtml('minicart_content'); ?>
+                    </div>
+                </div>
+
+                <div class="block" >
+                    <?php echo $this -> getChildHtml('cart_sidebar'); ?>
+                </div>
+
+
+            </div>
         </div>
 
-        <!-- Navigation -->
 
-        <div id="header-nav" class="skip-content">
-            <?php echo $this->getChildHtml('topMenu') ?>
-        </div>
 
-        <!-- Search -->
+        <div class="row smallheader" >
+            <nav class="navbar navbar-default nav-justified" role="navigation">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#"> <?php echo $this->__('Categories') ?></a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                        <span class="sr-only"><?php echo $this->__('Toggle Navigation') ?></ span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                </div>
+                <div class="collapse navbar-collapse" id="collapse">
+                    <?php echo $this->getChildHtml('topMenu') ?>
 
-        <div id="header-search" class="skip-content">
-            <?php echo $this->getChildHtml('topSearch') ?>
-        </div>
 
-        <!-- Account -->
+                </div>
 
-        <div id="header-account" class="skip-content">
-            <?php echo $this->getChildHtml('topLinks') ?>
+
+
+            </nav>
         </div>
     </div>
-</header>
+
+    <?php echo $this->getChildHtml('topContainer'); ?>
 
 
-<?php echo $this->getChildHtml('topContainer'); ?>

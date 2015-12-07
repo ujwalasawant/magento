@@ -24,18 +24,8 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php
-/**
- * Top menu for store
- *
- * @see Mage_Page_Block_Html_Topmenu
- */
-?>
-<?php $_menu = $this->getHtml('level-top') ?>
-<?php if($_menu): ?>
-    <div class="nav-container">
-        <ul id="nav" class="nav nav-tabs nav-justified">
-            <?php echo $_menu ?>
-        </ul>
-    </div>
-<?php endif ?>
+<div class="col-2">
+    <h4><?php echo $this->__('Newsletters') ?></h4>
+    <a href="<?php echo $this->getUrl('newsletter/manage') ?>"><?php echo $this->__('Edit Newsletters') ?></a>
+    <p><?php echo $this->__('You are currently subscribed to our newsletter.') ?></p>
+</div>

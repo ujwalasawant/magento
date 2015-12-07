@@ -1,0 +1,152 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<form id="loginForm" method="post" class="form-horizontal" action="<?php echo $this->getPostActionUrl() ?>">
+    <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+<p class="text-center">
+    <a href="" data-toggle="modal" data-target="#loginModal">Login</a>
+</p>
+<div class="container-fluid">
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-xs-2 pull-right">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="col-md-6 col-sm-6  col-xs-6 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+                        <h5 class="modal-title">Welcome to <img  src="<?php echo $this->getSkinUrl('images/artcrt.png') ?>" height="50px" width="80px"/>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <!-- The form is placed inside the body of modal -->
+
+
+
+                    <div class="row">
+                        <div class="col-lg-7 col-md-6">
+
+                            <div class="block-content">
+
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <div class="text-center Login-header">
+                                        <span><?php echo $this->__('Login') ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row text-center row-height" >
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <label for="email" class="required login-font"><?php echo $this->__('Email Id') ?></label>
+
+                                    </div>
+                                    <div class="col-md-8 col-sm-6 col-xs-12">
+                                        <input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email form-control login-textbox" title="<?php echo $this->__('Email Address') ?>" />
+
+                                    </div>
+                                </div>
+                                <div class="row text-center row-height">
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <label for="pass" class="required login-font"><?php echo $this->__('Password') ?></label>
+
+                                    </div>
+                                    <div class="col-md-8 col-sm-6 col-xs-12 ">
+                                        <input type="password" name="login[password]" class="input-text required-entry validate-password form-control login-textbox" id="pass" title="<?php echo $this->__('Password') ?>" />
+
+                                    </div>
+                                    <?php echo $this->getChildHtml('form.additional.info'); ?>
+
+                                </div>
+                                <div class="row row-height">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 actions text-center">
+                                        <button type="submit" class="Artybutton">
+                                            <span><span><?php echo $this->__('Login') ?></span></span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-lg-5 col-md-6 hidden-sm hidden-xs">
+                            <?php echo $this->__(' This is a site for fjsdfjsdfa for seling and buying We would not post on your
+                                behalf is a site for dbfsjdfjh for seling ad buying We would not post on your
+                                behalf ')?>
+                        </div>
+                    </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+    <div>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var dataForm = new VarienForm('login-form', true);
+    //]]>
+</script>
+<script>
+    $(document).ready(function () {
+        $('#loginForm').formValidation({
+            framework: 'bootstrap',
+            excluded: ':disabled',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The username is required'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                }
+            }
+        });
+    });
+    $('#loginModal').on('hidden.bs.modal', function () {
+        $('#loginForm').formValidation('resetForm', true);
+    });
+</script>
