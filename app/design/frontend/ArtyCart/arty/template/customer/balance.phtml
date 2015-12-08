@@ -24,18 +24,8 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php
-/**
- * Top menu for store
- *
- * @see Mage_Page_Block_Html_Topmenu
- */
-?>
-<?php $_menu = $this->getHtml('level-top') ?>
-<?php if($_menu): ?>
-    <div class="nav-container">
-        <ul id="nav" class="nav nav-tabs nav-justified">
-            <?php echo $_menu ?>
-        </ul>
-    </div>
-<?php endif ?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<?php echo $this->__('Your account balance is: %s', $customer->getStoreBalance()) ?>
+<div class="buttons-set">
+    <p class="back-link"><a href="<?php echo $this->getUrl('customer/account') ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+</div>

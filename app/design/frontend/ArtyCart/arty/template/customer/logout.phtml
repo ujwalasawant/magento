@@ -24,18 +24,12 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php
-/**
- * Top menu for store
- *
- * @see Mage_Page_Block_Html_Topmenu
- */
-?>
-<?php $_menu = $this->getHtml('level-top') ?>
-<?php if($_menu): ?>
-    <div class="nav-container">
-        <ul id="nav" class="nav nav-tabs nav-justified">
-            <?php echo $_menu ?>
-        </ul>
-    </div>
-<?php endif ?>
+<div class="page-title">
+    <h1><?php echo Mage::helper('customer')->__('You are now logged out') ?></h1>
+</div>
+<p><?php echo Mage::helper('customer')->__('You have logged out and will be redirected to our homepage in 5 seconds.') ?></p>
+<script type="text/javascript">
+//<![CDATA[
+    setTimeout(function(){ location.href = '<?php echo $this->getUrl() ?>'},5000);
+//]]>
+</script>
