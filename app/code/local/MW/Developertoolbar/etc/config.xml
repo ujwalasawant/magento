@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MW_Developertoolbar>
+            <version>1.0.0</version>
+        </MW_Developertoolbar>
+    </modules>
+    <frontend>
+        <routers>
+            <developertoolbar>
+                <use>standard</use>
+                <args>
+                    <module>MW_Developertoolbar</module>
+                    <frontName>developertoolbar</frontName>
+                </args>
+            </developertoolbar>
+        </routers>
+        <layout>
+            <updates>
+                <developertoolbar>
+                    <file>mw_developertoolbar.xml</file>
+                </developertoolbar>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<developertoolbar>
+				<use>admin</use>
+				<args>
+					<module>MW_Developertoolbar</module>
+					<frontName>developertoolbar</frontName>
+				</args>
+			</developertoolbar>
+        </routers>
+    </admin>
+    <adminhtml>
+		<layout>
+			<updates>
+				<developertoolbar>
+					<file>mw_developertoolbar.xml</file>
+				</developertoolbar>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+    <!--  
+        <models>
+            <developertoolbar>
+                <class>MW_Developertoolbar_Model</class>
+            </developertoolbar>
+        </models>
+	-->
+        <blocks>
+            <developertoolbar>
+                <class>MW_Developertoolbar_Block</class>
+            </developertoolbar>
+        </blocks>
+        <helpers>
+            <developertoolbar>
+                <class>MW_Developertoolbar_Helper</class>
+            </developertoolbar>
+        </helpers>
+    </global>
+	<stores>
+        <default>
+            <web>
+                <routers>
+                	<standard><area>frontend</area><class>MW_Developertoolbar_Controller_Router_Standard</class></standard>
+                </routers>
+            </web>
+        </default>
+    </stores>
+	<default>
+		<dev>
+			<offline>
+				<mwdevtoolbar>1</mwdevtoolbar>
+				
+			</offline>
+		</dev>
+		
+		<web>
+            <routers> 
+                 <standard><area>frontend</area><class>MW_Developertoolbar_Controller_Router_Standard</class></standard>
+            </routers>
+		</web>
+		<dev>
+			<offline>
+                <enable>0</enable>
+                <reminder>0</reminder>
+				<message><![CDATA[
+<style>
+body {
+  margin:0;
+  padding:0;
+  background: #618498;
+  color: #FFFFFF;
+
+  font-family: Arial,Verdana,Tahoma;
+  text-align:center;
+}
+h1 {
+    margin:0px;
+    padding:0px;
+     margin-top:20%;
+
+     font-size: 24pt;
+     display:block;
+}
+h2 {
+    padding:0px;
+     margin-top: 5px;
+     font-size: 18pt;
+}
+
+</style>
+</head>
+
+<body>
+  <h1>Our site is currently down for maintenance</h1>
+  <h2>We expect to be back online shortly. Thanks for your patience!</h2>
+</body>
+ ]]>
+				</message> 
+			</offline>
+		</dev>
+	</default>
+</config>

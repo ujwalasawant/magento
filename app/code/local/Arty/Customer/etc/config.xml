@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arty_Customer>
+            <version>1.6.0</version>
+        </Arty_Customer>
+    </modules>
+    <global>
+        <fieldsets>
+            <customer_account>
+                <mobile>
+                    <create>1</create>
+                    <update>1</update>
+                    <name>1</name>
+                </mobile>
+            </customer_account>
+        </fieldsets>
+
+        <models>
+            <arty_customer>
+                <class>Arty_Customer_Model</class>
+                <resourceModel>arty_customer_resource</resourceModel>
+            </arty_customer>
+            <arty_customer_resource>
+                <class>Arty_Customer_Model_Resource</class>
+            </arty_customer_resource>
+        </models>
+        <blocks>
+            <arty_customer>
+                <class>Arty_Customer_Block</class>
+            </arty_customer>
+        </blocks>
+        <helpers>
+            <arty_customer>
+                <class>Arty_Customer_Helper</class>
+            </arty_customer>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <arty_customer>
+                <use>standard</use>
+                <args>
+                    <module>Arty_Customer</module>
+                    <frontName>ChangePassword</frontName>
+                </args>
+            </arty_customer>
+            <customer>
+                <args>
+                    <modules>
+                        <arty_customer before="Mage_Customer">Arty_Customer</arty_customer>
+                    </modules>
+                </args>
+            </customer>
+        </routers>
+        <layout>
+            <updates>
+                <arty_customer>
+                    <file>local.xml</file>
+                </arty_customer>
+            </updates>
+        </layout>
+
+    </frontend>
+    <Arty_Customer_setup> <!-- Replace with your module name -->
+        <setup>
+            <module>Arty_Customer</module>
+            <!-- Replace with your module name -->
+            <class>Mage_Customer_Model_Entity_Setup</class>
+        </setup>
+    </Arty_Customer_setup>
+
+</config>

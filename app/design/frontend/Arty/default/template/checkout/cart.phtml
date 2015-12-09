@@ -1,0 +1,191 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+<div class="cart">
+    <div class="page-title title-buttons">
+        <h4><?php echo $this->__('Cart') ?>
+        <?php
+        $_cartQty = Mage::getSingleton('checkout/cart')->getItemsCount();
+            echo $_cartQty ;
+        ?>
+        </h4>
+
+
+    </div>
+   <?php echo $this->getMessagesBlock()->toHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <fieldset>
+            <div class="container">
+<table class="table table-striped">
+    <tr>
+        <td>
+                <div class="row">
+
+                    <div class="col-lg-2 col-lg-offset-2 vcenter text-center ">Product name </div>
+                    <div class="col-lg-2 vcenter text-center">Qty </div>
+                    <div class="col-lg-1 vcenter text-center">Price </div>
+                    <div class="col-lg-1 col-lg-offset-1 vcenter text-center">Delivery Details </div>
+                    <div class="col-lg-1 col-lg-offset-1 vcenter text-center">Subtotal </div>
+
+                </div>
+        </td>
+    </tr>
+</table>
+
+
+            <table class="table table-hover"  id="shopping-cart-table" >
+                <col width="3" />
+                <col />
+                <col width="3" />
+            <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                <col width="3" />
+            <?php endif ?>
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="3" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="3" />
+            <?php endif; ?>
+                <col width="3" />
+            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="3" />
+            <?php endif; ?>
+            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="3" />
+            <?php endif; ?>
+                <col width="3" />
+
+
+            <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+
+<thead>
+
+                    <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <tr>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                    </tr>
+                    <?php endif; ?>
+</thead>
+
+
+
+                <tbody>
+                <div class="row" >
+                <?php foreach($this->getItems() as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach ?>
+                </div>
+                </tbody>
+
+                <tfoot>
+
+
+                    <div class="row" >
+                        <div class="col-lg-4" >
+                            Shipping to Pin Code:
+                            <?php  echo
+                            $cart = Mage::getSingleton('checkout/cart');
+                            $quote = $cart->getQuote();
+                            $shippingAddress = $quote->getShippingAddress();
+                           $zip = $shippingAddress->getPostcode();
+
+                            ?>
+                        </div>
+                        <div class="col-lg-3 col-lg-offset-5" >
+                            Payable Amount:
+                            <?php
+                            $totals = Mage::getSingleton('checkout/session')->getQuote()->getTotals(); //Total object
+                            $grandtotal = round($totals["grand_total"]->getValue()); //Grandtotal value
+                            echo $formattedPrice = Mage::helper('core')->currency($grandtotal , true, false);
+                            ?>
+                        </div>
+
+                    </div>
+                    <div class="row" >
+                        <div class="col-lg-2 col-lg-offset-8"  >
+                            <?php if($this->getContinueShoppingUrl()): ?>
+                                <button style="width: 180px" type="button" title="<?php echo $this->__('Continue Shop') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Shop More') ?></span></span></button>
+                            <?php endif; ?>
+</div>
+                        <div class="col-lg-2">
+                            <?php if(!$this->hasError()): ?>
+                                <ul class=" checkout-types list-unstyled">
+                                    <?php foreach ($this->getMethods('top_methods') as $method): ?>
+                                        <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                                            <li><?php echo $methodHtml; ?></li>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+</div>
+                           <!--[if lt IE 8]>
+                            <input type="hidden" id="update_cart_action_container" />
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                Event.observe(window, 'load', function()
+                                {
+                                    // Internet Explorer (lt 8) does not support value attribute in button elements
+                                    $emptyCartButton = $('empty_cart_button');
+                                    $cartActionContainer = $('update_cart_action_container');
+                                    if ($emptyCartButton && $cartActionContainer) {
+                                        Event.observe($emptyCartButton, 'click', function()
+                                        {
+                                            $emptyCartButton.setAttribute('name', 'update_cart_action_temp');
+                                            $cartActionContainer.setAttribute('name', 'update_cart_action');
+                                            $cartActionContainer.setValue('empty_cart');
+                                        });
+                                    }
+
+                                });
+                            //]]>
+                            </script>
+                            <![endif]-->
+
+
+                    </div>
+
+                </tfoot>
+            </table>
+
+</div>
+
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </fieldset>
+    </form>
+
+</div>
