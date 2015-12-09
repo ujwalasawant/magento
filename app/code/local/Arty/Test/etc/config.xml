@@ -1,0 +1,21 @@
+<?xml version='1.0' ?>
+
+<config>
+    <modules>
+        <Arty_Test>
+            <version>1.0.0</version>
+        </Arty_Test>
+    </modules>
+    <frontend>
+        <routers>
+            <artytest>
+                <use>standard</use>
+                <args>
+                    <module>Arty_Test</module>
+                    <frontName>artytest</frontName>
+                </args>
+            </artytest>
+        </routers>
+
+    </frontend>
+</config>
