@@ -1,0 +1,32 @@
+<?php
+	$layer = Mage::getSingleton('catalog/layer');
+	$_category   = $layer->getCurrentCategory();
+	$_categories = $_category->getCollection()->addAttributeToSelect(array('url_key','name','image','all_children','is_anchor','description'))
+	->addAttributeToFilter('is_active', 1)
+	->addIdFilter($_category->getChildren())
+	->setOrder('position', 'ASC')
+	->joinUrlRewrite();
+  ?>
+
+<div class="listing-type-list catalog-listing">
+	<ul id="subcats" class="clear">
+		<?php foreach ($_categories as $_category): ?>
+				<?php if($_category->getIsActive()): ?>
+					<?php Mage::log($_category->debug(), null, 'mylogfile.log'); ?>
+					<li>
+						<div class="subcat clearfix">
+							<a class="now-from-container" href="<?php echo $_category->getURL() ?>"></a>
+							<div class="subcat-image">
+								<a href="<?php echo $_category->getURL() ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>">
+									<img src="<?php echo $this->htmlEscape($_category->getImageUrl()) ?>" width="190" alt="<?php echo $this->htmlEscape($_category->getName()) ?>" />
+								</a>
+							</div>
+							<div class="subcat-title-container">
+								<h2><a href="<?php echo $_category->getURL() ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>"><?php echo $this->htmlEscape($_category->getName()) ?></a></h2>
+							</div>
+						</div>
+					</li>
+				<?php endif; ?>
+		<?php endforeach; ?>
+	</ul>
+</div>

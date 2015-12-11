@@ -1,0 +1,20 @@
+<?php
+$_productCollection = Mage::getModel('catalog/product')
+    ->getCollection()
+    ->addAttributeToSort('created_at', 'DESC')
+    ->addAttributeToSelect('name')
+    ->addAttributeToSelect('price')
+    ->load();
+foreach ($_productCollection as $_product){
+    ?>
+    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+    </a>
+
+    <?php
+    echo $_product->getId().'</br>';
+    echo $_product->getName().'</br>';
+    echo $_product->getProductUrl().'</br>';
+    echo $_product->getPrice().'</br>';
+}
+?>

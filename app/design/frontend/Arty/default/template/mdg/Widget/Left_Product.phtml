@@ -38,8 +38,8 @@
         <?php echo $this->getPagerHtml() ?>
         <?php $_columnCount = $this->getColumnCount(); ?>
 
-        <div class="row subcontent" style="border: solid">
-            <div class="col-md-6 pull-right" style="border: solid">
+        <div class="row subcontent" >
+            <div class="col-md-6 pull-right" >
                 <div class="row">
                     <?php foreach ($_products as $_product): ?>
                         <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 _subpadding" >
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left _sub-padding" style="border: solid" >
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left _sub-padding"  >
 
                 <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" >
                     <img class="lightborder" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(572) ?>" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" />

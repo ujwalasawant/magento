@@ -5,32 +5,32 @@
             <template>
                 <values>
                     <home_grid translate="label">
-                        <value>mdg/widget/Left_Product.phtml</value>
+                        <value>mdg/Widget/Left_Product.phtml</value>
                         <label>ArtyCart_Left_Product</label>
                     </home_grid>
                     <new_grid translate="label">
-                        <value>mdg/widget/Right_Product.phtml</value>
+                        <value>mdg/Widget/Right_Product.phtml</value>
                         <label>ArtyCart_Right_Product</label>
                     </new_grid>
                     <Product_Grid translate="label">
-                        <value>mdg/widget/Product_List.phtml</value>
+                        <value>mdg/Widget/Product_List.phtml</value>
                         <label>ArtyCart_Product</label>
                     </Product_Grid>
                     <Artist_Grid translate="label">
-                        <value>mdg/widget/Artist_List.phtml</value>
+                        <value>mdg/Widget/Artist_List.phtml</value>
                         <label>ArtyCart_Artist</label>
                     </Artist_Grid>
                     <Designer_Grid translate="label">
-                        <value>mdg/widget/Designer_List.phtml</value>
+                        <value>mdg/Widget/Designer_List.phtml</value>
                         <label>ArtyCart_Designer</label>
                     </Designer_Grid>
                     <tidings_Grid translate="label">
-                        <value>mdg/widget/Tiding.phtml</value>
+                        <value>mdg/Widget/Tiding.phtml</value>
                         <label>ArtyCart_Tiding</label>
                     </tidings_Grid>
 
                     <sub_catagory_Grid translate="label">
-                        <value>mdg/widget/sub_catagory.phtml</value>
+                        <value>mdg/Widget/sub_catagory.phtml</value>
                         <label>ArtyCart_Subcatagory</label>
                     </sub_catagory_Grid>
                 </values>

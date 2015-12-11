@@ -1,0 +1,44 @@
+<?php
+$category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+$categories = $category->getCollection()
+    ->addAttributeToSelect(array('name', 'thumbnail'))
+    ->addAttributeToFilter('is_active', 1)
+    ->addIdFilter($category->getChildren())
+?>
+<div class="subcategories">
+    <p>Select a category to view products:</p>
+    <ul class="clearfix">
+        <!-- Display Each Subcategory Image and Name  -->
+
+        <?php foreach ($categories as $category): ?>
+            <li class="grid12-3">
+                <a href="<?php echo $category->getUrl() ?>" class="clearfix">
+                    <?php if($thumbFile = $category->getThumbnail()): ?>
+                        <img src="<?php echo Mage::getBaseUrl('media') . 'catalog' . DS . 'category' . DS . $thumbFile;?>" alt="<?php echo $this->htmlEscape($category->getName()) ?>" />
+                    <?php endif;?>
+                    <span><?php echo $category->getName() ?></span></a>
+            </li>
+            <!-- Load (3) Products from within each subcategory  -->
+            <?php
+            $_helper = $this->helper('catalog/output');
+            $products = Mage::getModel('catalog/product')
+                ->getCollection()
+                ->addCategoryFilter($category)
+
+                ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
+                ->load();
+            ?>
+            <!-- Display Each product's detailed info  -->
+            <?php foreach ($products as $product): ?>
+                <li>
+                    <?php // Product Image ?>
+                    <a href="<?php echo $product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>" /></a>
+                    <?php // Product description ?>
+                    <?php $_productNameStripped = $this->stripTags($product->getName(), null, true); ?>
+                    <h2 class="product-name"><a href="<?php echo $product->getProductUrl() ?>" title="<?php echo $productNameStripped; ?>"><?php echo $_helper->productAttribute($product, $product->getName() , 'name'); ?></a></h2>
+                </li>
+            <?php endforeach ; ?>
+
+        <?php endforeach; ?>
+    </ul>
+</div>
