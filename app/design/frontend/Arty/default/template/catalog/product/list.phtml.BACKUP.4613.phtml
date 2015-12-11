@@ -1,0 +1,200 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<style>
+    *, *:before, *:after {
+        box-sizing: border-box !important;
+    }
+
+    .pin {
+        -moz-column-width: 15em;
+        -webkit-column-width: 15em;
+        -moz-column-gap: 1em;
+        -webkit-column-gap: 1em;
+
+    }
+
+    .item {
+        display: inline-block;
+        padding: 0.25rem;
+        width: 100%;
+    }
+
+    .well {
+        position: relative;
+        display: block;
+    }
+
+
+</style>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> ujwala1
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+<div class="category-products">
+<<<<<<< HEAD
+        <div class="container" >
+            <div class="pin" >
+     <?php foreach ($_productCollection as $_product): ?>
+        <div class="lightborder item " >
+            <div>
+                <button type="button" class="glyphicon glyphicon-star-empty" style="background: none ; ">
+
+                </button>
+                <button type="button" class="glyphicon glyphicon-share-alt" style="background: none ">
+
+=======
+
+    <ol class="products-list" id="products-list">
+        <div class="container" >
+
+            <div class="pin" >
+    <?php foreach ($_productCollection as $_product): ?>
+
+        <div class="lightborder item " >
+            <div >
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+>>>>>>> ujwala1
+                </button>
+
+            </div>
+
+<<<<<<< HEAD
+            <div class=" well "  style="margin: 0px 0px 0px 0px">
+                <a href="<?php echo $_product->getProductUrl() ?>"
+                   title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+                    <img  width="100%"
+                         src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')?>"
+=======
+            <div class=" well " >
+                <a href="<?php echo $_product->getProductUrl() ?>"
+                   title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+                    <img height="100px" width="50px"
+                         src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(150) ?>"
+>>>>>>> ujwala1
+                         alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
+                </a>
+            </div>
+
+<<<<<<< HEAD
+                <div class="lightborder">
+
+                    <div class="row pricerow" >
+                        <ul class="list-unstyled">
+                            <li style="text-align: left">
+                                <h3 class="list-group-item-heading product-description">
+                                    <a style="color: black ; font-family: bold"
+                                        href="<?php echo $_product->getProductUrl() ?>"
+                                        title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?></a>
+                                </h3>
+=======
+
+            <div>
+                <div class="lightborder">
+
+                    <div class="row pricerow">
+                        <ul class="list-unstyled">
+                            <li style="text-align: left">
+
+                                <h3 class="list-group-item-heading product-description"><a
+                                        href="<?php echo $_product->getProductUrl() ?>"
+                                        title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?></a>
+                                </h3>
+
+
+>>>>>>> ujwala1
+                            </li>
+                            <li style="text-align: left">
+
+                            </li>
+                            <li style="text-align: right">
+<<<<<<< HEAD
+                                <div class="product-price" style="color: orangered">
+                                    <?php echo $this->getPriceHtml($_product, true, '-widget-new-list') ?>
+=======
+
+                                <div
+                                    class="product-price"><?php echo $this->getPriceHtml($_product, true, '-widget-new-list') ?>
+>>>>>>> ujwala1
+                                </div>
+
+                            </li>
+                            <li style="text-align: left">
+
+                                <?php if ($_product->isSaleable()): ?>
+                                    <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+                                            class="button btn-cart"
+                                            onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+                                        <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                    </button>
+<<<<<<< HEAD
+
+=======
+>>>>>>> ujwala1
+                                <?php else: ?>
+                                    <p class="availability out-of-stock">
+                                        <span><?php echo $this->__('Out of stock') ?></span></p>
+                                <?php endif; ?>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+<<<<<<< HEAD
+
+=======
+            </div>
+>>>>>>> ujwala1
+        </div>
+    <?php endforeach; ?>
+</div>
+            </div>
+<<<<<<< HEAD
+    </div>
+<?php endif; ?>
+
+=======
+<?php endif; ?>
+>>>>>>> ujwala1

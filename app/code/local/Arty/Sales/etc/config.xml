@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arty_Sales>
+            <version>0.1.0</version>
+        </Arty_Sales>
+    </modules>
+    <global>
+        <models>
+            <arty_sales>
+                <class>Arty_Sales_Model</class>
+                <resourceModel>arty_sales_resource</resourceModel>
+            </arty_sales>
+            <arty_sales_resource>
+                <class>Arty_Sales_Model_Resource</class>
+            </arty_sales_resource>
+        </models>
+        <blocks>
+            <arty_sales>
+                <class>Arty_Sales_Block</class>
+            </arty_sales>
+        </blocks>
+        <helpers>
+            <arty_sales>
+                <class>Arty_Sales_Helper</class>
+            </arty_sales>
+        </helpers>
+    </global>
+</config>
