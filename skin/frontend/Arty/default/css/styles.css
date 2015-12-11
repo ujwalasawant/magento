@@ -8283,6 +8283,10 @@ a {
   border: 1px grey solid;
 }
 
+.product-details {
+  padding-left: 5px;
+}
+
 .checkout-types.minicart {
   float: none;
   text-align: center;

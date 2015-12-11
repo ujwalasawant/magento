@@ -11,7 +11,7 @@
                 <type>skin_js</type>
                 <name>js/login-box.js</name>
             </action>
-           <!-- <action method="addItem">
+            <!-- <action method="addItem">
                 <type>skin_js</type>
                 <name>js/jquery.min.js</name>
             </action> -->
@@ -29,7 +29,7 @@
             </action>
 
 
-           <!-- <action method="addItem">
+            <!-- <action method="addItem">
                 <type>skin_js</type>
                 <name>js/jquery-1.8.3.min.js</name>
             </action> -->
@@ -160,17 +160,37 @@
             </reference>
 
 
-            <block type="checkout/cart_minicart" name="minicart_head" template="checkout/cart/minicart.phtml" before="-">
+            <block type="checkout/cart_minicart" name="minicart_head" template="checkout/cart/minicart.phtml"
+                   before="-">
 
-                <block type="checkout/cart_sidebar" name="minicart_content" template="checkout/cart/minicart/items.phtml">
-                    <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/cart/minicart/default.phtml</template></action>
-                    <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/minicart/default.phtml</template></action>
-                    <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/minicart/default.phtml</template></action>
-                    <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/minicart/default.phtml</template></action>
-                    <block type="core/text_list" name="cart_sidebar.cart_promotion" as="cart_promotion" translate="label" module="checkout">
+                <block type="checkout/cart_sidebar" name="minicart_content"
+                       template="checkout/cart/minicart/items.phtml">
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>checkout/cart_item_renderer</block>
+                        <template>checkout/cart/minicart/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>simple</type>
+                        <block>checkout/cart_item_renderer</block>
+                        <template>checkout/cart/minicart/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>checkout/cart_item_renderer_grouped</block>
+                        <template>checkout/cart/minicart/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>configurable</type>
+                        <block>checkout/cart_item_renderer_configurable</block>
+                        <template>checkout/cart/minicart/default.phtml</template>
+                    </action>
+                    <block type="core/text_list" name="cart_sidebar.cart_promotion" as="cart_promotion"
+                           translate="label" module="checkout">
                         <label>Mini-cart promotion block</label>
                     </block>
-                    <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                    <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label"
+                           module="checkout">
                         <label>Shopping Cart Sidebar Extra Actions</label>
                     </block>
                 </block>
@@ -178,41 +198,37 @@
         </reference>
 
 
-        <reference name="content">
-            <block type="catalog/List" name="product_list_my" template="catalog/product/category.phtml"/>
-        </reference>
+
 
         <reference name="root">
+
+        <reference name="footer">
+            <remove name="footer_links"/>
+            <remove name="footer_links2"/>
+
+            <block type="cms/block" name="footer-cmsLinks" as="footer-cmsLinks">
+                <action method="setBlockId">
+                    <block_id>footer-cmsLinks</block_id>
+                </action>
+            </block>
+            <block type="cms/block" name="footer-artycart" as="footer-artycart">
+                <action method="setBlockId">
+                    <block_id>footer-artycart</block_id>
+                </action>
+            </block>
+            <block type="cms/block" name="footer-social" as="footer-social">
+                <action method="setBlockId">
+                    <block_id>footer-social</block_id>
+                </action>
+            </block>
+            <block type="cms/block" name="footer-paymnet" as="footer-paymnet">
+                <action method="setBlockId">
+                    <block_id>footer-paymnet</block_id>
+                </action>
+            </block>
         </reference>
-            <reference name="footer">
-             <reference name="footer_links"/>
-                <reference name="footer_links2"/>
 
-                <block type="cms/block" name="footer-cmsLinks" as="footer-cmsLinks">
-                    <action method="setBlockId">
-                        <block_id>footer-cmsLinks</block_id>
-                    </action>
-                </block>
-                <block type="cms/block" name="footer-artycart" as="footer-artycart">
-                    <action method="setBlockId">
-                        <block_id>footer-artycart</block_id>
-                    </action>
-                </block>
-                <block type="cms/block" name="footer-social" as="footer-social">
-                    <action method="setBlockId">
-                        <block_id>footer-social</block_id>
-                    </action>
-                </block>
-                <block type="cms/block" name="footer-paymnet" as="footer-paymnet">
-                    <action method="setBlockId">
-                        <block_id>footer-paymnet</block_id>
-                    </action>
-                </block>
-            </reference>
-
-
-
-
+        </reference>
     </default>
     <catalog_product_view translate="label">
         <reference name="content">

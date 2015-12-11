@@ -1,0 +1,178 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Techinflo   
+ * @package     Techinflo_Checkavailability
+ * @copyright   Techinflo(www.techinflo.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * Product view template
+ *
+ * @see Techinflo_Checkavailability_Block_view
+ * @see Techinflo_Checkavailability_Block_view
+ */
+?>
+?>
+<?php if ($this->getIsActive()): ?>
+    <?php
+    $session = Mage::getSingleton('checkout/session');
+    $i = 1;
+    $name = "<div class='co_item_not_serviceable'><div class='message'>The following items are not deliverable to the address provided.</div><table width='100%' cellspacing='0' class='co_summary_not_allowed'><tbody>";
+    $name .=" <tr><th valign='top' align='center'> SN. </th><th width='450' valign='top'>Name</th><th valign='top'> Price </th><th>Availability </th></tr>";
+    foreach ($session->getQuote()->getAllItems() as $item) {
+        $ids[] = $item->getProductId();
+        $myproduct = Mage::getModel('catalog/product')->load($item->getProductId());
+        $type[] = $myproduct->getTypeId();
+
+
+        $name .= "<tr><td valign='top' align='center'>" . $i . " </td><td width='450' valign='top'>" . $item->getName() . "</td><td valign='top'>" . $item->getPrice() . "</td><td>" . Mage::getModel('checkavailability/availability')->checkoutpage($item->getProductId()) . "</td></tr>";
+        $i++;
+    }
+    $name .="</tbody></table></div><div class='reset'></div>";
+    ?>
+    <?php
+    if ($this->getZipcode()) {
+        $zip = $this->getZipcode();
+    }
+    ?>
+    <script>
+        var cb = jQuery.noConflict();
+        cb(document).ready(function() {
+            cb("#resp").html('');
+            var billpost = document.getElementById('billing:postcode');
+            billpost.className += " valzip";
+            var shippost = document.getElementById('shipping:postcode');
+            shippost.className += " avlship";
+            var checkadd = document.getElementById('billing:use_for_shipping_yes');
+            checkadd.className += " use_for_shipping_yes";
+
+            cb("#checkoutSteps").prepend('<div id="avl_status" ></div>');
+            cb("#checkoutSteps").prepend('<div style="" id="location_msg" class="unservicable-warning"></div>');
+    <?php if ((isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') || (isset($_COOKIE["avl_pin_code"]) && $_COOKIE["avl_pin_code"] != "")) { ?>
+        <?php if (isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') { ?>
+                    var pintext = "<?php echo $_COOKIE["pin_code"]; ?>";
+        <?php } else { ?>
+                    var pintext = "<?php echo $_COOKIE["avl_pin_code"]; ?>";
+        <?php } ?>
+        <?php if (!$myStatus) { ?>
+                    cb(".valzip").val(pintext);
+                    cb(".valzip").change();
+                    cb(".avlship").val(pintext);
+                    cb(".avlship").change();
+        <?php } ?>
+        <?php if ($myStatus) { ?>
+                    var pintext = "<?php echo $zip; ?>";
+        <?php } ?>
+                chkavail(pintext);
+    <?php } ?>
+            var remember = document.getElementById('billing:use_for_shipping_yes');
+            cb(".valzip").focusout(function() {
+                if (remember.checked) {
+                    var pin = cb(".valzip").val();
+                    setTimeout("chkavail(" + pin + ")", 30);
+                }
+            });
+            cb(".avlship").focusout(function() {
+                var pin = cb(".avlship").val();
+                setTimeout("chkavail(" + pin + ")", 30);
+            });
+
+        });
+        cb(".use_for_shipping_yes").click(function() {
+            var remember = document.getElementById('billing:use_for_shipping_yes');
+            if (remember.checked) {
+                var pin = cb(".valzip").val();
+                setTimeout("chkavail(" + pin + ")", 30);
+            }
+        });
+        function chkavail(pintext) {
+            var cb = jQuery.noConflict();
+            cb("#resp").html('');
+            var id = '<?php echo serialize($ids); ?>';
+            if (pintext == 'undefined' || pintext == '') {
+                var pintext = cb("#checkpin").val();
+            }
+            url = "<?php echo Mage::getUrl('checkavl/index/cart') ?>" + 'id/' + id + '/pincode/' + pintext;
+            cb("#loader").show();
+            cb("#ckhbtn").hide();
+
+            cb.ajax({url: url, success: function(result) {
+                    var resp_result = cb.trim(result);
+                    //alert(resp_result);
+                    var html = "";
+                    res = resp_result.split(",");
+                    if (res[0] == '1' && res[1] != '') {
+                        setCookie("avl_pin_code", '', 1);
+                        cb("#loader").hide();
+                        cb("#ckhbtn").show();
+                        cb("#location_msg").show();
+                        html = '<?php echo $this->failureMsgCart(); ?>';
+                        cb("#location_msg").html(html);                       
+                        cb("#avl_status").html("<?php echo $name; ?>");
+                        cb("#avl_status").show();                      
+                        hideAll();
+                        cb(".col-main *").off('click');
+                        cb("#location_msg_avl").hide();
+                        setCookie("pin_code", res[1], 1);       
+                        var response = "<span class='resp' style='color:red'><?php echo $this->failureMsg(); ?></span>";
+                    } else {
+                        cb("#co_order_items_not_allowed").html('');
+                        cb("#avl_status").hide();
+                        cb("#location_msg").hide();
+                        showall();
+                        cb(".col-main *").on('click');
+                        setCookie("pin_code", '', 1);
+                        setCookie("avl_pin_code", result, 1);
+                        if (cb("#checkpin").val() == "") {
+                            setCookie("pin_code", '', 1);
+                            setCookie("avl_pin_code", '', 1);
+                            var response = "";
+                            cb("#location_msg_avl").hide();
+                        } else {                           
+                            cb(".valship").val(cb.trim(result));
+                            cb("#checkpin").val(cb.trim(result));
+                            cb("#location_msg_avl").show();
+                            cb("#location_msg_avl").text('<?php echo $this->successMsg() ?>');
+                            var response = "<span class='resp' style='color:green'>Avaliable: " + result + "</span>";
+                        }                       
+                    }                 
+                    cb("#resp").html(response);
+                    cb("#resp").show();
+                }});
+            return false;
+        }
+        function setCookie(c_name, value, exdays)
+        {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value + ";path=/";
+        }
+        function hideAll() {
+            var cb = jQuery.noConflict();
+            cb("#opc-shipping").hide();
+            cb("#opc-shipping_method").hide();
+            cb("#opc-payment").hide();
+            cb("#opc-review").hide();
+        }
+        function showall() {
+            cb("#opc-shipping").show();
+            cb("#opc-shipping_method").show();
+            cb("#opc-payment").show();
+            cb("#opc-review").show();
+        }
+    </script>
+
+<?php endif; ?>

@@ -1,0 +1,165 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Techinflo   
+ * @package     Techinflo_Checkavailability
+ * @copyright   Techinflo(www.techinflo.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * 
+ * /**
+ * Product view template
+ *
+ * @see Techinflo_Checkavailability_Block_view
+ * @see Techinflo_Checkavailability_Block_view
+ */
+?>
+<?php if ($this->getIsActive()): ?>
+    <?php $set = $this->cookieparams() ?><div class="cart_pin chkavl"> 
+        <div class="check-avail check-avail1" id="check-avail1"><a  href="javascript:void(0);"><?php
+    if ((($_COOKIE["avl_pin_code"] != '') && isset($_COOKIE["avl_pin_code"])) || (($_COOKIE["pin_code"] != '') && isset($_COOKIE["pin_code"]))) {
+        if ($_COOKIE["avl_pin_code"] != '' && isset($_COOKIE["avl_pin_code"]))
+            echo "<span>Location:" . $_COOKIE["avl_pin_code"] . "&nbsp;<span class='changepin'>Change</span></span>";
+        if ($_COOKIE["pin_code"] != '' && isset($_COOKIE["pin_code"]))
+            echo "<span>Location:" . $_COOKIE["pin_code"] . "&nbsp;<span class='changepin'>Change</span></span>";
+    }else {
+        echo "<span>Check Avaliabilty</span>";
+    }
+    ?></a></div>
+
+        <div id="check-data" >
+            <input class="check-input" type="text" id="checkpin" name="checkpin" value="" />
+            <div class="check-data"><button class="btn btn-gray" id="ckhbtn" type="button" onclick="chkavail('');" ><span>check</span></button>
+                <span id="loader" style="display:none;"><img src="<?php echo $this->getSkinUrl('css/techinflo/checkavailability/ajax-loader.gif'); ?>"></span></div>	
+            <div id="resp" style="display:none;"></div>
+        </div>
+        <div class="check-avail check-avail2" id="check-avail2" style="display:none;"><a  href="javascript:void(0);">
+
+                <span>Hide</span>
+            </a></div>
+        <div id="location_msg_avl" style="display:none"></div>
+
+    </div>
+    <?php $ids = $this->cartitemids(); ?>
+    <script>
+        var cb = jQuery.noConflict();
+        cb(document).ready(function() {
+            cb("#resp").html('');
+            cb(".cart .page-title").prepend('<div id="location_msg" style="display:none"></div>');
+    <?php if ((isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') || (isset($_COOKIE["avl_pin_code"]) && $_COOKIE["avl_pin_code"] != "")) { ?>
+
+
+
+        <?php if (isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') { ?>
+                    var pintext = "<?php echo $_COOKIE["pin_code"]; ?>";
+        <?php } else { ?>
+                    var pintext = "<?php echo $_COOKIE["avl_pin_code"]; ?>";
+        <?php } ?>
+                chkavail(pintext);
+
+    <?php } ?>
+        });
+
+        function chkavail(pintext) {
+            var cb = jQuery.noConflict();
+            cb("#resp").html('');
+            // cb(".product-name").append("<div class='product_avl_info'></div>");
+            var id = '<?php echo serialize($ids); ?>';
+            if (pintext == 'undefined' || pintext == '') {
+                var pintext = cb("#checkpin").val();
+            }
+            url = "<?php echo Mage::getUrl('checkavl/index/cart') ?>" + 'id/' + id + '/pincode/' + pintext;
+            cb("#loader").show();
+            cb("#ckhbtn").hide();
+
+            cb.ajax({url: url, success: function(result) {
+                    var resp_result = cb.trim(result);
+                    //alert(resp_result);
+                    var html = "";
+                    res = resp_result.split(",");
+                    if (res[0] == '1' && res[1] != '') {
+                        setCookie("avl_pin_code", '', 1);
+                        cb("#loader").hide();
+                        cb("#ckhbtn").show();
+                        cb("#location_msg").show();
+                        html = '<?php echo $this->failureMsgCart(); ?>';
+                        cb("#location_msg").html(html);
+
+                        cb("#location_msg_avl").hide();
+                        setCookie("pin_code", res[1], 1);
+                        cb("#check-avail1 a").html('<span class="lbl">Location:</span><span class="pinonly">' + res[1] + '</span>&nbsp;<span class="changepin">Change</span>');
+                       
+                        var response = "<span class='resp' style='color:red'>Not available in your location yet.</span>";
+                        cb(".product_avl_info").show();
+                        cb("#location_msg").show();
+                    } else {
+
+                        cb("#check-avail1 a").html('<span class="lbl">Location:</span><span class="pinonly">' + result + '</span>&nbsp;<span class="changepin">Change</span>');
+                        cb("#loader").hide();
+                        cb("#ckhbtn").show();
+
+                        setCookie("pin_code", '', 1);
+                        setCookie("avl_pin_code", result, 1);
+                        cb("#checkpin").val(result);
+                        cb(".product_avl_info").hide();
+                        cb("#location_msg").hide();
+                        if (cb("#checkpin").val() == "") {
+                            setCookie("pin_code", '', 1);
+                            setCookie("avl_pin_code", '', 1);
+                            cb("#check-avail1 a").html('<span>Check Avaliabilty</span>');
+                            var response = "";
+                            cb("#location_msg_avl").hide();
+                        } else {
+                            cb(".product_avl_info").hide();
+                            cb("#location_msg").hide();
+                            cb("#checkpin").val(cb.trim(result));
+                            cb("#location_msg_avl").show();
+                            cb("#location_msg_avl").text('<?php echo $this->successMsg() ?>');
+                            var response = "<span class='resp' style='color:green'>Avaliable: " + result + "</span>";
+                        }
+                        
+
+                    }
+                    
+                    cb("#resp").html(response);
+                    cb("#resp").show();
+                }});
+
+            return false;
+        }
+        function setCookie(c_name, value, exdays)
+        {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value + ";path=/";
+        }
+
+        var $p = jQuery.noConflict();
+        $p('#check-avail1').click(function() {
+            $p(".check-data").show();
+            $p("#checkpin").show();
+            $p(this).hide();
+            $p('#check-avail2').show();
+            $p('#check-data').show();
+        });
+        $p('#check-avail2').click(function() {
+            $p(this).hide();
+            $p('#check-avail1').show();
+            $p('#check-data').hide();
+        });
+
+
+
+    </script>
+<?php endif; ?>
