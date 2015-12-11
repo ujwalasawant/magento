@@ -1,0 +1,98 @@
+<!--<?php
+$category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+$categories = $category->getCollection()
+        ->addAttributeToSelect(array('name', 'thumbnail'))
+        ->addAttributeToFilter('is_active', 1)
+        ->addIdFilter($category->getChildren())
+?>
+<ul class="subcategories">
+    <?php foreach ($categories as $category): ?>
+        <li>
+            <a href="<?php echo $category->getImageUrl() ?>"><img src="<?php echo Mage::getBaseUrl('media') . 'catalog' . DS . 'category' . DS . $category->getThumbnail() ?>" alt="<?php echo $this->htmlEscape($category->getName()) ?>" />
+                
+        </li>
+    <?php endforeach; ?>
+</ul>-->
+
+<!----Secound Try -->
+<!--<?php
+/**
+ * Sub Category images
+ *
+ * Needs code in static block {{block type="core/template" template="catalog/category/sub.phtml"}}
+ */
+?>
+ 
+<?php
+$category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+$categories = $category->getCollection()
+        //->addAttributeToSelect(array('name', 'image', 'description', 'meta_title'))
+        ->addAttributeToSelect(array('name', 'image', 'meta_description'))
+        ->addAttributeToFilter('is_active', 1)
+        ->addAttributeToSort('position')
+        ->addIdFilter($category->getChildren());
+ 
+?>
+<div class="subcategories">
+    <?php foreach ($categories as $category): ?>
+        <div class="span-1-3">
+            <h3><?php echo $category->getName() ?></h3>
+            <div class="Collimg">
+                <a title="<?php echo $category->getName() ?> furniture" href="<?php echo $category->getUrl() ?>">
+ 
+                <?php $imageUrl = $category->getImageUrl() ?>
+ 
+                <?php if (!empty($imageUrl)) { ?>
+                    <img src="<?php echo $imageUrl ?>" alt="<?php echo $this->htmlEscape($category->getName()) ?>" />
+                <?php } else { ?>
+                    <img src="<?php echo $this->getSkinUrl('images/media/collections/maddogsandenglishmen.jpg'); ?>" alt="<?php echo $this->htmlEscape($category->getName()) ?>" />
+                <?php } ?>
+                </a>
+ 
+                <div class="toggletext">
+                  <?php /*?><?php echo $category->getDescription() ?><?php */?>
+                  <?php /*?><?php echo $category->getMetaTitle() ?><?php */?>
+                  <div><?php echo $category->getMetaDescription() ?></div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+-->
+<!--Third Try -->
+<?php
+//Magento category page list subcategories products respectively
+ 
+$_category = Mage::registry('current_category');
+ 
+$_children = explode(',', $_category->getChildren());
+ 
+$visibility = array(
+Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH,
+Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG
+);
+foreach($_children as $childId) {
+$_childCategory = Mage::getModel('catalog/category')->load($childId);
+//$_collection = Mage::getModel('catalog/product')->getCollection();
+$_collection = Mage::getResourceModel('catalog/product_collection');
+$_collection->addAttributeToFilter('visibility', $visibility)
+->addCategoryFilter($_childCategory)
+->addAttributeToSelect('*')
+->setOrder('news_from_date', 'desc')
+->getSelect()
+->limit(4);
+ 
+echo $_childCategory->getName();//something html
+ $imgUrl=$_childCategory->getUrl();?>
+<img src="<?php echo $imgUrl ?>" />
+ <?php
+if(count($_collection)) {
+foreach ($_collection as $_product) {
+ 
+echo $_product->getName();//something html
+ 
+}
+}
+}
+ 
+?>

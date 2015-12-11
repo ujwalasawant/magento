@@ -1,0 +1,39 @@
+<?php
+ echo "hieee";
+?>
+
+<?php
+//Magento category page list subcategories products respectively
+
+$_category = Mage::registry('current_category');
+
+$_children = explode(',', $_category->getChildren());
+
+$visibility = array(
+    Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH,
+    Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG
+);
+foreach($_children as $childId) {
+ $_childCategory = Mage::getModel('catalog/category')->load($childId);
+//$_collection = Mage::getModel('catalog/product')->getCollection();
+ $_collection = Mage::getResourceModel('catalog/product_collection');
+ $_collection->addAttributeToFilter('visibility', $visibility)
+     ->addCategoryFilter($_childCategory)
+     ->addAttributeToSelect('*')
+     ->setOrder('news_from_date', 'desc')
+     ->getSelect()
+     ->limit(4);
+
+ echo $_childCategory->getName();//something html
+ $imgUrl=$_childCategory->getUrl();?>
+ <img src="<?php echo $imgUrl ?>" />
+ <?php
+
+ if(count($_collection)) {
+  foreach ($_collection as $_product) {
+
+   echo $_product->getName();//something html
+
+  }
+ }
+}

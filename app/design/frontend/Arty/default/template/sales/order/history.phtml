@@ -59,6 +59,16 @@
                 <?php endif ?>
                 </span>
             </td>
+        <td>
+
+            <?php echo $this->getChildHtml('order_items') ?>
+
+
+            <?php echo $this->getLayout()->createBlock('core/template')->setId($_order)->setTemplate('sales/order/view.phtml')->toHtml(); ?>
+
+            <?php echo Mage::getModel('sales/api2_order')->createBlock('sales/order_view')->setId($_order)->setTemplate('sales/order/view.phtml')->toHtml();?>
+        </td>
+
             <tr>
         <?php endforeach; ?>
         </tr>

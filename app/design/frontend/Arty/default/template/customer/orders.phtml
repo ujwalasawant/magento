@@ -20,7 +20,7 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -28,25 +28,24 @@
  * @deprecated  after 1.4.0.0-alpha3
  */
 ?>
-
 <div class="page-title">
     <h1><?php echo $this->__('My Orders') ?></h1>
 </div>
 <?php if($orders->getSize()): ?>
-    <div class="row">
-    <div class="data-table" id="my-orders-table" >
-        <div class="row">
-            <div class="colo"> <th><?php echo $this->__('Order #') ?></th> </div>
-            <div>  <th><?php echo $this->__('Date') ?></th></div>
+<table class="data-table" id="my-orders-table" >
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Order #') ?></th>
+            <th><?php echo $this->__('Date') ?></th>
             <!--<th class="a-center">Shipped To</th>-->
-            <div> <th><?php echo $this->__('Total') ?></th></div>
-            <div><th><?php echo $this->__('Status') ?></th></div>
-            <div> <th><?php echo $this->__('Details') ?></th></div>
-        </div>
+            <th><?php echo $this->__('Total') ?></th>
+            <th><?php echo $this->__('Status') ?></th>
+            <th><?php echo $this->__('Details') ?></th>
+        </tr>
+    </thead>
     <tbody>
     <?php foreach ($orders as $order): ?>
         <tr>
-
             <td><?php echo $order->getRealOrderId() ?>&nbsp;</td>
             <td><?php echo date("D, j M, Y", strtotime($order->getCreatedAt())) ?>&nbsp;</td>
             <!--<td class="a-center">{$page.orders[io].customer}</td>-->
@@ -56,8 +55,7 @@
         </tr>
     <?php endforeach ?>
     </tbody>
-</div>
-    </div>
+</table>
 <script type="text/javascript">decorateTable('my-orders-table')</script>
 <?php else: ?>
     <p><?php echo $this->__('You have placed no orders yet.') ?></p>

@@ -1,0 +1,17 @@
+<?php
+
+$cat_id = 43;
+$category = Mage::getModel('catalog/category')->load($cat_id);
+$products = $category->getProductCollection();
+echo 'total- '.$products->count();
+foreach($products as $product){ ?>
+
+
+    <h3>
+        <img src="<?php echo $product->getImageUrl() ?>" alt="">
+        <p><?php echo $product->getName()  ?></p>
+    </h3>
+
+<?php }?>
+
+<?php echo "hieeee";?>

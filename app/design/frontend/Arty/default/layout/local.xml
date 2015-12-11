@@ -11,10 +11,10 @@
                 <type>skin_js</type>
                 <name>js/login-box.js</name>
             </action>
-          <!--  <action method="addItem">
+            <action method="addItem">
                 <type>skin_js</type>
                 <name>js/jquery.min.js</name>
-            </action>-->
+            </action>
             <action method="addItem">
                 <type>skin_js</type>
                 <name>js/bootstrap.min.js</name>
@@ -29,10 +29,10 @@
             </action>
 
 
-          <!--  <action method="addItem">
+            <action method="addItem">
                 <type>skin_js</type>
                 <name>js/jquery-1.8.3.min.js</name>
-            </action>-->
+            </action>
             <action method="addItem">
                 <type>skin_js</type>
                 <name>js/jquery.elevatezoom.js</name>
@@ -222,13 +222,7 @@
 
         </block>
     </customer_account>
-    <ikantam_knowledgebase_index_index>
-        <update handle="customer_account"/>
-        <reference name="my.account.wrapper">
-            <block type="customer/account_dashboard" name="customer.account.link.back"
-                   template="customer/account/link/back.phtml"/>
-        </reference>
-    </ikantam_knowledgebase_index_index>
+
 
 
 
@@ -240,8 +234,6 @@
         </reference>
 
     </catalog_category_layered>
-
-
 
 
 

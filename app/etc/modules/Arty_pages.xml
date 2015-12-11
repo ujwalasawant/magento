@@ -4,9 +4,10 @@
         <Arty_page>
            <active>true</active>
               <codePool>local</codePool>
-          <depends>
-           <Mage_Page />
-          </depends>
+            <depends>
+                <Mage_Page/>
+
+            </depends>
        </Arty_page>
     </modules>
 </config>
