@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Morningtime Extensions
+* http://shop.morningtime.com
+*
+* @extension   FancyZoom
+* @type        Simple product media lightbox
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so we can send you a copy immediately.
+*
+* @category    Morningtime
+* @package     Morningtime_FancyZoom
+* @copyright   Copyright (c) 2011-2012 Morningtime Internetbureau B.V. (http://www.morningtime.com)
+* @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<layout version="1.7.0.0">
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><script>js/fancyzoom.js</script></action>
+            <action method="addCss"><stylesheet>css/fancyzoom.css</stylesheet></action>
+        </reference>
+        <reference name="product.info">
+            <remove name="product.info.media" />
+            <block type="fancyzoom/media" name="morningtime.fancyzoom" as="media" template="morningtime/fancyzoom/media.phtml"/>
+        </reference>
+    </catalog_product_view>
+</layout>

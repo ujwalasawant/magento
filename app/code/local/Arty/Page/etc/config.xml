@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+     <modules>
+        <Arty_page>
+        <version>0.1.0</version>
+        </Arty_page>
+     </modules>
+           <global>
+               <page>
+                 <layouts>
+                    <homepage translate="label">
+                           <label>Product_Page</label>
+                             <template>page/product.phtml</template>
+                           <layout_handle>home_page</layout_handle>
+                    </homepage>
+                <!-- add more layouts here -->
+                 </layouts>
+               </page>
+          </global>
+ </config>

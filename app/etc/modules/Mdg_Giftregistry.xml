@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mdg_Giftregistry>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Widget />
+            </depends>
+        </Mdg_Giftregistry >
+    </modules>
+
+</config>

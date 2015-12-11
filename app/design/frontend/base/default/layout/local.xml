@@ -1,0 +1,30 @@
+<default>  
+
+<reference name="head">
+	<action method="addItem">  <type>skin_js</type><name>js/myjavascript.js</name> </action> 
+	
+	<action method="addItem">  <type>skin_js</type><name>js/jquery.min.js</name> 	</action> 
+	<action method="addItem">  <type>skin_js</type><name>js/bootstrap.min.js</name> 
+	</action> <action method="addItem">  <type>skin_js</type><name>js/jquery.scripts.js</name> </action>
+<action method="addItem">  <type>skin_js</type><name>js/giftmessage.min.js</name></action>
+	<action method="addItem">  <type>skin_js</type><name>js/ie6.min.js</name></action>
+	<action method="addItem">  <type>skin_js</type><name>js/msrp.min.js</name></action>
+	<action method="addItem">  <type>skin_js</type><name>js/npm.js</name></action>
+	<action method="addItem">  <type>skin_js</type><name>js/opcheckout.js</name></action>
+	<action method="addItem">  <type>skin_js</type><name>js/checkout/review.js</name></action>
+	<action method="addItem">  <type>skin_js</type><name>js/bundle.js</name></action>
+	
+	<!-- Removing the styles.css declared in the base theme --> 
+	<action method="removeItem">  <type>skin_css</type>  <name>css/styles.css</name> </action>
+<!-- Adding Bootstrap Css --> 
+<action method="addItem">  <type>skin_css</type>  <stylesheet>css/bootstrap.min.css</stylesheet> </action>
+<!-- Adding the styles.css again --> 
+<action method="addItem">  <type>skin_css</type>  <stylesheet>css/styles.css</stylesheet> </action> 
+		<action method="addItem">  <type>skin_css</type><name>css/bootstrap.css</name> </action>
+			<action method="addItem">  <type>skin_css</type><name>css/bootstrap.min.map</name> </action>
+	
+	 <action method="addItem">  <type>skin_css</type><name>css/widgets.css</name> </action> 
+</reference>
+
+
+</default> 

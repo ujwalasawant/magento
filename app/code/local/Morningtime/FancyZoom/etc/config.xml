@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Morningtime Extensions
+* http://shop.morningtime.com
+*
+* @extension   FancyZoom
+* @type        Simple product media lightbox
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so we can send you a copy immediately.
+*
+* @category    Morningtime
+* @package     Morningtime_FancyZoom
+* @copyright   Copyright (c) 2011-2012 Morningtime Internetbureau B.V. (http://www.morningtime.com)
+* @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <modules>
+        <Morningtime_FancyZoom>
+            <version>1.7.0.0</version>
+        </Morningtime_FancyZoom>
+    </modules>
+    <global>
+        <models>
+            <fancyzoom>
+                <class>Morningtime_FancyZoom_Model</class>
+            </fancyzoom>
+        </models>
+        <helpers>
+            <fancyzoom>
+                <class>Morningtime_FancyZoom_Helper</class>
+            </fancyzoom>
+        </helpers>
+        <blocks>
+            <fancyzoom>
+                <class>Morningtime_FancyZoom_Block</class>
+            </fancyzoom>
+        </blocks>
+    </global>
+    <frontend>
+        <translate>
+            <modules>
+                <Morningtime_FancyZoom>
+                    <files>
+                        <default>Morningtime_FancyZoom.csv</default>
+                    </files>
+                </Morningtime_FancyZoom>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <fancyzoom>
+                    <file>morningtime/fancyzoom/layout.xml</file>
+                </fancyzoom>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <fancyzoom>
+                                            <title>FancyZoom</title>
+                                        </fancyzoom>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <fancyzoom>
+            <settings>
+                <main_zoom>1</main_zoom>
+                <image_width>265</image_width>
+                <image_height>265</image_height>
+                <thumb_width>56</thumb_width>
+                <thumb_height>56</thumb_height>
+                <fancy_width>800</fancy_width>
+                <fancy_height>600</fancy_height>
+                <show_gallery>1</show_gallery>
+                <gallery_items>5</gallery_items>
+            </settings>
+        </fancyzoom>
+    </default>
+</config>

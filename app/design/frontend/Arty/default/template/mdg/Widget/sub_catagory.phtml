@@ -1,0 +1,104 @@
+<style>
+    *, *:before, *:after {
+        box-sizing: border-box !important;
+    }
+
+    .pin {
+        -moz-column-width: 15em;
+        -webkit-column-width: 15em;
+        -moz-column-gap: 1em;
+        -webkit-column-gap: 1em;
+
+    }
+
+    .item {
+        display: inline-block;
+        padding: 0.25rem;
+        width: 100%;
+    }
+
+    .well {
+        position: relative;
+        display: block;
+    }
+
+
+</style>
+
+<?php if (($_products = $this->getProductCollection()) && $_products->getSize()): ?>
+
+    <div class="container" >
+
+        <div class="pin" >
+            <?php foreach ($_products as $_product): ?>
+
+                <div class="lightborder item " >
+                    <div >
+                        <button type="button" class="btn btn-default btn-lg">
+                            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-lg">
+                            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                        </button>
+
+                    </div>
+
+                    <div class=" well " >
+                        <a href="<?php echo $_product->getProductUrl() ?>"
+                           title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+                            <img height="100px" width="50px"
+                                 src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(150) ?>"
+                                 alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
+                        </a>
+                    </div>
+
+
+                    <div>
+                        <div class="lightborder">
+
+                            <div class="row pricerow">
+                                <ul class="list-unstyled">
+                                    <li style="text-align: left">
+
+                                        <h3 class="list-group-item-heading product-description"><a
+                                                href="<?php echo $_product->getProductUrl() ?>"
+                                                title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?></a>
+                                        </h3>
+
+
+                                    </li>
+                                    <li style="text-align: left">
+
+                                    </li>
+                                    <li style="text-align: right">
+
+                                        <div
+                                            class="product-price"><?php echo $this->getPriceHtml($_product, true, '-widget-new-list') ?>
+                                        </div>
+
+                                    </li>
+                                    <li style="text-align: left">
+
+                                        <?php if ($_product->isSaleable()): ?>
+                                            <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+                                                    class="button btn-cart"
+                                                    onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+                                                <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                            </button>
+                                        <?php else: ?>
+                                            <p class="availability out-of-stock">
+                                                <span><?php echo $this->__('Out of stock') ?></span></p>
+                                        <?php endif; ?>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+
+        </div>
+    </div>
+<?php endif; ?>

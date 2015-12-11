@@ -1,0 +1,106 @@
+<?php
+/**
+ * Morningtime Extensions
+ * http://shop.morningtime.com
+ *
+ * @extension   FancyZoom
+ * @type        Simple product media lightbox
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Morningtime
+ * @package     Morningtime_FancyZoom
+ * @copyright   Copyright (c) 2011-2012 Morningtime Internetbureau B.V. (http://www.morningtime.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+
+    // on the fly calculations
+    $gallery_x = floor($this->getFancyWidth() / $this->getGalleryItems()) - $this->getGalleryMargin();
+    $gallery_y = floor($this->getFancyHeight() / $this->getGalleryItems()) - $this->getGalleryMargin();
+    $fancyzoom_box_x = $this->getFancyWidth();
+    $fancyzoom_box_y = $this->getFancyHeight() + ($this->getShowGallery() && count($this->getGalleryImages()) > 0 ? $gallery_y: 0);
+?>
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+    <p class="product-image">
+        <?php $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize($this->getImageWidth(), $this->getImageHeight()).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />'; ?>
+        <?php if ($this->getMainZoom()): ?>
+            <a id="image-link" href="#main-image">
+                <?php echo $_helper->productAttribute($_product, $_img, 'image'); ?>
+            </a>
+        <?php else: ?>
+            <?php echo $_helper->productAttribute($_product, $_img, 'image'); ?>
+        <?php endif; ?>
+    </p>
+    
+    <?php if ($this->getMainZoom()): ?>
+        <div id="main-image" style="display: none;">
+            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($this->getFancyWidth(), $this->getFancyHeight()); ?>" alt="<?php echo $this->htmlEscape($this->getImageLabel()); ?>" title="<?php echo $this->htmlEscape($this->getImageLabel()); ?>">
+        </div>
+
+        <script type="text/javascript">
+        //<![CDATA[
+            Event.observe(window, 'load', function() {
+                new FancyZoom('image-link', {gallery: '<?php echo $this->getShowGallery() && count($this->getGalleryImages()) > 0 ? 'true' : 'false'; ?>', width: <?php echo $fancyzoom_box_x; ?>, height: <?php echo $fancyzoom_box_y; ?>, directory: "<?php echo $this->getSkinUrl('images/fancyzoom'); ?>"});
+            });
+        //]]>
+        </script>
+    <?php endif; ?>
+<?php else: ?>
+    <p class="product-image">
+        <?php
+            $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize($this->getImageWidth(), $this->getImageHeight()).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+            echo $_helper->productAttribute($_product, $_img, 'image');
+        ?>
+    </p>
+<?php endif; ?>
+
+<?php if (count($this->getGalleryImages()) > 0): ?>
+    <div class="more-views">
+        <ul>
+        <?php $i = 1; foreach ($this->getGalleryImages() as $_image): ?>
+            <li>
+                <a href="#fancy-zoom-gallery-image-<?php echo $i; ?>" class="fancy-zoom-gallery-link" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>"><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($this->getThumbWidth(), $this->getThumbHeight()); ?>" width="<?php echo $this->getThumbWidth(); ?>" height="<?php echo $this->getThumbHeight(); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" /></a>
+            </li>
+        <?php ++$i; endforeach; ?>
+        </ul>
+    </div>
+    <?php $i = 1; foreach ($this->getGalleryImages() as $_image): ?>
+        <div id="fancy-zoom-gallery-image-<?php echo $i; ?>" style="display: none;">
+            <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize($this->getFancyWidth(), $this->getFancyHeight()); ?>" alt="<?php echo $this->htmlEscape($_image->getImageLabel()); ?>" title="<?php echo $this->htmlEscape($_image->getLabel()); ?>" />
+        </div>
+    <?php ++$i; endforeach; ?>
+
+    <?php if ($this->getShowGallery()): ?>
+        <div id="fancy-zoom-gallery">
+            <?php $i = 1; foreach ($this->getGalleryImages() as $_image): ?><a href="#fancy-zoom-gallery-image-<?php echo $i; ?>" class="fancy-zoom-gallery-active" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>"><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($gallery_x, $gallery_y); ?>" width="<?php echo $gallery_x; ?>" height="<?php echo $gallery_y; ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" style="margin: <?php echo $this->getGalleryMargin(); ?>px <?php echo $this->getGalleryMargin(); ?>px 0 0;" /></a><?php if ($i == $this->getGalleryItems()): break; endif; ?><?php ++$i; endforeach; ?>
+        </div>
+
+        <script type="text/javascript">
+        //<![CDATA[
+            Event.observe(window, 'load', function() {
+                $$("a.fancy-zoom-gallery-link").each(function(el) {
+                    new FancyZoom(el, {gallery: '<?php echo $this->getShowGallery() ? 'true' : 'false'; ?>', width: <?php echo $fancyzoom_box_x; ?>, height: <?php echo $fancyzoom_box_y; ?>, directory: "<?php echo $this->getSkinUrl('images/fancyzoom'); ?>"});
+                })
+            });
+        //]]>
+        </script>
+    <?php endif; ?>
+<?php endif; ?>
