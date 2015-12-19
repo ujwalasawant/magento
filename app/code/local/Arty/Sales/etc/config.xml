@@ -26,4 +26,22 @@
             </arty_sales>
         </helpers>
     </global>
+    <frontend>
+        <routers>
+            <artysales>
+                <use>standard</use>
+                <args>
+                    <module>Arty_Sales</module>
+                    <frontName>artysales</frontName>
+                </args>
+            </artysales>
+        </routers>
+        <layout>
+            <updates>
+                <arty_sales>
+                    <file>local.xml</file>
+                </arty_sales>
+            </updates>
+        </layout>
+    </frontend>
 </config>

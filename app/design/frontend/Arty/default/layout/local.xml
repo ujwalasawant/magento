@@ -96,7 +96,7 @@
         </reference>
 
         <reference name="content">
-                <block type="catalog/List" name="product_list_my" template="catalog/product/category.phtml"/>
+            <block type="catalog/List" name="product_list_my" template="catalog/product/category.phtml"/>
         </reference>
 
         <reference name="footer">
@@ -184,7 +184,6 @@
 
         <block type="customer/account_navigation" name="customer_account_navigation" before="-"
                template="customer/account/navigation.phtml">
-         <!--   <action method="addLink" translate="label" module="knowledgebase"><name>knowledgebase</name><path>knowledgebase/index/index</path><label>Knowledge Base</label></action>-->
 
 
             <action method="addLink" translate="label" module="sales">
@@ -192,6 +191,13 @@
                 <path>sales/order/history/</path>
                 <label>My Orders</label>
             </action>
+            <action method="addLink" translate="label" module="review">
+                <name>reviews</name>
+                <path>review/customer</path>
+                <label>My Product Reviews</label>
+            </action>
+
+
             <action method="addLink" translate="label">
                 <name>billing_agreements</name>
                 <path>sales/billing_agreement/</path>
@@ -224,8 +230,6 @@
     </customer_account>
 
 
-
-
     <catalog_category_layered>
         <reference name="content">
             <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
@@ -234,6 +238,9 @@
         </reference>
 
     </catalog_category_layered>
+
+
+
 
 
 
