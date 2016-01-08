@@ -31,9 +31,12 @@
  * @see Mage_Catalog_Block_Category_View
  */
 ?>
+
+
 <?php
     $_helper    = $this->helper('catalog/output');
     $_category  = $this->getCurrentCategory();
+    echo $_category;
     $_imgHtml   = '';
     if ($_imgUrl = $_category->getImageUrl()) {
         $_imgHtml = '<p class="category-image" style="border: solid"><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'"  /></p>';
@@ -46,7 +49,7 @@
     <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
         <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
     <?php endif; ?>
-    <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+
 </div>
 
 <?php echo $this->getMessagesBlock()->toHtml() ?>

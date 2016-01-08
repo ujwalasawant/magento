@@ -1,3 +1,4 @@
+<?php /* @var $this Mage_Page_Block_Html_Footer */ ?>
 <?php
 /**
  * Magento
@@ -25,8 +26,8 @@
  */
 ?>
 <div class="footer-container">
-    <div class="footer" style="border: solid">
-    <div class="container">
+    <div class="footer" style="background-color: black ; color: white">
+    <div class="container" >
     	<div class="row">
     		<div class="col-lg-3">
     			<?php echo $this->getChildHtml('footer-cmsLinks') ?>    			
@@ -48,8 +49,6 @@
     		</div>
     	</div>
 </div>
-     <!--   <?php echo $this->getChildHtml() ?>
-        <p class="bugs"><?php echo $this->__('Help Us to Keep Magento Healthy') ?> - <a href="http://www.magentocommerce.com/bug-tracking" onclick="this.target='_blank'"><strong><?php echo $this->__('Report All Bugs') ?></strong></a> <?php echo $this->__('(ver. %s)', Mage::getVersion()) ?></p>
-   -->
+
 </div>
 </div>

@@ -11,6 +11,7 @@ $categories = $category->getCollection()
         <!-- Display Each Subcategory Image and Name  -->
 
         <?php foreach ($categories as $category): ?>
+
             <li class="grid12-3">
                 <a href="<?php echo $category->getUrl() ?>" class="clearfix">
                     <?php if ($thumbFile = $category->getThumbnail()): ?>

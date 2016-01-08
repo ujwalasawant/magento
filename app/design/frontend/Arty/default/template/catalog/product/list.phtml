@@ -31,108 +31,121 @@
  * @see Mage_Catalog_Block_Product_List
  */
 ?>
-<style>
-    *, *:before, *:after {
-        box-sizing: border-box !important;
-    }
-
-    .pin {
-        -moz-column-width: 15em;
-        -webkit-column-width: 15em;
-        -moz-column-gap: 1em;
-        -webkit-column-gap: 1em;
-
-    }
-
-    .item {
-        display: inline-block;
-        padding: 0.25rem;
-        width: 100%;
-    }
-
-    .well {
-        position: relative;
-        display: block;
-    }
 
 
-</style>
 
 
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 <?php
-    $_productCollection=$this->getLoadedProductCollection();
-    $_helper = $this->helper('catalog/output');
+$category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+$_helper = $this->helper('catalog/output');
+$_productCollection = Mage::getModel('catalog/product')
+    ->getCollection()
+    ->addCategoryFilter($category)
+    ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
+    ->load();
 ?>
-<?php if(!$_productCollection->count()): ?>
-<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<br/>
+<br/>
+<?php if (!$_productCollection->count()): ?>
+    <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
-<div class="category-products">
-        <div class="container" >
-            <div class="pin" >
-     <?php foreach ($_productCollection as $_product): ?>
-        <div class="lightborder item " >
-            <div>
-                <button type="button" class="glyphicon glyphicon-star-empty" style="background: none ; ">
+    <div class="category-products">
+        <div class="container">
+            <div class="pin">
+                <?php foreach ($_productCollection as $_product): ?>
 
-                </button>
-                <button type="button" class="glyphicon glyphicon-share-alt" style="background: none ">
+                    <div class="lightborder item " >
 
-                </button>
+                        <div>
 
-            </div>
+                            <a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>"
+                               class="glyphicon glyphicon-star-empty link-wishlist"
+                               style="background: none ;margin-left: 5%; margin-right: 5% ;border: none "></a>
 
-            <div class=" well "  style="margin: 0px 0px 0px 0px">
-                <a href="<?php echo $_product->getProductUrl() ?>"
-                   title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
-                    <img  width="100%"
-                         src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')?>"
-                         alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
-                </a>
-            </div>
+                            <button type="button" class="glyphicon glyphicon-plus-sign "
+                                    style="background: none ;margin-right:5% ;border: none ">
+                            </button>
 
-                <div class="lightborder">
+                            <button id="share" type="button" class="glyphicon glyphicon-share-alt"
+                                    style="background: none ;border: none ">
 
-                    <div class="row pricerow" >
-                        <ul class="list-unstyled">
-                            <li style="text-align: left">
-                                <h3 class="list-group-item-heading product-description">
-                                    <a style="color: black ; font-family: bold"
-                                        href="<?php echo $_product->getProductUrl() ?>"
-                                        title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?></a>
-                                </h3>
-                            </li>
-                            <li style="text-align: left">
+                            </button>
 
-                            </li>
-                            <li style="text-align: right">
-                                <div class="product-price" style="color: orangered">
-                                    <?php echo $this->getPriceHtml($_product, true, '-widget-new-list') ?>
-                                </div>
 
-                            </li>
-                            <li style="text-align: left">
+                        </div>
+                        <div class=" well " style="padding: 0px 0px 0px 0px ; margin: 0px 0px 1px 0px">
+                            <a href="<?php echo $_product->getProductUrl() ?>"
+                               title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+                                <img width="100%"
+                                     src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image') ?>"
+                                     alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
+                            </a>
+                        </div>
+                        <div class="lightborder" style=" margin: 2px 0px 1px 0px ;" >
+                            <div class="row pricerow" >
+                                <ul class="list-unstyled">
+                                    <li style="text-align: left">
+                                        <h4 class="list-group-item-heading product-description">
+                                            <a style="color: black ; font-family: bold"
+                                               href="<?php echo $_product->getProductUrl() ?>"
+                                               title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?>
+                                            </a>
+                                            <?php $id=$_product->getId();
+                                            echo "(".$id.")"?>
+                                        </h4>
 
-                                <?php if ($_product->isSaleable()): ?>
-                                    <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
-                                            class="button btn-cart"
-                                            onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
-                                        <span><span><?php echo $this->__('Add to Cart') ?></span></span>
-                                    </button>
+                                    </li>
+                                    <li style="text-align: left; color: grey">
+                                        <?php
+                                        $type=$_product->getTypeId();
+                                        echo "$type";
+                                        ?>
+                                    </li>
+                                    <li style="text-align: right">
+                                        <div class="product-price" style="color: orangered;" >
+                                            <?php
+                                                $_product = Mage::getModel('catalog/product')->load($id);
+                                                $_actualPrice = $_product->getPrice();
+                                                $_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),true,false);
+                                                $_formattedSpecialPrice = Mage::helper('core')->currency($_product->getFinalPrice(),true,false);
 
-                                <?php else: ?>
-                                    <p class="availability out-of-stock">
-                                        <span><?php echo $this->__('Out of stock') ?></span></p>
-                                <?php endif; ?>
+                                            if($_formattedActualPrice===$_formattedSpecialPrice)
+                                            {
+                                                echo "<br/>"."Actual Price : " .$_formattedActualPrice."<br/>";
 
-                            </li>
-                        </ul>
+                                            }
+                                            else
+                                            {
+                                                echo "<br/>"."Actual Price : " .$_formattedActualPrice."<br/>";
+                                                echo "Special Price : ".$_formattedSpecialPrice;
+                                            }
+
+                                                ?>
+
+                                        </div>
+                                    </li>
+                                    <li style="text-align: left">
+                                        <?php if ($_product->isSaleable()): ?>
+                                           <br/> <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+                                                         class="up-arrow"
+                                                    onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+                                                <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+
+                                            </button>
+                                            <br/>
+
+                                        <?php else: ?>
+                                            <p class="availability out-of-stock">
+                                               <br/> <span><?php echo $this->__('Out of stock') ?></span></p>
+                                        <?php endif; ?>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-        </div>
-    <?php endforeach; ?>
-</div>
+                <?php endforeach; ?>
             </div>
+        </div>
     </div>
 <?php endif; ?>
-

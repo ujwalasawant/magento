@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout version="0.1.0">
 
+    <!-- default handler -->
+
     <default translate="label" module="page">
 
-
+        <!-- reference head  -->
         <reference name="head">
             <!-- Adding Javascripts -->
 
@@ -73,9 +75,9 @@
                 <type>skin_css</type>
                 <stylesheet>css/styles.css</stylesheet>
             </action>
-
-
         </reference>
+
+        <!-- reference header -->
         <reference name="header">
             <block type="cms/block" name="topbar_cmslinks" as="topbar_cmslinks">
                 <action method="setBlockId">
@@ -92,10 +94,9 @@
                     <action method="addCheckoutLink"></action>
                 </block>
             </reference>
-            <action method="insert">
-                <blockName>cart_sidebar</blockName>
-            </action>
-
+            <!--  <action method="insert">
+                  <blockName>cart_sidebar</blockName>
+              </action>-->
             <block type="checkout/cart_minicart" name="minicart_head" template="checkout/cart/minicart.phtml"
                    before="-">
 
@@ -131,81 +132,14 @@
                     </block>
                 </block>
             </block>
-            <reference name="right">
-                <action method="unsetChild">
-                    <name>cart_sidebar</name>
-                </action>
-                <block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml"
-                       before="-">
-                    <action method="addItemRender">
-                        <type>simple</type>
-                        <block>checkout/cart_item_renderer</block>
-                        <template>checkout/cart/sidebar/default.phtml</template>
-                    </action>
-                    <action method="addItemRender">
-                        <type>grouped</type>
-                        <block>checkout/cart_item_renderer_grouped</block>
-                        <template>checkout/cart/sidebar/default.phtml</template>
-                    </action>
-                    <action method="addItemRender">
-                        <type>configurable</type>
-                        <block>checkout/cart_item_renderer_configurable</block>
-                        <template>checkout/cart/sidebar/default.phtml</template>
-                    </action>
-                    <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label"
-                           module="checkout">
-                        <label>Shopping Cart Sidebar Extra Actions</label>
-                    </block>
-                </block>
-            </reference>
 
-
-            <block type="checkout/cart_minicart" name="minicart_head" template="checkout/cart/minicart.phtml"
-                   before="-">
-
-                <block type="checkout/cart_sidebar" name="minicart_content"
-                       template="checkout/cart/minicart/items.phtml">
-                    <action method="addItemRender">
-                        <type>default</type>
-                        <block>checkout/cart_item_renderer</block>
-                        <template>checkout/cart/minicart/default.phtml</template>
-                    </action>
-                    <action method="addItemRender">
-                        <type>simple</type>
-                        <block>checkout/cart_item_renderer</block>
-                        <template>checkout/cart/minicart/default.phtml</template>
-                    </action>
-                    <action method="addItemRender">
-                        <type>grouped</type>
-                        <block>checkout/cart_item_renderer_grouped</block>
-                        <template>checkout/cart/minicart/default.phtml</template>
-                    </action>
-                    <action method="addItemRender">
-                        <type>configurable</type>
-                        <block>checkout/cart_item_renderer_configurable</block>
-                        <template>checkout/cart/minicart/default.phtml</template>
-                    </action>
-                    <block type="core/text_list" name="cart_sidebar.cart_promotion" as="cart_promotion"
-                           translate="label" module="checkout">
-                        <label>Mini-cart promotion block</label>
-                    </block>
-                    <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label"
-                           module="checkout">
-                        <label>Shopping Cart Sidebar Extra Actions</label>
-                    </block>
-                </block>
-            </block>
         </reference>
 
-
-
-
-        <reference name="root">
-
+        <!-- reference footer -->
         <reference name="footer">
             <remove name="footer_links"/>
             <remove name="footer_links2"/>
-
+            <remove name="right"/>
             <block type="cms/block" name="footer-cmsLinks" as="footer-cmsLinks">
                 <action method="setBlockId">
                     <block_id>footer-cmsLinks</block_id>
@@ -226,29 +160,244 @@
                     <block_id>footer-paymnet</block_id>
                 </action>
             </block>
-        </reference>
-
-        </reference>
-    </default>
-    <catalog_product_view translate="label">
-        <reference name="content">
-            <block type="catalog/product_view" name="product.info.addtocart" as="addtocart"
-                   template="catalog/product/view/addtocart.phtml"/>
-        </reference>
-    </catalog_product_view>
-
-
-    <PRODUCT_TYPE_configurable translate="label" module="catalog">
-        <reference name="product.info.options.wrapper">
-            <block type="catalog/product_view_type_configurable" name="product.info.options.configurable"
-                   as="options_configurable" before="-"
-                   template="catalog/product/view/type/options/configurable.phtml">
-                <block type="core/text_list" name="product.info.options.configurable.renderers"
-                       as="attr_renderers"/>
-                <block type="core/text_list" name="product.info.options.configurable.after" as="after"/>
+            <block type="cms/block" name="cart_footer" as="cart_footer">
+                <action method="setBlockId">
+                    <block_id>cart_footer</block_id>
+                </action>
             </block>
         </reference>
-    </PRODUCT_TYPE_configurable>
+
+
+    </default>
+
+
+    <catalog_category_layered>
+        <reference name="content">
+            <action method="unsetChild">
+                <name>catalog.leftnav</name>
+            </action>
+        </reference>
+        <reference name="content">
+            <action method="insert">
+                <child>catalog.leftnav</child>
+            </action>
+        </reference>
+        <reference name="catalog.leftnav">
+            <action method="unsetChild"><name>category_filter</name></action>
+        </reference>
+        <reference name="content">
+            <action method="insert"><name>category_filter</name></action>
+        </reference>
+
+    </catalog_category_layered>
+
+    <product_list>
+        <block type="core/template" name="product_list.swatches" template="configurableswatches/catalog/product/list/swatches.phtml" />
+    </product_list>
+
+
+    <catalog_product_view translate="label">
+
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
+                <!--
+                <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
+                <action method="addReviewSummaryTemplate"><type>short</type><template>review/helper/summary_short.phtml</template></action>
+                <action method="addReviewSummaryTemplate"><type>...</type><template>...</template></action>
+                -->
+                <block type="catalog/product_view_media" name="product.info.media" as="media"
+                       template="catalog/product/view/media.phtml">
+                    <block type="core/text_list" name="product.info.media.after" as="after"/>
+                </block>
+                <block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
+                    <label>Alert Urls</label>
+                </block>
+
+                <action method="setTierPriceTemplate">
+                    <template>catalog/product/view/tierprices.phtml</template>
+                </action>
+
+                <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products"
+                       template="catalog/product/list/upsell.phtml">
+                    <action method="setColumnCount">
+                        <columns>6</columns>
+                    </action>
+                    <action method="setItemLimit">
+                        <type>upsell</type>
+                        <limit>6</limit>
+                    </action>
+                </block>
+
+                <block type="catalog/product_view_additional" name="product.info.additional"
+                       as="product_additional_data"/>
+                <block type="catalog/product_view_description" name="product.description" as="description"
+                       template="catalog/product/view/description.phtml">
+                    <action method="addToParentGroup">
+                        <group>detailed_info</group>
+                    </action>
+                    <action method="setTitle" translate="value">
+                        <value>Description</value>
+                    </action>
+                </block>
+                <block type="catalog/product_view_attributes" name="product.attributes" as="additional"
+                       template="catalog/product/view/attributes.phtml">
+                    <action method="addToParentGroup">
+                        <group>detailed_info</group>
+                    </action>
+                    <action method="setTitle" translate="value">
+                        <value>Additional Information</value>
+                    </action>
+                </block>
+                <block type="catalog/product_list_related" name="catalog.product.related" as="related_products"
+                       template="catalog/product/list/related.phtml"/>
+
+                <block type="catalog/product_view" name="product.info.addto" as="addto"
+                       template="catalog/product/view/addto.phtml"/>
+                <block type="catalog/product_view" name="product.info.sharing" as="sharing"
+                       template="catalog/product/view/sharing.phtml"/>
+                <block type="catalog/product_view" name="product.info.addtocart" as="addtocart"
+                       template="catalog/product/view/addtocart.phtml"/>
+
+                <block type="core/text_list" name="product.info.extrahint" as="extrahint" translate="label">
+                    <label>Product View Extra Hint</label>
+                </block>
+
+                <block type="catalog/product_view" name="product.info.options.wrapper" as="product_options_wrapper"
+                       template="catalog/product/view/options/wrapper.phtml" translate="label">
+                    <label>Info Column Options Wrapper</label>
+                    <block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+                    <block type="catalog/product_view_options" name="product.info.options" as="product_options"
+                           template="catalog/product/view/options.phtml">
+                        <action method="addOptionRenderer">
+                            <type>text</type>
+                            <block>catalog/product_view_options_type_text</block>
+                            <template>catalog/product/view/options/type/text.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>file</type>
+                            <block>catalog/product_view_options_type_file</block>
+                            <template>catalog/product/view/options/type/file.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>select</type>
+                            <block>catalog/product_view_options_type_select</block>
+                            <template>catalog/product/view/options/type/select.phtml</template>
+                        </action>
+                        <action method="addOptionRenderer">
+                            <type>date</type>
+                            <block>catalog/product_view_options_type_date</block>
+                            <template>catalog/product/view/options/type/date.phtml</template>
+                        </action>
+                    </block>
+                    <block type="core/html_calendar" name="html_calendar" as="html_calendar"
+                           template="page/js/calendar.phtml"/>
+                </block>
+                <block type="catalog/product_view" name="product.info.options.wrapper.bottom"
+                       as="product_options_wrapper_bottom" template="catalog/product/view/options/wrapper/bottom.phtml"
+                       translate="label">
+                    <label>Bottom Block Options Wrapper</label>
+                    <action method="insert">
+                        <block>product.tierprices</block>
+                    </action>
+                    <block type="catalog/product_view" name="product.clone_prices" as="prices"
+                           template="catalog/product/view/price_clone.phtml"/>
+                    <action method="append">
+                        <block>product.info.addtocart</block>
+                    </action>
+                    <action method="append">
+                        <block>product.info.addto</block>
+                    </action>
+                    <action method="append">
+                        <block>product.info.sharing</block>
+                    </action>
+                </block>
+
+                <block type="core/template_facade" name="product.info.container1" as="container1">
+                    <action method="setDataByKey">
+                        <key>alias_in_layout</key>
+                        <value>container1</value>
+                    </action>
+                    <action method="setDataByKeyFromRegistry">
+                        <key>options_container</key>
+                        <key_in_registry>product</key_in_registry>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper</block>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper.bottom</block>
+                    </action>
+                </block>
+                <block type="core/template_facade" name="product.info.container2" as="container2">
+                    <action method="setDataByKey">
+                        <key>alias_in_layout</key>
+                        <value>container2</value>
+                    </action>
+                    <action method="setDataByKeyFromRegistry">
+                        <key>options_container</key>
+                        <key_in_registry>product</key_in_registry>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper</block>
+                    </action>
+                    <action method="append">
+                        <block>product.info.options.wrapper.bottom</block>
+                    </action>
+                </block>
+                <action method="unsetCallChild">
+                    <child>container1</child>
+                    <call>ifEquals</call>
+                    <if>0</if>
+                    <key>alias_in_layout</key>
+                    <key>options_container</key>
+                </action>
+                <action method="unsetCallChild">
+                    <child>container2</child>
+                    <call>ifEquals</call>
+                    <if>0</if>
+                    <key>alias_in_layout</key>
+                    <key>options_container</key>
+                </action>
+            </block>
+        </reference>
+
+
+    </catalog_product_view>
+
+    <PRODUCT_TYPE_simple translate="label" module="catalog">
+        <label>Catalog Product View (Simple)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data"
+                   template="catalog/product/view/type/default.phtml">
+                <block type="core/text_list" name="product.info.simple.extra" as="product_type_data_extra"
+                       translate="label">
+                    <label>Product Extra Info</label>
+                </block>
+            </block>
+            <block type="catalog/product_view_type_simple" name="product.info.availability"
+                   as="product_type_availability" template="catalog/product/view/type/availability/default.phtml"/>
+        </reference>
+    </PRODUCT_TYPE_simple>
+
+
+    <!--
+        <PRODUCT_TYPE_configurable translate="label" module="catalog">
+            <reference name="product.info.options.wrapper">
+                <block type="catalog/product_view_type_configurable" name="product.info.options.configurable"
+                       as="options_configurable" before="-"  template="catalog/product/view/type/options/configurable.phtml">
+                    <block type="core/text_list" name="product.info.options.configurable.renderers" as="attr_renderers"/>
+                    <block type="core/text_list" name="product.info.options.configurable.after" as="after"/>
+                </block>
+            </reference>
+        </PRODUCT_TYPE_configurable>
+        -->
+
     <checkout_cart_index translate="label">
         <reference name="checkout.cart">
             <action method="setCartTemplate">
@@ -271,8 +420,15 @@
             </action>
 
         </reference>
-
+        <reference name="footer">
+            <action method="setTemplate">
+                   <template>page/html/cart-footer.phtml</template>
+               </action>
+        </reference>
     </checkout_cart_index>
+
+
+
     <customer_logged_out>
         <reference name="header">
             <block type="customer/form_login" name="header_customer_form_mini_login"
@@ -284,70 +440,72 @@
 
     <!--  Customer Links  -->
     <customer_account>
-<reference name="my.account.wrapper">
-        <block type="customer/account_navigation" name="customer_account_navigation" before="-"
-               template="customer/account/navigation.phtml">
+        <reference name="my.account.wrapper">
+            <block type="customer/account_navigation" name="customer_account_navigation" before="-"
+                   template="customer/account/navigation.phtml">
 
-            <action method="addLink" translate="label" module="customer">
-                <name>custom page</name>
-                <!--Customer Block/AccountpageController.php-->
-                <path>customer/accountpage/</path>
-                <label>Custom Page</label>
-            </action>
-            <action method="addLink" translate="label" module="sales">
-                <name>orders</name>
-                <path>sales/order/history/</path>
-                <label>My Orders</label>
-            </action>
-            <action method="addLink" translate="label">
-                <name>billing_agreements</name>
-                <path>sales/billing_agreement/</path>
-                <label>Billing Agreements</label>
-            </action>
-            <action method="addLink" translate="label">
-                <name>change_password</name>
-                <path>arty_customer/Accountpage/index</path>
-                <label>Change Password</label>
-            </action>
+                <action method="addLink" translate="label" module="customer">
+                    <name>custom page</name>
+                    <!--Customer Block/AccountpageController.php-->
+                    <path>customer/accountpage/</path>
+                    <label>Custom Page</label>
+                </action>
+                <action method="addLink" translate="label" module="sales">
+                    <name>orders</name>
+                    <path>sales/order/history/</path>
+                    <label>My Orders</label>
+                </action>
+                <action method="addLink" translate="label">
+                    <name>billing_agreements</name>
+                    <path>sales/billing_agreement/</path>
+                    <label>Billing Agreements</label>
+                </action>
+                <action method="addLink" translate="label">
+                    <name>change_password</name>
+                    <path>arty_customer/Accountpage/index</path>
+                    <label>Change Password</label>
+                </action>
 
-            <action method="addLink" translate="label" module="downloadable">
-                <name>downloadable_products</name>
-                <path>downloadable/customer/products</path>
-                <label>Product History</label>
-            </action>
-            <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
-                <name>wishlist</name>
-                <path>wishlist/</path>
-                <label>My Wishlist</label>
-            </action>
-            <action method="addLink" translate="label" module="customer">
-                <name>account_edit</name>
-                <path>customer/account/edit/</path>
-                <label>Account Informations</label>
-            </action>
-            <action method="addLink" translate="label" module="customer">
-                <name>address_book</name>
-                <path>customer/address/</path>
-                <label>Address Book</label>
-            </action>
+                <action method="addLink" translate="label" module="downloadable">
+                    <name>downloadable_products</name>
+                    <path>downloadable/customer/products</path>
+                    <label>Product History</label>
+                </action>
+                <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
+                    <name>wishlist</name>
+                    <path>wishlist/</path>
+                    <label>My Wishlist</label>
+                </action>
+                <action method="addLink" translate="label" module="customer">
+                    <name>account_edit</name>
+                    <path>customer/account/edit/</path>
+                    <label>Account Informations</label>
+                </action>
+                <action method="addLink" translate="label" module="customer">
+                    <name>address_book</name>
+                    <path>customer/address/</path>
+                    <label>Address Book</label>
+                </action>
 
-        </block>
+            </block>
 
-        <reference name="customer_account_navigation">
-            <action method="addLink">
-                <name>account</name>
-                <path>customer/account/</path>
-                <label>Account dAshboard</label>
-            </action>
+            <reference name="customer_account_navigation">
+                <action method="addLink">
+                    <name>account</name>
+                    <path>customer/account/</path>
+                    <label>Account dAshboard</label>
+                </action>
+            </reference>
         </reference>
-</reference>
     </customer_account>
+
     <pulsestorm_customerpage_index_index>
-        <update handle="customer_account" />
+        <update handle="customer_account"/>
         <reference name="my.account.wrapper">
             <block type="core/text" name="pulsestorm_customerpage_content">
                 <action method="setText">
-                    <text><![CDATA[<h1>Look at me!</h1>]]></text></action>
+                    <text><![CDATA[<h1>Look at me!</h1>]]></text>
+                </action>
             </block>
         </reference>
     </pulsestorm_customerpage_index_index>

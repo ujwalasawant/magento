@@ -569,9 +569,10 @@ $gray: #5B5B5B;
 }
 .pricerow
 {
+
   margin-left: 1px;
   margin-right: 1px;
-  background:#ECECEC;
+  background-color: white;
 }
 .list-group-item
 {
@@ -712,6 +713,7 @@ border: none !important;
 
 /**logo**/
 .logo {
+
   display: block;
   float: left;
   width: 100%;
@@ -983,6 +985,115 @@ border: none !important;
   background: #FFFFFF;
   font-size: 15px;
   width: 50%;
+}
 
+.btn-remove2 {
+  background-position: 4px -648px;
+  border: none;
+  vertical-align: top;
+}
+.btn-remove2:after {
+  display: none;
+}
+.btn-remove2:hover {
+  background-color: transparent;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+}
+
+/** subcategory page **/
+ *, *:before, *:after {
+   box-sizing: border-box !important;
+ }
+.pin {
+  -moz-column-width: 15em;
+  -webkit-column-width: 15em;
+  -moz-column-gap: 1em;
+  -webkit-column-gap: 1em;
+}
+.item {
+  display: inline-block;
+  padding: 0.25rem;
+  width: 100%;
+}
+.well {
+  position: relative;
+  display: block;
+}
+/**
+.btn-cart{
+  background-image: url("../images/ddl.png");
+}**/
+
+/** price in subategory page  **/
+
+.products-list .product-shop .product-secondary {
+  float: right;
+  width: 35%;
+  text-align: right;
+  clear: right;
+}
+
+
+
+
+/*** Add to cart button css ***/
+
+.up-arrow {
+  display: inline-block;
+  position: relative;
+  background: purple;
+  color: #FFF;
+  text-decoration: none;
+  padding: 0px;
+  width : 40%;
+  height : 25px;
+  border-top-right-radius: 22px;
+  border-bottom-right-radius : 22px;
+}
+.up-arrow:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 5px;
+  bottom: 100%;
+  width: 0;
+  height: 5PX;
+  border-bottom: 10px solid purple;
+  border-top: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
 
 }
+
+
+
+/*** buy now button css ***/
+
+
+.up-arrow-b {
+  display: inline-block;
+  position: relative;
+  background: #B40404;
+  color: #FFF;
+  text-decoration: none;
+  padding: 0px;
+  width : 150px;
+  height : 40px;
+  border-top-right-radius: 2em;
+  border-bottom-right-radius : 2em;
+}
+.up-arrow-b:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 20px;
+  bottom: 100%;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid #B40404;
+  border-top: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
