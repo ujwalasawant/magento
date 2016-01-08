@@ -38,6 +38,7 @@
     <?php echo $this->getMessagesBlock()->toHtml() ?>
     <?php /* Extensions placeholder */ ?>
     <?php echo $this->getChildHtml('customer.form.login.extra')?>
+    <?php echo $this->getChildHtml('customer_form_register2');?>
     <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
         <?php echo $this->getBlockHtml('formkey'); ?>
         <div class="col2-set">

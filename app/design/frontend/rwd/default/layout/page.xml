@@ -88,15 +88,9 @@
             </block>
 
             <block type="page/html_notices" name="global_notices" as="global_notices" template="page/html/notices.phtml" />
-            <block type="cms/block" name="topbar_cmslinks" as="topbar_cmslinks">
-                <action method="setBlockId">
-                    <block_id>topbar_cmslinks</block_id>
-                </action>
-            </block>
+
             <block type="page/html_header" name="header" as="header">
-
                 <block type="page/template_links" name="top.links" as="topLinks"/>
-
                 <block type="page/switch" name="store_language" as="store_language" template="page/switch/languages.phtml"/>
                 <block type="core/text_list" name="top.menu" as="topMenu" translate="label">
                     <label>Navigation Bar</label>
