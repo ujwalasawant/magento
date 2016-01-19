@@ -88,7 +88,7 @@ if(empty($_cartQty)) {
 
         <div class="minicart-actions">
             <?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
-                <ul class="checkout-types minicart">
+                    <ul class="checkout-types minicart">
                     <?php echo $this->getChildHtml('extra_actions') ?>
                     <li>
                         <a title="<?php echo $this->__('Checkout') ?>" class="button checkout-button" href="<?php echo $this->getCheckoutUrl() ?>">

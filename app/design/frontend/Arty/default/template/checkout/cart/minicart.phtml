@@ -31,13 +31,10 @@
  */
 
 ?>
-
 <?php
-$_cartQty = $this->getSummaryCount();
-if (empty($_cartQty)) {
-    $_cartQty = 0;
-}
+$_cartQty = Mage::getSingleton('checkout/cart')->getItemsCount();
 ?>
+
 
 <a href="<?php echo $this->helper('checkout/cart')->getCartUrl(); ?>" data-toggle="popover"
    data-target-element="#header-cart" class="skip-link skip-cart <?php if ($_cartQty <= 0): ?> no-count<?php endif; ?>">

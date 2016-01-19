@@ -1,0 +1,43 @@
+<ul class="list-inline list-unstyled text-right">
+	<li>	 Check Availability at
+	</li>
+	<li><input type="text" id="zipcode"  placeholder="Pincode" style="width: 130px;" class="zipcode">
+	</li>
+	<li><button onclick="Checkshipping()" title="check" class="button" type="button"><span><span>Check</span></span></button>
+	</li>
+	<li><div id ="result"></div>
+	</li>
+
+</ul>
+<script>
+function Checkshipping()
+{
+		var zipcode = document.getElementById('zipcode').value;
+		jQuery( "#result" ).empty();
+		
+		if (zipcode == '')
+		{
+			jQuery("#zipcode").css("border","2px dotted #E84100");return false;	
+		}
+		jQuery.ajax({
+		type:"POST",
+		xhrFields: {
+		withCredentials: false
+		},
+		url:"<?php echo Mage::getBaseUrl();?>shippingrestriction/index/front",
+		data:{'zipcode':zipcode},
+		success: function (data, status) {
+				//jQuery("#zipcode").css("border","none");
+				jQuery( "#result" ).empty(data);
+				jQuery( "#result" ).append(data);
+
+    		},
+		error: function (xhr, desc, err) { 
+                        
+			alert("Error Processing your request!Please try again later!");
+			alert(xhr.toSource());
+			alert("Desc: " + desc + "\nErr:" + err);
+		}    
+		});
+}
+</script>
