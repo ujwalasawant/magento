@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arty_Review>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Arty_Artyreview/>
+
+            </depends>
+        </Arty_Review>
+    </modules>
+</config>

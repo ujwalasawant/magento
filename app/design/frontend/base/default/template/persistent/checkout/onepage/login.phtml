@@ -131,7 +131,8 @@
     }
     function onepageLogin(button)
     {
-        if(loginForm.validator && loginForm.validator.validate()){
+        if(loginForm.validator && loginForm.validator.validate())
+        {
             button.disabled = true;
             loginForm.submit();
         }

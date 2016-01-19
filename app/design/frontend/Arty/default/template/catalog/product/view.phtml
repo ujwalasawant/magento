@@ -30,23 +30,28 @@
  * @see Mage_Catalog_Block_Product_View
  * @see Mage_Review_Block_Product_View
  */
+
 ?>
-     <?php $_helper = $this->helper('catalog/output'); ?>
+
+<?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); ?>
 <script type="text/javascript">
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
 <div class="product-view">
-    <div class="product-essential">
+    <div class="product-essential" >
     <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
         <?php echo $this->getBlockHtml('formkey') ?>
         <div class="no-display">
             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>
-
-        <div class="product-shop">
+        <div class="row">
+        <div class="col-lg-5 product-img-box">
+            <?php echo $this->getChildHtml('media') ?>
+        </div>
+        <div  class="col-lg-5 product-shop">
             <div class="product-name">
                 <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
             </div>
@@ -76,6 +81,7 @@
                 <div class="add-to-box">
                     <?php echo $this->getChildHtml('addto') ?>
                 </div>
+
             <?php endif; ?>
 
             <?php if ($_product->getShortDescription()):?>
@@ -87,15 +93,20 @@
 
             <?php echo $this->getChildHtml('other');?>
 
+
+
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
             <?php endif;?>
 
+            <div class="pincode">
+                <input type="text" name="pincode" id='pincode1'  placeholder="Enter pincode to check dilivery option">
+                <div id='pincode'></div>
+                <input class="verify-button" type='button' onclick="checkForm()" value='Verify'>
+            </div>
+        </div>
         </div>
 
-        <div class="product-img-box">
-            <?php echo $this->getChildHtml('media') ?>
-        </div>
 
         <div class="clearer"></div>
         <?php if ($_product->isSaleable() && $this->hasOptions()):?>
@@ -155,16 +166,39 @@
     </script>
     </div>
 
-    <div class="product-collateral">
-<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
-        <div class="box-collateral <?php echo "box-{$alias}"?>">
-            <?php if ($title = $this->getChildData($alias, 'title')):?>
-            <h2><?php echo $this->escapeHtml($title); ?></h2>
-            <?php endif;?>
-            <?php echo $html; ?>
+    <div class="product-collateral tabs ">
+
+    <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+        <?php $items=count($detailedInfoGroup);
+        $i=0;?>
+        <ul class="list-inline list-unstyled">
+            <?php foreach ($detailedInfoGroup as $alias => $html):?>
+
+                <li class="<?php if($i==0){echo "active"; $i++;}  ?>">
+                    <a  href=#<?php echo $alias; ?>>
+                        <?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?>
+                    </a>
+                </li>
+            <?php endforeach;   $i=0; ?>
+        </ul>
+        <div class="tab-content ">
+
+            <?php foreach ($detailedInfoGroup as $alias => $html):?>
+
+                <div class="tab <?php if($i==0){echo "in active"; $i++;} ?>" id="<?php echo $alias; ?>">
+                    <?php echo $html ?>
+                </div>
+            <?php endforeach;?>
         </div>
-<?php endforeach;?>
-        <?php echo $this->getChildHtml('upsell_products') ?>
-        <?php echo $this->getChildHtml('product_additional_data') ?>
+
+
+    <?php endif; ?>
     </div>
+
+
+<?php echo $this->getChildHtml('upsell_products') ?>
+    <?php echo $this->getChildHtml('product_additional_data') ?>
 </div>
+<script type="text/javascript">
+
+</script>

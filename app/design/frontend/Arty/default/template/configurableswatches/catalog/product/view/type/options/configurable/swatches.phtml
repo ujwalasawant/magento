@@ -52,7 +52,7 @@ $_swatchArray = $_config->attributes->$_id;
         <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select no-display swatch-select">
             <option><?php echo $this->__('Choose an Option...') ?></option>
         </select>
-        <ul id="configurable_swatch_<?php echo $_attrCode ?>" class="configurable-swatch-list clearfix">
+        <ul id="configurable_swatch_<?php echo $_attrCode ?>" class="configurable-swatch-list clearfix list-unstyled" >
             <?php foreach ($_swatchArray->options as $_option): ?>
                 <?php
                 $_optionCode = Mage::helper('configurableswatches')->getHyphenatedString($_option->label);

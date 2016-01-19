@@ -1,0 +1,158 @@
+<?php if(!Mage::getSingleton('customer/session')->isLoggedIn()){
+	$title=Mage::getStoreConfig('chweb/chweb_group/chweb_input',Mage::app()->getStore());
+	$flag=Mage::getStoreConfig('chweb/chweb_group/chweb_select',Mage::app()->getStore());
+		$contents=Mage::getStoreConfig('chweb/chweb_group/chweb_textarea',Mage::app()->getStore());
+ $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+    $pass = '';                           //password is a string
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i <8; $i++) {
+        $n = mt_rand(0, $alphaLength);    
+        $pass = $pass.$alphabet[$n];      //append a random character
+    }
+	//echo $fldddag;
+if($flag){?>
+<div id="popForm" style = "display:none">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/popup.css');?>"/>
+<div style="" class="popup_container sign_in_modal" id="transparent_bg">
+<div style="width:660px;" class="overlay-inner-bg" id="content">
+<a href="javascript:void(0)" onclick="closeSignup()" class=""></a>
+<div class="reg_msg">
+
+<?php  echo $title; ?><br/>
+<?php  echo $contents; ?>
+
+<span style= "bottom: 10px; font-size: 11px; position: absolute;left: 10px;">
+	<a href="javascript:void(0)" onclick="closeSignup()" class="">Register Later</a></span>
+</div>  
+
+
+
+<div style="width:300px;" class="left_block left_block_new">
+<h2>Register</h2>
+<div class="sign_signup_form">
+<form rel="signupBox" action="" method="post" id="signup-form" name="myFrom">
+<input type="hidden" value="" name="csrf_token">					
+<span style="color:#990000; font-size:14px;"></span>
+<div class="error" id="error_msg"></div>
+<ul>
+<li>  
+<input type="text" autocomplete="off" maxlength="100" id="email" name="email" value="" placeholder="Email ID - eg: taaza.tamatar@domain.com"  class="required-entry validate-email"><br>
+<div style="display:none" class="validation-advice" id="emailError">Please enter a valid email address. For example taaza.tamatar@domain.com</div>
+<span id="email" class="error_msg"></span>
+</li>
+<li>
+<div class="form_field_left">
+	<input type="text" autocomplete="off" id="firstname" maxlength="35" name="firstname" value="" placeholder="First Name" class="required-entry">
+	<span id="firstname" class="error_msg"></span>
+	<div style="display:none" class="validation-advice" id="fnameError">Please use letters only (a-z or A-Z) in this field.</div>
+</div>
+<div class="form_field_right">
+	<input type="text" autocomplete="off" id="lastname" maxlength="35" name="lastname" value="" placeholder="Last Name" class="required-entry">
+	<span id="lastname" class="error_msg"></span>
+	<div style="display:none" class="validation-advice" id="lnameError">Please use letters only (a-z or A-Z) in this field.</div>
+</div>
+<div class="clearfix"></div>
+</li>
+<li>
+<input type="text" autocomplete="off" name="mobile" id="mobile" class="login_input validate-number required-entry" value="" placeholder="Mobile - eg: 9800000000" pattern="[0-9]*" maxlength="10"><br>
+<span id="mobile" class="error_msg"></span>
+<div style="display:none" class="validation-advice" id="mobileError">Enter correct mobile number (Eg:9800000000)</div>
+ <div class="clearfix"></div>
+</li>								
+<li>
+<div class="form_field_left">
+	<input type="hidden" autocomplete="off" maxlength="30" id="password1" name="password1" value="<?php echo $pass;?>">
+</div>
+	<input type="hidden" autocomplete="off" maxlength="30" id="isAjax" name="isAjax" value="1">
+
+<div class="clearfix"></div>
+</li>                        
+
+<li>
+<input type="submit" value="Save" name="register" class="grey-btn" id="formSubmit">
+</li>
+</ul>
+</form>
+</div>
+<div class="clearfix"></div>
+<div class="no_account">Already have an account?   <a style="text-decoration:none;" class="red" id="loginpop1" href="javascript:void(0)" onclick="closeSignup();javascript:socialLogin.open();">Sign In</a></div>
+
+</div>
+</div>
+</div>
+</div> 
+<script type="text/javascript">
+var customForm = new VarienForm('signup-form');
+</script>
+
+<script type="text/javascript">
+function closeSignup(){
+jQuery('#transparent_bg').hide();
+
+}
+</script>
+
+<?php
+$name = 'popupcookies';     
+$value = 'yes'; 
+// $getCookies = "";    
+$getCookies = Mage::getModel('core/cookie')->get($name);
+// $getCookies = "";
+if($getCookies==""){
+
+?>
+<script>
+jQuery(document).ready(function() {
+jQuery("#popForm").show();
+
+});
+</script>
+<?php
+Mage::getModel('core/cookie')->set($name, $value);
+}
+?>
+
+<script>
+jQuery('#signup-form').submit(function(e){
+e.preventDefault();
+if (customForm.validator && customForm.validator.validate()){
+jQuery.ajax({
+//jQuery("#signup-form" ).serialize() ;
+type: "POST",
+url: "<?php echo Mage::getUrl('customer/account/createpost/'); ?>", // create some.php file
+data : jQuery("#signup-form" ).serialize(),
+cache: false,
+success : function(msg){
+ var data = jQuery.parseJSON(msg);
+//var obj = JSON.parse(msg);
+
+ //alert(data.msg);
+
+if(data.msg=='success'){
+window.location = '<?php echo Mage::getBaseUrl(); ?>';
+}
+else if(data.msg=='emailisexist'){
+jQuery('.already').html('Email Id already exist');
+return false;
+}
+
+else{
+jQuery('.already').html('Cannot Create Account');
+return false;
+
+}
+
+}
+
+
+});
+}               
+
+});
+</script>
+<style>
+.already{color: #EB340A;}
+</style>
+<?php  
+}
+}?>

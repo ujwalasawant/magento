@@ -40,21 +40,24 @@
                     <?php if ($this->helper('customer')->isLoggedIn()): ?>
                         <li>
                             <a title="<?php echo $this->__('My Account') ?>"
-                               href="<?php echo Mage::getUrl('customer/account') ?>">   <?php echo $this->__('My Account') ?>     </a>
+                               href="<?php echo Mage::getUrl('customer/account') ?>">
+                                <?php echo $this->__('My Account') ?> </a>
                         </li>
                         <li>
                             <a title="Log Out"
-                               href="<?php echo Mage::getUrl('customer/account/logout') ?>">     <?php echo $this->__('Logout') ?></a>
+                               href="<?php echo Mage::getUrl('customer/account/logout') ?>"> <?php echo $this->__('Logout') ?> </a>
+
+                            <a href="<?php echo Mage::getUrl('customer/account/create/') ?>">  <?php echo $this->__('Sign up') ?> </a>
                         </li>
                     <?php else: ?>
 
                         <li>
-                            <a href="<?php echo Mage::getUrl('customer/account/create/') ?>">  <?php echo $this->__('Sign up') ?></a>
+                            <a href="<?php echo Mage::getUrl('customer/account/create/') ?>">  <?php echo $this->__('Sign up') ?> </a>
+
                         </li>
 
                         <li>
-                            <?php echo $this->getChildHtml('header_customer_form_mini_login') ?>
-
+                            <a href="<?php echo $this->getChildHtml('header_customer_form_mini_login') ?>" ><?php echo $this->__('login up') ?></a>
                         </li>
 
 

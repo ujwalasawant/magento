@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Test_test>
+            <version>0.1.0</version>
+        </Test_test>
+    </modules>
+    <global>
+        <models>
+            <test_test>
+                <class>Test_test_Model</class>
+                <resourceModel>test_test_resource</resourceModel>
+            </test_test>
+            <test_test_resource>
+                <class>Test_test_Model_Resource</class>
+            </test_test_resource>
+        </models>
+        <blocks>
+            <test_test>
+                <class>Test_test_Block</class>
+            </test_test>
+        </blocks>
+        <helpers>
+            <test_test>
+                <class>Test_test_Helper</class>
+            </test_test>
+        </helpers>
+    </global>
+</config>

@@ -1,3 +1,4 @@
+<?php /* @var $this Mage_Catalog_Block_Product_List */ ?>
 <?php
 /**
  * Magento
@@ -19,7 +20,7 @@
  * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
- * @package     base_default
+ * @package     rwd_default
  * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
@@ -30,122 +31,162 @@
  *
  * @see Mage_Catalog_Block_Product_List
  */
+/* @var $this Mage_Catalog_Block_Product_List */
 ?>
 
 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<?php echo $this->getToolbarHtml() ?>
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 <?php
-$category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+$_productCollection = $this->getLoadedProductCollection();
 $_helper = $this->helper('catalog/output');
-$_productCollection = Mage::getModel('catalog/product')
-    ->getCollection()
-    ->addCategoryFilter($category)
-    ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
-    ->load();
 ?>
-<br/>
-<br/>
 <?php if (!$_productCollection->count()): ?>
     <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
-    <div class="category-products">
-        <div class="container">
-            <div class="pin">
-                <?php foreach ($_productCollection as $_product): ?>
 
-                    <div class="lightborder item " >
+<div>
+    <!--<span class='st_email' displayText='Email'></span> -->
 
-                        <div>
-
-                            <a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>"
-                               class="glyphicon glyphicon-star-empty link-wishlist"
-                               style="background: none ;margin-left: 5%; margin-right: 5% ;border: none "></a>
-
-                            <button type="button" class="glyphicon glyphicon-plus-sign "
-                                    style="background: none ;margin-right:5% ;border: none ">
-                            </button>
-
-                            <button id="share" type="button" class="glyphicon glyphicon-share-alt"
-                                    style="background: none ;border: none ">
-
-                            </button>
+    <div class="container">
+        <div class="pin"><!-- Go to www.addthis.com/dashboard to customize your tools -->
 
 
-                        </div>
-                        <div class=" well " style="padding: 0px 0px 0px 0px ; margin: 0px 0px 1px 0px">
-                            <a href="<?php echo $_product->getProductUrl() ?>"
-                               title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
-                                <img width="100%"
-                                     src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image') ?>"
-                                     alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
-                            </a>
-                        </div>
-                        <div class="lightborder" style=" margin: 2px 0px 1px 0px ;" >
-                            <div class="row pricerow" >
+            <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+            <?php $_collectionSize = $_productCollection->count() ?>
+            <?php $_columnCount = $this->getColumnCount(); ?>
+            <ul class="products-grid products-grid--max-<?php echo $_columnCount; ?>-col">
+                <?php $i = 0;
+                foreach ($_productCollection as $_product): ?>
+
+                    <div class="item ">
+
+
+                        <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
+                            <!-- product block header  -->
+                            <div class="lightborder">
+
+                                <a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>"
+                                   class="glyphicon glyphicon-star-empty link-wishlist"
+                                   style="background: none ;margin-left: 5%; margin-right: 5% ;border: none "></a>
+
+                                <button type="button" class="glyphicon glyphicon-plus-sign "
+                                        style="background: none ;margin-right:5% ;border: none ">
+                                </button>
+
+                                <button id="share" type="button"
+                                        class="st_sharethis_custom glyphicon glyphicon-share-alt ">
+
+                                </button>
+
+
+                            </div>
+
+
+                            <div class=" well " style="padding: 0px 0px 0px 0px ; margin: 0px 0px 0px 0px">
+                                <a href="<?php echo $_product->getProductUrl() ?>"
+                                   title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
+                                    <?php // $_imgSize = 200 ; ?>
+                                    <img id="product-collection-image-<?php echo $_product->getId(); ?>" width="100%"
+                                         src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                                         alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+                                </a>
+
+                            </div>
+
+
+                            <div class="product-info lightborder" style=" margin: 2px 0px 1px 0px ;">
+
                                 <ul class="list-unstyled">
-                                    <li style="text-align: left">
-                                        <h4 class="list-group-item-heading product-description">
-                                            <a style="color: black ; font-family: bold"
-                                               href="<?php echo $_product->getProductUrl() ?>"
-                                               title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?>
-                                            </a>
-                                            <?php $id=$_product->getId();
-                                            echo "(".$id.")"?>
-                                        </h4>
-
+                                    <li style="text-align: left ; ">
+                                        <a href="<?php echo $_product->getProductUrl() ?>"
+                                           title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                                            <?php $id = $_product->getId();
+                                            echo "(" . $id . ")" ?>
+                                        </a>
                                     </li>
                                     <li style="text-align: left; color: grey">
                                         <?php
-                                        $type=$_product->getTypeId();
+                                        $type = $_product->getTypeId();
                                         echo "$type";
                                         ?>
                                     </li>
+
+                                    <?php
+                                    // Provides extra blocks on which to hang some features for products in the list
+                                    // Features providing UI elements targeting this block will display directly below the product name
+
+                                    if ($this->getChild('name.after')) {
+                                        $_nameAfterChildren = $this->getChild('name.after')->getSortedChildren();
+                                        foreach ($_nameAfterChildren as $_nameAfterChildName) {
+                                            $_nameAfterChild = $this->getChild('name.after')->getChild($_nameAfterChildName);
+                                            $_nameAfterChild->setProduct($_product);
+                                            echo $_nameAfterChild->toHtml();
+                                        }
+                                    }
+                                    ?>
                                     <li style="text-align: right">
-                                        <div class="product-price" style="color: orangered;" >
-                                            <?php
-                                                $_product = Mage::getModel('catalog/product')->load($id);
-                                                $_actualPrice = $_product->getPrice();
-                                                $_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),true,false);
-                                                $_formattedSpecialPrice = Mage::helper('core')->currency($_product->getFinalPrice(),true,false);
+                                        <div class="product-price" style="color: orangered;">
 
-                                            if($_formattedActualPrice===$_formattedSpecialPrice)
-                                            {
-                                                echo "<br/>"."Actual Price : " .$_formattedActualPrice."<br/>";
+                                            <?php echo $this->getPriceHtml($_product, true) ?>
+                                            <?php if ($_product->getRatingSummary()): ?>
+                                                <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </li>
 
-                                            }
-                                            else
-                                            {
-                                                echo "<br/>"."Actual Price : " .$_formattedActualPrice."<br/>";
-                                                echo "Special Price : ".$_formattedSpecialPrice;
-                                            }
-
-                                                ?>
+                                    <li style="text-align: left ; margin: 2px 0px 10px 0px">
+                                        <div class="actions">
+                                            <?php if (!$_product->canConfigure() && $_product->isSaleable()): ?>
+                                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+                                                        class="up-arrow"
+                                                        onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+                                                    <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                                </button>
+                                            <?php elseif ($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>
+                                                <a title="<?php echo $this->__('View Details') ?>" class="button"
+                                                   href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('View Details') ?></a>
+                                            <?php else: ?>
+                                                <p class="availability out-of-stock">
+                                                    <span><?php echo $this->__('Out of stock') ?></span></p>
+                                            <?php endif; ?>
 
                                         </div>
                                     </li>
-                                    <li style="text-align: left">
-                                        <?php if ($_product->isSaleable()): ?>
-                                           <br/> <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
-                                                         class="up-arrow"
-                                                    onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
-                                                <span><span><?php echo $this->__('Add to Cart') ?></span></span>
 
-                                            </button>
-                                            <br/>
-
-                                        <?php else: ?>
-                                            <p class="availability out-of-stock">
-                                               <br/> <span><?php echo $this->__('Out of stock') ?></span></p>
-                                        <?php endif; ?>
-                                    </li>
                                 </ul>
+
                             </div>
-                        </div>
+                        </li>
+
                     </div>
-                <?php endforeach; ?>
-            </div>
+                <?php endforeach ?>
+
+                <script
+                    type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd', 'even', 'first', 'last'])</script>
+                <?php endif; ?>
+            </ul>
         </div>
     </div>
-<?php endif; ?>
+</div>
+
+<?php
+// Provides a block where additional page components may be attached, primarily good for in-page JavaScript
+if ($this->getChild('after')) {
+    $_afterChildren = $this->getChild('after')->getSortedChildren();
+    foreach ($_afterChildren as $_afterChildName) {
+        $_afterChild = $this->getChild('after')->getChild($_afterChildName);
+        //set product collection on after blocks
+        $_afterChild->setProductCollection($_productCollection);
+        echo $_afterChild->toHtml();
+    }
+}
+?>
+
+
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript"> stLight.options({publisher: '12345',}); </script>
+
