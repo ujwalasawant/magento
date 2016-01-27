@@ -1,23 +1,7 @@
 <?php
 class Arty_Sales_Block_Order_History extends Mage_Sales_Block_Order_History
 {
-    public function __construct()
-    {
-        parent::__construct();
 
-        $this->setTemplate('sales/order/test.phtml');
-        $orders = Mage::getResourceModel('sales/order_collection')
-            ->addFieldToSelect('*')
-            ->addFieldToFilter('customer_id', Mage::getSingleton('customer/session')->getCustomer()->getId())
-            ->addFieldToFilter('state', array('in' => Mage::getSingleton('sales/order_config')->getVisibleOnFrontStates()))
-            ->setOrder('created_at', 'desc')
-        ;
-
-        $this->setOrders($orders);
-        $this->setOrder(Mage::getModel('sales/order')->load($this->getRequest()->getParam('order_id')));
-        Mage::registry('action')->getLayout()->getBlock('root')->setHeaderTitle(Mage::helper('sales')->__('Order Details'));
-        Mage::app()->getFrontController()->getAction()->getLayout()->getBlock('root')->setHeaderTitle(Mage::helper('sales')->__('My Orders'));
-    }
     public function getBackUrl()
     {
         return Mage::getUrl('*/*/history');
@@ -32,5 +16,54 @@ class Arty_Sales_Block_Order_History extends Mage_Sales_Block_Order_History
     public function getPrintUrl()
     {
         return Mage::getUrl('*/*/print');
+    }
+    protected function _prepareLayout()
+    {
+        if ($headBlock = $this->getLayout()->getBlock('head')) {
+            $headBlock->setTitle($this->__('Order # %s', $this->getOrder()->getRealOrderId()));
+        }
+        $this->setChild(
+            'payment_info',
+            $this->helper('payment')->getInfoBlock($this->getOrder()->getPayment())
+        );
+    }
+
+    public function getPaymentInfoHtml()
+    {
+        return $this->getChildHtml('payment_info');
+    }
+
+    /**
+     * Retrieve current order model instance
+     *
+     * @return Mage_Sales_Model_Order
+     */
+    public function getOrder()
+    {
+        return Mage::registry('current_order');
+    }
+
+
+
+    /**
+     * Return back title for logged in and guest users
+     *
+     * @return string
+     */
+
+
+    public function getInvoiceUrl($order)
+    {
+        return Mage::getUrl('*/*/invoice', array('order_id' => $order->getId()));
+    }
+
+    public function getShipmentUrl($order)
+    {
+        return Mage::getUrl('*/*/shipment', array('order_id' => $order->getId()));
+    }
+
+    public function getCreditmemoUrl($order)
+    {
+        return Mage::getUrl('*/*/creditmemo', array('order_id' => $order->getId()));
     }
 }

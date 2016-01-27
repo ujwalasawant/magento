@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arty_Paymenthistory>
+            <version>0.1.0</version>
+        </Arty_Paymenthistory>
+    </modules>
+    <global>
+        <helpers>
+            <arty_paymenthistory>
+                <class>Arty_Paymenthistory_Helper</class>
+            </arty_paymenthistory>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <arty_paymenthistory module="Arty_Paymenthistory">
+                    <file>arty_paymenyhistory.xml</file>
+                </arty_paymenthistory>
+            </updates>
+        </layout>
+        <routers>
+            <arty_paymenthistory>
+                <use>standard</use>
+                <args>
+                    <module>Arty_Paymenthistory</module>
+                    <frontName>arty_paymenthistory</frontName>
+                </args>
+            </arty_paymenthistory>
+        </routers>
+    </frontend>
+</config>

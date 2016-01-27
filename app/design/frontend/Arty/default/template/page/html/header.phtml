@@ -128,4 +128,48 @@
 
     <?php echo $this->getChildHtml('topContainer'); ?>
 
+    <script>
 
+        jQuery(document).ready(function(){
+
+            var menu = jQuery('#nav');
+
+            menu.addClass('default');
+
+            pos = menu.offset();
+
+            jQuery(window).scroll(function(){
+
+                onscroll();
+
+            });
+
+            function onscroll(){
+
+                if(jQuery(this).scrollTop() > pos.top && menu.hasClass('default')){
+
+                    menu.fadeOut(1, function(){
+
+                        jQuery(this).removeClass('default').addClass('fixed').css('width',jQuery(this).parent().width())
+
+                            .fadeIn('fast');
+
+                    });
+
+                } else if(jQuery(this).scrollTop() <= pos.top && menu.hasClass('fixed')){
+
+                    menu.fadeOut(1, function(){
+
+                        jQuery(this).removeClass('fixed').addClass('default').removeAttr('style').show();
+
+                    });
+
+                }
+
+            }
+
+            onscroll();
+
+        });
+
+    </script>

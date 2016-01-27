@@ -42,6 +42,7 @@
 <div class="product-view" >
     <div class="product-essential"  style="border: solid">
     <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <input type="hidden" name="buy_now" id="buy_now" value="" />
         <?php echo $this->getBlockHtml('formkey') ?>
         <div class="no-display">
             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
@@ -96,6 +97,10 @@
     <li>
             <?php echo $this->getChildHtml('zipcode');?>
     </li>
+    <li>
+        <button type="button" onclick="jQuery('#buy_now').val('buy_now');productAddToCartForm.submit(this)" class="btn btn-block btn-express-buynow"><i class="cart-icon-white m-r-sm v-middle"></i>Buy Now</button>
+    </li>
+
     <li >
             <?php echo $this->getChildHtml('other');?>
     </li>
@@ -115,6 +120,7 @@
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
         <?php endif;?>
     </form>
+
     <script type="text/javascript">
     //<![CDATA[
         var productAddToCartForm = new VarienForm('product_addtocart_form');
@@ -166,6 +172,19 @@
         }.bind(productAddToCartForm);
     //]]>
     </script>
+        <script>
+            function setcheckoutLocation(location)
+            {
+                jQuery.ajax({
+                    type:"GET",
+                url:location,
+                    success:function(data){
+                window.location.href = "http://127.0.0.1/magento/checkout/onepage/";
+                    }
+            });
+
+            }
+        </script>
     </div>
 
     <div class="product-collateral toggle-content tabs">

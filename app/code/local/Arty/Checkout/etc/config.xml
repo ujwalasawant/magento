@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arty_Checkout>
+            <version>0.1.0</version>
+        </Arty_Checkout>
+    </modules>
+    <global>
+        <models>
+            <arty_checkout>
+                <class>Arty_Checkout_Model</class>
+                <resourceModel>arty_checkout_resource</resourceModel>
+            </arty_checkout>
+            <arty_checkout_resource>
+                <class>Arty_Checkout_Model_Resource</class>
+            </arty_checkout_resource>
+        </models>
+        <blocks>
+            <arty_checkout>
+                <class>Arty_Checkout_Block</class>
+            </arty_checkout>
+        </blocks>
+        <helpers>
+            <arty_checkout>
+                <class>Arty_Checkout_Helper</class>
+            </arty_checkout>
+        </helpers>
+    </global>
+</config>

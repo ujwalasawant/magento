@@ -9,6 +9,12 @@ require_once Mage::getModuleDir('controllers', 'Mage_Sales').DS.'OrderController
 
 class Arty_Sales_OrderController extends Mage_Sales_OrderController
 {
+
+    public function paymentAction()
+    {
+        $this->loadLayout();
+        $this->renderLayout();
+    }
     public function producthistoryAction()
     {
         $this->loadLayout();
@@ -21,6 +27,7 @@ class Arty_Sales_OrderController extends Mage_Sales_OrderController
         }
         $this->renderLayout();
     }
+
 }
 
 ?>

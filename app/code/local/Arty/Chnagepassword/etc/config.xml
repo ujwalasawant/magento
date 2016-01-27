@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arty_Chnagepassword>
+            <version>0.1.0</version>
+        </Arty_Chnagepassword>
+    </modules>
+    <global>
+        <helpers>
+            <arty_chnagepassword>
+                <class>Arty_Chnagepassword_Helper</class>
+            </arty_chnagepassword>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <arty_chnagepassword module="Arty_Chnagepassword">
+                    <file>arty_chnagepassword.xml</file>
+                </arty_chnagepassword>
+            </updates>
+        </layout>
+        <routers>
+            <arty_chnagepassword>
+                <use>standard</use>
+                <args>
+                    <module>Arty_Chnagepassword</module>
+                    <frontName>arty_chnagepassword</frontName>
+                </args>
+            </arty_chnagepassword>
+        </routers>
+    </frontend>
+</config>

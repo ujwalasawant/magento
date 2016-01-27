@@ -26,16 +26,74 @@
 ?>
 <form id="co-billing-form" action="">
 <fieldset>
-    <ul class="form-list">
+    <ul class="form-list list-unstyled">
     <?php if ($this->customerHasAddresses()): ?>
         <li class="wide">
-            <label for="billing-address-select"><?php echo $this->__('Select a billing address from your address book or enter a new address.') ?></label>
-            <div class="input-box">
-                <?php echo $this->getAddressesHtmlSelect('billing') ?>
-            </div>
-        </li>
-    <?php endif; ?>
-    <li id="billing-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
+
+            <div class="input-box" style="display:none">
+                <?php echo $this->getAddressesHtmlSelect('billing') ;?>
+                </div>
+              <div >
+                <?php $customerId = Mage::getSingleton('customer/session')->getCustomer();?>
+                <?php $customer = Mage::getModel('customer/customer')->load($customerId->getId()); ?>
+                <?php $data = array(); $i=0;?>
+                     <div class="row checkout-address">
+                    <?php foreach ($customer->getAddresses() as $address):?>
+                    <?php $data = $address->toArray();?>
+
+                    <div class="col-lg-4 float address"  id="addresseList<?php echo $data['entity_id'];?>">
+
+
+
+                        <a type="button" href="#" style="float: right" class="cancelbtn " onclick="deletediv(this.id)" id="btncancel<?php echo $data['entity_id'];?>"  >
+                            <span class="glyphicon glyphicon-alert"></span>
+                        </a>
+
+                        <address style="margin-left: 5%">
+                        <?php echo '<p style="text-align: center"><b>'.$data['firstname'].' '.$data['lastname'].'</b></p>';?>
+                        <?php echo '<p>'.$data['street'].'</p>';?>
+                        <?php echo '<p>'.$data['city'].','.$data['region'].','.$data['postcode'].'</p>';?>
+                        <?php $country_name = Mage::app()->getLocale()->getCountryTranslation($data['country_id']);?>
+                        <?php echo '<p>'.$country_name.'</p>';?>
+                        <?php echo 'T: '.$data['telephone'];?>
+                        </address>
+                        <button class="btn" onclick="myFunction(this.id)" id="<?php echo $data['entity_id'];?>"><?php echo $this->__('Deliver Here');?></button>
+
+                    </div>
+                        <?php  $i++;
+                        if($i==3) break;
+                     endforeach;?>
+</div>
+                <div class="actions text-center">
+                    <a href="javaScript:void(0);"  id="btnAddNewAddress" class="btn btn-primary"><?php echo $this->__('Add New');?></a>
+
+                    <script>
+
+                        document.getElementById ("btnAddNewAddress").addEventListener ("click",resetEmotes, false);
+                        function resetEmotes()
+                        {
+                            var billing = new Billing('co-billing-form', '<?php echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php echo $this->getUrl('checkout/onepage/saveBilling') ?>');
+                            $('billing-address-select').value='';
+                            $('billing-address-select') && billing.newAddress(!$('billing-address-select').value);
+
+                        };
+                        function myFunction(value) {
+                            $('billing-address-select').value=value;
+                        }
+                        function deletediv(value) {
+                            child=document.getElementById(value);
+                            child.parentNode.remove();
+
+                        }
+                    </script>
+
+
+               </div>
+
+           </div>
+       </li>
+   <?php endif; ?>
+        <li id="billing-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif; ?>>
         <fieldset>
             <input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
             <ul>

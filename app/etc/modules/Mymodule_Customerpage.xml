@@ -31,7 +31,7 @@
      <modules>
             <Mymodule_Customerpage>
                    <active>true</active>
-                   <codePool>community</codePool>
+                   <codePool>local</codePool>
             </Mymodule_Customerpage>
      </modules>
 </config>

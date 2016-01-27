@@ -4,10 +4,6 @@
         <Arty_Checkout>
             <active>true</active>
             <codePool>local</codePool>
-            <depends>
-                <Mage_Checkout/>
-
-            </depends>
         </Arty_Checkout>
     </modules>
 </config>

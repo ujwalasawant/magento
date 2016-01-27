@@ -672,11 +672,12 @@ $gray: #5B5B5B;
 /** My Account Navigation **/
 .block-account ul
 {
-  border:solid;
+  border:solid 1px black;
+  margin: 5px 0 5px 18% ;
 }
 .block-account ul li{
+  margin: 5px 0 5px 12% ;
 
-  margin: 5px 0 5px 25px ;
 }
 
 .dobtxtbox
@@ -2939,6 +2940,40 @@ form .form-instructions {
 .button-continue:hover {
   background: darken(darkorange, 1.5%);
 }
+/*19/1/2016*/
+.checkout-address div:not(:last-child) ,.chekout-login div:not(:last-child)  {
+  border-right: 1px solid #333;
+}
+.chekout-login button
+{
+  padding: 2px 2px 2px 2px;
+  background: darkorange;
+  color: black;
+}
+.address
+{
+  align-items: flex-end;
+}
+//@media (min-width: 1200px) {
+ // .container {
+//    width: 1100px;
+ // }
+//}
+@media (min-width: 900px) {
+  .section .container {
+    width: 125%;
+  }
+}
 
+/** sneha) header scroll **/
+.page .nav-container .fixed {
 
+  background-color: whitesmoke;
 
+  position: fixed !important;
+
+  top: 0;
+
+  z-index: 99999;
+
+}
