@@ -39,7 +39,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <div class="row">
             <!-- 1st column -->
 
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 product-cart-image vcenter" style=" padding: 20px 0px 10px 40px">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 product-cart-image vcenter" style=" padding: 20px 0px 10px 0px ; ">
 
                 <?php if ($this->hasProductUrl()): ?>
                 <a href="<?php echo $this->getProductUrl() ?>"
@@ -55,7 +55,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
 
             <!-- 2nd column -->
 
-            <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-6 vcenter">
+            <div class=" col-lg-2 col-md-2 col-sm-2 col-xs-2 vcenter" >
 
 
                     <?php if ($this->hasProductUrl()): ?>
@@ -65,7 +65,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                     <?php endif; ?>
 
 
-
+                <div class="hidden-xs">
                 <?php
                 $product = Mage::getModel('catalog/product')->load($this->getProduct()->getId());
                 $attributes = $product->getAttributes();
@@ -88,7 +88,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                     }
                 }
                 ?>
-
+                </div>
                 <?php if ($_options = $this->getOptionList()): ?>
                 <dl class="item-options">
                     <?php foreach ($_options as $_option) : ?>
@@ -141,7 +141,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
             </td>
         <?php else: ?>
             <!-- 3rd column -->
-            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-6 product-cart-actions vcenter text-center" style="border: s">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 product-cart-actions vcenter text-center" >
                 <input type="text" name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>"
                        onchange="this.form.submit()" size="3" title="<?php echo $this->__('Qty') ?>"
                        class="input-text qty" maxlength="12" style="background-color: lightgrey;text-align: center"/>
@@ -153,7 +153,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
 
             <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
 
-                <div class="col-lg-1 col-md-2 col-sm-1 col-xs-6 product-cart-price vcenter text-center" >
+                <div class="col-lg-1 col-md-2 hidden-sm hidden-xs product-cart-price vcenter text-center" >
                     <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
                     <span class="cart-tax-total"
                           onclick="taxToggle('eunit-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
@@ -258,7 +258,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
 
         <!--Sub total starts here -->
         <!-- 5th column -->
-        <div class="col-lg-2 col-md-1 col-sm-2 col-xs-6 vcenter text-center">
+        <div class="col-lg-2 col-md-1 col-sm-2 hidden-xs vcenter text-center">
             <?php
             echo "Shipping Charges: ". Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getShippingAmount();
             ?>
@@ -267,7 +267,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <!-- 6th column -->
         <?php if (($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()) && !$_item->getNoSubtotal()): ?>
 
-            <div class="col-lg-2 col-md-2 col-sm-1 col-xs-6 product-cart-total vcenter text-center " >
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 product-cart-total vcenter text-center " >
                 <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
                 <span class="cart-tax-total"
                       onclick="taxToggle('esubtotal-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
@@ -377,14 +377,19 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <?php endif; ?>
 
 
-        <a href="<?php echo $this->getDeleteUrl() ?>" class="vcenter" style="text-align: right" type="checkbox" title="<?php echo $this->__('Remove Item') ?>"
+        <a href="<?php echo $this->getDeleteUrl() ?>" class="vcenter a-center product-cart-remove" style="text-align: right" type="checkbox" title="<?php echo $this->__('Remove Item') ?>"
            onchange="this.form.submit()" >
-        <span style="position: relative" ><input class="vcenter" type="checkbox" name="remove_item"></span>
+        <span ><input class="vcenter" type="checkbox" name="remove_item"></span>
         </a>
 
+
         </div>
+<?php
+        foreach( Mage::getSingleton('checkout/session')->getQuote()->getItemsCollection() as $item ){
+        Mage::getSingleton('checkout/cart')->removeItem( $item->getId() )->save();
 
-
+        }
+?>
     </tr>
 
 </table>

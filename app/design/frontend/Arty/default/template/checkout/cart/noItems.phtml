@@ -24,6 +24,9 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<?php
+Mage::app()->getResponse()->setRedirect($this->getContinueShoppingUrl());
+?>
 <div class="page-title">
     <h1><?php echo $this->__('Shopping Cart is Empty') ?></h1>
 </div>
@@ -34,3 +37,8 @@
     <p><?php echo $this->__('Click <a href="%s">here</a> to continue shopping.', $this->getContinueShoppingUrl()) ?></p>
     <?php echo $this->getChildHtml('shopping.cart.table.after'); ?>
 </div>
+<script>
+    setTimeout(function () {
+        window.location.href = "<?php echo $this->getContinueShoppingUrl() ?>"; //will redirect  to your blog page (an ex: blog.html)
+    }, 2000); //will call the function after 2 secs.
+</script>

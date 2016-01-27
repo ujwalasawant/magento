@@ -6237,7 +6237,9 @@ a {
 
 .product-owner {
   margin-left: 1px;
-  margin-right: 1px; }
+  margin-right: 1px;
+
+}
 
 .lightborder {
   border: solid 1px #DDD; }

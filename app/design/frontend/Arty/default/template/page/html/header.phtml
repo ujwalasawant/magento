@@ -40,24 +40,21 @@
                     <?php if ($this->helper('customer')->isLoggedIn()): ?>
                         <li>
                             <a title="<?php echo $this->__('My Account') ?>"
-                               href="<?php echo Mage::getUrl('customer/account') ?>">
-                                <?php echo $this->__('My Account') ?> </a>
+                               href="<?php echo Mage::getUrl('customer/account') ?>">   <?php echo $this->__('My Account') ?>     </a>
                         </li>
                         <li>
                             <a title="Log Out"
-                               href="<?php echo Mage::getUrl('customer/account/logout') ?>"> <?php echo $this->__('Logout') ?> </a>
-
-                            <a href="<?php echo Mage::getUrl('customer/account/create/') ?>">  <?php echo $this->__('Sign up') ?> </a>
+                               href="<?php echo Mage::getUrl('customer/account/logout') ?>">     <?php echo $this->__('Logout') ?></a>
                         </li>
                     <?php else: ?>
 
                         <li>
-                            <a href="<?php echo Mage::getUrl('customer/account/create/') ?>">  <?php echo $this->__('Sign up') ?> </a>
-
+                             <?php echo $this->getChildHtml('customer_form_register') ?>
                         </li>
 
                         <li>
-                            <a href="<?php echo $this->getChildHtml('header_customer_form_mini_login') ?>" ><?php echo $this->__('login up') ?></a>
+                            <?php echo $this->getChildHtml('header_customer_form_mini_login') ?>
+
                         </li>
 
 
@@ -73,13 +70,13 @@
 
         <div class="row">
             <div class="col-md-4 vbottom">
-                <div class="logobox">
+                <div class="logobox " >
                     <?php if ($this->getIsHomePage()): ?>
                         <h1>
                             <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"
                                class="logo">
                                 <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>"
-                                     class="img img-responsive logo"/></a></h1>
+                                       class="img img-responsive logo"/></a></h1>
                     <?php else: ?>
                         <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"
                            class="logo"><img src="<?php echo $this->getLogoSrc() ?>"
@@ -95,9 +92,9 @@
 
             <div class="col-md-2 vbottom">
 
-                <div class="cart">
+                <div class="cart ">
                     <!-- cart sneha -->
-                    <div class="header-minicart" style="display: inline-block;">
+                    <div class="header-minicart" >
                         <?php echo $this->getChildHtml('minicart_head'); ?>
                     </div>
                     <!-- cart sneha -->
@@ -109,7 +106,7 @@
         </div>
 
 
-        <div class="row smallheader">
+        <div class="row smallheader page nav-container fixed">
             <nav class="navbar navbar-default nav-justified" role="navigation">
                 <div class="navbar-header">
                     <a class="navbar-brand visible-xs" href="#"> <?php echo $this->__('Categories') ?></a>
@@ -132,3 +129,50 @@
     <?php echo $this->getChildHtml('topContainer'); ?>
 
 
+    <script>
+
+        jQuery(document).ready(function(){
+
+            var menu = jQuery('#nav');
+
+            menu.addClass('default');
+
+            pos = menu.offset();
+
+            jQuery(window).scroll(function(){
+
+                onscroll();
+
+            });
+
+            function onscroll(){
+
+                if(jQuery(this).scrollTop() > pos.top && menu.hasClass('default')){
+
+                    menu.fadeOut(1, function(){
+
+                        jQuery(this).removeClass('default').addClass('fixed').css('width',jQuery(this).parent().width())
+
+                            .fadeIn('fast');
+
+                    });
+
+                } else if(jQuery(this).scrollTop() <= pos.top && menu.hasClass('fixed')){
+
+                    menu.fadeOut(1, function(){
+
+                        jQuery(this).removeClass('fixed').addClass('default').removeAttr('style').show();
+
+                    });
+
+                }
+
+            }
+
+            onscroll();
+
+        });
+
+    </script>
+
+   

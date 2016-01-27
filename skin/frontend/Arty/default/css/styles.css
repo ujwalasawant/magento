@@ -7319,6 +7319,14 @@ button.close {
     display: none !important;
   }
 }
+h1, h2, h3, h4, h5, h6 {
+  color: #CC4E5C;
+}
+
+li a {
+  color: #A92000;
+}
+
 /* TopBar */
 #topbar {
   color: #A92000;
@@ -7332,7 +7340,7 @@ button.close {
 }
 
 a {
-  color: #A92000;
+  color: burlywood;
   font-size: 15px;
 }
 
@@ -7400,7 +7408,6 @@ a {
 .vcenter {
   display: inline-block;
   vertical-align: middle;
-  text-align: center;
   float: none;
 }
 
@@ -7813,13 +7820,15 @@ a {
   display: block;
 }
 
-/** Category Page **/
+/** Category Page  modified at 13/1/2016**/
 .category-products {
-  width: 380px;
+  width: 315px;
+  margin: 5px 10px 5px 10px;
+  height: auto;
 }
 
 .product-img-box {
-  margin: 5px 25px 5px 25px;
+  margin: 5px 10px 5px 10px;
   border: none;
   border-radius: 0px;
   border: solid 1px #DDD;
@@ -7870,6 +7879,8 @@ a {
 .product-owner {
   margin-left: 1px;
   margin-right: 1px;
+  border-bottom: solid 1px #DDD;
+  border-right: solid 1px #DDD;
 }
 
 .lightborder {
@@ -7881,7 +7892,7 @@ a {
   margin-right: 1px;
   background: #ECECEC;
   border-bottom: solid 1px #DDD;
-  height: 120px;
+  height: 106px;
 }
 
 .pricerow {
@@ -8045,7 +8056,14 @@ select {
 }
 
 .gender {
-  width: 100px;
+  width: 98%;
+  background: white;
+  border: 0 !important;
+  .  
+  -webkit-appearance: none;
+  /*Removes default chrome and safari style*/
+  -moz-appearance: none;
+  height: 30px;
 }
 
 .gender-txt {
@@ -8059,6 +8077,17 @@ select {
   border: 0 !important;
   .  
   -webkit-appearance: none;
+  /*Removes default chrome and safari style*/
+  -moz-appearance: none;
+  width: 90px;
+}
+
+.productatt select {
+  height: 30px;
+  background: white;
+  border: 0 !important;
+  .  
+-webkit-appearance: none;
   /*Removes default chrome and safari style*/
   -moz-appearance: none;
   width: 90px;
@@ -8337,7 +8366,6 @@ select {
 
 .product-image {
   float: left;
-  border: 1px grey solid;
 }
 
 .product-details {
@@ -8406,11 +8434,12 @@ select {
 }
 
 /*Sneha Code */
-/* sharing icon */
-.st_sharethis_custom {
-  background: none;
-  margin-right: 5%;
-  border: none;
+/** header css scroll **/
+.page .nav-container .fixed {
+  position: fixed !important;
+  background-color: whitesmoke;
+  top: 0;
+  z-index: 99999;
 }
 
 /** price in subategory page  **/
@@ -8419,61 +8448,6 @@ select {
   width: 35%;
   text-align: right;
   clear: right;
-}
-
-/* filter button */
-.filter-arrow {
-  display: inline-block;
-  position: relative;
-  background: #F4F1F1;
-  width: 10%;
-  height: 30px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  text-align: center;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-}
-
-.filter-arrow:after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 10px;
-  top: 100%;
-  width: 0px;
-  height: 0px;
-  border-top: 15px solid #F4F1F1;
-  border-right: 15px solid transparent;
-  border-bottom: 0 solid transparent;
-  border-left: 15px solid transparent;
-}
-
-.sort-arrow {
-  display: inline-block;
-  position: relative;
-  background: #F4F1F1;
-  width: 10%;
-  height: 30px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  text-align: center;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-
-.sort-arrow:after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 70%;
-  top: 100%;
-  width: 0px;
-  height: 0px;
-  border-top: 15px solid #F4F1F1;
-  border-right: 15px solid transparent;
-  border-bottom: 0 solid transparent;
-  border-left: 15px solid transparent;
 }
 
 /*** Add to cart button css ***/
@@ -8530,194 +8504,6 @@ select {
   border-top: 10px solid transparent;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-}
-
-/** checkout header css **/
-.down-arrow {
-  display: inline-block;
-  position: relative;
-  background: darkcyan;
-  padding: 15px 0;
-  width: 100%;
-  height: 40px;
-  padding: 3px 0px 1px 70px;
-  text-align: left;
-  box-shadow: 0px 10px 5px #888888;
-}
-
-.down-arrow:after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 30px;
-  top: 100%;
-  width: 0;
-  height: 0;
-  border-top: 20px solid darkcyan;
-  border-right: 40px solid transparent;
-  border-bottom: 0 solid transparent;
-  border-left: 40px solid transparent;
-}
-
-/* ============================================ *
- * Form List
- * ============================================ */
-.form-list > li {
-  margin-bottom: 10px;
-}
-
-.form-list select {
-  margin-top: 4px;
-  width: 365px;
-  max-width: 100%;
-}
-
-.form-list .input-range .input-text {
-  width: 74px;
-}
-
-.form-list .field,
-.form-list .wide,
-.form-list .control {
-  margin-bottom: 10px;
-}
-
-/* Turn the label of controls (radio/checkbox) into a button style that wraps the input */
-.form-list .control,
-.sp-methods dt,
-#checkout-shipping-method-load .sp-methods dd,
-#co-shipping-method-form .sp-methods dd,
-.product-options ul.options-list {
-  /* When a label is next to an input that is set to not display, we should style the label in a non-clickable state */
-}
-
-.form-list .control div.input-box,
-.sp-methods dt div.input-box,
-#checkout-shipping-method-load .sp-methods dd div.input-box,
-#co-shipping-method-form .sp-methods dd div.input-box,
-.product-options ul.options-list div.input-box {
-  display: inline;
-  float: left;
-}
-
-.form-list .control div.input-box:after,
-.sp-methods dt div.input-box:after,
-#checkout-shipping-method-load .sp-methods dd div.input-box:after,
-#co-shipping-method-form .sp-methods dd div.input-box:after,
-.product-options ul.options-list div.input-box:after {
-  display: none;
-}
-
-.form-list .control input.radio,
-.form-list .control input.checkbox,
-.sp-methods dt input.radio,
-.sp-methods dt input.checkbox,
-#checkout-shipping-method-load .sp-methods dd input.radio,
-#checkout-shipping-method-load .sp-methods dd input.checkbox,
-#co-shipping-method-form .sp-methods dd input.radio,
-#co-shipping-method-form .sp-methods dd input.checkbox,
-.product-options ul.options-list input.radio,
-.product-options ul.options-list input.checkbox {
-  float: left;
-  margin-right: -40px;
-  margin-top: 10px;
-  margin-left: 15px;
-}
-
-.form-list .control label,
-.sp-methods dt label,
-#checkout-shipping-method-load .sp-methods dd label,
-#co-shipping-method-form .sp-methods dd label,
-.product-options ul.options-list label {
-  color: #636363;
-  background-color: #F4F4F4;
-  padding: 5px 10px;
-  display: inline-block;
-  width: auto;
-  max-width: none;
-  min-width: 250px;
-  float: none;
-  padding: 6px 10px 6px 40px;
-}
-
-.form-list .control label:hover,
-.sp-methods dt label:hover,
-#checkout-shipping-method-load .sp-methods dd label:hover,
-#co-shipping-method-form .sp-methods dd label:hover,
-.product-options ul.options-list label:hover {
-  background-color: #ececec;
-}
-
-.form-list .control .no-display + label,
-.sp-methods dt .no-display + label,
-#checkout-shipping-method-load .sp-methods dd .no-display + label,
-#co-shipping-method-form .sp-methods dd .no-display + label,
-.product-options ul.options-list .no-display + label {
-  padding-left: 10px;
-  background-color: transparent;
-}
-
-.form-list .control .no-display + label:hover,
-.sp-methods dt .no-display + label:hover,
-#checkout-shipping-method-load .sp-methods dd .no-display + label:hover,
-#co-shipping-method-form .sp-methods dd .no-display + label:hover,
-.product-options ul.options-list .no-display + label:hover {
-  background-color: transparent;
-}
-
-.product-options ul.options-list label,
-.col2-set .form-list .control label {
-  min-width: inherit;
-  width: 250px;
-  max-width: 100%;
-}
-
-.form-list .control.remember-me-box label {
-  width: auto;
-  max-width: none;
-  min-width: inherit;
-}
-
-.form-list .control {
-  margin-top: 10px;
-}
-
-.form-list .control label {
-  float: none;
-}
-
-.form-list .control .radio,
-.form-list .control .checkbox {
-  margin-right: 6px;
-}
-
-.form-list .control .input-box {
-  clear: none;
-  display: inline-block;
-  width: auto;
-  padding: 0;
-}
-
-form .form-instructions {
-  font-style: italic;
-  font-family: Georgia, Times, "Times New Roman", serif;
-  font-size: 13px;
-  color: #A0A0A0;
-}
-
-.button-continue {
-  display: inline-block;
-  position: relative;
-  background: orange;
-  color: #FFF;
-  text-decoration: none;
-  padding: 5px;
-  width: 100px;
-  height: 30px;
-}
-
-.button-continue:hover {
-  background: #f78800;
 }
 
 /*End of Sneha code*/
@@ -9270,4 +9056,914 @@ a {
 
 .row.vertical-divider div[class^="col-"]:last-child {
   border-right: none;
+}
+
+/**8/1/2016*/
+.row-centered {
+  text-align: center;
+}
+
+.col-centered {
+  display: inline-block;
+  float: none;
+  /* reset the text-align */
+  text-align: left;
+  /* inline-block space fix */
+  margin-right: -4px;
+}
+
+/*14/1/2016*/
+.swatch-back {
+  background-image: url("../images/media/catalog/swatches/1/15x15/media/black.png");
+}
+
+/*15/1/2016*/
+/* ================================================= *
+ * General Product List Styles (not module-specific)
+ * ================================================= */
+/* -------------------------------------------- *
+ * Product List General
+ */
+.category-title h1,
+body.catalogsearch-result-index .page-title h1 {
+  border-bottom: none;
+}
+
+.category-image {
+  margin-bottom: 1.5em;
+}
+
+.products-list .action .button,
+.products-grid .actions .button {
+  white-space: normal;
+}
+
+/* -------------------------------------------- *
+ * Product Name
+ */
+h2.product-name,
+h3.product-name,
+h4.product-name,
+h5.product-name,
+p.product-name {
+  font-size: 13px;
+  font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+  font-weight: normal;
+  line-height: 1.4;
+}
+h2.product-name a,
+h3.product-name a,
+h4.product-name a,
+h5.product-name a,
+p.product-name a {
+  color: #636363;
+}
+h2.product-name a:hover,
+h3.product-name a:hover,
+h4.product-name a:hover,
+h5.product-name a:hover,
+p.product-name a:hover {
+  color: #3399CC;
+  text-decoration: none;
+}
+
+.products-grid .product-name,
+.products-list .product-name {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+.products-grid .product-name a,
+.products-list .product-name a {
+  font-weight: 500;
+}
+
+/* ============================================ *
+ * Product Grid
+ * ============================================ */
+.products-grid {
+  position: relative;
+}
+
+.products-grid:after:before, .products-grid:after:after {
+  content: " ";
+  display: table;
+}
+.products-grid:after:after {
+  clear: both;
+}
+
+.products-grid > li {
+  position: relative;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.products-grid > li:after:before, .products-grid > li:after:after {
+  content: " ";
+  display: table;
+}
+.products-grid > li:after:after {
+  clear: both;
+}
+
+.products-grid .product-image {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.products-grid .product-image img {
+  width: 100%;
+  height: auto;
+}
+.products-grid .product-image img:hidden {
+  display: none;
+}
+
+.widget-new-products .products-grid .product-image {
+  width: 75%;
+  margin-bottom: 15px;
+  margin-left: 10%;
+}
+
+.products-grid .product-info {
+  position: relative;
+  padding-bottom: 95px;
+}
+
+.products-grid .actions {
+  padding-top: 10px;
+  position: absolute;
+  bottom: 0px;
+  min-height: 85px;
+  width: 100%;
+}
+
+.products-grid .ratings .rating-box {
+  margin: 0 auto;
+}
+
+.products-grid .ratings .amount {
+  display: none;
+}
+
+.products-grid .price-box {
+  color: #A0A0A0;
+  font-size: 13px;
+  margin: 0 0 5px;
+}
+
+.products-grid .add-to-links {
+  margin-bottom: 0;
+}
+
+/* Config: Two columns + flexible gutter */
+.products-grid > li {
+  float: left;
+  width: 47.72727%;
+  margin-right: 4.54545%;
+}
+
+.products-grid > li:nth-child(odd) {
+  clear: left;
+}
+
+.products-grid > li:nth-child(even) {
+  margin-right: 0;
+}
+
+.products-grid .product-image {
+  margin-bottom: 5px;
+}
+
+@media only screen and (min-width: 480px) {
+  /* Config: Three columns + flexible gutter */
+  .products-grid {
+    /* Undo two-column config */
+    /* Set three-column config */
+  }
+  .products-grid > li:nth-child(odd) {
+    clear: none;
+  }
+  .products-grid > li:nth-child(even) {
+    margin-right: 3.7037%;
+  }
+  .products-grid > li {
+    width: 30.8642%;
+    margin-right: 3.7037%;
+  }
+  .products-grid > li:nth-child(3n+1) {
+    clear: left;
+  }
+  .products-grid > li:nth-child(3n) {
+    margin-right: 0;
+  }
+}
+@media only screen and (min-width: 960px) {
+  /* Config: Columns + flexible gutter */
+  /* Undo three-column config */
+  .products-grid--max-4-col > li:nth-child(odd) {
+    clear: none;
+  }
+
+  .products-grid--max-4-col > li:nth-child(3n+1) {
+    clear: none;
+  }
+
+  .products-grid--max-4-col > li:nth-child(even),
+  .products-grid--max-4-col > li:nth-child(3n) {
+    margin-right: 2.22222%;
+  }
+
+  /* Set column config */
+  .products-grid--max-4-col > li {
+    margin-right: 2.22222%;
+  }
+
+  .products-grid--max-4-col > li {
+    width: 23.33333%;
+    margin-right: 2.22222%;
+  }
+
+  .products-grid--max-4-col > li:nth-child(4n+1) {
+    clear: left;
+  }
+
+  .products-grid--max-4-col > li:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  /* Config: Columns + flexible gutter */
+  /* Undo three-column config */
+  .products-grid--max-5-col > li:nth-child(odd) {
+    clear: none;
+  }
+
+  .products-grid--max-5-col > li:nth-child(3n+1) {
+    clear: none;
+  }
+
+  .products-grid--max-5-col > li:nth-child(even),
+  .products-grid--max-5-col > li:nth-child(3n) {
+    margin-right: 2.22222%;
+  }
+
+  /* Set column config */
+  .products-grid--max-5-col > li {
+    margin-right: 2.22222%;
+  }
+
+  .products-grid--max-5-col > li {
+    width: 18.22222%;
+    margin-right: 2.22222%;
+  }
+
+  .products-grid--max-5-col > li:nth-child(5n+1) {
+    clear: left;
+  }
+
+  .products-grid--max-5-col > li:nth-child(5n) {
+    margin-right: 0;
+  }
+
+  /* Config: Columns + flexible gutter */
+  /* Undo three-column config */
+  .products-grid--max-6-col > li:nth-child(odd) {
+    clear: none;
+  }
+
+  .products-grid--max-6-col > li:nth-child(3n+1) {
+    clear: none;
+  }
+
+  .products-grid--max-6-col > li:nth-child(even),
+  .products-grid--max-6-col > li:nth-child(3n) {
+    margin-right: 2.22222%;
+  }
+
+  /* Set column config */
+  .products-grid--max-6-col > li {
+    margin-right: 2.22222%;
+  }
+
+  .products-grid--max-6-col > li {
+    width: 14.81481%;
+    margin-right: 2.22222%;
+  }
+
+  .products-grid--max-6-col > li:nth-child(6n+1) {
+    clear: left;
+  }
+
+  .products-grid--max-6-col > li:nth-child(6n) {
+    margin-right: 0;
+  }
+}
+/* ============================================ *
+ * Product List
+ * ============================================ */
+.products-list {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.products-list > li {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #EDEDED;
+}
+.products-list > li:after:before, .products-list > li:after:after {
+  content: " ";
+  display: table;
+}
+.products-list > li:after:after {
+  clear: both;
+}
+.products-list > li .product-image {
+  float: left;
+  width: 33.33333%;
+}
+.products-list > li .product-image img {
+  width: 100%;
+  max-width: 100%;
+}
+.products-list > li:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.products-list .product-shop {
+  float: right;
+  width: 66.66667%;
+  padding-left: 20px;
+}
+.products-list .product-shop .product-name {
+  margin-bottom: 0;
+}
+.products-list .product-shop .ratings {
+  margin: 0;
+}
+.products-list .product-shop .ratings .rating-box,
+.products-list .product-shop .ratings .rating-links {
+  float: left;
+  margin-right: 7px;
+}
+.products-list .product-shop .ratings .rating-links {
+  margin-top: 4px;
+}
+.products-list .product-shop .price-box {
+  margin-top: 0;
+}
+.products-list .product-shop .price-box .price {
+  font-size: 18px;
+}
+.products-list .product-shop .action {
+  margin: 7px 0;
+}
+.products-list .product-shop .desc {
+  margin-top: 7px;
+}
+.products-list .product-shop .product-primary,
+.products-list .product-shop .desc {
+  float: left;
+  width: 65%;
+  overflow: hidden;
+}
+.products-list .product-shop .product-secondary {
+  float: right;
+  width: 35%;
+  text-align: right;
+  clear: right;
+}
+
+@media only screen and (min-width: 480px) {
+  .products-list .product-name a {
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 1279px) {
+  .products-list .product-shop .product-primary,
+  .products-list .product-shop .desc {
+    float: left;
+    width: 60%;
+    padding-right: 20px;
+  }
+  .products-list .product-shop .product-secondary {
+    float: right;
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .products-list .product-shop .price-box .special-price {
+    padding-left: 0;
+  }
+
+  .products-list .product-shop .product-primary,
+  .products-list .product-shop .product-secondary,
+  .products-list .product-shop .desc {
+    float: none;
+    width: 100%;
+    padding-right: 0;
+    text-align: left;
+  }
+}
+/* ============================================ *
+ * Mini Product List
+ * ============================================ */
+.mini-products-list .product-image {
+  float: left;
+  min-width: 50px;
+}
+.mini-products-list .product-details {
+  margin-left: 60px;
+}
+.mini-products-list .product-details .product-name {
+  padding-top: 10px;
+}
+.mini-products-list li {
+  margin-bottom: 10px;
+  clear: both;
+}
+.mini-products-list li:after:before, .mini-products-list li:after:after {
+  content: " ";
+  display: table;
+}
+.mini-products-list li:after:after {
+  clear: both;
+}
+
+.mini-products-images-list:after:before, .mini-products-images-list:after:after {
+  content: " ";
+  display: table;
+}
+.mini-products-images-list:after:after {
+  clear: both;
+}
+.mini-products-images-list li.item {
+  float: left;
+  width: 50%;
+  margin: 0;
+  padding: 0 5px 10px 0;
+}
+.mini-products-images-list li.item:nth-child(even) {
+  padding-right: 0;
+  padding-left: 5px;
+}
+.mini-products-images-list li.item .product-image {
+  display: block;
+}
+.mini-products-images-list li.item .product-image img {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ============================================ *
+ * Catalog - List
+ * ============================================ */
+.category-image {
+  border: 1px solid #CCCCCC;
+  padding: 10px;
+}
+.category-image img {
+  width: 100%;
+  max-width: 100%;
+}
+.category-image img:hidden {
+  display: none;
+}
+
+/* ============================================ *
+ * Layered Navigation
+ * ============================================ */
+.block-layered-nav .block-subtitle--filter {
+  display: none;
+  cursor: pointer;
+}
+
+.block-layered-nav dl dd {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.block-layered-nav dl dd ol > li > span, .block-layered-nav dl dd ol > li > a {
+  padding: 5px 15px;
+  display: block;
+}
+.block-layered-nav dl dd ol > li > a .count {
+  color: #A0A0A0;
+}
+
+@media only screen and (min-width: 771px) {
+  .block-layered-nav .block-content > dl > dt {
+    padding-left: 10px;
+  }
+  .block-layered-nav .block-content > dl > dt:after {
+    display: none;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .sidebar .block.block-layered-nav {
+    border-bottom: none;
+  }
+
+  .block-layered-nav--no-filters .block-title {
+    display: none;
+  }
+
+  .block-layered-nav .block-content {
+    padding-top: 0;
+    margin-top: 15px;
+  }
+
+  .block-layered-nav .block-subtitle--filter {
+    background-color: #3399CC;
+    border: 0;
+    margin-bottom: 0;
+    display: block;
+    color: #FFFFFF;
+  }
+  .block-layered-nav .block-subtitle--filter:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: block;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid #FFFFFF;
+    border-right: none;
+    right: 10px;
+    top: 50%;
+    margin-top: -5px;
+  }
+  .block-layered-nav .block-subtitle--filter:hover {
+    background-color: #2e8ab8;
+    color: #FFFFFF;
+  }
+  .block-layered-nav .block-subtitle--filter.active:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: block;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-top: 4px solid #FFFFFF;
+    border-bottom: none;
+    right: 10px;
+    top: 50%;
+    margin-top: -3px;
+  }
+
+  #narrow-by-list,
+  #narrow-by-list2 {
+    padding: 10px;
+    border: 1px solid #CCCCCC;
+    border-top: 0;
+  }
+
+  .block-layered-nav dl ol > li > a,
+  .block-layered-nav dl ol > li > span {
+    padding: 7px;
+    margin: 5px;
+  }
+
+  .block-layered-nav dl ol > li > a {
+    color: #636363;
+    background-color: #F4F4F4;
+    padding: 5px 10px;
+  }
+  .block-layered-nav dl ol > li > a:hover {
+    text-decoration: none;
+    background: #ededed;
+  }
+}
+.block-layered-nav .currently .block-subtitle {
+  display: block;
+}
+.block-layered-nav .currently ol {
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+.block-layered-nav .currently ol li {
+  margin-bottom: 5px;
+}
+.block-layered-nav .currently ol li .label {
+  font-weight: bold;
+}
+.block-layered-nav .currently ol li:after:before, .block-layered-nav .currently ol li:after:after {
+  content: " ";
+  display: table;
+}
+.block-layered-nav .currently ol li:after:after {
+  clear: both;
+}
+
+.block-layered-nav .actions {
+  text-align: right;
+  margin-bottom: 7px;
+}
+
+.product-image-gallery {
+  position: relative;
+}
+.product-image-gallery .gallery-image {
+  display: none;
+}
+.product-image-gallery .gallery-image.visible {
+  display: block;
+}
+.product-image-gallery .gallery-image.visible.hidden {
+  visibility: hidden;
+}
+
+/*16/1/2016
+
+PDP product attribute/*/
+.dob-year {
+  width: 62px;
+  float: left;
+}
+
+.zipcode {
+  border: solid 1px black;
+  padding: 2px 0px 5px 7px;
+  font-size: medium;
+}
+
+input[placeholder] {
+  color: grey;
+}
+
+button[title='check'] {
+  border: solid 1px black;
+  padding: 2px 2px 2px 2px;
+  font-size: medium;
+  background: #FFF0E5;
+  color: orange;
+}
+
+.priceli .price-box .regular-price .price {
+  font-size: 22px;
+  color: darkorange;
+  word-spacing: 35px;
+}
+
+/*19/1/2016
+Merging code Sneha's Code
+*/
+/* sharing icon */
+.st_sharethis_custom {
+  background: none;
+  margin-right: 5%;
+  border: none;
+}
+
+/** price in subategory page  **/
+.products-list .product-shop .product-secondary {
+  float: right;
+  width: 35%;
+  text-align: right;
+  clear: right;
+}
+
+/* filter button */
+.filter-arrow {
+  display: inline-block;
+  position: relative;
+  background: #F4F1F1;
+  width: 10%;
+  height: 30px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.filter-arrow:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 10px;
+  top: 100%;
+  width: 0px;
+  height: 0px;
+  border-top: 15px solid #F4F1F1;
+  border-right: 15px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-left: 15px solid transparent;
+}
+
+.sort-arrow {
+  display: inline-block;
+  position: relative;
+  background: #F4F1F1;
+  width: 10%;
+  height: 30px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-align: center;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.sort-arrow:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 70%;
+  top: 100%;
+  width: 0px;
+  height: 0px;
+  border-top: 15px solid #F4F1F1;
+  border-right: 15px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-left: 15px solid transparent;
+}
+
+/** checkout header css **/
+.down-arrow {
+  display: inline-block;
+  position: relative;
+  background: darkcyan;
+  padding: 15px 0;
+  width: 100%;
+  height: 40px;
+  padding: 3px 0px 1px 70px;
+  text-align: left;
+  box-shadow: 0px 10px 5px #888888;
+}
+
+.down-arrow:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 30px;
+  top: 100%;
+  width: 0;
+  height: 0;
+  border-top: 20px solid darkcyan;
+  border-right: 40px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-left: 40px solid transparent;
+}
+
+/* ============================================ *
+ * Form List
+ * ============================================ */
+.form-list > li {
+  margin-bottom: 10px;
+}
+
+.form-list select {
+  margin-top: 4px;
+  width: 365px;
+  max-width: 100%;
+}
+
+.form-list .input-range .input-text {
+  width: 74px;
+}
+
+.form-list .field,
+.form-list .wide,
+.form-list .control {
+  margin-bottom: 10px;
+}
+
+/* Turn the label of controls (radio/checkbox) into a button style that wraps the input */
+.form-list .control,
+.sp-methods dt,
+#checkout-shipping-method-load .sp-methods dd,
+#co-shipping-method-form .sp-methods dd,
+.product-options ul.options-list {
+  /* When a label is next to an input that is set to not display, we should style the label in a non-clickable state */
+}
+
+.form-list .control div.input-box,
+.sp-methods dt div.input-box,
+#checkout-shipping-method-load .sp-methods dd div.input-box,
+#co-shipping-method-form .sp-methods dd div.input-box,
+.product-options ul.options-list div.input-box {
+  display: inline;
+  float: left;
+}
+
+.form-list .control div.input-box:after,
+.sp-methods dt div.input-box:after,
+#checkout-shipping-method-load .sp-methods dd div.input-box:after,
+#co-shipping-method-form .sp-methods dd div.input-box:after,
+.product-options ul.options-list div.input-box:after {
+  display: none;
+}
+
+.form-list .control input.radio,
+.form-list .control input.checkbox,
+.sp-methods dt input.radio,
+.sp-methods dt input.checkbox,
+#checkout-shipping-method-load .sp-methods dd input.radio,
+#checkout-shipping-method-load .sp-methods dd input.checkbox,
+#co-shipping-method-form .sp-methods dd input.radio,
+#co-shipping-method-form .sp-methods dd input.checkbox,
+.product-options ul.options-list input.radio,
+.product-options ul.options-list input.checkbox {
+  float: left;
+  margin-right: -40px;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.form-list .control label,
+.sp-methods dt label,
+#checkout-shipping-method-load .sp-methods dd label,
+#co-shipping-method-form .sp-methods dd label,
+.product-options ul.options-list label {
+  color: #636363;
+  background-color: #F4F4F4;
+  padding: 5px 10px;
+  display: inline-block;
+  width: auto;
+  max-width: none;
+  min-width: 250px;
+  float: none;
+  padding: 6px 10px 6px 40px;
+}
+
+.form-list .control label:hover,
+.sp-methods dt label:hover,
+#checkout-shipping-method-load .sp-methods dd label:hover,
+#co-shipping-method-form .sp-methods dd label:hover,
+.product-options ul.options-list label:hover {
+  background-color: #ececec;
+}
+
+.form-list .control .no-display + label,
+.sp-methods dt .no-display + label,
+#checkout-shipping-method-load .sp-methods dd .no-display + label,
+#co-shipping-method-form .sp-methods dd .no-display + label,
+.product-options ul.options-list .no-display + label {
+  padding-left: 10px;
+  background-color: transparent;
+}
+
+.form-list .control .no-display + label:hover,
+.sp-methods dt .no-display + label:hover,
+#checkout-shipping-method-load .sp-methods dd .no-display + label:hover,
+#co-shipping-method-form .sp-methods dd .no-display + label:hover,
+.product-options ul.options-list .no-display + label:hover {
+  background-color: transparent;
+}
+
+.product-options ul.options-list label,
+.col2-set .form-list .control label {
+  min-width: inherit;
+  width: 250px;
+  max-width: 100%;
+}
+
+.form-list .control.remember-me-box label {
+  width: auto;
+  max-width: none;
+  min-width: inherit;
+}
+
+.form-list .control {
+  margin-top: 10px;
+}
+
+.form-list .control label {
+  float: none;
+}
+
+.form-list .control .radio,
+.form-list .control .checkbox {
+  margin-right: 6px;
+}
+
+.form-list .control .input-box {
+  clear: none;
+  display: inline-block;
+  width: auto;
+  padding: 0;
+}
+
+form .form-instructions {
+  font-style: italic;
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-size: 13px;
+  color: #A0A0A0;
+}
+
+.button-continue {
+  display: inline-block;
+  position: relative;
+  background: orange;
+  color: #FFF;
+  text-decoration: none;
+  padding: 5px;
+  width: 100px;
+  height: 30px;
+}
+
+.button-continue:hover {
+  background: #f78800;
 }
