@@ -7987,16 +7987,17 @@ a {
 }
 
 .row-height {
-  height: 50px;
+  height: 100%;
 }
 
 /** My Account Navigation **/
 .block-account ul {
-  border: solid;
+  border: solid 1px black;
+  margin: 5px 0 5px 18%;
 }
 
 .block-account ul li {
-  margin: 5px 0 5px 25px;
+  margin: 5px 0 5px 12%;
 }
 
 .dobtxtbox {
@@ -8100,7 +8101,7 @@ select {
 }
 
 .my_account .row {
-  height: 40px;
+  height: 100%;
 }
 
 .my_account .legend {
@@ -8108,7 +8109,7 @@ select {
   font-size: medium;
 }
 
-.my_account .personal-info {
+.personal-info {
   border: solid 1px black;
 }
 
@@ -8434,14 +8435,6 @@ select {
 }
 
 /*Sneha Code */
-/** header css scroll **/
-.page .nav-container .fixed {
-  position: fixed !important;
-  background-color: whitesmoke;
-  top: 0;
-  z-index: 99999;
-}
-
 /** price in subategory page  **/
 .products-list .product-shop .product-secondary {
   float: right;
@@ -8504,6 +8497,58 @@ select {
   border-top: 10px solid transparent;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
+}
+
+.Myorder {
+  width: 50%;
+  padding-left: 50px;
+}
+
+.rowspan {
+  padding-top: 1%;
+}
+
+.addressspan {
+  padding-left: 1%;
+}
+
+.delvryhr {
+  color: #707070;
+  background-color: #D0D0D0;
+  border-color: #D8D8D8;
+  widht: 50%;
+}
+
+.delvryhr:focus, .delvryhr.focus {
+  color: #707070;
+  background-color: #D0D0D0;
+  border-color: #D8D8D8;
+}
+
+.delvryhr:hover {
+  color: #fff;
+  background-color: #FF8600;
+  border-color: #FFA036;
+  text-decoration: none;
+}
+
+.paddngLeft {
+  padding-left: 2%;
+}
+
+.addnewadd {
+  padding-top: 3%;
+  padding-left: 10%;
+  width: 30%;
+}
+
+.orderreview {
+  border-right: 1px solid #333;
+}
+
+.btn-block {
+  width: 50%;
+  color: orange;
 }
 
 /*End of Sneha code*/
@@ -9208,7 +9253,7 @@ p.product-name a:hover {
 }
 
 .products-grid .price-box {
-  color: #A0A0A0;
+  color: orangered;
   font-size: 13px;
   margin: 0 0 5px;
 }
@@ -9784,7 +9829,7 @@ Merging code Sneha's Code
 .down-arrow {
   display: inline-block;
   position: relative;
-  background: darkcyan;
+  background: transparent;
   padding: 15px 0;
   width: 100%;
   height: 40px;
@@ -9801,7 +9846,7 @@ Merging code Sneha's Code
   top: 100%;
   width: 0;
   height: 0;
-  border-top: 20px solid darkcyan;
+  border-top: 20px solid gainsboro;
   border-right: 40px solid transparent;
   border-bottom: 0 solid transparent;
   border-left: 40px solid transparent;
@@ -9966,4 +10011,32 @@ form .form-instructions {
 
 .button-continue:hover {
   background: #f78800;
+}
+
+/*19/1/2016*/
+.checkout-address div:not(:last-child), .chekout-login div:not(:last-child) {
+  border-right: 1px solid #333;
+}
+
+.chekout-login button {
+  padding: 2px 2px 2px 2px;
+  background: darkorange;
+  color: black;
+}
+
+.address {
+  align-items: flex-end;
+}
+
+@media (min-width: 900px) {
+  .section .container {
+    width: 125%;
+  }
+}
+/** sneha) header scroll **/
+.page .nav-container .fixed {
+  background-color: whitesmoke;
+  position: fixed !important;
+  top: 0;
+  z-index: 99999;
 }

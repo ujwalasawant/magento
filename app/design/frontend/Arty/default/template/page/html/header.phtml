@@ -49,7 +49,7 @@
                     <?php else: ?>
 
                         <li>
-                             <?php echo $this->getChildHtml('customer_form_register') ?>
+                            <?php echo $this->getChildHtml('customer_form_register') ?>
                         </li>
 
                         <li>
@@ -70,13 +70,13 @@
 
         <div class="row">
             <div class="col-md-4 vbottom">
-                <div class="logobox " >
+                <div class="logobox">
                     <?php if ($this->getIsHomePage()): ?>
                         <h1>
                             <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"
                                class="logo">
                                 <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>"
-                                       class="img img-responsive logo"/></a></h1>
+                                     class="img img-responsive logo"/></a></h1>
                     <?php else: ?>
                         <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"
                            class="logo"><img src="<?php echo $this->getLogoSrc() ?>"
@@ -92,9 +92,9 @@
 
             <div class="col-md-2 vbottom">
 
-                <div class="cart ">
+                <div class="cart">
                     <!-- cart sneha -->
-                    <div class="header-minicart" >
+                    <div class="header-minicart" style="display: inline-block;">
                         <?php echo $this->getChildHtml('minicart_head'); ?>
                     </div>
                     <!-- cart sneha -->
@@ -106,7 +106,7 @@
         </div>
 
 
-        <div class="row smallheader page nav-container fixed">
+        <div class="row smallheader">
             <nav class="navbar navbar-default nav-justified" role="navigation">
                 <div class="navbar-header">
                     <a class="navbar-brand visible-xs" href="#"> <?php echo $this->__('Categories') ?></a>
@@ -127,7 +127,6 @@
     </div>
 
     <?php echo $this->getChildHtml('topContainer'); ?>
-
 
     <script>
 
@@ -174,5 +173,3 @@
         });
 
     </script>
-
-   

@@ -32,11 +32,9 @@
     <a href="" data-toggle="modal" data-target="#loginModal">Login</a>
 </p>
 <div class="container-fluid">
-
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-
-        <div class="modal-dialog">
-            <div class="modal-content">
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
             <div class="modal-header">
 
                 <div class="row">
@@ -75,11 +73,7 @@
 
                                     </div>
                                     <div class="col-md-8 col-sm-6 col-xs-12">
-                                        <input type="text" name="login[username]"
-                                               value="<?php echo $this->escapeHtml($this->getUsername()) ?>"
-                                               id="email"
-                                               class="input-text required-entry validate-email form-control login-textbox"
-                                               title="<?php echo $this->__('Email Address') ?>" />
+                                        <input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email form-control login-textbox" title="<?php echo $this->__('Email Address') ?>" />
 
                                     </div>
                                 </div>
@@ -118,7 +112,7 @@
         </div>
     </div>
 </div>
-    </div>
+    <div>
 </form>
 <script type="text/javascript">
     //<![CDATA[

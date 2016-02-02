@@ -19,7 +19,7 @@
  * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
- * @package     base_default
+ * @package     rwd_default
  * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
@@ -31,172 +31,188 @@
  * @see Mage_Customer_Block_Address_Edit
  */
 ?>
-
-<style>
-    .arrow {
-        font-size: 9px;
-        color: red;
-        position: absolute;
-        right: 0px;
-        top : 10px;
-        cursor: default;
-        line-height: 1px;
-
-    }
-</style>
-
-
-<?php if($this->getTitle()): ?>
-<div class="page-title">
-    <h1><?php echo $this->getTitle() ?></h1>
-</div>
+<?php if ($this->getTitle()): ?>
+    <div class="page-title">
+        <h1><?php echo $this->getTitle() ?></h1>
+    </div>
 <?php endif; ?>
-<?php echo $this->getMessagesBlock()->toHtml() ?>
-<form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate" >
-    <!---- div fieldset remove    ul tag remove ----->
-    <table>
+
+<form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate" class="scaffold-form personal-info"
+      enctype="multipart/form-data">
     <div class="fieldset">
-       <h3><?php echo $this->__('Default Billing Address') ?></h3>
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>"/>
+        <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>"/>
 
-            <!---- billing addresss ------->
+    </div>
+    <div class="my_account fieldset">
+        <h3 style="padding-left: 20px"><?php echo $this->__('Default Billing Address') ?></h3>
 
+        <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
+        <div class="row rowspan ">
 
-        <tr>
-            <td style="  padding-bottom: 10px">
-                <label for="company"><?php echo $this->__('House No. :') ?></label>
-           
-                <div class="input-box" style="float: right">
-                    <input type="text" name="company" id="company" title="<?php echo $this->__('Company') ?>" value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('company') ?> textbx" />
+            <label for="street_1"
+                   class="col-lg-2 col-md-2 col-sm-2 col-xs-4  text-right required"><?php echo $this->__('House No. :') ?></label>
+
+            <div class="input-box ">
+                <input type="text" name="street[]"
+                       value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>"
+                       title="<?php echo $this->__('Street Address') ?>" id="street_1"
+                       class="input-text <?php echo $_streetValidationClass ?>"/>
+            </div>
+        </div>
+        <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+        <div class="row rowspan">
+            <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
+
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-right required"
+                       for="billing:street<?php echo $_i ?>"><?php echo $this->__('Street :', $_i) ?></label>
+                <div class="input-box ">
+                    <input type="text" name="street[]"
+                           value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($_i)) ?>"
+                           title="<?php echo $this->__('Street Address ', $_i) ?>" id="street_<?php echo $_i ?>"
+                           class="input-text <?php echo $_streetValidationClass ?>"/>
                 </div>
-            </td>
-        </tr>
 
+            <?php endfor; ?>
+        </div>
+        <?php if ($this->helper('customer/address')->isVatAttributeVisible()) : ?>
 
-          <!---- name block removed by Sneha malvanakr --->
+            <label for="vat_id"><?php echo $this->__('VAT Number') ?></label>
+            <div class="input-box">
+                <input type="text" name="vat_id"
+                       value="<?php echo $this->escapeHtml($this->getAddress()->getVatId()) ?>"
+                       title="<?php echo $this->__('VAT Number') ?>" id="vat_id"
+                       class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('vat_id') ?>"/>
+            </div>
 
+        <?php endif; ?>
 
-          <!-- div teleph removed by Sneha ---->
-                <!-- div fax removed by Sneha -->
-        <tr>
-            <td style="padding-bottom: 10px">
-                <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
+        <div class="row field rowspan">
+            <label for="city"
+                   class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-right required"><?php echo $this->__('City :') ?></label>
 
-                    <label for="street_1" class="required" style="float:left;" ><em>*</em><?php echo $this->__('Street :') ?></label>
-
-                    <div class="input-box" style="float: right">
-                        <input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="input-text <?php echo $_streetValidationClass ?> textbx" />
+            <div class="col-lg-offset-1 input-box">
+                <input type="text" name="city" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>"
+                       title="<?php echo $this->__('City') ?>"
+                       class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>"
+                       id="city"/>
+            </div>
+        </div>
+        <div class="row field rowspan">
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 text-right">
+                        <label for="region_id"
+                               class=" "><?php echo $this->__('Indian State :') ?></label>
                     </div>
-
-              <!--- second textbx removed by sneha malvankar ---->
-
-                <?php if ($this->helper('customer/address')->isVatAttributeVisible()) : ?>
-                    <div>
-                        <label for="vat_id"><?php echo $this->__('VAT Number') ?></label>
-                        <div class="input-box">
-                            <input type="text" name="vat_id" value="<?php echo $this->escapeHtml($this->getAddress()->getVatId()) ?>" title="<?php echo $this->__('VAT Number') ?>" id="vat_id" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('vat_id') ?>" />
-                        </div>
-                    </div>
-                <?php endif; ?>
-            </td>
-        </tr>
-
-        <tr>
-            <td style=" padding-bottom: 10px">
-                <label for="city" class="required" style="float:left;"><em>*</em><?php echo $this->__('City :') ?></label>
-
-                <div class="input-box" style="float: right">
-                <input type="text" name="city" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>"  title="<?php echo $this->__('City') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?> textbx" id="city" />
-                </div>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td style="padding-bottom: 10px">
-
-                    <label for="region_id" class="required"><em>*</em><?php echo $this->__('Indian State :') ?></label>
-
-                    <div class="input-box" >
-                        <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
-                            <option value=""><?php echo $this->__('Select state') ?></option>
+                    <div class="col-lg-6">
+                        <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>"
+                                class="validate-select themeborder " style="display:none;">
+                            <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
                         </select>
                         <script type="text/javascript">
                             //<![CDATA[
-                            $('region_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getRegionId() ?>");
+                            $('region_id').setAttribute('defaultValue', "<?php echo $this->getAddress()->getRegionId() ?>");
                             //]]>
                         </script>
-                        <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?> textbx" />
+
+                        <input style="padding: 1%" type="text" id="region" name="region"
+                               value="<?php echo $this->escapeHtml($this->getAddress()->getRegion()) ?>"
+                               title="<?php echo $this->__('State/Province') ?>"
+                               class=" input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>"/>
                     </div>
-            </td>
-            <td>
-                <label for="country" class="required"><em>*</em><?php echo $this->__('Country :') ?></label>
-
-                <div class="input-box" >
-                    <!--- arrow with orange head
-                                         <div class="arrow" style="color: orangered">&#9660;</div>-->
-                    <!--- ******* ---->
-                    <?php echo $this->getCountryHtmlSelect() ?>
                 </div>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td style="padding-bottom: 10px">
-               <label for="zip" class="required" style="float:left;"><em>*</em><?php echo $this->__('Pin Code :') ?></label>
-                    <div class="input-box" style="float: right">
-                        <input type="text" name="postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?> textbx" />
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4 text-right">
+                        <label for="country" class="text-right required"
+                        ><?php echo $this->__('Country :') ?></label>
                     </div>
-
-            </td>
-        </tr>
-
-        <tr >
-            <td></td>
-            <td >
-
-                <div class="buttons-set" style="text-align: right" >
-                    <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
-                    <p class="required"><?php echo $this->__('* Required Fields') ?></p>
-                    <button data-action="save-customer-address" type="submit" title="<?php echo $this->__('Save Address') ?>" class="btnbg"><span><span><?php echo $this->__('Save') ?></span></span></button>
+                    <div class="col-lg-6">
+                        <?php echo $this->getCountryHtmlSelect() ?>
+                    </div>
                 </div>
-            </td>
-        </tr>
+            </div>
+        </div>
 
-        <tr>
-            <td>
-                <h3 ><?php echo $this->__('Default Shipping Address') ?> </h3>
 
-                    <?php if($this->isDefaultBilling()): ?>
+        <div class="row field rowspan" style="padding-bottom: 10px">
+            <label for="zip"
+                   class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-right required"><em>*</em><?php echo $this->__('Pin Code :') ?>
+            </label>
+
+            <div class="input-box">
+                <input type="text" name="postcode"
+                       value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>"
+                       title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip"
+                       class="input-text validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>"/>
+            </div>
+        </div>
+
+
+        <ul class="form-list list-unstyled">
+            <li class=" list-unstyled">
+                <div class="row control" style="padding-left: 3%;">
+
+                    <?php if ($this->canSetAsDefaultBilling()) ?>
+                    <?php if ($this->isDefaultBilling()): ?>
                         <strong><?php echo $this->__('Default Billing Address') ?></strong>
-                    <?php elseif($this->canSetAsDefaultBilling()): ?>
-                        <input type="checkbox" style="float: left" id="primary_billing" name="default_billing" value="1" title="<?php echo $this->__('Use as My Default Billing Address') ?>" class="checkbox" /><label for="primary_billing"><?php echo $this->__('Same as default billing address') ?></label>
+                    <?php elseif ($this->canSetAsDefaultBilling()): ?>
+                     <div class="col-xs-5">
+                        <div style="padding-bottom: 1%;">
+                            <input type="checkbox" id="primary_billing" name="default_billing" value="1"
+                                   title="<?php echo $this->__('Use as My Default Billing Address') ?>"
+                                   class="checkbox"/>
+                        </div>
+                        <div>
+                            <label
+                                for="primary_billing"><?php echo $this->__('Use as my default billing address') ?></label>
+                        </div>
+                     </div>
                     <?php else: ?>
-                        <input type="hidden" name="default_billing" value="1" />
+                        <input type="hidden" name="default_billing" value="1"/>
                     <?php endif; ?>
 
 
+                </div>
+            </li>
+            <li class="list-unstyled">
+                <div class="row control " style="padding-left: 3%;">
 
-
-
-            </td>
-        </tr>
-
-
-<!------ shippng address -----------
-             extra shippng address blck removed by sneha
-  ------------------------------------------------------------------------------------------------------->
-
-
-
+                    <?php if ($this->canSetAsDefaultShipping()) ?>
+                    <?php if ($this->isDefaultShipping()): ?>
+                        <strong><?php echo $this->__('Default Shipping Address') ?></strong>
+                    <?php elseif ($this->canSetAsDefaultShipping()): ?>
+                        <div class="col-xs-5">
+                            <div style="padding-bottom: 1%;">
+                                <input type="checkbox" id="primary_shipping" name="default_shipping" value="1"
+                                       title="<?php echo $this->__('Use as My Default Shipping Address') ?>"
+                                       class="checkbox"/>
+                            </div>
+                            <div>
+                                <label
+                                    for="primary_shipping"><?php echo $this->__('Use as my default shipping address') ?></label>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <input type="hidden" name="default_shipping" value="1"/>
+                    <?php endif; ?>
+                </div>
+            </li>
+        </ul>
     </div>
-
-</table>
-
+    <div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>">
+                <small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        <button type="submit" title="<?php echo $this->__('Save') ?>" class="Artybutton">
+            <span><span><?php echo $this->__('Save Address') ?></span></span></button>
+    </div>
 </form>
 <script type="text/javascript">
-//<![CDATA[
+    //<![CDATA[
     var dataForm = new VarienForm('form-validate', true);
     new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
-//]]>
+    //]]>
 </script>

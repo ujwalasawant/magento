@@ -384,12 +384,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
 
 
         </div>
-<?php
-        foreach( Mage::getSingleton('checkout/session')->getQuote()->getItemsCollection() as $item ){
-        Mage::getSingleton('checkout/cart')->removeItem( $item->getId() )->save();
 
-        }
-?>
     </tr>
 
 </table>

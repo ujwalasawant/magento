@@ -28,20 +28,14 @@
     </global>
     <frontend>
         <routers>
-            <artysales>
+            <arty_sales>
                 <use>standard</use>
                 <args>
                     <module>Arty_Sales</module>
-                    <frontName>artysales</frontName>
+                    <frontName>arty_sales</frontName>
                 </args>
-            </artysales>
+            </arty_sales>
         </routers>
-        <layout>
-            <updates>
-                <arty_sales>
-                    <file>local.xml</file>
-                </arty_sales>
-            </updates>
-        </layout>
+
     </frontend>
 </config>

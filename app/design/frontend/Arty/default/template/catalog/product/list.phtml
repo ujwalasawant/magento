@@ -48,7 +48,7 @@ $_helper = $this->helper('catalog/output');
     <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
 
-<div>
+<div class="rowspan">
     <!--<span class='st_email' displayText='Email'></span> -->
 
     <div class="container">
@@ -85,7 +85,7 @@ $_helper = $this->helper('catalog/output');
 
                             </div>
 
-
+                            <!-- product image -->
                             <div class=" well " style="padding: 0px 0px 0px 0px ; margin: 0px 0px 0px 0px">
                                 <a href="<?php echo $_product->getProductUrl() ?>"
                                    title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
@@ -138,7 +138,7 @@ $_helper = $this->helper('catalog/output');
                                         </div>
                                     </li>
 
-                                    <li style="text-align: left ; margin: 2px 0px 10px 0px">
+                                    <li style="text-align: left">
                                         <div class="actions">
                                             <?php if (!$_product->canConfigure() && $_product->isSaleable()): ?>
                                                 <button type="button" title="<?php echo $this->__('Add to Cart') ?>"

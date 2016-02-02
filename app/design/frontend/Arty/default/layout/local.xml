@@ -104,8 +104,6 @@
                 <type>skin_css</type>
                 <stylesheet>css/styles.css</stylesheet>
             </action>
-
-
         </reference>
         <reference name="header">
             <block type="cms/block" name="topbar_cmslinks" as="topbar_cmslinks">
@@ -121,8 +119,31 @@
                     <action method="addCartLink"></action>
                     <action method="addCheckoutLink"></action>
                 </block>
-
             </reference>
+            <reference name="root">
+
+                <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+
+                <block type="core/text_list" name="left_first" as="left_first" translate="label">
+                    <label>Left Column First (shows above main column on smaller screens)</label>
+                </block>
+
+                <block type="core/text_list" name="left" as="left" translate="label">
+                    <label>Left Column</label>
+                </block>
+
+                <block type="core/messages" name="global_messages" as="global_messages"/>
+                <block type="core/messages" name="messages" as="messages"/>
+
+                <block type="core/text_list" name="content" as="content" translate="label">
+                    <label>Main Content Area</label>
+                </block>
+
+                <block type="core/text_list" name="right" as="right" translate="label">
+                    <label>Right Column</label>
+                </block>
+            </reference>
+
             <block type="checkout/cart_minicart" name="minicart_head" template="checkout/cart/minicart.phtml"
                    before="-">
                 <block type="checkout/cart_sidebar" name="minicart_content"
@@ -204,7 +225,6 @@
             </block>
         </reference>
     </PRODUCT_TYPE_configurable>
-
     <catalog_product_view>
         <reference name="head">
             <action method="addItem">
@@ -265,7 +285,6 @@
 
         </reference>
     </catalog_product_view>
-
     <PRODUCT_TYPE_configurable>
         <reference name="product.info.options.configurable">
             <block type="core/text_list" name="product.info.options.configurable.renderers" as="attr_renderers">
@@ -292,6 +311,55 @@
     </catalog_category_layered>-->
     <!--End of Category Page handler -->
     <!--checkout Page Handlers-->
+
+    <checkout_onepage_index>
+        <reference name="content">
+
+            <reference name="checkout.onepage">
+                <block type="checkout/onepage_login" name="checkout.onepage.login" as="login"
+                       template="checkout/onepage/login.phtml">
+                    <block type="page/html_wrapper" name="checkout.onepage.login.before" as="login_before"
+                           translate="label">
+                        <label>Login/Registration Before</label>
+                        <action method="setMayBeInvisible">
+                            <value>1</value>
+                        </action>
+                    </block>
+                </block>
+                <block type="checkout/onepage_billing" name="checkout.onepage.billing" as="billing"
+                       template="checkout/onepage/billing.phtml"/>
+                <block type="checkout/onepage_shipping" name="checkout.onepage.shipping" as="shipping"
+                       template="checkout/onepage/shipping.phtml"/>
+                <block type="checkout/onepage_shipping_method" name="checkout.onepage.shipping_method"
+                       as="shipping_method"
+                       template="checkout/onepage/shipping_method.phtml">
+                    <block type="checkout/onepage_shipping_method_available"
+                           name="checkout.onepage.shipping_method.available" as="available"
+                           template="checkout/onepage/shipping_method/available.phtml"/>
+                    <block type="checkout/onepage_shipping_method_additional"
+                           name="checkout.onepage.shipping_method.additional" as="additional"
+                           template="checkout/onepage/shipping_method/additional.phtml"/>
+                </block>
+                <block type="checkout/onepage_review" name="checkout.onepage.review" as="review"
+                       template="checkout/onepage/review.phtml"/>
+                <block type="checkout/onepage_payment" name="checkout.onepage.payment" as="payment"
+                       template="checkout/onepage/payment.phtml">
+                    <block type="checkout/onepage_payment_methods" name="checkout.payment.methods" as="methods"
+                           template="checkout/onepage/payment/info.phtml">
+                        <action method="setMethodFormTemplate">
+                            <method>purchaseorder</method>
+                            <template>payment/form/purchaseorder.phtml</template>
+                        </action>
+                    </block>
+                </block>
+
+            </reference>
+
+        </reference>
+
+    </checkout_onepage_index>
+
+
     <checkout_cart_index translate="label">
         <reference name="checkout.cart">
             <action method="setCartTemplate">
@@ -319,8 +387,85 @@
             </action>
         </reference>
     </checkout_cart_index>
+
+
     <!--End of checkout Page Handlers-->
     <!--Customer Page Handlers-->
+
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="unsetChild">
+                <name>account</name>
+            </action>
+            <action method="unsetChild">
+                <name>account_edit</name>
+            </action>
+            <action method="unsetChild">
+                <name>address_book</name>
+            </action>
+            <action method="addLink" translate="label" module="sales">
+                <name>Heading_orders</name>
+                <path>sales/order/history/</path>
+                <label>My Orders</label>
+            </action>
+            <action method="addLink">
+                <name>Heading_Payment</name>
+                <path>arty_paymenthistory/index/index</path>
+                <label>Paymeny History</label>
+            </action>
+
+            <action method="addLink" translate="label" module="customer">
+                <name>Heading_Setting</name>
+                <path>customer/account/edit/</path>
+                <label>Setting</label>
+            </action>
+
+            <action method="addLink" translate="label" module="customer">
+                <name>account_edit</name>
+                <path>customer/account/edit/</path>
+                <label>Personal Informations</label>
+            </action>
+            <action method="addLink">
+                <name>arty_changepassword</name>
+                <path>arty_chnagepassword/index/index</path>
+                <label>Change Password</label>
+            </action>
+            <action method="addLink" translate="label" module="customer">
+                <name>address_book</name>
+                <path>customer/address/</path>
+                <label>Address</label>
+            </action>
+            <action method="addLink" translate="label" module="review">
+                <name>deactivate</name>
+                <path>review/customer</path>
+                <label>Deactivate account</label>
+            </action>
+            <action method="addLink" translate="label" module="review">
+                <name>Notification</name>
+                <path>review/customer</path>
+                <label>Notification</label>
+            </action>
+            <action method="addLink" translate="label" module="customer">
+                <name>Heading_Stuff</name>
+                <path>customer/account/edit/</path>
+                <label>My Stuff</label>
+            </action>
+            <action method="addLink" translate="label" module="review">
+                <name>ratingreviews</name>
+                <path>review/customer</path>
+                <label>Reviews and Rating</label>
+            </action>
+            <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
+                <name>MyStuff_wishlist</name>
+                <path>wishlist/</path>
+                <label>My Wishlist</label>
+            </action>
+
+
+        </reference>
+    </customer_account>
+
     <customer_logged_out>
         <reference name="header">
             <block type="customer/form_login" name="header_customer_form_mini_login"
@@ -329,57 +474,11 @@
                    template="customer/form/mini.register.phtml">
             </block>
         </reference>
-
     </customer_logged_out>
 
-    <!-- registration block (sneha) -->
-    <customer_account_create>
-
-    </customer_account_create>
-    <adminhtml_customer_edit>
-
-
-    </adminhtml_customer_edit>
-
-    <customer_account>
-        <block type="customer/account_navigation" name="customer_account_navigation" before="-"
-               template="customer/account/navigation.phtml">
-            <action method="addLink" translate="label" module="sales">
-                <name>orders</name>
-                <path>sales/order/history/</path>
-                <label>My Orders</label>
-            </action>
-            <action method="addLink" translate="label" module="review">
-                <name>reviews</name>
-                <path>review/customer</path>
-                <label>My Product Reviews</label>
-            </action>
-            <action method="addLink" translate="label">
-                <name>billing_agreements</name>
-                <path>sales/billing_agreement/</path>
-                <label>Billing Agreements</label>
-            </action>
-            <action method="addLink" translate="label" module="downloadable">
-                <name>downloadable_products</name>
-                <path>downloadable/customer/products</path>
-                <label>Product History</label>
-            </action>
-            <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
-                <name>wishlist</name>
-                <path>wishlist/</path>
-                <label>My Wishlist</label>
-            </action>
-            <action method="addLink" translate="label" module="customer">
-                <name>account_edit</name>
-                <path>customer/account/edit/</path>
-                <label>Account Informations</label>
-            </action>
-            <action method="addLink" translate="label" module="customer">
-                <name>address_book</name>
-                <path>customer/address/</path>
-                <label>Address Book</label>
-            </action>
-        </block>
-    </customer_account>
     <!--End of Customer Page Handlers-->
+
+    <!-- registration block (sneha) -->
+
+
 </layout>

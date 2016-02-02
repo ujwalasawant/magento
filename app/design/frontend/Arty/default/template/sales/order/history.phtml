@@ -24,54 +24,98 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <?php $_orders = $this->getOrders(); ?>
 <div class="page-title">
     <h1><?php echo $this->__('My Orders') ?></h1>
 </div>
 <?php echo $this->getPagerHtml(); ?>
-<?php if($_orders->getSize()): ?>
-<table class="data-table table borderless lightborder" id="my-orders-table">
+<?php if ($_orders->getSize()): ?>
+    <div>
 
-    <thead>
-        <tr>
-            <th><?php echo $this->__('Date') ?></th>
-            <th><?php echo $this->__('Order #') ?></th>
-            <th><span class="nobr"><?php echo $this->__('Order Total') ?></span></th>
-            <th><span class="nobr"><?php echo $this->__('Order Status') ?></span></th>
-            <th>&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody>
+
         <?php $_odd = ''; ?>
-        <tr>
+
         <?php foreach ($_orders as $_order): ?>
-            <tr>
-            <td><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
-            <td><?php echo $_order->getRealOrderId() ?></td>
-            <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
-            <td><em><?php echo $_order->getStatusLabel() ?></em></td>
-            <td class="a-center">
+            <div class="personal-info">
+                <div>
+                    <label><?php echo $this->__('Date: ') ?></label><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?>
+                    <label><?php echo $this->__('Order #') ?></label><?php echo $_order->getRealOrderId() ?>
+                </div>
 
-                <span class="nobr"><a href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $this->__('View Order') ?></a>
-                    <?php /*<span class="separator">|</span><a href="<?php echo $this->getTrackUrl($_order) ?>"><?php echo $this->__('Track Order') ?></a>&nbsp;*/ ?>
-                    <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
-                    <span class="separator">|</span> <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
-                <?php endif ?>
-                </span>
-            </td>
-            <td>
+                <div class="row">
+                    <div class="col-lg-3 text-right">Product</div>
+                    <div class="col-lg-4 text-right  ">Qty</div>
+                    <div class="col-lg-2 text-center">Price</div>
+                    <div class="col-lg-2 ">Status with Date</div>
+
+                </div>
+                <div class="row " >
+                    <div class="col-lg-5" style="border: solid ;">
+                    <?php
+                    $orderIncrementId = $_order->getRealOrderId();
+                    $orderId = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId)
+                        ->getEntityId();
 
 
+                    $order = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId);
 
-            </td>
-            <tr>
+
+                    $orderItems = $order->getItemsCollection();
+
+
+                    foreach ($orderItems as $item) {
+                        if ($item->getPrice() != 0.0) {
+                            if ($item->getProductType() == 'configurable') {
+                                $_product = $item->getProduct();
+                            } else {
+                                $_product = Mage::getModel('catalog/product')->load($product_id);
+                            }
+
+                            ?>
+
+                            <img
+                                src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>"
+                                width="100" height="100" alt=""/>
+
+
+                            <?php
+
+                            echo $product_name = $item->getName();
+                            //  echo $product_id = $item->product_id ;
+
+                            //  echo $product_sku = $item->sku ;
+                            // echo $product_price = $item->getPrice();
+
+
+                        }
+                        echo "<hr>";
+
+
+                    }
+
+
+                    ?>
+
+                    </div>
+
+              <div class="col-lg-offset-4 text-right"  style="border: solid red">
+                <?php echo $_order->formatPrice($_order->getGrandTotal()) ?>
+                <em><?php echo $_order->getStatusLabel() ?></em>
+              </div>
+
+                </div>
+            </div>
+
         <?php endforeach; ?>
-        </tr>
-    </tbody>
-</table>
-<script type="text/javascript">decorateTable('my-orders-table');</script>
-<?php echo $this->getPagerHtml(); ?>
+
+
+        <?php echo $this->getChildHtml('sales.order.view') ?>
+
+    </div>
+    <script type="text/javascript">decorateTable('my-orders-table');</script>
+
 <?php else: ?>
     <p><?php echo $this->__('You have placed no orders.'); ?></p>
 <?php endif ?>

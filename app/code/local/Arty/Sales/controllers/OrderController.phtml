@@ -1,0 +1,33 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ujwala
+ * Date: 17/12/15
+ * Time: 3:29 PM
+ */
+require_once Mage::getModuleDir('controllers', 'Mage_Sales').DS.'OrderController.php';
+
+class Arty_Sales_OrderController extends Mage_Sales_OrderController
+{
+
+    public function paymentAction()
+    {
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+    public function producthistoryAction()
+    {
+        $this->loadLayout();
+        $this->_initLayoutMessages('catalog/session');
+
+        $this->getLayout()->getBlock('head')->setTitle($this->__('My Orders'));
+
+        if ($block = $this->getLayout()->getBlock('customer.account.link.back')) {
+            $block->setRefererUrl($this->_getRefererUrl());
+        }
+        $this->renderLayout();
+    }
+
+}
+
+?>

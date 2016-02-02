@@ -75,14 +75,15 @@
         <?php endif; ?>
 
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="field name-firstname ">
-                    <div class="col-lg-6 text-right">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+
                         <label for="<?php echo $this->getFieldId('firstname') ?>" class="required"><em>*</em><?php echo $this->getStoreLabel('firstname') ?>
                         </label>
                     </div>
 
-                    <div class="col-lg-6 text-left">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                         <input type="text" id="<?php echo $this->getFieldId('firstname') ?>"
                                name="<?php echo $this->getFieldName('firstname') ?>"
                                value="<?php echo $this->escapeHtml($this->getObject()->getFirstname()) ?>"
@@ -92,18 +93,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <?php if ($this->showMiddlename()): ?>
                     <?php $isMiddlenameRequired = $this->isMiddlenameRequired(); ?>
                     <div class="field name-middlename ">
-                        <div class="col-lg-6  text-right">
-                            <div class="col-lg-6 text-right">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
                                 <label
                                     for="<?php echo $this->getFieldId('middlename') ?>"<?php echo $isMiddlenameRequired ? ' class="required"' : '' ?>><?php echo $isMiddlenameRequired ? '<em>*</em>' : '' ?><?php echo $this->getStoreLabel('middlename') ?>
                                 </label>
                             </div>
 
-                            <div class="col-lg-6 text-left">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-left">
                                 <input type="text" id="<?php echo $this->getFieldId('middlename') ?>"
                                        name="<?php echo $this->getFieldName('middlename') ?>"
                                        value="<?php echo $this->escapeHtml($this->getObject()->getMiddlename()) ?>"
@@ -114,13 +115,13 @@
                     </div>
                 <?php endif; ?>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="field name-lastname ">
-                    <div class="col-lg-6 text-right">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
                         <label for="<?php echo $this->getFieldId('lastname') ?>" class="required"><em>*</em><?php echo $this->getStoreLabel('lastname') ?>
                         </label></div>
 
-                    <div class="col-lg-6 text-left">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                         <input type="text" id="<?php echo $this->getFieldId('lastname') ?>"
                                                   name="<?php echo $this->getFieldName('lastname') ?>"
                                                   value="<?php echo $this->escapeHtml($this->getObject()->getLastname()) ?>"

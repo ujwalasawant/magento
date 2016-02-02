@@ -1,0 +1,46 @@
+<config>
+    <modules>
+        <MyCompany_MyCaptcha>
+            <version>1.0.0</version>
+        </MyCompany_MyCaptcha>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <mycaptcha> <!-- should be some unique name -->
+                    <file>mycaptcha.xml</file>
+                </mycaptcha>
+            </updates>
+        </layout>
+    </frontend>
+    <!--  Now we need to add our observer. I attached mine to the
+controller_action_predispatch_review_product_post event because
+I needed to intercept product review post event. The event you
+attach your observer to will be different depending on what you're
+trying to do. -->
+    <global>
+        <events>
+            <controller_action_predispatch_review_product_post>
+                <observers>
+                    <mycaptcha> <!-- these need to match -->
+                        <class>MyCompany_MyCaptcha_Model_Observer</class>
+                        <method>myMethod</method>
+                    </mycaptcha>
+                </observers>
+            </controller_action_predispatch_review_product_post>
+        </events>
+    </global>
+    <!-- Now we add our form label that will show in configuration and allow
+us to turn the captcha on or off. -->
+    <default>
+        <captcha>
+            <frontend>
+                <areas>
+                    <mycaptcha> <!-- these need to match -->
+                        <label>My Captcha</label>
+                    </mycaptcha>
+                </areas>
+            </frontend>
+        </captcha>
+    </default>
+</config>
