@@ -49,7 +49,7 @@
                     <?php else: ?>
 
                         <li>
-                            <a href="<?php echo Mage::getUrl('customer/account/create/') ?>">  <?php echo $this->__('Sign up') ?></a>
+                            <?php echo $this->getChildHtml('customer_form_register') ?>
                         </li>
 
                         <li>
@@ -90,9 +90,9 @@
                 </div>
             </div>
 
-            <div class="col-md-2 vbottom">
+            <div class="col-md-2 vbottom" >
 
-                <div class="cart">
+                <div class="cart" >
                     <!-- cart sneha -->
                     <div class="header-minicart" style="display: inline-block;">
                         <?php echo $this->getChildHtml('minicart_head'); ?>
@@ -131,45 +131,28 @@
     <script>
 
         jQuery(document).ready(function(){
-
             var menu = jQuery('#nav');
-
+            var cart = jQuery('#cart');
             menu.addClass('default');
-
+            cart.addClass('default');
             pos = menu.offset();
-
+            pos1=cart.offset();
             jQuery(window).scroll(function(){
-
                 onscroll();
-
             });
-
             function onscroll(){
-
                 if(jQuery(this).scrollTop() > pos.top && menu.hasClass('default')){
-
                     menu.fadeOut(1, function(){
-
                         jQuery(this).removeClass('default').addClass('fixed').css('width',jQuery(this).parent().width())
-
                             .fadeIn('fast');
-
                     });
-
                 } else if(jQuery(this).scrollTop() <= pos.top && menu.hasClass('fixed')){
-
                     menu.fadeOut(1, function(){
-
                         jQuery(this).removeClass('fixed').addClass('default').removeAttr('style').show();
-
                     });
-
                 }
 
             }
-
             onscroll();
-
         });
-
     </script>

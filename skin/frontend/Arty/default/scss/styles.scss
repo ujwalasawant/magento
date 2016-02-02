@@ -2487,7 +2487,77 @@ $productsGridActionHeight: 85px;
   }
 
 }
+/*Review and Rating Ujwala 27/1/2016 */
+/*Rating stars in form*/
+.rating-input {
+  display: none;
+}
 
+.rating-star {
+  float: right;
+  display: block;
+  width: 20px !important; /* just to be fast here*/
+  height: 20px;
+  background: url(../images/star.png);
+}
+
+.rating-star:hover,
+.rating-star:hover ~ .rating-star,
+.rating-input:checked ~ .rating-star {
+  background: url(../images/ReviewRating.png);
+}
+
+.rating-star:hover {
+  cursor: pointer;
+}
+
+.data-table.table-ratings {
+  width: auto;
+  border: 0;
+}
+
+.data-table.table-ratings th {
+  width: 80px;
+  line-height: 20px;
+  text-align: left;
+  padding: 10px 0;
+}
+
+.data-table.table-ratings td {
+  width: 100px;
+  padding: 9px 0;
+}
+
+/*Rating stars when displaying reviews (in product page and profile)*/
+.ratings-table .rating-box,
+.ratings .rating-box,
+.ratings-table .rating-box .rating,
+.ratings .rating-box .rating {
+  background-size: 15px;
+  background-repeat: repeat-x;
+  background-position: 0 1px;
+}
+
+.ratings-table .rating-box,
+.ratings .rating-box {
+  background-image: url(../images/star.png);
+}
+
+.ratings-table .rating-box .rating,
+.ratings .rating-box .rating {
+  background-image: url(../images/ReviewRating.png);
+}
+
+.ratings-table .rating-box,
+.ratings .rating-box {
+  height: 20px;
+  width: 74px;
+}
+
+.ratings-table .rating-box .rating,
+.ratings .rating-box .rating{
+  height: 20px;
+}
 
 
 /* ============================================ *

@@ -71,19 +71,25 @@
                             document.getElementById ("btnAddNewShipAddress").addEventListener ("click",shipaddress, false);
                             function shipaddress()
                             {
-                                var shipping = new Shipping('co-shipping-form', '<?php echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php echo $this->getUrl('checkout/onepage/saveShipping') ?>',<?php echo $this->getUrl('checkout/onepage/shippingMethod') ?>');
+                                child=document.getElementById("btncancelform");
+                                child.parentNode.clone();
                                 $('shipping-address-select').value='';
                                 $('shipping-address-select') && shipping.newAddress(!$('shipping-address-select').value);
 
                             };
                             function myFunction(value) {
-                                $('shipping-address-select').value='';=value;
-                            }
+                                $('shipping-address-select').value=value;
+                            };
                             function deletediv(value) {
                                 child=document.getElementById(value);
                                 child.parentNode.remove();
 
-                            }
+                            };
+                            function deleteform(value) {
+                                child=document.getElementById(value);
+                                child.parentNode.remove();
+
+                            };
                         </script>
 
 
@@ -95,6 +101,9 @@
 
 
         <li id="shipping-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif ?>>
+            <a type="button" href="#" style="float: right" class="cancelbtn " onclick="deleteform(this.id)" id="btncancelform"  >
+                <span class="glyphicon glyphicon-alert"></span>
+            </a>
             <fieldset>
                 <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="shipping:address_id" />
                 <ul>

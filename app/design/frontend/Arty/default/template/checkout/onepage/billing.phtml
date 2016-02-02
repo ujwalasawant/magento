@@ -72,19 +72,19 @@
                         document.getElementById ("btnAddNewAddress").addEventListener ("click",resetEmotes, false);
                         function resetEmotes()
                         {
-                            var billing = new Billing('co-billing-form', '<?php echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php echo $this->getUrl('checkout/onepage/saveBilling') ?>');
+                           // var billing = new Billing('co-billing-form', '<?php //echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php //echo $this->getUrl('checkout/onepage/saveBilling') ?>');
                             $('billing-address-select').value='';
                             $('billing-address-select') && billing.newAddress(!$('billing-address-select').value);
 
                         };
                         function myFunction(value) {
                             $('billing-address-select').value=value;
-                        }
+                        };
                         function deletediv(value) {
                             child=document.getElementById(value);
                             child.parentNode.remove();
 
-                        }
+                        };
                     </script>
 
 
