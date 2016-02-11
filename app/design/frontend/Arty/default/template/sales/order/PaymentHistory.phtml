@@ -31,54 +31,65 @@
 </div>
 <?php echo $this->getPagerHtml(); ?>
 <?php if($_orders->getSize()): ?>
-    <table class="data-table" id="my-orders-table">
-        <col width="1" />
-        <col width="1" />
-        <col />
-        <col width="1" />
-        <col width="1" />
-        <col width="1" />
-        <thead>
-        <tr>
-            <th><?php echo $this->__('Order #') ?></th>
-            <th><?php echo $this->__('Date') ?></th>
-            <th><?php echo $this->__('Ship To') ?></th>
-            <th><span class="nobr"><?php echo $this->__('Order Total') ?></span></th>
-            <th><span class="nobr"><?php echo $this->__('Order Status') ?></span></th>
-            <th>&nbsp;</th>
-        </tr>
-        </thead>
-        <tbody>
+
+
+
+<div class="personal-info">
+<div class="row " >
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 vcenter text-left" ><?php echo $this->__('Order #  (items)') ?> </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 vcenter text-center">
+        <span class="nobr"><?php echo $this->__('Status') ?></span>
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 vcenter text-center" >
+            <span class="nobr"><?php echo $this->__('Date') ?></span>
+    </div>
+
+
+
+</div>
+
+
         <?php $_odd = ''; ?>
         <?php foreach ($_orders as $_order): ?>
-            <tr>
-                <td><?php echo $_order->getRealOrderId() ?></td>
-                <td><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+        <div class="row rowspan" >
 
-                <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
-                <td><em><?php echo $_order->getStatusLabel() ?></em></td>
+<!---order Id -->
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 text-left ">
+            <?php echo "AC# ". $_order->getRealOrderId() ?>
 
-                <td>
-                    <?php
-                    $orderIncrementId =$_order->getRealOrderId();
-                    $orderId = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId)
-                        ->getEntityId();
+<!-- order count -->
 
-
-                    $order = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId);
+            <?php
+            $orderIncrementId =$_order->getRealOrderId();
+            $orderId = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId)
+                ->getEntityId();
 
 
+            $order = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId);
 
-                    $orderItems = $order->getItemsCollection();
-                    echo "Item count". $itemcount=$orderItems->count();
-                    ?>
-                </td>
-            </tr>
+
+
+            $orderItems = $order->getItemsCollection();
+            echo " (Items-". $itemcount=$orderItems->count() .")";
+            ?>
+            </div>
+                <?php //echo $_order->formatPrice($_order->getGrandTotal()) ?>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 vcenter text-center">
+<!-- status -->
+                <em><?php echo $_order->getStatusLabel() ?></em>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 vcenter text-center" >
+            <!-- date -->
+            <span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span>
+            </div>
+
+
+        </div>
         <?php endforeach; ?>
-        </tbody>
-    </table>
+
+   </div>
     <script type="text/javascript">decorateTable('my-orders-table');</script>
-    <?php echo $this->getPagerHtml(); ?>
 <?php else: ?>
     <p><?php echo $this->__('You have placed no orders.'); ?></p>
 <?php endif ?>

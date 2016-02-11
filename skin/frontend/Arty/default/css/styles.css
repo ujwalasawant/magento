@@ -8109,7 +8109,7 @@ select {
   font-size: medium;
 }
 
-.my_account .personal-info {
+.personal-info {
   border: solid 1px black;
 }
 
@@ -9521,13 +9521,15 @@ p.product-name a:hover {
   width: 20px !important;
   /* just to be fast here*/
   height: 20px;
-  background: url(../images/star.png);
+  background: url(../images/product_rating_blank_star.gif);
+  background-repeat: no-repeat;
 }
 
 .rating-star:hover,
 .rating-star:hover ~ .rating-star,
 .rating-input:checked ~ .rating-star {
-  background: url(../images/ReviewRating.png);
+  background: url(../images/product_rating_full_star.gif);
+  background-repeat: no-repeat;
 }
 
 .rating-star:hover {
@@ -9563,12 +9565,12 @@ p.product-name a:hover {
 
 .ratings-table .rating-box,
 .ratings .rating-box {
-  background-image: url(../images/star.png);
+  background-image: url(../images/product_rating_blank_star.gif);
 }
 
 .ratings-table .rating-box .rating,
 .ratings .rating-box .rating {
-  background-image: url(../images/ReviewRating.png);
+  background-image: url(../images/product_rating_full_star.gif);
 }
 
 .ratings-table .rating-box,
@@ -9850,7 +9852,7 @@ Merging code Sneha's Code
 .down-arrow {
   display: inline-block;
   position: relative;
-  background: darkcyan;
+  background: transparent;
   padding: 15px 0;
   width: 100%;
   height: 40px;
@@ -9867,7 +9869,7 @@ Merging code Sneha's Code
   top: 100%;
   width: 0;
   height: 0;
-  border-top: 20px solid darkcyan;
+  border-top: 20px solid gainsboro;
   border-right: 40px solid transparent;
   border-bottom: 0 solid transparent;
   border-left: 40px solid transparent;
@@ -10060,4 +10062,352 @@ form .form-instructions {
   position: fixed !important;
   top: 0;
   z-index: 99999;
+}
+
+.Myorder {
+  width: 50%;
+  padding-left: 50px;
+}
+
+.rowspan {
+  padding-top: 2.5%;
+}
+
+.addressspan {
+  padding-left: 1%;
+}
+
+.delvryhr {
+  color: #707070;
+  background-color: #D0D0D0;
+  border-color: #D8D8D8;
+  widht: 50%;
+}
+
+.delvryhr:focus, .delvryhr.focus {
+  color: #707070;
+  background-color: #D0D0D0;
+  border-color: #D8D8D8;
+}
+
+.delvryhr:hover {
+  color: #fff;
+  background-color: #FF8600;
+  border-color: #FFA036;
+  text-decoration: none;
+}
+
+.paddngLeft {
+  padding-left: 2%;
+}
+
+.addnewadd {
+  padding-top: 3%;
+  padding-left: 10%;
+  width: 30%;
+}
+
+.orderreview {
+  border-right: 1px solid #333;
+}
+
+.btn-block {
+  width: 50%;
+  color: orange;
+}
+
+/* ============================================ *
+ * Wishlist ujwala added rwd theme
+ * ============================================ */
+#wishlist-table th {
+  text-align: center;
+}
+#wishlist-table.clean-table {
+  font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  width: 100%;
+}
+#wishlist-table.clean-table th {
+  border-bottom: 1px solid #C0C0C0;
+}
+#wishlist-table.clean-table td {
+  padding: 15px;
+  vertical-align: top;
+}
+#wishlist-table.clean-table thead th {
+  font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+#wishlist-table .product-name {
+  font-size: 16px;
+  font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+#wishlist-table .product-name a {
+  color: #3399CC;
+}
+#wishlist-table .wishlist-sku {
+  font-size: 11px;
+  font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+  margin: 5px 0;
+}
+#wishlist-table textarea {
+  border: 1px solid #C0C0C0;
+  width: 100%;
+  height: 45px;
+  font-size: 11px;
+  font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+#wishlist-table textarea::-webkit-input-placeholder {
+  text-transform: uppercase;
+}
+#wishlist-table textarea:-moz-placeholder {
+  text-transform: uppercase;
+}
+#wishlist-table textarea::-moz-placeholder {
+  text-transform: uppercase;
+}
+#wishlist-table textarea:-ms-input-placeholder {
+  text-transform: uppercase;
+}
+#wishlist-table textarea:focus {
+  border: 1px solid #3399CC;
+}
+#wishlist-table .item-manage {
+  text-align: right;
+  max-width: 450px;
+  padding-top: 5px;
+}
+#wishlist-table .item-manage .button {
+  font-size: 11px;
+  padding: 3px 5px;
+}
+#wishlist-table .cart-cell {
+  text-align: center;
+}
+#wishlist-table td.customer-wishlist-item-image {
+  width: 113px;
+}
+#wishlist-table td.customer-wishlist-item-quantity {
+  width: 3em;
+}
+#wishlist-table td.customer-wishlist-item-price {
+  width: 120px;
+  text-align: center;
+}
+#wishlist-table td.customer-wishlist-item-cart {
+  width: 150px;
+}
+#wishlist-table td.customer-wishlist-item-cart .button {
+  font-size: 12px;
+  margin-bottom: 10px;
+  padding: 3px 5px;
+  width: 100%;
+}
+#wishlist-table td.customer-wishlist-item-cart .truncated {
+  margin-bottom: 10px;
+}
+#wishlist-table td.customer-wishlist-item-cart > p {
+  margin-bottom: 0;
+}
+#wishlist-table td.customer-wishlist-item-cart .remove-whishlist-item {
+  text-align: center;
+}
+#wishlist-table td.customer-wishlist-item-cart .btn-remove {
+  vertical-align: top;
+}
+#wishlist-table td.customer-wishlist-item-remove {
+  width: 20px;
+}
+#wishlist-table td .button,
+#wishlist-table td button {
+  white-space: normal;
+}
+#wishlist-table .price-box {
+  font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+  font-size: 12px;
+}
+#wishlist-table .price-box .price {
+  color: #636363;
+}
+#wishlist-table .giftregisty-add {
+  margin-top: 5px;
+}
+#wishlist-table .giftregisty-add .change {
+  display: none;
+}
+#wishlist-table .giftregisty-add li {
+  cursor: pointer;
+  color: #3399CC;
+  margin-bottom: 3px;
+}
+#wishlist-table .truncated .details {
+  background: none;
+  color: #3399CC;
+}
+#wishlist-table td[data-rwd-label]:before {
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 1199px) {
+  #wishlist-table.clean-table td {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media only screen and (max-width: 979px) {
+  #wishlist-table.clean-table td {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  #wishlist-table.clean-table td textarea {
+    height: 100px;
+  }
+  #wishlist-table.clean-table td.customer-wishlist-item-cart {
+    width: 110px;
+  }
+  #wishlist-table .product-name {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 770px) {
+  #wishlist-table:after:before, #wishlist-table:after:after {
+    content: " ";
+    display: table;
+  }
+  #wishlist-table:after:after {
+    clear: both;
+  }
+  #wishlist-table .product-name {
+    font-size: 16px;
+  }
+  #wishlist-table textarea {
+    height: 68px;
+    max-width: 100%;
+  }
+  #wishlist-table .item-manage {
+    max-width: 100%;
+  }
+  #wishlist-table tr {
+    position: relative;
+  }
+  #wishlist-table tr:after:before, #wishlist-table tr:after:after {
+    content: " ";
+    display: table;
+  }
+  #wishlist-table tr:after:after {
+    clear: both;
+  }
+  #wishlist-table td.customer-wishlist-item-image {
+    width: 70px;
+  }
+  #wishlist-table td.customer-wishlist-item-image img {
+    width: 70px;
+    height: 70px;
+  }
+  #wishlist-table td.customer-wishlist-item-cart p {
+    margin-bottom: 0;
+  }
+  #wishlist-table td.customer-wishlist-item-cart .remove-whishlist-item {
+    margin-right: 0;
+    padding-top: 4px;
+  }
+  #wishlist-table td.customer-wishlist-item-cart {
+    padding-right: 15px;
+  }
+}
+@media only screen and (max-width: 599px) {
+  #wishlist-table td.customer-wishlist-item-quantity {
+    padding-left: 0;
+  }
+  #wishlist-table td.customer-wishlist-item-image,
+  #wishlist-table th.customer-wishlist-item-image {
+    display: none;
+  }
+}
+@media only screen and (max-width: 479px) {
+  #wishlist-table tr {
+    position: relative;
+  }
+  #wishlist-table th.customer-wishlist-item-image {
+    display: block;
+  }
+  #wishlist-table td.customer-wishlist-item-image, #wishlist-table td.customer-wishlist-item-info, #wishlist-table td.customer-wishlist-item-quantity, #wishlist-table td.customer-wishlist-item-price, #wishlist-table td.customer-wishlist-item-cart {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    empty-cells: hide;
+  }
+  #wishlist-table td.customer-wishlist-item-image {
+    display: block;
+    overflow: hidden;
+  }
+  #wishlist-table td.customer-wishlist-item-image a {
+    float: left;
+  }
+  #wishlist-table td.customer-wishlist-item-image a img {
+    width: 113px;
+    height: 113px;
+  }
+  #wishlist-table td.customer-wishlist-item-quantity, #wishlist-table td.customer-wishlist-item-price {
+    text-align: left;
+  }
+  #wishlist-table td.customer-wishlist-item-quantity:before, #wishlist-table td.customer-wishlist-item-price:before {
+    float: left;
+    margin-right: 15px;
+  }
+  #wishlist-table td.customer-wishlist-item-quantity .cart-cell, #wishlist-table td.customer-wishlist-item-price .cart-cell {
+    text-align: left;
+  }
+  #wishlist-table td.customer-wishlist-item-quantity .price-box, #wishlist-table td.customer-wishlist-item-price .price-box {
+    margin-top: 0;
+  }
+  #wishlist-table td.customer-wishlist-item-cart .cart-cell {
+    float: left;
+    width: 48%;
+  }
+  #wishlist-table td.customer-wishlist-item-cart > p {
+    float: right;
+    width: 48%;
+  }
+  #wishlist-table td.customer-wishlist-item-remove {
+    position: absolute;
+    top: 15px;
+    right: 0px;
+    display: block;
+    padding: 0px;
+    height: 20px;
+  }
+  #wishlist-table.clean-table td.customer-wishlist-item-cart {
+    width: 100%;
+  }
+}
+/* ============================================ *
+ * Wishlist Sidebar
+ * ============================================ */
+.block-wishlist .mini-products-list > li:not(:last-child) {
+  padding-bottom: 5px;
+}
+.block-wishlist .product-details .product-name {
+  padding-top: 0;
+  margin-bottom: 5px;
+}
+.block-wishlist .price-box {
+  float: left;
+  margin: 0;
+}
+.block-wishlist .price-box,
+.block-wishlist .price-box .price,
+.block-wishlist .link-cart {
+  font-size: 12px;
+}
+.block-wishlist .link-cart {
+  float: left;
+  text-transform: uppercase;
+  margin-right: 7px;
+  padding-right: 7px;
+  border-right: 1px solid #EDEDED;
 }
