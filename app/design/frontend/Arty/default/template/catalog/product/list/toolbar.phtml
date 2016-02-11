@@ -31,44 +31,57 @@
  * @see Mage_Catalog_Block_Product_List_Toolbar
  */
 ?>
-<?php if($this->getCollection()->getSize()): ?>
-    <div class="toolbar text-right" >
-
-    <?php if( $this->isExpanded() ): ?>
-
-        <div class="sort-by">
-
-            <select class="sort-arrow"  id="selectS" onchange="setLocation(this.value)">
-
-               <option> Sort By </option>
-
-                <option value="<?php echo $this->getOrderUrl('price', 'asc') ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
-                    Price Low to High
-                </option>
-
-                <option value="<?php echo $this->getOrderUrl('price', 'desc') ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
-                    Price High to Low
-                </option>
-
-                <option value="<?php echo $this->getOrderUrl('name', 'asc') ?>"<?php if($this->isOrderCurrent('name') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
-                     A-Z
-                </option>
-
-                <option value="<?php echo $this->getOrderUrl('name', 'desc') ?>"<?php if($this->isOrderCurrent('name') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
-                     Z-A
-                </option>
-
-                <option value="<?php echo $this->getOrderUrl('entity_id', 'desc') ?>"<?php if($this->isOrderCurrent('entity_id') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
-                    Newest Products
-                </option><option value="<?php echo $this->getOrderUrl('entity_id', 'asc') ?>"<?php if($this->isOrderCurrent('entity_id') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
-                    Oldest Products
-                </option>
-            </select>
-
-        </div>
-
-    <?php endif; ?>
+<div class="row">
+<div class="col-lg-10 col-md-10 col-sm-10 col-xs-8 text-right" >
+    <?php echo $this->getChildHtml('catalog.leftnav'); ?>
 </div>
+
+<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left" >
+<?php if ($this->getCollection()->getSize()): ?>
+
+
+        <?php if ($this->isExpanded()): ?>
+
+            <div class="sort-by "  >
+
+                <select class="sort-arrow" id="selectS"  onchange="setLocation(this.value)">
+
+                    <option> Sort By</option>
+
+                    <option
+                        value="<?php echo $this->getOrderUrl('price', 'asc') ?>"<?php if ($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
+                        Price Low to High
+                    </option>
+
+                    <option
+                        value="<?php echo $this->getOrderUrl('price', 'desc') ?>"<?php if ($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                        Price High to Low
+                    </option>
+
+                    <option
+                        value="<?php echo $this->getOrderUrl('name', 'asc') ?>"<?php if ($this->isOrderCurrent('name') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
+                        A-Z
+                    </option>
+
+                    <option
+                        value="<?php echo $this->getOrderUrl('name', 'desc') ?>"<?php if ($this->isOrderCurrent('name') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                        Z-A
+                    </option>
+
+                    <option
+                        value="<?php echo $this->getOrderUrl('entity_id', 'desc') ?>"<?php if ($this->isOrderCurrent('entity_id') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                        Newest Products
+                    </option>
+                    <option
+                        value="<?php echo $this->getOrderUrl('entity_id', 'asc') ?>"<?php if ($this->isOrderCurrent('entity_id') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
+                        Oldest Products
+                    </option>
+                </select>
+
+            </div>
+
+        <?php endif; ?>
+
 <?php endif ?>
-
-
+</div>
+</div>

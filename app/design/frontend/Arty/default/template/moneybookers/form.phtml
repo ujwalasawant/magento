@@ -25,12 +25,13 @@
  */
 ?>
 <?php $_code = $this->getMethodCode(); ?>
-<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none">
-    <li>
-        <?php echo Mage::helper('moneybookers')->__('You will be redirected to our secure payment page when you place an order.') ?>
+
+<ul class="form-list list-unstyled" id="payment_form_<?php echo $_code ?>" style="display:none">
+    <li class="list-unstyled">
+            <?php echo Mage::helper('moneybookers')->__('You will be redirected to our secure payment page when you place an order.') ?>
     </li>
     <?php if ($_img = $this->getPaymentImageSrc($_code)): ?>
-    <li>
+    <li class="list-unstyled">
         <div style="padding:10px 15px 15px;">
             <img src="<?php echo $_img ?>" alt="" /><br />
             <?php if ($_code == 'moneybookers_wlt'): ?>

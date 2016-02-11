@@ -41,7 +41,7 @@
                     <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2  vcenter text-center " >Product name </div>
                     <div class="col-lg-1 col-md-2 col-sm-2  vcenter text-center">Qty </div>
                     <div class="col-lg-2 col-md-2 col-sm-2  vcenter text-center">Price </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 vcenter text-center" >Delivery Details </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 vcenter text-center" >Delivery details </div>
                     <div class="col-lg-2 col-md-1 col-sm-1 vcenter text-center">Subtotal </div>
 
                     <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
@@ -54,12 +54,18 @@
                     <?php endif; ?>
                 </div>
 
-        <?php echo $this->getChildHtml('totals'); ?>
+
         <tbody>
         <?php foreach($this->getItems() as $_item): ?>
             <?php echo $this->getItemHtml($_item)?>
         <?php endforeach ?>
         </tbody>
+
+        <div class="row">
+            <div class="col-lg-offset-7">
+                <?php echo $this->getChildHtml('totals'); ?>
+            </div>
+        </div>
     </table>
 </div>
 <?php echo $this->getChildHtml('items_after'); ?>
@@ -71,7 +77,7 @@
 </script>
 <div id="checkout-review-submit">
     <?php echo $this->getChildHtml('agreements') ?>
-    <div class="buttons-set" id="review-buttons-container">
+    <div class="buttons-set " id="review-buttons-container">
         <a href="<?php echo $this->getUrl('checkout/cart') ?>"><?php echo $this->__('Edit Your Cart') ?></a>
         <?php echo $this->getChildHtml('button') ?>
         <span class="please-wait" id="review-please-wait" style="display:none;">

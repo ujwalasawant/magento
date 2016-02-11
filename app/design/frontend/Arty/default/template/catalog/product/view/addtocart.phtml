@@ -27,16 +27,22 @@
 <?php $_product = $this->getProduct(); ?>
 <?php $buttonTitle = $this->__('Add to Cart'); ?>
 <?php if($_product->isSaleable()): ?>
-    <div class="add-to-cart">
+    <div class="rowspanm">
+    <div class="add-to-cart " style="border-right: 1px solid black ; width : 50%">
+        <div class="rowspanm">
         <?php if(!$_product->isGrouped()): ?>
         <label for="qty"><?php echo $this->__('Qty:') ?></label>
         <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
         <?php  endif; ?>
-        <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="btn-add-to-cart"  onclick="productAddToCartForm.submit(this)"><span></span></button>
+        </div>
+        <div class="rowspanm">
+        <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="up-arrow" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
         <?php echo $this->getChildHtml('', true, true) ?>
-
-        <button type="button" title="Buy Now" class="button btn-cart" onclick="productAddToCartForm.submit(this);setcheckoutLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span>Buy Now</span></span></button>
+        </div>
+        <div class="rowspanm">
+        <button type="button" title="Buy Now" class="button up-arrow-b" onclick="productAddToCartForm.submit(this);setcheckoutLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span>Buy Now</span></span></button>
         <?php echo $this->getChildHtml('', true, true) ?>
-
+        </div>
+    </div>
     </div>
 <?php endif; ?>

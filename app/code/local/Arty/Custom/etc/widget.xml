@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+    <new_products>
+        <parameters>
+            <template>
+                <values>
+                    <homE_grid translate="label">
+                        <value>arty/widget/new_home_grid.phtml</value>
+                        <label>Home Page's Category</label>
+                    </homE_grid>
+                </values>
+            </template>
+        </parameters>
+    </new_products>
+</widgets>

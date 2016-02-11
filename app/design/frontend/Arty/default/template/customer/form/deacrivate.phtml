@@ -1,0 +1,23 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: ujwala
+ * Date: 28/1/16
+ * Time: 3:37 PM
+ */
+
+
+                            $sessionCustomer = Mage::getSingleton("customer/session");
+
+                            if($sessionCustomer->isLoggedIn()) {
+
+
+                                $customerid = $sessionCustomer->getCustomer()
+                                    ->getData();
+
+
+
+                                print_r($customerid);
+                            }
+                                ?>
+

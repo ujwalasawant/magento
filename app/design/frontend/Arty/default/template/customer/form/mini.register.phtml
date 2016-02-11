@@ -32,13 +32,17 @@
  */
 /** @var $this Mage_Customer_Block_Form_Register */
 ?>
-<p class="text-center">
-    <a href="" data-toggle="modal" data-target="#RegisterModal">Sign Up</a>
-</p>
-<?php  echo $this->getChildHtml('form_fields_before') ?>
-<?php  //echo $this->getMessagesBlock()->toHtml() ?>
+
+
+
+
 <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate" class="form-horizontal">
 
+    <p class="text-center">
+        <a href="" data-toggle="modal" data-target="#RegisterModal">Sign Up</a>
+    </p>
+    <?php  echo $this->getChildHtml('form_fields_before') ?>
+    <?php  //echo $this->getMessagesBlock()->toHtml() ?>
 
     <input type="hidden" name="form_key"
            value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>"/>
@@ -69,6 +73,9 @@
                     </div>
 
                     <div class="modal-body">
+                        <input type="checkbox" id="c1" name="cc" />
+                        <label for="c1"><span></span>Check Box 1</label>
+
                         <div class="row">
                             <div class="col-lg-7 col-md-6">
 

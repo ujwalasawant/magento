@@ -3,6 +3,8 @@
     <default translate="label" module="page">
         <reference name="head">
             <!--Adding Javascripts -->
+            <!-- angular js added -->
+
             <action method="addItem">
                 <script>lib/jquery/jquery-1.10.2.min.js</script>
             </action>
@@ -89,6 +91,8 @@
                 <params/>
                 <if>lt IE 9</if>
             </action>
+
+
             <!-- Removing the styles.css -->
             <action method="removeItem">
                 <type>skin_css</type>
@@ -282,7 +286,6 @@
                        template="page/js/calendar.phtml"/>
             </reference>
 
-
         </reference>
     </catalog_product_view>
     <PRODUCT_TYPE_configurable>
@@ -297,20 +300,104 @@
             </block>
         </reference>
     </PRODUCT_TYPE_configurable>
-    <!--<catalog_category_layered>
-        <reference name="content">
+    <catalog_category_layered translate="label">
+        <label>Catalog Category (Anchor)</label>
+        <reference name="left_first">
             <action method="unsetChild">
                 <name>catalog.leftnav</name>
             </action>
+
         </reference>
         <reference name="content">
-            <action method="insert">
-                <child>catalog.leftnav</child>
+            <action method="unsetChild">
+                <name>category.products</name>
             </action>
+            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
+                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+                    <block type="core/text_list" name="product_list.name.after" as="name.after"/>
+                    <block type="core/text_list" name="product_list.after" as="after"/>
+                    <!-- <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/su.phtml</template></action> -->
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar"
+                           template="catalog/product/list/toolbar.phtml">
+                        <action method="insert">
+                            <name>catalog.leftnav</name>
+                        </action>
+
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                        <!-- The following code shows how to set your own pager increments -->
+                        <!--
+                            <action method="setDefaultListPerPage"><limit>4</limit></action>
+                            <action method="setDefaultGridPerPage"><limit>3</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
+                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+                            <action method="addPagerLimit"><mode>grid</mode><limit>3</limit></action>
+                            <action method="addPagerLimit"><mode>grid</mode><limit>6</limit></action>
+                            <action method="addPagerLimit"><mode>grid</mode><limit>9</limit></action>
+                            <action method="addPagerLimit" translate="label"><mode>grid</mode><limit>all</limit><label>All</label></action>
+                        -->
+                    </block>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>empty</layout>
+                        <count>6</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>one_column</layout>
+                        <count>5</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_left</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_right</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>three_columns</layout>
+                        <count>3</count>
+                    </action>
+                    <action method="setToolbarBlockName">
+                        <name>product_list_toolbar</name>
+                    </action>
+                    <!-- Since the addColumnCountLayoutDepend does not work, we are manually setting the max columns -->
+                    <action method="setColumnCount">
+                        <count>4</count>
+                    </action>
+                </block>
+            </block>
         </reference>
-    </catalog_category_layered>-->
-    <!--End of Category Page handler -->
-    <!--checkout Page Handlers-->
+    </catalog_category_layered>
+    <!--  <catalog_category_layered>
+          <reference name="content">
+
+              <action method="unsetChild">
+                  <name>category.products</name>
+              </action>
+              <action method="insert">
+                  <child>category.products</child>
+              </action>
+              <action method="unsetChild">
+                  <name>left_first</name>
+              </action>
+              <reference name="product_list_toolbar">
+                  <block name="catalog.leftnav"></block>
+              </reference>
+          </reference>
+
+      </catalog_category_layered>-->
+    <!--  <catalogsearch_result_index>
+          <reference name="content">
+          <action method="unsetChild">
+              <name>catalogsearch.leftnav</name>
+          </action>
+          <action method="insert">
+              <child>catalogsearch.leftnav</child>
+          </action>
+          </reference>
+       checkout Page Handlers-->
 
     <checkout_onepage_index>
         <reference name="content">
@@ -479,6 +566,8 @@
     <!--End of Customer Page Handlers-->
 
     <!-- registration block (sneha) -->
+    <customer_account_create>
 
+    </customer_account_create>
 
 </layout>

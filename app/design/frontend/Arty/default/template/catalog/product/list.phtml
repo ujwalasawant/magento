@@ -48,7 +48,7 @@ $_helper = $this->helper('catalog/output');
     <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
 
-<div class="rowspan">
+<div>
     <!--<span class='st_email' displayText='Email'></span> -->
 
     <div class="container">
@@ -69,12 +69,17 @@ $_helper = $this->helper('catalog/output');
                             <!-- product block header  -->
                             <div class="lightborder">
 
+                                <div class="add-to-box">
+                                    <?php echo $this->getChildHtml('addto') ?>
+                                </div>
+
                                 <a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>"
-                                   class="glyphicon glyphicon-star-empty link-wishlist"
-                                   style="background: none ;margin-left: 5%; margin-right: 5% ;border: none "></a>
+                                   onclick="setColor(event, 'button', 'grey')" ; data-count="1"
+                                   class="glyphicon glyphicon-star-empty link-wishlist">
+                                </a>
 
                                 <button type="button" class="glyphicon glyphicon-plus-sign "
-                                        style="background: none ;margin-right:5% ;border: none ">
+                                        style="background: none ;margin-right:5% ;border: none">
                                 </button>
 
                                 <button id="share" type="button"
@@ -85,7 +90,7 @@ $_helper = $this->helper('catalog/output');
 
                             </div>
 
-                            <!-- product image -->
+
                             <div class=" well " style="padding: 0px 0px 0px 0px ; margin: 0px 0px 0px 0px">
                                 <a href="<?php echo $_product->getProductUrl() ?>"
                                    title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
@@ -138,7 +143,7 @@ $_helper = $this->helper('catalog/output');
                                         </div>
                                     </li>
 
-                                    <li style="text-align: left">
+                                    <li style="text-align: left ; margin: 2px 0px 10px 0px">
                                         <div class="actions">
                                             <?php if (!$_product->canConfigure() && $_product->isSaleable()): ?>
                                                 <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
@@ -190,3 +195,12 @@ if ($this->getChild('after')) {
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript"> stLight.options({publisher: '12345',}); </script>
 
+<script>
+    function setColor(e, btn, color) {
+        var target = e.target,
+            count = +target.dataset.count;
+
+        target.style.backgroundColor = count === 1 ? "yellow" : '#FFFFFF';
+        target.dataset.count = count === 1 ? 0 : 1;
+    }
+</script>

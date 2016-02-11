@@ -45,7 +45,7 @@
         <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>"/>
 
     </div>
-    <div class="my_account fieldset">
+    <div class="my_account ">
         <h3 style="padding-left: 20px"><?php echo $this->__('Default Billing Address') ?></h3>
 
         <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
@@ -100,13 +100,13 @@
             </div>
         </div>
         <div class="row field rowspan">
-            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6">
                 <div class="row">
-                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 text-right">
+                    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-7 text-right">
                         <label for="region_id"
                                class=" "><?php echo $this->__('Indian State :') ?></label>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-xs-2">
                         <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>"
                                 class="validate-select themeborder " style="display:none;">
                             <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
@@ -124,13 +124,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                 <div class="row">
-                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-4 text-right">
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6 text-right">
                         <label for="country" class="text-right required"
                         ><?php echo $this->__('Country :') ?></label>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-xs-2">
                         <?php echo $this->getCountryHtmlSelect() ?>
                     </div>
                 </div>
@@ -138,12 +138,12 @@
         </div>
 
 
-        <div class="row field rowspan" style="padding-bottom: 10px">
+        <div class="row field ">
             <label for="zip"
-                   class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-right required"><em>*</em><?php echo $this->__('Pin Code :') ?>
+                   class=" col-md-2 col-sm-2 col-xs-4 text-right required "><?php echo $this->__('Pin Code :') ?>
             </label>
 
-            <div class="input-box">
+            <div class="input-box col-lg-4 col-md-2 col-sm-2 col-xs-2">
                 <input type="text" name="postcode"
                        value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>"
                        title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip"
@@ -151,64 +151,62 @@
             </div>
         </div>
 
-
-        <ul class="form-list list-unstyled">
-            <li class=" list-unstyled">
-                <div class="row control" style="padding-left: 3%;">
-
-                    <?php if ($this->canSetAsDefaultBilling()) ?>
-                    <?php if ($this->isDefaultBilling()): ?>
-                        <strong><?php echo $this->__('Default Billing Address') ?></strong>
-                    <?php elseif ($this->canSetAsDefaultBilling()): ?>
-                     <div class="col-xs-5">
-                        <div style="padding-bottom: 1%;">
-                            <input type="checkbox" id="primary_billing" name="default_billing" value="1"
-                                   title="<?php echo $this->__('Use as My Default Billing Address') ?>"
-                                   class="checkbox"/>
-                        </div>
-                        <div>
-                            <label
-                                for="primary_billing"><?php echo $this->__('Use as my default billing address') ?></label>
-                        </div>
-                     </div>
-                    <?php else: ?>
-                        <input type="hidden" name="default_billing" value="1"/>
-                    <?php endif; ?>
-
-
-                </div>
-            </li>
-            <li class="list-unstyled">
-                <div class="row control " style="padding-left: 3%;">
-
-                    <?php if ($this->canSetAsDefaultShipping()) ?>
-                    <?php if ($this->isDefaultShipping()): ?>
-                        <strong><?php echo $this->__('Default Shipping Address') ?></strong>
-                    <?php elseif ($this->canSetAsDefaultShipping()): ?>
-                        <div class="col-xs-5">
-                            <div style="padding-bottom: 1%;">
-                                <input type="checkbox" id="primary_shipping" name="default_shipping" value="1"
-                                       title="<?php echo $this->__('Use as My Default Shipping Address') ?>"
-                                       class="checkbox"/>
-                            </div>
-                            <div>
-                                <label
-                                    for="primary_shipping"><?php echo $this->__('Use as my default shipping address') ?></label>
-                            </div>
-                        </div>
-                    <?php else: ?>
-                        <input type="hidden" name="default_shipping" value="1"/>
-                    <?php endif; ?>
-                </div>
-            </li>
-        </ul>
     </div>
-    <div class="buttons-set">
-        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>">
-                <small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+    <div class="form-list  " >
+        <div class="row control">
+            <div class="col-lg-6 col-md-3 col-sm-2 col-xs-2" >
+                <?php if ($this->canSetAsDefaultBilling()) ?>
+                <?php if ($this->isDefaultBilling()): ?>
+                    <strong><?php echo $this->__('Default Billing Address') ?></strong>
+                <?php elseif ($this->canSetAsDefaultBilling()): ?>
+
+
+                    <input type="checkbox" id="primary_billing" name="default_billing" value="1"
+                           title="<?php echo $this->__('Use as My Default Billing Address') ?>"
+                           class="checkbox"/>
+
+                    <label
+                        for="primary_billing"><?php echo $this->__('Use as my default billing address') ?></label>
+
+
+                <?php else: ?>
+                    <input type="hidden" name="default_billing" value="1"/>
+                <?php endif; ?>
+            </div>
+
+        </div>
+
+
+        <div class="row control ">
+            <div class="col-lg-6 col-md-3 col-sm-2 col-xs-2">
+                <?php if ($this->canSetAsDefaultShipping()) ?>
+                <?php if ($this->isDefaultShipping()): ?>
+                    <strong><?php echo $this->__('Default Shipping Address') ?></strong>
+                <?php elseif ($this->canSetAsDefaultShipping()): ?>
+
+
+                    <input type="checkbox" id="primary_shipping" name="default_shipping" value="1"
+                           title="<?php echo $this->__('Use as My Default Shipping Address') ?>"
+                           class="checkbox"/>
+
+                    <label
+                        for="primary_shipping"><?php echo $this->__('Use as my default shipping address') ?></label>
+
+                <?php else: ?>
+                    <input type="hidden" name="default_shipping" value="1"/>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="buttons-set text-center">
+
         <button type="submit" title="<?php echo $this->__('Save') ?>" class="Artybutton">
             <span><span><?php echo $this->__('Save Address') ?></span></span></button>
     </div>
+    <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>">
+            <small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
 </form>
 <script type="text/javascript">
     //<![CDATA[

@@ -29,30 +29,30 @@
  */
 ?>
 <?php if ($this->includeTax() && $this->getTotalExclTax()>=0):?>
-<tr>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <strong><?php echo $this->helper('tax')->__('Grand Total Excl. Tax')?></strong>
-    </td>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+<div class="row" style="display: none" >
+    <div style="<?php echo $this->getStyle() ?>" class="col-lg-offset-8 col-lg-2" colspan="<?php echo $this->getColspan(); ?>">
+        <strong><?php echo $this->helper('tax')->__('Amount Payable Excl. Tax')?></strong>
+    </div>
+    <div style="<?php echo $this->getStyle() ?>" class="col-lg-offset-8 ">
         <strong><?php echo $this->helper('checkout')->formatPrice($this->getTotalExclTax()) ?></strong>
-    </td>
-</tr>
+    </div>
+</div>
 <?php echo $this->renderTotals('taxes', $this->getColspan()); ?>
-<tr>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <strong><?php echo $this->helper('tax')->__('Grand Total Incl. Tax')?></strong>
-    </td>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+<div class="row">
+    <div style="<?php echo $this->getStyle() ?>" class="col-lg-offset-8 col-lg-2" colspan="<?php echo $this->getColspan(); ?>">
+        <strong><?php echo $this->helper('tax')->__('Amount Payable')?></strong>
+    </div>
+    <div style="<?php echo $this->getStyle() ?>" class="col-lg-offset-8">
         <strong><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></strong>
-    </td>
-</tr>
+    </div>
+</div>
 <?php else:?>
-<tr>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+<div class="row">
+    <div style="<?php echo $this->getStyle() ?>" class="col-lg-offset-8 col-lg-2" colspan="<?php echo $this->getColspan(); ?>">
         <strong><?php echo $this->getTotal()->getTitle() ?></strong>
-    </td>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+    </div>
+    <div style="<?php echo $this->getStyle() ?>" class="col-lg-offset-8 ">
         <strong><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></strong>
-    </td>
-</tr>
+    </div>
+</div>
 <?php endif;?>

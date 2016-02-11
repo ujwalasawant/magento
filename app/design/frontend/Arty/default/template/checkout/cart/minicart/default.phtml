@@ -31,7 +31,8 @@ $isVisibleProduct = $_item->getProduct()->isVisibleInSiteVisibility();
 $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage_Catalog_Model_Product_Attribute_Source_Msrp_Type::TYPE_BEFORE_ORDER_CONFIRM);
 ?>
 
-<li class="item " xmlns="http://www.w3.org/1999/html">
+
+<li class="item lightborder" xmlns="http://www.w3.org/1999/html">
     <div class="text-right">
         <?php if ($isVisibleProduct): ?>
             <?php if (!$this->isOnCheckoutPage()): ?>
@@ -45,17 +46,23 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
             <?php endif; ?>
         <?php endif ?>
     </div>
+
     <?php if ($this->hasProductUrl()): ?>
+
         <a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->escapeHtml($this->getProductName()) ?>"
            class="product-image"><img
-                src="<?php echo $this->getProductThumbnail()->resize(50, 50)->setWatermarkSize('30x10'); ?>" width="50"
-                height="50" alt="<?php echo $this->escapeHtml($this->getProductName()) ?>"/></a>
+                src="<?php echo $this->getProductThumbnail()->resize(50, 50)->setWatermarkSize('30x10'); ?>"
+                alt="<?php echo $this->escapeHtml($this->getProductName()) ?>"/></a>
+
+
     <?php else: ?>
         <span class="product-image sub-padding "><img
-                src="<?php echo $this->getProductThumbnail()->resize(50, 50)->setWatermarkSize('30x10'); ?>" width="50"
-                height="50" alt="<?php echo $this->escapeHtml($this->getProductName()) ?>"/></span>
+                src="<?php echo $this->getProductThumbnail()->resize(50, 50)->setWatermarkSize('30x10'); ?>"
+                alt="<?php echo $this->escapeHtml($this->getProductName()) ?>"/></span>
+
     <?php endif; ?>
-    <div class="product-details pcart">
+
+    <div class="product-details pcart"  >
         <p class="product-name"><?php if ($this->hasProductUrl()): ?><a
                 href="<?php echo $this->getProductUrl() ?>"><?php endif; ?><?php echo $this->escapeHtml($this->getProductName()) ?><?php if ($this->hasProductUrl()): ?></a><?php endif; ?>
         </p>
@@ -171,10 +178,13 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
 
                     <button id="qbutton-<?php echo $_item->getId(); ?>"
                             data-item-id="<?php echo $_item->getId(); ?>"
+
                             disabled="disabled"
                             data-update
-                            class="button delvryhr">
-                        <?php echo $this->__('ok'); ?>
+                            class="button quantity-button delvryhr">
+                        <?php echo $this->__(' Ok '); ?>
+
+
                     </button>
 
 

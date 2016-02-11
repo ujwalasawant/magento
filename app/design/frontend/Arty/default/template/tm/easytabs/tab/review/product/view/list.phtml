@@ -30,12 +30,16 @@
 <div class="collateral-box dedicated-review-box" id="customer-reviews">
 
     <?php echo $this->getChildHtml('toolbar') ?>
-
-    <ol style="margin-top:15px;">
+    <div class="row" style="border: solid ;">
+    <ol class="list-unstyled " style="margin-top:15px; ">
         <?php foreach ($_items as $_review):?>
-            <li>
-                <strong><?php echo $this->htmlEscape($_review->getTitle()) ?></strong> <?php echo $this->__('Review by %s', $this->htmlEscape($_review->getNickname())) ?>
+            <li >
+                <div class="col-lg-6 float" >
+                    <div class="" style="border: solid ; padding-left: 50%;">
                 <table class="ratings-list ratings-table" cellspacing="0">
+
+                    <strong><?php echo $this->htmlEscape($_review->getTitle()) ?></strong> <?php echo $this->__('Review by %s', $this->htmlEscape($_review->getNickname())) ?>
+
                     <tbody>
                         <?php foreach ($_review->getRatingVotes() as $_vote): ?>
                         <tr>
@@ -48,12 +52,16 @@
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
+
                 </table>
+
                 <p><?php echo nl2br($this->htmlEscape($_review->getDetail())) ?> <?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?></p>
+                    </div>
+               </div>
             </li>
         <?php endforeach; ?>
     </ol>
-
+    </div>
     <?php echo $this->getChildHtml('toolbar') ?>
 </div>
 <?php endif;?>

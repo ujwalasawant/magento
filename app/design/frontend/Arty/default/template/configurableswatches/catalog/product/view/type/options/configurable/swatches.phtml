@@ -43,7 +43,7 @@ $_swatchArray = $_config->attributes->$_id;
 ?>
 <dt class="swatch-attr" >
     <label id="<?php echo $_attrCode ?>_label" class="required">
-        <em>*</em><?php echo $_attribute->getLabel() ?>:
+        <?php echo $_attribute->getLabel() ?>:
         <span id="select_label_<?php echo $_attrCode ?>" class="select-label"></span>
     </label>
 </dt>
@@ -68,6 +68,7 @@ $_swatchArray = $_config->attributes->$_id;
                 }
                 ?>
                 <li class="option-<?php echo $_optionCode; ?><?php echo $_liClass; ?>" id="option<?php echo $_option->id; ?>">
+
                     <a href="javascript:void(0)" name="<?php echo $_optionCode; ?>" id="swatch<?php echo $_option->id; ?>" class="<?php echo $_aClass ?>" title="<?php echo $_option->label; ?>"
                        style="height: <?php echo $_swatchOuterHeight ?>px; <?php if (!$_hasImage): ?>min-<?php endif; ?>width: <?php echo $_swatchOuterWidth ?>px;">
                 <span class="swatch-label" style="height: <?php echo $_swatchInnerHeight ?>px; <?php if (!$_hasImage): ?>min-<?php endif; ?>width: <?php echo $_swatchInnerWidth ?>px; line-height: <?php echo $_swatchInnerHeight ?>px;">

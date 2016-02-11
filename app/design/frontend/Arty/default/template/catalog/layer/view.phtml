@@ -33,12 +33,14 @@
 ?>
 
 
-    <div class=" text-right" style="padding-right: 10%;">
-<button class="filter-arrow"  onclick="showAttribute()"><?php echo $this->__('Filter') ?></button>
+<button class="sort-arrow"  onclick="showAttribute()"><?php echo $this->__('Filter') ?></button>
 <?php if($this->canShowBlock()): ?>
     <div class="block-layered-nav " style="display: none;">
-     <div id="narrow-by-list" style="padding-top: 2%">
-
+     <dl id="narrow-by-list">
+         <?php echo $this->getStateHtml() ?>
+         <?php if ($this->getLayer()->getState()->getFilters()): ?>
+             <div class="actions"><a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
+         <?php endif; ?>
          <?php $_filters = $this->getFilters() ?>
          <?php foreach ($_filters as $_filter):
              if($_filter->getItemsCount()):
@@ -47,30 +49,28 @@
                          //enable selected filters
                          if (in_array($_filter->getAttributeModel()->getAttributeId(), $filtersselected)) {
                           //   echo "<dt>". $this->__($_filter->getName()) ."</dt>";
-                             echo "<dd class='filter-arrow' style='margin-top: 20px;'>". $_filter->getHtml() ."</dd>";
+                             echo "<dd class='sort-arrow' style='margin-top: 20px;'>". $_filter->getHtml() ."</dd>";
                          }
                          break;
                      case 3:
                          //disable selected filters
                          if (!in_array($_filter->getAttributeModel()->getAttributeId(), $filtersselected)) {
                            //  echo "<dt>". $this->__($_filter->getName()) ."</dt>";
-                             echo "<dd class='filter-arrow'>". $_filter->getHtml() ."</dd>";
+                             echo "<dd class='sort-arrow'>". $_filter->getHtml() ."</dd>";
                          }
                          break;
                      default:
                          //disabled. show all.
                        //  echo  "<dt>". $this->__($_filter->getName()) ."</dt>";
-                         echo "<dd class='filter-arrow'>". $_filter->getHtml() ."</dd>";
+                         echo "<dd class='sort-arrow'>". $_filter->getHtml() ."</dd>";
                  }
              endif;
          endforeach; ?>
-                </div>
+                </dl>
         <script type="text/javascript">decorateDataList('narrow-by-list')</script>
-
 
     </div>
 <?php endif; ?>
-    </div>
 
 
 <script type="text/javascript">

@@ -25,39 +25,36 @@
  */
 ?>
 <div class="footer-container">
-    <div class="footer" style="border: solid">
-    <div class="container">
+    <div class="footer footerlinks" >
+    <div class="container" >
     	<div class="row">
-    		<div class="col-lg-3 col-md-3 col-sm-3 ">
-				<div class="row">
-					<div class="col-lg-3 col-xs-push-4 col-xs-7">
+    		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 ">
+
     			<?php echo $this->getChildHtml('footer-cmsLinks') ?>
-					</div>
-				</div>
+
     		</div>
-    		<div class="col-lg-3 col-md-3 col-sm-3">
-				<div class="row">
-					<div class="col-xs-push-4 col-xs-7">
+
+    		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-8 float ">
+
     				<?php echo $this->getChildHtml('footer-artycart') ?>
-					</div>
-				</div>
+
     		</div>
     		<div class="col-lg-6 col-md-6 col-sm-6 ">
-				<div class="row">
-					<div class="col-xs-push-4 col-xs-7">
+
     			<?php echo $this->getChildHtml('footer-social') ?>
-					</div>
-				</div>
+
     		</div>
     	</div>
     	
     	<div class="row">
     		<div class="col-lg-5 col-md-5 col-sm-3 ">
     			<?php echo $this->getChildHtml('footer-paymnet') ?>
-    		</div>
+
+			</div>
+
     		<div class="col-lg-7 col-md-7 col-sm-9 ">
     			     <?php echo $this->getCopyright() ?>
-    		</div>
+			</div>
     	</div>
 </div>
      <!--   <?php echo $this->getChildHtml() ?>

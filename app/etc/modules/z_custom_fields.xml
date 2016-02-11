@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <udropship>
+            <vendor>
+                <!-- If you want to create a new field group, use fieldset (optional): -->
+                <fieldsets>
+                    <my_fieldset>
+                        <legend>My Fieldset</legend>
+                        <position>100</position>
+                    </my_fieldset>
+                </fieldsets>
+
+                <fields>
+                    <!-- Text field, named 'my_text_field' -->
+                    <my_text_field>
+                        <!-- text label for the field, will be shown to admin and vendor -->
+                        <label>New Order Carbon Copy Emails</label>
+                        <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
+                        <fieldset>my_fieldset</fieldset>
+                        <!-- Position within the fieldset -->
+                        <position>5</position>
+                        <!-- Default value for the field -->
+                        <default><![CDATA[Default text]]></default>
+                        <!-- <note> is optional, use for comments on the field for admin and vendor -->
+                        <note>Comma separated</note>
+                    </my_text_field>
+
+                    <!-- Dropdown field -->
+                    <my_country_field>
+                        <label>3rd Party Country</label>
+                        <fieldset>my_fieldset</fieldset>
+                        <type>select</type>
+                        <source_model>adminhtml/system_config_source_country</source_model>
+                        <position>5</position>
+                    </my_country_field>
+
+                    <my_dropdown_field>
+                        <label>My Yes/No Dropdown Field</label>
+                        <type>select</type>
+                        <fieldset>my_fieldset</fieldset>
+                        <!-- Source for the 'switch' within the class file -->
+                        <source>yesno</source>
+                        <position>3</position>
+                        <!-- Default value for the field -->
+                        <default>0</default>
+                    </my_dropdown_field>
+                </fields>
+            </vendor>
+        </udropship>
+    </global>
+</config>
+

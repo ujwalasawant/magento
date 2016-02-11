@@ -27,8 +27,8 @@
 
 <?php $_product = $this->getProduct(); ?>
 <?php $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
-
-<ul class="sharing-links list-unstyled list-inline">
+<div class="rowspan">
+<ul class="sharing-links list-unstyled list-inline rowspan">
     <?php if ($this->canEmailToFriend()): ?>
     <?php endif; ?>
 
@@ -47,4 +47,4 @@
         <a href="<?php echo 'http://twitter.com/home?status=' . $_productName . '+' . $_productUrl; ?>" target="_blank" title="<?php echo $this->__('Share on Twitter') ?>" class="link-twitter"><?php echo $this->__('Share on Twitter') ?></a>
     </li>
 </ul>
-
+</div>

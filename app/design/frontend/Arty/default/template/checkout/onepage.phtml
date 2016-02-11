@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Magento
@@ -25,30 +24,57 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
+
 <div class="page-title">
 
 </div>
 <script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
 <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
-<ul class="opc list-unstyled" id="checkoutSteps" >
-    <?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>
-        <?php if (!$this->getChild($_stepId) || !$this->getChild($_stepId)->isShow()): continue; endif; $i++ ?>
-        <li class="section allow active" id="opc-<?php echo $_stepId ?>" class="section<?php echo !empty($_stepInfo['allow'])?' allow':'' ?><?php echo !empty($_stepInfo['complete'])?' saved':'' ?>">
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/angular.min.js') ?>"></script>
+
+<ul class="opc list-unstyled" id="checkoutSteps">
+    <?php $i = 0;
+    foreach ($this->getSteps() as $_stepId => $_stepInfo): ?>
+        <?php if (!$this->getChild($_stepId) || !$this->getChild($_stepId)->isShow()): continue; endif;
+        $i++ ?>
+        <li class="section allow active" id="opc-<?php echo $_stepId ?>"
+            class="section<?php echo !empty($_stepInfo['allow']) ? ' allow' : '' ?><?php echo !empty($_stepInfo['complete']) ? ' saved' : '' ?>">
 
             <div class="container">
+
                 <div class="panel-group" id="accordion">
 
                     <div class="panel panel-default ">
-                        <div class=" down-arrow " >
+
+                        <div class=" <?php if ($i == 1) {
+                            echo 'checkout-header1';
+                        } elseif ($i == 2) {
+                            echo 'checkout-header2';
+                        } elseif ($i == 3) {
+                            echo 'checkout-header3';
+                        } elseif ($i == 4) {
+                            echo 'checkout-header4';
+                        } elseif ($i == 5) {
+                            echo 'checkout-header5';
+                        } else {
+                            echo 'checkout-header6';
+                        }
+
+                        ?> ">
+
                             <h4 class="panel-title step-title ">
-                             <a href="#"> <h4><?php echo " ". $i."." . $_stepInfo['label'] ?></h4></a>
+                                <a href="#" class="Checkout-link"  id="<?php echo "Checkout-link" . $i ?>"><h4><?php echo " " . $i . "." . $_stepInfo['label'] ?></h4></a>
                             </h4>
+
                         </div>
+
                         <div id="collapse1" class="panel-collapse collapse in">
                             <div class="panel-body">
 
-                                <div id="checkout-step-<?php echo $_stepId ?>" class="step a-item" style="display:none;">
+                                <div id="checkout-step-<?php echo $_stepId ?>" class="step a-item"
+                                     style="display:none;">
                                     <?php echo $this->getChildHtml($_stepId) ?>
                                 </div>
 
@@ -66,11 +92,14 @@
     <?php if($this->getActiveStep()): ?>
     accordion.openSection('opc-<?php echo $this->getActiveStep() ?>');
     <?php endif ?>
-    var checkout = new Checkout(accordion,{
-        progress: '<?php echo $this->getUrl('checkout/onepage/progress') ?>',
-        review: '<?php echo $this->getUrl('checkout/onepage/review') ?>',
-        saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveMethod') ?>',
-        failure: '<?php echo $this->getUrl('checkout/cart') ?>'}
+    var checkout = new Checkout(accordion, {
+            progress: '<?php echo $this->getUrl('checkout/onepage/progress') ?>',
+            review: '<?php echo $this->getUrl('checkout/onepage/review') ?>',
+            saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveMethod') ?>',
+            failure: '<?php echo $this->getUrl('checkout/cart') ?>'
+        }
     );
     //]]>
+
+
 </script>

@@ -39,8 +39,8 @@
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
-<div class="product-view" >
-    <div class="product-essential"  style="border: solid">
+<div class="product-view "  >
+    <div class="product-essential " >
     <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
         <input type="hidden" name="buy_now" id="buy_now" value="" />
         <?php echo $this->getBlockHtml('formkey') ?>
@@ -48,15 +48,16 @@
             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>
-        <div class="row" style="height: 10%;border: solid">
+        <div class="row" style="height: 10%;">
         <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12 product-img-box"  >
             <?php echo $this->getChildHtml('media') ?>
         </div>
-        <div  class="col-lg-5 col-md-4 col-sm-12 col-xs-12 product-shop" >
+        <div  class="col-lg-5 col-md-4 col-sm-12 col-xs-12 product-shop " >
             <div class="product-name">
                 <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
             </div>
-<ul class="list-unstyled">
+<ul class="list-unstyled ">
+
     <li>
             <?php if ($this->canEmailToFriend()): ?>
                 <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
@@ -75,7 +76,7 @@
 
             <?php echo $this->getChildHtml('extrahint') ?>
     </li>
-    <li>
+    <li >
             <?php if (!$this->hasOptions()):?>
                 <div class="add-to-box">
                     <?php if($_product->isSaleable()): ?>
@@ -97,11 +98,9 @@
     <li>
             <?php echo $this->getChildHtml('zipcode');?>
     </li>
-    <li>
-        <button type="button" onclick="jQuery('#buy_now').val('buy_now');productAddToCartForm.submit(this)" class="btn btn-block btn-express-buynow"><i class="cart-icon-white m-r-sm v-middle"></i>Buy Now</button>
-    </li>
 
-    <li >
+
+    <li>
             <?php echo $this->getChildHtml('other');?>
     </li>
     <li class="priceli">
@@ -119,6 +118,7 @@
         <?php if ($_product->isSaleable() && $this->hasOptions()):?>
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
         <?php endif;?>
+
     </form>
 
     <script type="text/javascript">
