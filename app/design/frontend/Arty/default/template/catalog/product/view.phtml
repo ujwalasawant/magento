@@ -39,170 +39,243 @@
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
-<div class="product-view "  >
-    <div class="product-essential " >
-    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
-        <input type="hidden" name="buy_now" id="buy_now" value="" />
-        <?php echo $this->getBlockHtml('formkey') ?>
-        <div class="no-display">
-            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
-            <input type="hidden" name="related_product" id="related-products-field" value="" />
-        </div>
-        <div class="row" style="height: 10%;">
-        <div class="col-lg-5 col-md-4 col-sm-12 col-xs-12 product-img-box"  >
-            <?php echo $this->getChildHtml('media') ?>
-        </div>
-        <div  class="col-lg-5 col-md-4 col-sm-12 col-xs-12 product-shop " >
-            <div class="product-name">
-                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+<div class="product-view ">
+    <div class="product-essential ">
+        <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"
+              id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+            <input type="hidden" name="buy_now" id="buy_now" value=""/>
+            <?php echo $this->getBlockHtml('formkey') ?>
+
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 product-img-box">
+                    <?php echo $this->getChildHtml('media') ?>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 product-shop ">
+
+
+                    <div class="row">
+                        <div class="product-name">
+                            <h4> <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h4>
+                        </div>
+                        <?php $_vendorName = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?>
+                        <?php echo $_vendorName->getVendorName() ?>
+
+                        <?php echo $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('my_text_field') ?>
+
+
+
+                        <!-- === any field vendor profile ===
+                          <?php echo Mage::helper('udropship')->getVendor($_product)->getData('bank_name'); ?>
+                            <?php echo Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('City') ?>
+                            <?php $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?> <?php echo $_vendor->getData('name') ?>
+
+                            -->
+
+                        <div>
+                            <?php echo $this->getChildHtml('alert_urls') ?>
+                        </div>
+                        <div>
+                            <?php echo $this->getChildHtml('product_type_data') ?>
+                        </div>
+
+                        <div>
+
+                            <?php echo $this->getChildHtml('extrahint') ?>
+                        </div>
+                        <div>
+                            <?php if (!$this->hasOptions()): ?>
+                                <div class="add-to-box">
+                                    <?php if ($_product->isSaleable()): ?>
+                                        <?php echo $this->getChildHtml('addtocart') ?>
+                                        <?php if ($this->helper('wishlist')->isAllow() || $_compareUrl = $this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                                            <span class="or"></span>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php echo $this->getChildHtml('addto') ?>
+                                </div>
+                                <?php echo $this->getChildHtml('extra_buttons') ?>
+                            <?php elseif (!$_product->isSaleable()): ?>
+                                <div class="add-to-box">
+                                    <?php echo $this->getChildHtml('addto') ?>
+                                </div>
+
+                            <?php endif; ?>
+                        </div>
+                        <div>
+                            <?php echo $this->getChildHtml('zipcode'); ?>
+                        </div>
+
+
+                        <div>
+                            <?php echo $this->getChildHtml('other'); ?>
+                        </div>
+                        <div class="priceli">
+                            <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                            <?php endif; ?>
+                        </div>
+                        <div>
+                            <div>
+                                <?php echo $this->getChildHtml('zipcode'); ?>
+                            </div>
+
+                            <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
-<ul class="list-unstyled ">
-
-    <li>
-            <?php if ($this->canEmailToFriend()): ?>
-                <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
-            <?php endif; ?>
-    </li>
-    <li>
-            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-    </li>
-    <li>
-            <?php echo $this->getChildHtml('alert_urls') ?>
-    </li>
-    <li>
-            <?php echo $this->getChildHtml('product_type_data') ?>
-    </li>
-    <li>
-
-            <?php echo $this->getChildHtml('extrahint') ?>
-    </li>
-    <li >
-            <?php if (!$this->hasOptions()):?>
-                <div class="add-to-box">
-                    <?php if($_product->isSaleable()): ?>
-                        <?php echo $this->getChildHtml('addtocart') ?>
-                        <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
-                            <span class="or"><?php echo $this->__('OR') ?></span>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    <?php echo $this->getChildHtml('addto') ?>
-                </div>
-                <?php echo $this->getChildHtml('extra_buttons') ?>
-            <?php elseif (!$_product->isSaleable()): ?>
-                <div class="add-to-box">
-                    <?php echo $this->getChildHtml('addto') ?>
-                </div>
-
-            <?php endif; ?>
-    </li>
-    <li>
-            <?php echo $this->getChildHtml('zipcode');?>
-    </li>
 
 
-    <li>
-            <?php echo $this->getChildHtml('other');?>
-    </li>
-    <li class="priceli">
-            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
-            <?php endif;?>
-    </li>
+        </form>
 
-</ul>
-        </div>
-        </div>
-
-
-        <div class="clearer"></div>
-        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-            <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
-        <?php endif;?>
-
-    </form>
-
-    <script type="text/javascript">
-    //<![CDATA[
-        var productAddToCartForm = new VarienForm('product_addtocart_form');
-        productAddToCartForm.submit = function(button, url) {
-            if (this.validator.validate()) {
-                var form = this.form;
-                var oldUrl = form.action;
-
-                if (url) {
-                   form.action = url;
-                }
-                var e = null;
-                try {
-                    this.form.submit();
-                } catch (e) {
-                }
-                this.form.action = oldUrl;
-                if (e) {
-                    throw e;
-                }
-
-                if (button && button != 'undefined') {
-                    button.disabled = true;
-                }
-            }
-        }.bind(productAddToCartForm);
-
-        productAddToCartForm.submitLight = function(button, url){
-            if(this.validator) {
-                var nv = Validation.methods;
-                delete Validation.methods['required-entry'];
-                delete Validation.methods['validate-one-required'];
-                delete Validation.methods['validate-one-required-by-name'];
-                // Remove custom datetime validators
-                for (var methodName in Validation.methods) {
-                    if (methodName.match(/^validate-datetime-.*/i)) {
-                        delete Validation.methods[methodName];
-                    }
-                }
-
+        <script type="text/javascript">
+            //<![CDATA[
+            var productAddToCartForm = new VarienForm('product_addtocart_form');
+            productAddToCartForm.submit = function (button, url) {
                 if (this.validator.validate()) {
+                    var form = this.form;
+                    var oldUrl = form.action;
+
                     if (url) {
-                        this.form.action = url;
+                        form.action = url;
                     }
-                    this.form.submit();
+                    var e = null;
+                    try {
+                        this.form.submit();
+                    } catch (e) {
+                    }
+                    this.form.action = oldUrl;
+                    if (e) {
+                        throw e;
+                    }
+
+                    if (button && button != 'undefined') {
+                        button.disabled = true;
+                    }
                 }
-                Object.extend(Validation.methods, nv);
-            }
-        }.bind(productAddToCartForm);
-    //]]>
-    </script>
-        <script>
-            function setcheckoutLocation(location)
-            {
-                jQuery.ajax({
-                    type:"GET",
-                url:location,
-                    success:function(data){
-                window.location.href = "http://127.0.0.1/magento/checkout/onepage/";
+            }.bind(productAddToCartForm);
+
+            productAddToCartForm.submitLight = function (button, url) {
+                if (this.validator) {
+                    var nv = Validation.methods;
+                    delete Validation.methods['required-entry'];
+                    delete Validation.methods['validate-one-required'];
+                    delete Validation.methods['validate-one-required-by-name'];
+                    // Remove custom datetime validators
+                    for (var methodName in Validation.methods) {
+                        if (methodName.match(/^validate-datetime-.*/i)) {
+                            delete Validation.methods[methodName];
+                        }
                     }
-            });
+
+                    if (this.validator.validate()) {
+                        if (url) {
+                            this.form.action = url;
+                        }
+                        this.form.submit();
+                    }
+                    Object.extend(Validation.methods, nv);
+                }
+            }.bind(productAddToCartForm);
+            //]]>
+        </script>
+        <script>
+            function setcheckoutLocation(location) {
+                jQuery.ajax({
+                    type: "GET",
+                    url: location,
+                    success: function (data) {
+                        window.location.href = "http://127.0.0.1/magento/checkout/onepage/";
+                    }
+                });
 
             }
         </script>
     </div>
 
     <div class="product-collateral toggle-content tabs">
-        <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+        <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')): ?>
             <dl id="collateral-tabs" class="collateral-tabs">
-                <?php foreach ($detailedInfoGroup as $alias => $html):?>
-                    <dt class="tab"><span><?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?></span></dt>
+                <?php foreach ($detailedInfoGroup as $alias => $html): ?>
+                    <dt class="tab"><span><?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?></span>
+                    </dt>
                     <dd class="tab-container">
                         <div class="tab-content"><?php echo $html ?></div>
                     </dd>
-                <?php endforeach;?>
+                <?php endforeach; ?>
             </dl>
         <?php endif; ?>
     </div>
 
 
-<?php echo $this->getChildHtml('upsell_products') ?>
-    <?php echo $this->getChildHtml('product_additional_data') ?>
+    <div class="no-display">
+        <input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+        <input type="hidden" name="related_product" id="related-products-field" value=""/>
+
+    </div>
+
+
+    <!--- crosssell Product -->
+    <div>
+        <?php if ($_crossSellProducts = $_product->getCrossSellProducts()): ?>
+
+            <div>
+                <h4><?php echo $this->__('Recommended Combo Offer:') ?></h4>
+
+
+                <div class="row container">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#">Combo Offer</a></li>
+
+                    </ul>
+                    <?php foreach ($_crossSellProducts as $_item): ?>
+
+                        <?php $_item = Mage::getModel('catalog/product')->load($_item->getId()); ?>
+
+                        <div class="col-lg-2 "> <!-- item-->
+                            <a class="product-image" href="<?php echo $_item->getProductUrl() ?>"
+                               title="<?php echo $this->htmlEscape($_item->getName()) ?>">
+                                <img class="img img-responsive"
+                                     src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(150); ?>"
+
+                                     alt="<?php echo $this->htmlEscape($_item->getName()) ?>"/>
+                            </a>
+
+
+                            <h5 class="product-name">
+                                <a
+                                    href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a>
+                            </h5>
+                            <span class="priceblack"><?php echo $this->getPriceHtml($_item, true) ?></span>
+
+
+                        </div>
+
+                    <?php endforeach; ?>
+                </div>
+
+                <script
+                    type="text/javascript">decorateList('crosssell-products-list', 'none-recursive')</script>
+            </div>
+
+        <?php endif; ?>
+    </div>
+
+
+    <!-- tab -->
+    <div>
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+    </div>
+
+    <!-- recently viewed product -->
+    <div>
+        <?php echo $this->getChildHtml('viewed.product') ?>
+
+    </div>
 </div>
 <script type="text/javascript">
 

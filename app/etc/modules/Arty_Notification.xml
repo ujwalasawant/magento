@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arty_Notification>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Arty_Notification>
+    </modules>
+</config>

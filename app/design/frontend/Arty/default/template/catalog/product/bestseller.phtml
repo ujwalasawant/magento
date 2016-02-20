@@ -1,0 +1,18 @@
+<?php
+echo "hello best seller";
+$_productCollection=$this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+if ($_productCollection->count()):
+    $_iterator = 0;
+
+    foreach ($_productCollection as $_product): ?>
+
+        <div> <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(145); ?>" width="120" height="120" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+            <p><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></p>
+            <p><span><?php echo $this->getPriceHtml($_product, true) ?></span></p>
+            <p><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><img src="images/more-info.gif" width="110" height="30" alt="More Info" /></a></p>
+        </div>
+
+    <?php endforeach; // end products loop ?>
+    <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+<?php endif; // if product collection ?>

@@ -29,97 +29,104 @@
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <form action="<?php echo $this->getUrl('customer/account/editPost') ?>" method="post" id="form-validate" autocomplete="off">
     <div class="personal-info">
-    <div class="fieldset ">
-        <?php echo $this->getBlockHtml('formkey')?>
-        <h2 class="legend"><?php echo $this->__('Personal Information') ?></h2>
-        <div >
-        <div class="personal">
-        <div class=" row text-center " >
+        <div class="fieldset ">
+            <?php echo $this->getBlockHtml('formkey')?>
+            <h2 class="legend"><?php echo $this->__('Personal Information') ?></h2>
+            <div >
+                <div class="personal">
+                    <div class=" row " >
 
-            <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?>
+                        <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?>
 
-        </div>
+                    </div>
 
-        <div class="row" style="padding-left: 9px">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 rowspan" >
-                <div  class="text-center col-lg-3 col-lg-push-1 col-md-push-1 col-md-3 col-sm-push-1 col-sm-3  col-xs-3 "  >
-                    <label for="email" class="required"><?php echo $this->__('Email ID') ?></label>
-                </div>
-                <div class="col-lg-3 col-lg-offset-1 col-md-offset-1 col-md-1 col-sm-offset-1 col-sm-1 col-xs-3 paddngLeft "style="padding-right:5px;">
-                    <input type="text" name="email" id="email" value="<?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email themeborder" />
-                </div>
+                    <div class="row rowspan" >
+                        <div class="col-lg-6 col-md-6 col-sm-6 "  >
+                            <div class="row" style="padding-left: 3%;" >
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 text-center" >
+                                <label for="email" class="required"><?php echo $this->__('Email ID') ?></label>
+                                </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 ">
+                                <input type="text" name="email" id="email" value="<?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email themeborder" />
+                            </div>
+                            </div>
 
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 rowspan paddngLeft" >
-                <div  class="text-center col-lg-3 col-md-2 col-sm-3  col-xs-3 "   >
-                    <label class="required"><?php echo $this->__('Mobile') ?></label>
-                </div>
-                <div class="col-lg-3 col-lg-pull-1 col-md-1 col-sm-1 col-xs-3 " >
-                    <p ><input type="text" value="<?php echo $this->getCustomer()->getMobile(); ?>" title="<?php echo $this->__('Mobile') ?>" name="mobile" class="input-text validate-digits-range digits-range-1000000000-9999999999 required-entry "></p>
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="row text-center">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6"    >
-                <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
-                <?php if ($_dob->isEnabled()): ?>
-                    <div><?php echo $_dob->setDate($this->getCustomer()->getDob())->toHtml() ?></div>
-                <?php endif ?>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-9" >
-                <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
-                <?php if ($_gender->isEnabled()): ?>
-                    <div><?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?></div>
-                <?php endif ?>
-            </div>
-        </div>
-        </div>
-            </div>
-        <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
-        <?php if ($_taxvat->isEnabled()): ?>
-            <div><?php echo $_taxvat->setTaxvat($this->getCustomer()->getTaxvat())->toHtml() ?></div>
-        <?php endif ?>
-        <div class="control" style="display:none;">
-            <input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo $this->__('Change Password') ?>"<?php if($this->getCustomer()->getChangePassword()==1): ?> checked="checked"<?php endif; ?> class="checkbox" /><label for="change_password"><?php echo $this->__('Change Password') ?></label>
-        </div>
-    </div>
+                        </div>
+                    </div>
+                    <div class="row rowspan">
+                        <div class="col-lg-6 col-md-6 col-sm-6 " >
+                            <div class="row" style="padding-left: 3%;">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 text-center">
+                                <label class="required"><?php echo $this->__('Mobile') ?></label>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 ">
+                                <p ><input type="text" value="<?php echo $this->getCustomer()->getMobile(); ?>" title="<?php echo $this->__('Mobile') ?>" name="mobile" class="input-text validate-digits-range digits-range-1000000000-9999999999 required-entry themeborder"></p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
 
 
-
-    <div class="fieldset" style="display:none;">
-        <h2 class="legend"><?php echo $this->__('Change Password') ?></h2>
-        <ul class="form-list">
-            <li>
-                <label for="current_password" class="required"><em>*</em><?php echo $this->__('Current Password') ?></label>
-                <div class="input-box">
-                    <!-- This is a dummy hidden field to trick firefox from auto filling the password -->
-                    <input type="text" class="input-text no-display" name="dummy" id="dummy" />
-                    <input type="password" title="<?php echo $this->__('Current Password') ?>" class="input-text" name="current_password" id="current_password" />
-                </div>
-            </li>
-            <li class="fields" >
-                <div class="field">
-                    <label for="password" class="required"><em>*</em><?php echo $this->__('New Password') ?></label>
-                    <div class="input-box">
-                        <input type="password" title="<?php echo $this->__('New Password') ?>" class="input-text validate-password" name="password" id="password" />
+                    <div class="row ">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"    >
+                            <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+                            <?php if ($_dob->isEnabled()): ?>
+                                <div><?php echo $_dob->setDate($this->getCustomer()->getDob())->toHtml() ?></div>
+                            <?php endif ?>
+                        </div>
+                        </div>
+                    <div class="row rowspan">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 " >
+                            <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+                            <?php if ($_gender->isEnabled()): ?>
+                                <div><?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?></div>
+                            <?php endif ?>
+                        </div>
                     </div>
                 </div>
-                <div class="field">
-                    <label for="confirmation" class="required"><em>*</em><?php echo $this->__('Confirm New Password') ?></label>
+            </div>
+            <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
+            <?php if ($_taxvat->isEnabled()): ?>
+                <div><?php echo $_taxvat->setTaxvat($this->getCustomer()->getTaxvat())->toHtml() ?></div>
+            <?php endif ?>
+            <div class="control" style="display:none;">
+                <input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo $this->__('Change Password') ?>"<?php if($this->getCustomer()->getChangePassword()==1): ?> checked="checked"<?php endif; ?> class="checkbox" /><label for="change_password"><?php echo $this->__('Change Password') ?></label>
+            </div>
+        </div>
+
+
+
+        <div class="fieldset" style="display:none;">
+            <h2 class="legend"><?php echo $this->__('Change Password') ?></h2>
+            <ul class="form-list">
+                <li>
+                    <label for="current_password" class="required"><em>*</em><?php echo $this->__('Current Password') ?></label>
                     <div class="input-box">
-                        <input type="password" title="<?php echo $this->__('Confirm New Password') ?>" class="input-text validate-cpassword" name="confirmation" id="confirmation" />
+                        <!-- This is a dummy hidden field to trick firefox from auto filling the password -->
+                        <input type="text" class="input-text no-display" name="dummy" id="dummy" />
+                        <input type="password" title="<?php echo $this->__('Current Password') ?>" class="input-text" name="current_password" id="current_password" />
                     </div>
-                </div>
-            </li>
-        </ul>
-    </div>
+                </li>
+                <li class="fields" >
+                    <div class="field">
+                        <label for="password" class="required"><em>*</em><?php echo $this->__('New Password') ?></label>
+                        <div class="input-box">
+                            <input type="password" title="<?php echo $this->__('New Password') ?>" class="input-text validate-password" name="password" id="password" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="confirmation" class="required"><em>*</em><?php echo $this->__('Confirm New Password') ?></label>
+                        <div class="input-box">
+                            <input type="password" title="<?php echo $this->__('Confirm New Password') ?>" class="input-text validate-cpassword" name="confirmation" id="confirmation" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <p class="back-link rowspanm"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
         <div class="buttons-set text-center">
-        <button type="submit" title="<?php echo $this->__('Save') ?>" class="button Artybutton"><span><span><?php echo $this->__('Save') ?></span></span></button>
-             </div>
+            <button type="submit" title="<?php echo $this->__('Save') ?>" class="button Artybutton"><span><span><?php echo $this->__('Save') ?></span></span></button>
+        </div>
     </div>
 </form>
 <script type="text/javascript">

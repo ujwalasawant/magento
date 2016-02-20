@@ -12,12 +12,12 @@ $_session = Mage::getSingleton('udropship/session');
 		<span class="required"><?php echo Mage::helper('udropship')->__('* Indicated Required Fields') ?></span>
 	</div>
 
-<form action="<?php echo $this->getUrl('umicrosite/vendor/registerPost')?>" enctype="multipart/form-data" method="post" id="umicrosite-registration-form">
+<form action="<?php echo $this->getUrl('umicrosite/vendor/registerPost')?>"  enctype="multipart/form-data" method="post" id="umicrosite-registration-form">
 <?php foreach ($this->getForm()->getElements() as $element) {
     echo $element->toHtml();
 } ?>
 
-<ul class="form-list">
+<ul class="form-list" >
     <?php echo $this->getChildHtml('form.additional.info'); ?>
 </ul>
 

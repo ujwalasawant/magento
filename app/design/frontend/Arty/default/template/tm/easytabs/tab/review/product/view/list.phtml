@@ -24,62 +24,77 @@
  * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<style>
+    .example-two {
+        border: 1px solid lightgrey;
 
-<?php $_items = $this->getReviewsCollection()->getItems();?>
-<?php if (count($_items)):?>
-<div class="collateral-box dedicated-review-box" id="customer-reviews">
+        background: #dddddd;
+        width:100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+</style>
+<?php $_items = $this->getReviewsCollection()->getItems(); ?>
+<?php if (count($_items)): ?>
+    <div class="collateral-box dedicated-review-box" id="customer-reviews">
 
-    <?php echo $this->getChildHtml('toolbar') ?>
-    <div class="row" style="border: solid ;">
-    <ol class="list-unstyled " style="margin-top:15px; ">
-        <?php foreach ($_items as $_review):?>
-            <li >
-                <div class="col-lg-6 float" >
-                    <div class="" style="border: solid ; padding-left: 50%;">
-                <table class="ratings-list ratings-table" cellspacing="0">
+        <?php echo $this->getChildHtml('toolbar') ?>
 
-                    <strong><?php echo $this->htmlEscape($_review->getTitle()) ?></strong> <?php echo $this->__('Review by %s', $this->htmlEscape($_review->getNickname())) ?>
+        <div class="row" >
+            <?php foreach ($_items as $_review): ?>
+                <div class="col-lg-6 col-md-6 float">
 
-                    <tbody>
-                        <?php foreach ($_review->getRatingVotes() as $_vote): ?>
-                        <tr>
-                            <td class="label"><strong><?php echo $_vote->getRatingCode() ?></strong></td>
-                            <td>
-                                <div class="rating-box">
-                                    <div class="rating" style="width: <?php echo $_vote->getPercent() ?>%;"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
+                 <ul style="display: inline-block ; padding-top: 5%;" class="list-unstyled">
+                     <div class="float">
+                        <li class="example-two float"/>
+                     </div>
+                     <div class="float" >
 
-                </table>
+                        <table class="ratings-list ratings-table" cellspacing="0">
+                            <tbody>
 
-                <p><?php echo nl2br($this->htmlEscape($_review->getDetail())) ?> <?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?></p>
+                            <?php foreach ($_review->getRatingVotes() as $_vote): ?>
+                                <tr>
+                                    <td class="label"><strong><?php echo $_vote->getRatingCode() ?></strong></td>
+                                    <td>
+                                        <div class="rating-box">
+                                            <div class="rating"
+                                                 style="width: <?php echo $_vote->getPercent() ?>%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <p><?php echo nl2br($this->htmlEscape($_review->getDetail())) ?><?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?></p>
+
+                     </div>
+                 </ul>
+                    <div>
+                   <?php echo $this->__('Review by %s', $this->htmlEscape($_review->getNickname())) ?>
                     </div>
-               </div>
-            </li>
-        <?php endforeach; ?>
-    </ol>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <?php echo $this->getChildHtml('toolbar') ?>
     </div>
-    <?php echo $this->getChildHtml('toolbar') ?>
-</div>
-<?php endif;?>
+<?php endif; ?>
 
 <br/>
 
 <?php echo $this->getChildHtml('review_form') ?>
 
 <script type="text/javascript">
-    $$('.rating-links a, .no-rating a').each(function(el) {
-        el.observe('click', function(e) {
+    $$('.rating-links a, .no-rating a').each(function (el) {
+        el.observe('click', function (e) {
             var writeReview = (el.href.indexOf('#review-form') > -1);
             if (writeReview && !$('review-form')) {
                 return;
             }
 
             e.stop();
-            var tab  = "<?php echo $this->getAlias(); ?>",
+            var tab = "<?php echo $this->getAlias(); ?>",
                 href = easytabs.tpl.href.replace(easytabs.tpl.tab, tab);
             window.location.hash = href;
             easytabs.onclick(el, e, tab, true);

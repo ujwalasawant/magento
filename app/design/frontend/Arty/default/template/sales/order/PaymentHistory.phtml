@@ -37,11 +37,11 @@
 <div class="personal-info">
 <div class="row " >
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 vcenter text-left" ><?php echo $this->__('Order #  (items)') ?> </div>
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 vcenter text-center">
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 vcenter text-center">
         <span class="nobr"><?php echo $this->__('Status') ?></span>
     </div>
 
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 vcenter text-center" >
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 vcenter text-center" >
             <span class="nobr"><?php echo $this->__('Date') ?></span>
     </div>
 
@@ -52,10 +52,10 @@
 
         <?php $_odd = ''; ?>
         <?php foreach ($_orders as $_order): ?>
-        <div class="row rowspan" >
+        <div class="row rowspan xspayment" >
 
 <!---order Id -->
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 text-left ">
+            <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 text-left ">
             <?php echo "AC# ". $_order->getRealOrderId() ?>
 
 <!-- order count -->
@@ -75,11 +75,11 @@
             ?>
             </div>
                 <?php //echo $_order->formatPrice($_order->getGrandTotal()) ?>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 vcenter text-center">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 vcenter text-center">
 <!-- status -->
                 <em><?php echo $_order->getStatusLabel() ?></em>
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 vcenter text-center" >
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 vcenter text-center" >
             <!-- date -->
             <span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span>
             </div>
@@ -89,6 +89,8 @@
         <?php endforeach; ?>
 
    </div>
+
+    <?php echo $this->getPagerHtml(); ?>
     <script type="text/javascript">decorateTable('my-orders-table');</script>
 <?php else: ?>
     <p><?php echo $this->__('You have placed no orders.'); ?></p>

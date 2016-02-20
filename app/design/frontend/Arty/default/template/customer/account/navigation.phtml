@@ -24,28 +24,22 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div class="block block-account">
+<div class="block block-account" >
 
-    <div class="block-title">
+    <div class="block-title text-center" >
         <strong><span><?php echo $this->__('My Account'); ?></span></strong>
     </div>
     <div class="block-content box-border">
         <ul class="list-unstyled ">
             <?php $_links = $this->getLinks(); ?>
-
-
-
-
             <?php $_index = 1; ?>
             <?php $_count = count($_links); /* Add or Remove Account Left Navigation Links Here -*/
-
             unset($_links['tags']); /* My Tags */
             unset($_links['invitations']); /* My Invitations */
             unset($_links['reviews']);  /* Reviews */
             unset($_links['wishlist']); /* Wishlist */
             unset($_links['newsletter']); /* Newsletter */
             unset($_links['orders']); /* My Orders */
-
             unset($_links['enterprise_customerbalance']); /* Store Credit */
             unset($_links['OAuth Customer Tokens']); /* My Applications */
             unset($_links['enterprise_reward']); /* Reward Points */

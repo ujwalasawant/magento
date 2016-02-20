@@ -37,10 +37,10 @@ if(empty($_cartQty)) {
     $_cartQty = 0;
 }
 ?>
-<div id="minicart-error-message" class="minicart-message"></div>
-<div id="minicart-success-message" class="minicart-message"></div>
+<div id="minicart-error-message" class="minicart-message" style="color: red;"></div>
+<div id="minicart-success-message" class="minicart-message" style="color: green"></div>
 
-<div class="minicart-wrapper lightborder" >
+<div class="minicart-wrapper">
 
     <p class="block-subtitle">
         <?php echo $this->__('Recently added item(s)') ?>
@@ -72,8 +72,8 @@ if(empty($_cartQty)) {
         <div id="minicart-widgets">
             <?php echo $this->getChildHtml('cart_promotion') ?>
         </div>
-        <div class="block-content">
-            <p class="subtotal">
+        <div class="block-content" style="background-color: lightgrey">
+            <p class="subtotal text-center">
                 <?php if ($this->canApplyMsrp()): ?>
                     <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
                 <?php else: ?>
@@ -86,9 +86,9 @@ if(empty($_cartQty)) {
         </div>
 
 
-        <div class="minicart-actions">
+        <div class="minicart-actions text-center">
             <?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
-                    <ul class="checkout-types minicart">
+                <ul class="checkout-types minicart list-unstyled">
                     <?php echo $this->getChildHtml('extra_actions') ?>
                     <li>
                         <a title="<?php echo $this->__('Checkout') ?>" class="button checkout-button" href="<?php echo $this->getCheckoutUrl() ?>">
@@ -97,14 +97,13 @@ if(empty($_cartQty)) {
                     </li>
                 </ul>
             <?php endif ?>
-            <a class="cart-link" href="<?php echo $this->getUrl('checkout/cart'); ?>">
+            <a class="cart-link text-center rowspan" href="<?php echo $this->getUrl('checkout/cart'); ?>">
                 <?php echo $this->__('View Shopping Cart'); ?>
             </a>
         </div>
 
     <?php else: ?>
-        <p class="text-center"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
+        <p class="empty"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
 
     <?php endif ?>
 </div>
-

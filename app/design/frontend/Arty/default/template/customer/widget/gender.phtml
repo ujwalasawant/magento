@@ -26,13 +26,13 @@
 ?>
 <div class="row">
 
-   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 text-right"  > <label for="<?php echo $this->getFieldId('gender')?>"<?php if ($this->isRequired()) echo ' class="required"' ?>><?php if ($this->isRequired()) echo '<em>*</em>' ?><?php echo $this->__('Gender') ?></label></div>
+   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 text-right"  > <label for="<?php echo $this->getFieldId('gender')?>"<?php if ($this->isRequired()) echo ' class="required"' ?>><?php if ($this->isRequired()) echo '<em>*</em>' ?><?php echo $this->__('Gender') ?></label></div>
 
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-1 gender-txt text-left" >
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-1 gender-txt ">
 
-        <div class="themeborder ">
+        <div class="themeborder">
         <span class="span "  >
-       <select  class="gender span " style="border: solid"  id="<?php echo $this->getFieldId('gender')?>" name="<?php echo $this->getFieldName('gender')?>" title="<?php echo $this->__('Gender') ?>"<?php if ($this->isRequired()):?> class="validate-select"<?php endif; ?> <?php echo $this->getFieldParams() ?>>
+       <select  class="gender span "  id="<?php echo $this->getFieldId('gender')?>" name="<?php echo $this->getFieldName('gender')?>" title="<?php echo $this->__('Gender') ?>"<?php if ($this->isRequired()):?> class="validate-select"<?php endif; ?> <?php echo $this->getFieldParams() ?>>
         <?php $options = Mage::getResourceSingleton('customer/customer')->getAttribute('gender')->getSource()->getAllOptions();?>
         <?php $value = $this->getGender();?>
         <?php foreach ($options as $option):?>

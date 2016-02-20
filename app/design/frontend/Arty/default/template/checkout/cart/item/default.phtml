@@ -380,18 +380,8 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <?php endif; ?>
 
 
-        <?php
-        $_cartQty = $this->getSummaryCount();
-        if(empty($_cartQty)) {
-            $_cartQty = 0;
-        }
-        ?>
-        <a href="<?php echo $this->getDeleteUrl() ?>" type="checkbox" title="<?php echo $this->__('Remove Item') ?>"
-           onchange="this.form.submit()" class="remove glyphicon glyphicon-trash " style="padding-left: 3% " >
-        </a>
+
         </div>
-
-
 
 
     </tr>

@@ -66,11 +66,10 @@ $categories = $category->getCollection()
                                                             title="<?php echo $this->stripTags($product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($product, $product->getName(), 'name') ?></a>
                                                     </h3>
                                                 </div>
-                                                <div class="col-lg-4">
-
-                                                    <div class="product-price">
+                                                <div class="col-lg-4 categryprice">
 
                                                         <?php
+                                                        $product->getId();
                                                         $_product = Mage::getModel('catalog/product')->load($product->getId());
 
 
@@ -79,7 +78,7 @@ $categories = $category->getCollection()
 
                                                         if($_formattedActualPrice===$_formattedSpecialPrice)
                                                         {
-                                                            echo "<br/>"."Actual Price : " .$_formattedActualPrice."<br/>";
+                                                            echo "<br/>".$_formattedActualPrice;
 
                                                         }
                                                         else
@@ -90,9 +89,6 @@ $categories = $category->getCollection()
 
                                                         ?>
 
-
-
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -131,8 +127,8 @@ $categories = $category->getCollection()
                                                         </a>
                                                         <?php elseif($i==3):?>
 
-                                                            <div class="thumbnail box-border Hpadding" style="width:83px;height:80px">
-                                                                <?php echo $productcount."items";?>
+                                                            <div class="thumbnail box-border Hpadding vbottom text-center" style="width:83px;height:80px; padding: 26%;">
+                                                                <?php echo "<b>".$productcount."</b>"."<br/>"."items";?>
                                                         </div>
 
                                                         <?php endif; ?>
@@ -147,10 +143,32 @@ $categories = $category->getCollection()
 
                                             </div>
                                              <div class="row product-owner ">
-                                                <div class="col-lg-2 product-category-profile">
+                                                <div class="col-lg-2 product-category-profile" style="border: 1px solid black">
 
                                                 </div>
-                                                <div class="col-lg-7">
+                                                <div class="col-lg-6 col-lg-offset-4">
+                                                    <?php
+                                                    /**
+                                                     * Instanciate reviews helper
+                                                     */
+                                                    $this->_reviewsHelperBlock = $this->getLayout()->createBlock('review/helper');
+
+                                                    /**
+                                                     * Get products for your category
+                                                     */
+
+                                                    /**
+                                                     * Loop thru products
+                                                     */
+
+
+                                                        /**
+                                                         * Display review summary with stars.
+                                                         * If correctly configured in back-office: Catalog > Reviews and Ratings > Manage Ratings
+                                                         */
+                                                      echo   $this->_reviewsHelperBlock->getSummaryHtml($product, false, false);
+
+                                                    ?>
 
                                                 </div>
                                                 <div class="col-lg-3">
@@ -170,3 +188,4 @@ $categories = $category->getCollection()
         <?php endforeach; ?>
     </ul>
 </div>
+

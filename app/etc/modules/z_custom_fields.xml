@@ -26,6 +26,113 @@
                         <note>Comma separated</note>
                     </my_text_field>
 
+
+                    <bank_account_no>
+                        <!-- text label for the field, will be shown to admin and vendor -->
+                        <label>Bank Account Number</label>
+                        <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
+                        <fieldset>vendor_info</fieldset>
+                        <!-- Position within the fieldset -->
+                        <position>11</position>
+                        <!-- Default value for the field -->
+                        <default><![CDATA[Default text]]></default>
+                        <!-- <note> is optional, use for comments on the field for admin and vendor -->
+                        <note>Comma separated</note>
+                    </bank_account_no>
+
+                    <confirm_bank_account_no>
+                        <!-- text label for the field, will be shown to admin and vendor -->
+                        <label>Confirm Bank Account Number</label>
+                        <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
+                        <fieldset>vendor_info</fieldset>
+                        <!-- Position within the fieldset -->
+                        <position>13</position>
+                        <!-- Default value for the field -->
+                        <default><![CDATA[Default text]]></default>
+                        <!-- <note> is optional, use for comments on the field for admin and vendor -->
+                        <note>Comma separated</note>
+                    </confirm_bank_account_no>
+
+                    <bank_branch>
+                        <!-- text label for the field, will be shown to admin and vendor -->
+                        <label>Bank branch address</label>
+                        <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
+                        <fieldset>vendor_info</fieldset>
+                        <!-- Position within the fieldset -->
+                        <position>14</position>
+                        <!-- Default value for the field -->
+                        <default><![CDATA[Default text]]></default>
+                        <!-- <note> is optional, use for comments on the field for admin and vendor -->
+                        <note>Comma separated</note>
+                    </bank_branch>
+
+                    <VAT>
+                        <!-- text label for the field, will be shown to admin and vendor -->
+                        <label>Vat/TIN</label>
+                        <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
+                        <fieldset>vendor_info</fieldset>
+                        <!-- Position within the fieldset -->
+                        <position>15</position>
+                        <!-- Default value for the field -->
+                        <default><![CDATA[Default text]]></default>
+                        <!-- <note> is optional, use for comments on the field for admin and vendor -->
+                        <note>Comma separated</note>
+                    </VAT>
+
+                    <bank_cheque>
+                        <!-- text label for the field, will be shown to admin and vendor -->
+                        <label>Cheque on Behalf</label>
+                        <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
+                        <fieldset>vendor_info</fieldset>
+                        <!-- Position within the fieldset -->
+                        <position>16</position>
+                        <!-- Default value for the field -->
+                        <default><![CDATA[Default text]]></default>
+                        <!-- <note> is optional, use for comments on the field for admin and vendor -->
+                        <note>Comma separated</note>
+                    </bank_cheque>
+
+                    <bank_IFSC>
+                        <!-- text label for the field, will be shown to admin and vendor -->
+                        <label>IFSC code</label>
+                        <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
+                        <fieldset>vendor_info</fieldset>
+                        <!-- Position within the fieldset -->
+                        <position>17</position>
+                        <!-- Default value for the field -->
+                        <default><![CDATA[Default text]]></default>
+                        <!-- <note> is optional, use for comments on the field for admin and vendor -->
+                        <note>Comma separated</note>
+                    </bank_IFSC>
+
+                    <company_name>
+                        <!-- text label for the field, will be shown to admin and vendor -->
+                        <label>Company Name</label>
+                        <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
+                        <fieldset>vendor_info</fieldset>
+                        <!-- Position within the fieldset -->
+                        <position>18</position>
+                        <!-- Default value for the field -->
+                        <default><![CDATA[Default text]]></default>
+                        <!-- <note> is optional, use for comments on the field for admin and vendor -->
+                        <note>Comma separated</note>
+                    </company_name>
+
+                    <PAN>
+                        <!-- text label for the field, will be shown to admin and vendor -->
+                        <label>PAN no</label>
+                        <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
+                        <fieldset>vendor_info</fieldset>
+                        <!-- Position within the fieldset -->
+                        <position>19</position>
+                        <!-- Default value for the field -->
+                        <default><![CDATA[Default text]]></default>
+                        <!-- <note> is optional, use for comments on the field for admin and vendor -->
+                        <note>Comma separated</note>
+                    </PAN>
+
+
+
                     <!-- Dropdown field -->
                     <my_country_field>
                         <label>3rd Party Country</label>
@@ -36,7 +143,7 @@
                     </my_country_field>
 
                     <my_dropdown_field>
-                        <label>My Yes/No Dropdown Field</label>
+                        <label>My Yes/No Dropdown vendor</label>
                         <type>select</type>
                         <fieldset>my_fieldset</fieldset>
                         <!-- Source for the 'switch' within the class file -->

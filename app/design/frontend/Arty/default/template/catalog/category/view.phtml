@@ -30,17 +30,24 @@
  *
  * @see Mage_Catalog_Block_Category_View
  */
+
 ?>
+
+
+
+
 <?php
     $_helper    = $this->helper('catalog/output');
     $_category  = $this->getCurrentCategory();
     $_imgHtml   = '';
     if ($_imgUrl = $_category->getImageUrl()) {
-        $_imgHtml = '<p class="category-image" style="border: solid"><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'"  /></p>';
+        $_imgHtml = '<p class="category-image" ><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'"  /></p>';
         $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
 		
-    }
+    }   
 ?>
+
+
 <div class="page-title category-title" >
 
     <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
@@ -51,9 +58,18 @@
 
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 
-<?php if($_imgUrl): ?>
-    <?php echo $_imgHtml ?>
-<?php endif; ?>
+
+
+<div class="col-lg-2 float" style="border-right: 1px solid lightgrey; padding-left: 4%;" >
+    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('catalog/homecategories.phtml')->toHtml(); ?>
+
+</div>
+        <div class="col-lg-7 col-lg-offset-2" >
+
+        <?php if($_imgUrl): ?>
+            <?php echo $_imgHtml ?>
+        <?php endif; ?></div>
+
 
 
 <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>

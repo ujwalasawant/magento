@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arty_Notification>
+            <version>0.1.0</version>
+        </Arty_Notification>
+    </modules>
+    <global>
+
+        <helpers>
+            <arty_notification>
+                <class>Arty_Notification_Helper</class>
+            </arty_notification>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <arty_notification module="Arty_Notification">
+                    <file>arty_notification.xml</file>
+                </arty_notification>
+            </updates>
+        </layout>
+        <routers>
+            <arty_notification>
+                <use>standard</use>
+                <args>
+                    <module>Arty_Notification</module>
+                    <frontName>arty_notification</frontName>
+                </args>
+            </arty_notification>
+        </routers>
+    </frontend>
+</config>

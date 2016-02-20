@@ -275,27 +275,73 @@ Customer account pages, rendered for all tabs in dashboard
         <reference name="left">
             <block type="customer/account_navigation" name="customer_account_navigation" before="-"
                    template="customer/account/navigation.phtml">
+                <action method="unsetChild">
+                    <name>account</name>
+                </action>
+                <action method="unsetChild">
+                    <name>account_edit</name>
+                </action>
+                <action method="unsetChild">
+                    <name>address_book</name>
+                </action>
+                <action method="addLink" translate="label" module="sales">
+                    <name>Heading_orders</name>
+                    <path>sales/order/history/</path>
+                    <label>My Orders</label>
+                </action>
+                <action method="addLink">
+                    <name>Heading_Payment</name>
+                    <path>arty_paymenthistory/index/index</path>
+                    <label>Paymeny History</label>
+                </action>
+
+                <action method="addLink" translate="label" module="customer">
+                    <name>Heading_Setting</name>
+                    <path>customer/account/edit/</path>
+                    <label>Setting</label>
+                </action>
+
+                <action method="addLink" translate="label" module="customer">
+                    <name>account_edit</name>
+                    <path>customer/account/edit/</path>
+                    <label>Personal Informations</label>
+                </action>
+                <action method="addLink">
+                    <name>arty_changepassword</name>
+                    <path>arty_chnagepassword/index/index</path>
+                    <label>Change Password</label>
+                </action>
+                <action method="addLink" translate="label" module="customer">
+                    <name>address_book</name>
+                    <path>customer/address</path>
+                    <label>Address</label>
+                </action>
+
+                <action method="addLink">
+                    <name>arty_notification</name>
+                    <path>arty_notification/index/index</path>
+                    <label>Notification</label>
+                </action>
+                <action method="addLink" translate="label" module="customer">
+                    <name>Heading_Stuff</name>
+                    <path>customer/account/edit/</path>
+                    <label>My Stuff</label>
+                </action>
+                <action method="addLink" translate="label" module="review">
+                    <name>ratingreviews</name>
+                    <path>review/customer</path>
+                    <label>Reviews and Rating</label>
+                </action>
+                <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
+                    <name>MyStuff_wishlist</name>
+                    <path>wishlist/</path>
+                    <label>My Favorites</label>
+                </action>
+
 
             </block>
-            <block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml">
-                <action method="addItemRender">
-                    <type>simple</type>
-                    <block>checkout/cart_item_renderer</block>
-                    <template>checkout/cart/sidebar/default.phtml</template>
-                </action>
-                <action method="addItemRender">
-                    <type>grouped</type>
-                    <block>checkout/cart_item_renderer_grouped</block>
-                    <template>checkout/cart/sidebar/default.phtml</template>
-                </action>
-                <action method="addItemRender">
-                    <type>configurable</type>
-                    <block>checkout/cart_item_renderer_configurable</block>
-                    <template>checkout/cart/sidebar/default.phtml</template>
-                </action>
-            </block>
-            <block type="catalog/product_compare_sidebar" name="catalog.compare.sidebar"
-                   template="catalog/product/compare/sidebar.phtml"/>
+
+            <remove name="sale.reorder.sidebar"></remove>
             <remove name="tags_popular"/>
 
         </reference>
@@ -317,18 +363,13 @@ Customer account home dashboard layout
             </action>
         </reference>
         <reference name="my.account.wrapper">
-            <block type="customer/account_dashboard" name="customer_account_dashboard"
-                   template="customer/account/dashboard.phtml">
-                <block type="customer/account_dashboard_hello" name="customer_account_dashboard_hello" as="hello"
-                       template="customer/account/dashboard/hello.phtml"/>
-                <block type="core/template" name="customer_account_dashboard_top" as="top"/>
-                <block type="customer/account_dashboard_info" name="customer_account_dashboard_info" as="info"
-                       template="customer/account/dashboard/info.phtml"/>
-                <block type="customer/account_dashboard_newsletter" name="customer_account_dashboard_newsletter"
-                       as="newsletter" template="customer/account/dashboard/newsletter.phtml"/>
-                <block type="customer/account_dashboard_address" name="customer_account_dashboard_address" as="address"
-                       template="customer/account/dashboard/address.phtml"/>
+            <block type="sales/order_history" name="sales.order.history">
+                <block type="core/text_list" name="sales.order.history.info" as="info" translate="label">
+                    <label>Order History Info</label>
+                </block>
             </block>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+
         </reference>
 
     </customer_account_index>
@@ -357,7 +398,6 @@ Customer account address edit page
         <update handle="customer_account"/>
         <reference name="my.account.wrapper">
             <block type="customer/address_edit" name="customer_address_edit" template="customer/address/edit.phtml"/>
-            <block type="customer/account" name="customer_address_edit" template="customer/form/deacrivate.phtml"/>
         </reference>
     </customer_address_form>
 

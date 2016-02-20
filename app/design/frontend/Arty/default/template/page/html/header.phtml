@@ -19,7 +19,7 @@
  * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
- * @package     base_default
+ * @package     rwd_default
  * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
@@ -28,167 +28,161 @@
  */
 ?>
 
-<!-- Top Bar -->
+<div class="header-language-background">
+    <div class="header-language-container">
 
 
-<div id="topbar page-header">
-    <div class="container  page-header-container">
-        <div class="row topmenu">
-            <div class="col-md-4 pull-right">
-                <?php echo $this->getChildHtml('topbar_cmslinks') ?>
-                <ul class="list-inline float">
-                    <?php if ($this->helper('customer')->isLoggedIn()): ?>
-                        <li>
-                            <a title="<?php echo $this->__('My Account') ?>"
-                               href="<?php echo Mage::getUrl('customer/account') ?>">   <?php echo $this->__('My Account') ?>     </a>
-                        </li>
-                        <li>
-                            <a title="Log Out"
-                               href="<?php echo Mage::getUrl('customer/account/logout') ?>">     <?php echo $this->__('Logout') ?></a>
-                        </li>
-                    <?php else: ?>
+        <?php echo $this->getChildHtml('topbar_cmslinks') ?>
+        <ul class="list-inline float">
+            <?php if ($this->helper('customer')->isLoggedIn()): ?>
+                <li>
+                    <a title="<?php echo $this->__('My Account') ?>"
+                       href="<?php echo Mage::getUrl('customer/account') ?>">   <?php echo $this->__('My Account') ?>     </a>
+                </li>
+                <li>
+                    <a title="Log Out"
+                       href="<?php echo Mage::getUrl('customer/account/logout') ?>">     <?php echo $this->__('Logout') ?></a>
+                </li>
+            <?php else: ?>
 
-                        <li>
-                            <?php echo $this->getChildHtml('customer_form_register') ?>
-                        </li>
+                <li>
+                    <?php echo $this->getChildHtml('customer_form_register') ?>
+                </li>
 
-                        <li>
-                            <?php echo $this->getChildHtml('header_customer_form_mini_login') ?>
+                <li>
+                    <?php echo $this->getChildHtml('header_customer_form_mini_login') ?>
 
-                        </li>
+                </li>
 
 
-                    <?php endif; ?>
-                </ul>
-            </div>
-            <div class="user-links col-md-8">
-	  	  	           	  <span class="welcome pull-left">
-	  	  	           	  	   <!--<?php echo $this->getLayout()->getBlock('header')->getWelcome() ?>-->
-	  	  	           	 </span>
-            </div>
+            <?php endif; ?>
+        </ul>
+        <p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></p>
+    </div>
+</div>
+
+<header id="header" class="page-header" >
+    <div>
+
+        <a class="logo" href="<?php echo $this->getUrl('') ?>">
+            <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
+            <img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small" />
+        </a>
+
+        <?php // In order for the language switcher to display next to logo on smaller viewports, it will be moved here.
+        // See app.js for details ?>
+        <div class="store-language-container"></div>
+
+        <!-- Skip Links -->
+        <div class="row" >
+        <div class="col-lg-7 col-md-7 col-sm-6 "  id="nav">
+
+        <div class="skip-links" >
+            <a href="#header-nav" class="skip-link skip-nav">
+                <span class="icon"></span>
+                <span class="label"><?php echo $this->__('Menu'); ?></span>
+            </a>
         </div>
 
-
-        <div class="row page-header " style="border: solid " id="headerNav">
-            <div class="row " style="border: solid" >
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-11  page-header-container "
-                     id="logoId"
-                     style="border: solid yellowgreen">
-
-                    <?php if ($this->getIsHomePage()): ?>
-
-                        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"
-                           class="">
-                            <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>"
-                                 class="img img-responsive "/></a>
-                    <?php else: ?>
-                        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"
-                           class="logo"><img src="<?php echo $this->getLogoSrc() ?>"
-                                             alt="<?php echo $this->getLogoAlt() ?>"/></a>
-                    <?php endif ?>
-
-                </div>
-
-                <div class="col-lg-offset-3  col-lg-4 col-md-offset-3 col-md-4 col-sm-offset-2 col-sm-4 col-xs-12 vbottom page-header-container "
-                     id="searchId"
-                     style="border: solid yellow" id="searchbx">
-                    <div>
-                        <?php echo $this->getChildHtml('topSearch') ?>
-                    </div>
-                </div>
-
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 vbottom float page-header-container"
-                     id="cartId"
-                     style="border:solid greenyellow">
-
-                    <div>
-                        <!-- cart sneha -->
-                        <div id="cart" class="header-minicart" style="display: inline-block;">
-                            <?php echo $this->getChildHtml('minicart_head'); ?>
-                        </div>
-                        <!-- cart sneha -->
-                        <div class="block">
-                            <?php echo $this->getChildHtml('cart_sidebar'); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="smallheader float page-header-container" id="nav">
-                <nav class="navbar navbar-default nav-justified" role="navigation">
-                    <div class="navbar-header">
-                        <a class="navbar-brand visible-xs" href="#"> <?php echo $this->__('Categories') ?></a>
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
-                            <span class="sr-only"><?php echo $this->__('Toggle Navigation') ?></ span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span> <span class="icon-bar"></span></button>
-                    </div>
-                    <div class="collapse navbar-collapse" id="collapse">
-                        <?php echo $this->getChildHtml('topMenu') ?>
-                    </div>
-                </nav>
-            </div>
+        <?php echo $this->getChildHtml('topMenu') ?>
         </div>
+
+        <ul class="list-unstyled list-inline" >
+           <li class="float" id="searchId" style="border: solid;padding: 0">
+               <a href="#header-search" class="skip-link skip-search">
+                <span class="icon"></span>
+            </a>
+           </li>
+          <li class="float" style="border: solid;padding: 0">
+           <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account" class="skip-link skip-account">
+                <span class="icon"></span>
+                </a>
+
+          </li>
+            <li class="float" style=" border: solid;"><?php echo $this->getChildHtml('minicart_head'); ?></li>
+        </ul>
+
+
+
 
 
     </div>
-
-    <?php echo $this->getChildHtml('topContainer'); ?>
-
-
-    <script>
-        jQuery(document).ready(function () {
-            var hdNv = jQuery('#headerNav');
-            hdNv.addClass('default');
-            var pos = hdNv.offset();
-            jQuery(window).scroll(function () {
-                onscroll();
-            });
-
-            function onscroll() {
+        <!-- Navigation -->
 
 
-                if (jQuery(this).scrollTop() > pos.top && hdNv.hasClass('default')) {
+       <!-- Search -->
 
-                    hdNv.fadeOut(1, function () {
-                        //  alert(jQuery(this).scrollTop());
-                        jQuery(this).removeClass('default').addClass('fixed').show();
-                        jQuery('#logoId').removeClass('default').addClass('LogoId').removeAttr('style').show();
-                        jQuery('#searchId').removeClass('default').addClass('SearchId').removeAttr('style').show();
-                        jQuery('#cartId').removeClass('default').addClass('CartId').removeAttr('style').show();
-                        jQuery('#nav').removeClass('default').addClass('NavId').removeAttr('style').show();
+       <div id="header-search" class="skip-content" >
+        <?php echo $this->getChildHtml('topSearch') ?>
+       </div>
+        <!-- Account -->
 
+       <div id="header-account" class="skip-content">
+            <?php echo $this->getChildHtml('topLinks') ?>
+        </div>
+    </div>
 
-                    });
+</header>
 
-                }
-                else if (jQuery(this).scrollTop() <= pos.top && hdNv.hasClass('fixed')) {
-
-                    hdNv.fadeOut(1, function () {
-
-                        jQuery(this).removeClass('fixed').addClass('default').removeAttr('style').show();
-                        jQuery('#logoId').removeClass('LogoId').addClass('default').removeAttr('style').show();
-                        jQuery('#searchId').removeClass('SearchId').addClass('default').removeAttr('style').show();
-                        jQuery('#cartId').removeClass('CartId').addClass('default').removeAttr('style').show();
-                        jQuery('#nav').removeClass('NavId').addClass('default').removeAttr('style').show();
+<img  class="show img img-responsive" src="<?php echo $this->getSkinUrl('images/smallHeader.png')?>"  width="100%"/>
 
 
-                        // jQuery('#smallheader').removeClass('fixed').addClass('no-display').show();
+<?php echo $this->getChildHtml('topContainer'); ?>
+<script>
+
+    jQuery(document).ready(function () {
+        var hdNv = jQuery('#header');
+        hdNv.addClass('default');
+        var pos = hdNv.offset();
+
+        jQuery(window).scroll(function () {
+            onscroll();
+      });
+
+        function onscroll() {
 
 
-                    });
+            if (jQuery(this).scrollTop() > pos.top && hdNv.hasClass('default')) {
 
-                }
-                else {
-                    //    alert(pos);
-                }
+                hdNv.fadeOut(1, function () {
+                    //  alert(jQuery(this).scrollTop());
+                    jQuery(this).removeClass('default').addClass('fixed').show();
+                    jQuery('.page-header').removeClass('page-header').addClass('page-headerf');
+                    jQuery('.logo').removeClass('logo').addClass('logof');
+                    jQuery('#nav').removeClass('col-lg-7').addClass('col-lg-8');
+                    jQuery('#nav').removeClass('col-md-7').addClass('col-md-6');
 
+                    jQuery('#imgheader').removeClass('show').addClass('hidden');
+                    jQuery('#imgheaderf').removeClass('hidden').addClass('show');
+                });
 
             }
+            else if (jQuery(this).scrollTop() <= pos.top && hdNv.hasClass('fixed')) {
 
-            onscroll();
+                hdNv.fadeOut(1, function () {
 
-        });
+                    jQuery(this).removeClass('fixed').addClass('default').removeAttr('style').show();
+                    jQuery('.page-headerf').removeClass('page-headerf').addClass('page-header').removeAttr('style').show();
+                    jQuery('.logof').removeClass('logof').addClass('logo').removeAttr('style').show();
+                    jQuery('#nav').removeClass('col-lg-8').addClass('col-lg-7');
+                    jQuery('#nav').removeClass('col-md-6').addClass('col-md-7');
+                    jQuery('#imgheader').removeClass('hidden').addClass('show');
+                    jQuery('#imgheaderf').removeClass('show').addClass('hidden');
+                    // jQuery('#smallheader').removeClass('fixed').addClass('no-display').show();
 
-    </script>
+
+                });
+
+            }
+            else {
+                //    alert(pos);
+            }
+
+
+        }
+
+        onscroll();
+
+    });
+</script>
 

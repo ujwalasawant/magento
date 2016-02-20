@@ -42,7 +42,7 @@
                 <use>standard</use>
                 <args>
                     <module>Arty_Customer</module>
-                    <frontName>ChangePassword</frontName>
+                    <frontName>Arty_Customer</frontName>
                 </args>
             </arty_customer>
             <customer>

@@ -19,7 +19,7 @@
  * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
- * @package     base_default
+ * @package     rwd_default
  * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
@@ -31,16 +31,25 @@
  * @see Mage_Catalog_Block_Layer_Filter
  */
 ?>
-<select  style="-webkit-appearance: none;
-  -moz-appearance: none;background: #F4F1F1 ; border: none;padding-top: 5px; " onchange="setLocation(this.value)">
-    <?php $count = 0; ?>
-    <?php foreach ($this->getItems() as $_item): ?>
-        <?php $count++; ?>
-        <?php if($count == 1): ?>
-            <option value='' disabled selected style='display:none;'><?php echo $attribute_code = $_item->getFilter()->getName();?> </option>
-        <?php endif; ?>
-        <option <?php if ($_item->getCount() > 0): ?> value="<?php echo $this->urlEscape($_item->getUrl()) ?>">
-            <?php echo $_item->getLabel() ?> <?php else: echo '>' . $_item->getLabel() ?> <?php endif; ?> (<?php echo $_item->getCount() ?>) </option>
-    <?php endforeach; ?>
-</select>
 
+<ol class="list-unstyled">
+    <?php foreach ($this->getItems() as $_item): ?>
+        <li class="links">
+            <?php if ($_item->getCount() > 0): ?>
+                <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>">
+                    <?php echo $_item->getLabel() ?>
+                    <?php if ($this->shouldDisplayProductCount()): ?>
+                        <span class="count">(<?php echo $_item->getCount() ?>)</span>
+                    <?php endif; ?>
+                </a>
+            <?php else: ?>
+                <span>
+                <?php echo $_item->getLabel(); ?>
+                    <?php if ($this->shouldDisplayProductCount()): ?>
+                        <span class="count">(<?php echo $_item->getCount() ?>)</span>
+                    <?php endif; ?>
+            </span>
+            <?php endif; ?>
+        </li>
+    <?php endforeach ?>
+</ol>

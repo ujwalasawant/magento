@@ -24,77 +24,219 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<style>
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+
+    figure {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        position: relative;
+        display: block;
+        cursor: pointer;
+        overflow: hidden;
+        border: 3px solid #fff;
+
+    }
+
+    figure:hover figcaption {
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+        filter: alpha(opacity=100);
+        opacity: 1;
+        top: 0;
+    }
+
+    figcaption {
+        -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        filter: alpha(opacity=0);
+        opacity: 0;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(0,0,0,.5);
+        color: #fff;
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        -o-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+        transition: all .5s ease;
+        -webkit-transition-delay: .5s;
+        -moz-transition-delay: .5s;
+        -o-transition-delay: .5s;
+        -ms-transition-delay: .5s;
+        transition-delay: .5s;
+    }
+
+    figcaption h3
+    {
+        font-size: 30px;
+        color: #f3b204;
+        padding: 10px 20px;
+        margin-bottom: 0;
+        position: relative;
+        righ: 100%;
+        margin-top: 37px;
+
+    }
+
+    figcaption p {
+        font-size: 13px;
+        padding: 10px 20px;
+        background-color: black;
+        margin-bottom: 0;
+        margin-top: 20px;
+        position: relative;
+        left: 100%;
+
+    }
+
+    figure:hover h3,figure:hover p {
+        left: 0;
+    }
+
+    figcaption a {
+        color: #fff;
+        border: 2px solid #fff;
+        padding: 4px 10px;
+        text-decoration: none;
+    }
+
+    figcaption a:hover {
+        color: #4f5856;
+        background: #fff;
+    }
+
+    @media (max-width: 991px)
+    {
+        figcaption h3
+        {
+            font-size: 12px;
+        }
+        figcaption p
+        {
+            font-size:12px;
+        }
+    }
+
+    @media (max-width: 681px) and (min-width: 650px)
+    {
+        figcaption h3
+        {
+            font-size: 10px;
+        }
+        figcaption p
+        {
+            font-size:10px;
+        }
+    }
+
+    @media (max-width: 651px)
+    {
+        figcaption h3
+        {
+            font-size: 10px;
+        }
+        figcaption p
+        {
+            font-size:8px;
+        }
+    }
+</style>
+
+
+
 <?php $_helper = Mage::helper('catalog/category') ?>
 <?php $_categories = $_helper->getStoreCategories() ?>
 
 <?php $I = 0;
-$div = 0; ?>
+$div = 1; ?>
 <?php if (count($_categories) > 0): ?>
 
-    <div class="container ">
+    <div class="container  ">
 
         <?php foreach ($_categories as $_category): ?>
 
-                <div class="row">
-                    <div class="<?php  $I++; if ($I == 1) {
-                        echo 'firstH';
-                    } elseif ($I == 2) {
-                        echo 'secondH';
-                    } elseif ($I == 3) {
-                        echo 'thirdH';
-                    } elseif ($I == 4) {
-                        echo 'fourthH';
-                    } elseif ($I == 5) {
-                        echo 'fifthH';
-                    } else {
-                        echo 'sixthH';
-                    }
+            <div class="row">
+                <div class="<?php $I++;
+                if ($I == 1) {
+                    echo 'firstH';
+                } elseif ($I == 2) {
+                    echo 'secondH';
+                } elseif ($I == 3) {
+                    echo 'thirdH';
+                } elseif ($I == 4) {
+                    echo 'fourthH';
+                } elseif ($I == 5) {
+                    echo 'fifthH';
+                } else {
+                    echo 'sixthH';
+                }
 
-                    ?>" >
-                        <a href="<?php echo $_helper->getCategoryUrl($_category) ?>">
+                ?>">
+                    <a href="<?php echo $_helper->getCategoryUrl($_category) ?>">
 
-                            <?php echo $_category->getName() . '<br/>';
+                        <?php echo $_category->getName() . '<br/>';
 
-                            $products = Mage::getModel('catalog/product')
-                                ->getCollection()
-                                ->addCategoryFilter($_category)
-                                ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
-                                ->load();
-                            ?>
-                        </a>
-                    </div>
+                        $products = Mage::getModel('catalog/product')
+                            ->getCollection()
+                            ->addCategoryFilter($_category)
+                            ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
+                            ->load();
+                        ?>
+                    </a>
                 </div>
+            </div>
 
-
-
-            <div class="row subcontent" >
+          <div class="row subcontent">
                 <?php $i = 1;
                 foreach ($products as $product): ?>
 
                     <?php if ($i == 5): ?>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  sub-padding  " >
 
-                            <a href="<?php echo $product->getProductUrl() ?>"
-                               title="<?php echo $this->stripTags($product->getName(), null, true) ?>">
-                                <img class="lightborder img img-responsive"
-                                     src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(500) ?>"
+                        <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-6 _sub-padding <?php if ($div % 2 == 0) {
+                            echo "pull-left";
+                        } ?>  ">
+                        <a href="<?php echo $product->getProductUrl() ?>">
+
+                             <figure>
+                                <img class=" lightborder img img-responsive " style="border: solid black"
+                                     src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(600) ?>"
                                      alt="<?php echo $this->stripTags($product->getName(), null, true) ?>"/>
-                            </a>
 
+                                     <figcaption>
+                                     <h3>I like this Product!</h3>
+                                     <p><?php echo $product->getName() ?></p>
+                                     </figcaption>
+                                     </figure>
+                        </a>
 
                         </div>
                     <?php else: ?>
 
                         <?php if ($i == 1) : ?>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  " >
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 _subpadding <?php if ($div % 2 == 0) {
+                                echo "pull-right";
+                            }
+                            $div++; ?>" >
                             <div class="row" >
                         <?php endif; ?>
-                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 subpadding " >
-                            <a href="<?php echo $product->getProductUrl() ?>"
-                               title="<?php echo $this->stripTags($product->getName(), null, true) ?>">
-                                <img class="lightborder img img-responsive"
-                                     src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(250) ?>"
+                        <div data-content="<?php echo $this->stripTags($product->getName(), null, true) ?>" class=" col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
+                            <a href="<?php echo $product->getProductUrl() ?>">
+
+                                <figure>
+                                <img class="img img-responsive lightborder" style="border: solid black"
+                                     src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(600) ?>"
                                      alt="<?php echo $this->stripTags($product->getName(), null, true) ?>"/>
+                                    <figcaption>
+                                        <h3>I like this product!</h3>
+                                        <p><?php echo $product->getName() ?></p>
+                                    </figcaption>
+
+                                </figure>
                             </a>
                         </div>
                         <?php if ($i == 4) : ?>
@@ -116,7 +258,6 @@ $div = 0; ?>
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
-
 
 
 

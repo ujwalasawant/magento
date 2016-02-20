@@ -31,22 +31,17 @@
  * @see Mage_Catalog_Block_Product_List_Toolbar
  */
 ?>
-<div class="row">
-<div class="col-lg-10 col-md-10 col-sm-10 col-xs-8 text-right" >
-    <?php echo $this->getChildHtml('catalog.leftnav'); ?>
-</div>
-
-<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left" >
+<div class="text-right" style="padding-right: 10%;">
 <?php if ($this->getCollection()->getSize()): ?>
 
 
         <?php if ($this->isExpanded()): ?>
 
-            <div class="sort-by "  >
+            <div >
 
-                <select class="sort-arrow" id="selectS"  onchange="setLocation(this.value)">
+                <select id="selectS"  onchange="setLocation(this.value)">
 
-                    <option> Sort By</option>
+                    <option>Sort By</option>
 
                     <option
                         value="<?php echo $this->getOrderUrl('price', 'asc') ?>"<?php if ($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
@@ -83,5 +78,6 @@
         <?php endif; ?>
 
 <?php endif ?>
-</div>
+
+
 </div>

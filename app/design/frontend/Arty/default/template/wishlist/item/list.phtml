@@ -19,45 +19,66 @@
  * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
- * @package     base_default
+ * @package     rwd_default
  * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
 <?php
-    $columns = $this->getColumns();
+/* @var $this Mage_Wishlist_Block_Customer_Wishlist_Items */
 ?>
-<table class="data-table" id="wishlist-table">
+<?php
+$columns = $this->getColumns();
+?>
+<table class="clean-table linearize-table" id="wishlist-table">
     <thead>
-        <tr>
-            <?php foreach ($columns as $column): ?>
-                <th><?php echo $column->getTitle();?></th>
-            <?php endforeach; ?>
-        </tr>
+    <tr>
+        <?php
+        /* @var $column Mage_Wishlist_Block_Customer_Wishlist_Item_Column */
+        foreach ($columns as $column):
+            $_blockName = str_replace('.', '-', strtolower($column->getNameInLayout()));
+            ?>
+
+        <?php endforeach; ?>
+    </tr>
     </thead>
-    <tbody>
-        <?php if (count($this->getItems())): ?>
-            <?php foreach ($this->getItems() as $item): ?>
-                <tr id="item_<?php echo $item->getId();?>">
-                    <?php foreach ($columns as $column): ?>
-                        <td><?php $column->setItem($item); echo $column->toHtml($item);?></td>
-                    <?php endforeach; ?>
-                </tr>
-            <?php endforeach ?>
-        <?php else: ?>
-            <td colspan="<?php echo count($columns);?>" class="wishlist-empty"><?php echo $this->__('This Wishlist has no Items');?></td>
-        <?php endif; ?>
+    <tbody >
+    <?php if (count($this->getItems())): ?>
+        <?php foreach ($this->getItems() as $item): ?>
+            <tr id="item_<?php echo $item->getId(); ?>">
+                <?php
+                foreach ($columns as $key => $column):
+                    $_blockName = str_replace('.', '-', strtolower($column->getNameInLayout()));
+
+                    /* Override default column title in layout, useful for certain cases like select all box */
+                    if ($column->getRwdTitle()) {
+                        $_rwdLabel = $column->getRwdTitle();
+                    } else {
+                        $_rwdLabel = ($column->getTitle()) ? $column->getTitle() : false;
+                    }
+                    ?>
+                    <td >
+
+                        <?php $column->setItem($item);
+                        echo $column->toHtml($item); ?></td>
+                <?php endforeach; ?>
+            </tr>
+        <?php endforeach ?>
+    <?php else: ?>
+        <td colspan="<?php echo count($columns); ?>"
+            class="wishlist-empty"><?php echo $this->__('This Wishlist has no Items'); ?></td>
+    <?php endif; ?>
     </tbody>
 </table>
 <?php foreach ($columns as $column): ?>
-    <?php echo $column->getAdditionalHtml();?>
+    <?php echo $column->getAdditionalHtml(); ?>
 <?php endforeach; ?>
 <script type="text/javascript">
-//<![CDATA[
+    //<![CDATA[
     decorateTable('wishlist-table');
 
-<?php foreach ($columns as $column): ?>
+    <?php foreach ($columns as $column): ?>
     <?php echo $column->getJs();?>
-<?php endforeach; ?>
-//]]>
+    <?php endforeach; ?>
+    //]]>
 </script>

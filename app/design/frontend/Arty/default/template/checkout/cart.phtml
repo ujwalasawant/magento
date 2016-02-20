@@ -31,128 +31,140 @@
  * @see Mage_Checkout_Block_Cart
  */
 ?>
+
+
 <div class="cart">
     <div class="page-title title-buttons">
         <h4><?php echo $this->__('Cart') ?>
-        <?php
-        $_cartQty = Mage::getSingleton('checkout/cart')->getItemsCount();
-            echo "(".$_cartQty.")" ;
-        ?>
+            <?php
+            $_cartQty = Mage::getSingleton('checkout/cart')->getItemsCount();
+            echo "(" . $_cartQty . ")";
+            ?>
         </h4>
 
 
     </div>
-   <?php echo $this->getMessagesBlock()->toHtml() ?>
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
     <?php echo $this->getChildHtml('form_before') ?>
     <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
         <?php echo $this->getBlockHtml('formkey'); ?>
+
         <fieldset>
-            <div class="container">
-<table class="table table-striped">
-    <tr>
-        <td>
-                <div class="row hidden-sm hidden-xs">
+            <div class="">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            <div class="row hidden-sm hidden-xs">
 
-                    <div class="col-lg-2 col-lg-offset-2 col-md-offset-2  vcenter text-center " >Product name </div>
-                    <div class="col-lg-1 col-md-2  vcenter text-center">Qty </div>
-                    <div class="col-lg-1 col-md-1  vcenter text-center">Price </div>
-                    <div class="col-lg-2 col-md-3  vcenter text-center" >Delivery Details </div>
-                    <div class="col-lg-2 col-md-1  vcenter text-center">Subtotal </div>
-                    <div class="col-lg-1 col-md-1  vcenter text-center">Remove </div>
+                                <div class="col-lg-2 col-lg-offset-2 col-md-offset-2  vcenter text-center ">Product
+                                    name
+                                </div>
+                                <div class="col-lg-1 col-md-2  vcenter text-center">Qty</div>
+                                <div class="col-lg-1 col-md-1  vcenter text-center">Price</div>
+                                <div class="col-lg-2 col-md-3  vcenter text-center">Delivery Details</div>
+                                <div class="col-lg-2 col-md-1  vcenter text-center">Subtotal</div>
+                                <div class="col-lg-1 col-md-1  vcenter text-center">Remove</div>
 
-                </div>
-        </td>
-    </tr>
-</table>
-
-
-            <table class="table table-hover"  id="shopping-cart-table" >
-                <col width="3" />
-                <col />
-                <col width="3" />
-            <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
-                <col width="3" />
-            <?php endif ?>
-            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
-                <col width="3" />
-            <?php endif; ?>
-            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
-                <col width="3" />
-            <?php endif; ?>
-                <col width="3" />
-            <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
-                <col width="3" />
-            <?php endif; ?>
-            <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
-                <col width="3" />
-            <?php endif; ?>
-                <col width="3" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
 
 
-            <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                <table class="table table-hover" id="shopping-cart-table">
+                    <col width="3"/>
+                    <col/>
+                    <col width="3"/>
+                    <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                        <col width="3"/>
+                    <?php endif ?>
+                    <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                        <col width="3"/>
+                    <?php endif; ?>
+                    <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                        <col width="3"/>
+                    <?php endif; ?>
+                    <col width="3"/>
+                    <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                        <col width="3"/>
+                    <?php endif; ?>
+                    <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                        <col width="3"/>
+                    <?php endif; ?>
+                    <col width="3"/>
 
-<thead>
+
+                    <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+
+                    <thead>
 
                     <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
-                    <tr>
-                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
-                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
-                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
-                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
-                    </tr>
+                        <tr>
+                            <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                            <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                            <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                            <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                        </tr>
                     <?php endif; ?>
-</thead>
+                    </thead>
 
 
+                    <tbody>
+                    <div class="row">
+                        <?php foreach ($this->getItems() as $_item): ?>
+                            <?php echo $this->getItemHtml($_item) ?>
+                        <?php endforeach ?>
+                    </div>
+                    </tbody>
 
-                <tbody>
-                <div class="row" >
-                <?php foreach($this->getItems() as $_item): ?>
-                    <?php echo $this->getItemHtml($_item) ?>
-                <?php endforeach ?>
-                </div>
-                </tbody>
-
-                <tfoot>
+                    <tfoot>
 
 
-                    <div class="row" >
+                    <div class="row">
                         <div class="col-lg-4">
 
                             <?php
                             $sessionCustomer = Mage::getSingleton("customer/session");
 
-                            if($sessionCustomer->isLoggedIn()) {
+                            if ($sessionCustomer->isLoggedIn()) {
 
                                 $primaryAddress = $sessionCustomer->getCustomer()
                                     ->getPrimaryShippingAddress();
-                                $countryName = Mage::getModel('directory/country')
-                                    ->loadByCode($primaryAddress->getCountryId())
-                                    ->getName();
-                                echo '<br/>Shipping to Pin Code: '.$primaryAddress->getPostcode();
+
+                                if (empty($primaryAddress)) {
+                                    echo '<br/>Shipping to Pin Code: ';
+
+                                } else {
+                                    echo "Shipping to Pin Code:" . $primaryAddress->getPostcode();
+                                }
+
+
                             } else {
                                 echo '<br/>Shipping to Pin Code: ';
                             }
                             ?>
                         </div>
-                        <div class="col-lg-3 col-lg-offset-5" >
+                        <div class="col-lg-3 col-lg-offset-5">
                             Payable Amount:
                             <?php
                             $totals = Mage::getSingleton('checkout/session')->getQuote()->getTotals(); //Total object
                             $grandtotal = round($totals["grand_total"]->getValue()); //Grandtotal value
-                            echo $formattedPrice = Mage::helper('core')->currency($grandtotal , true, false);
+                            echo $formattedPrice = Mage::helper('core')->currency($grandtotal, true, false);
                             ?>
                         </div>
 
                     </div>
-                    <div class="row" >
-                        <div class="col-lg-2 col-lg-offset-8"  >
-                            <?php if($this->getContinueShoppingUrl()): ?>
-                                <button style="width: 180px" type="button" title="<?php echo $this->__('Continue Shop') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Shop More') ?></span></span></button>
+                    <div class="row">
+                        <div class="col-lg-2 col-lg-offset-8">
+                            <?php if ($this->getContinueShoppingUrl()): ?>
+                                <button style="width: 180px" type="button"
+                                        title="<?php echo $this->__('Continue Shop') ?>" class="button btn-continue"
+                                        onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')">
+                                    <span><span><?php echo $this->__('Shop More') ?></span></span></button>
                             <?php endif; ?>
-</div>
+                        </div>
                         <div class="col-lg-2">
-                            <?php if(!$this->hasError()): ?>
+                            <?php if (!$this->hasError()): ?>
                                 <ul class=" checkout-types list-unstyled">
                                     <?php foreach ($this->getMethods('top_methods') as $method): ?>
                                         <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
@@ -161,11 +173,11 @@
                                     <?php endforeach; ?>
                                 </ul>
                             <?php endif; ?>
-</div>
-                           <!--[if lt IE 8]>
-                            <input type="hidden" id="update_cart_action_container" />
-                            <script type="text/javascript">
-                                //<![CDATA[
+                        </div>
+                        <!--[if lt IE 8]>
+                        <input type="hidden" id="update_cart_action_container"/>
+                        <script type="text/javascript">
+                            //<![CDATA[
                                 Event.observe(window, 'load', function()
                                 {
                                     // Internet Explorer (lt 8) does not support value attribute in button elements
@@ -188,10 +200,10 @@
 
                     </div>
 
-                </tfoot>
-            </table>
+                    </tfoot>
+                </table>
 
-</div>
+            </div>
 
             <script type="text/javascript">decorateTable('shopping-cart-table')</script>
         </fieldset>

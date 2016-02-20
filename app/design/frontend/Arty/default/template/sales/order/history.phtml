@@ -32,40 +32,37 @@
 </div>
 <?php echo $this->getPagerHtml(); ?>
 <?php if ($_orders->getSize()): ?>
-    <div>
 
+    <div class="lightborder">
 
         <?php $_odd = ''; ?>
-
         <?php foreach ($_orders as $_order): ?>
-            <div class="personal-info">
-                <div>
-                    <label><?php echo $this->__('Date: ') ?></label><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?>
-                    <label><?php echo $this->__('Order #') ?></label><?php echo $_order->getRealOrderId() ?>
-                </div>
+        <div class="personal-info " >
+
+
+                    <label><?php echo $this->__('Date : ') ?></label><?php echo  $this->formatDate($_order->getCreatedAtStoreDate()) ?>
+
+                    <label><?php echo $this->__('Order #') ?></label><?php echo  " ".$_order->getRealOrderId() ?>
+
 
                 <div class="row">
-                    <div class="col-lg-3 text-right">Product</div>
-                    <div class="col-lg-4 text-right  ">Qty</div>
-                    <div class="col-lg-2 text-center">Price</div>
-                    <div class="col-lg-2 ">Status with Date</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">Products</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 text-right " style=" padding-right:4%;">Qty</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left" >Price</div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 xssalesorder" >Status </div>
 
                 </div>
-                <div class="row " >
-                    <div class="col-lg-5" style="border: solid ;">
+
+
                     <?php
                     $orderIncrementId = $_order->getRealOrderId();
-                    $orderId = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId)
-                        ->getEntityId();
-
+                  //  $orderId = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId)
+                     //       ->getEntityId();
 
                     $order = Mage::getModel('sales/order')->loadByIncrementId($orderIncrementId);
-
-
                     $orderItems = $order->getItemsCollection();
-
-
                     foreach ($orderItems as $item) {
+
                         if ($item->getPrice() != 0.0) {
                             if ($item->getProductType() == 'configurable') {
                                 $_product = $item->getProduct();
@@ -74,42 +71,78 @@
                             }
 
                             ?>
+                            <div class="row xssalesorder">
 
-                            <img
-                                src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>"
-                                width="100" height="100" alt=""/>
-
-
-                            <?php
-
-                            echo $product_name = $item->getName();
-                            //  echo $product_id = $item->product_id ;
-
-                            //  echo $product_sku = $item->sku ;
-                            // echo $product_price = $item->getPrice();
+                                <!-- product img product name-->
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5" style="padding-left: 4%;">
+                                    <img class="lightborder img img-responsive float"
+                                        src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>"
+                                        width="100" height="100" alt="" style="display: inline-block"/>
 
 
+                                    <?php
+
+                                    echo $product_name = $item->getName();
+                                    //  echo $product_id = $item->product_id ;
+                                    ?>
+                                </div>
+
+                                <!-- product quantity -->
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 paddngLeft ">
+                                    <?php
+                                    if ($item->getQtyOrdered() > 0): ?>
+                                        <strong><?php echo $item->getQtyOrdered() * 1 ?></strong>
+                                    <?php endif;
+                                    if ($item->getQtyShipped() > 0): ?>
+                                        <strong><?php echo $item->getQtyShipped() * 1 ?></strong>
+                                    <?php endif;
+                                    if ($item->getQtyCanceled() > 0): ?>
+                                        <strong><?php echo $item->getQtyCanceled() * 1 ?></strong>
+                                    <?php endif;
+                                    if ($item->getQtyRefunded() > 0): ?>
+                                        <strong><?php echo $item->getQtyRefunded() * 1 ?></strong>
+                                    <?php endif; ?>
+                                </div>
+
+                                <!-- product price -->
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <?php
+
+                                    $currency_symbol =
+                                        Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+                                    echo
+                                        $currency_symbol . $product_price = ceil($item->getPrice()); ?>
+
+                                </div>
+
+                                <!-- product status -->
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                    <?php
+                                    $product_price = $item->getPrice() . "<br/>";
+                                    if ($item->getQtyOrdered() > 0): ?>
+                                        <?php echo $this->__('Ordered'); ?>
+                                        <strong><?php $item->getQtyOrdered() * 1 ?></strong><br/>
+                                    <?php endif;
+                                    if ($item->getQtyShipped() > 0): ?>
+                                        <?php echo $this->__('Shipped'); ?>:
+                                        <strong><?php $item->getQtyShipped() * 1 ?></strong><br/>
+                                    <?php endif;
+                                    if ($item->getQtyCanceled() > 0): ?>
+                                        <?php echo $this->__('Canceled'); ?>:
+                                        <strong><?php $item->getQtyCanceled() * 1 ?></strong><br/>
+                                    <?php endif;
+                                    if ($item->getQtyRefunded() > 0): ?>
+                                        <?php echo $this->__('Refunded'); ?>:
+                                        <strong><?php $item->getQtyRefunded() * 1 ?></strong><br/>
+                                    <?php endif; ?>
+                                </div>
+                            </div> <?php
                         }
                         echo "<hr>";
-
-
                     }
-
-
-                    ?>
-
-                    </div>
-
-              <div class="col-lg-offset-4 text-right"  style="border: solid red">
-                <?php echo $_order->formatPrice($_order->getGrandTotal()) ?>
-                <em><?php echo $_order->getStatusLabel() ?></em>
-              </div>
-
-                </div>
-            </div>
-
-        <?php endforeach; ?>
-
+?>
+        </div>     <?php
+        endforeach; ?>
 
         <?php echo $this->getChildHtml('sales.order.view') ?>
 

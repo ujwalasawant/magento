@@ -13,9 +13,9 @@ $rcElements = $this->getElement()->getRightColumn();
 
 <?php if (!empty($topElements)): ?>
 <tr><td colspan="2">
-<ul class="form-list">
+<ul class="form-list" >
 <?php foreach($topElements as $topElement): ?>
-<li id="<?php echo $topElement.'-container'?>" class="wide">
+<li id="<?php echo $topElement.'-container'?>" class="wide" >
 <?php echo $this->getChildElementJs($topElement); ?>
 <?php echo $this->getChildElementHtml($topElement); ?>
 </li>

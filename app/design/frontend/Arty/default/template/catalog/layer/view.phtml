@@ -1,3 +1,5 @@
+<?php /* @var $this Mage_Catalog_Block_Layer_View */ ?>
+<?php /* @var $this Mage_CatalogSearch_Block_Layer */ ?>
 <?php
 /**
  * Magento
@@ -19,7 +21,7 @@
  * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
- * @package     rwd_default
+ * @package     base_default
  * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
@@ -31,62 +33,53 @@
  * @see Mage_Catalog_Block_Layer_View
  */
 ?>
-
-
-<button class="sort-arrow"  onclick="showAttribute()"><?php echo $this->__('Filter') ?></button>
+<div class="col-lg-3 col-md-4 col-sm-4" >
 <?php if($this->canShowBlock()): ?>
-    <div class="block-layered-nav " style="display: none;">
-     <dl id="narrow-by-list">
-         <?php echo $this->getStateHtml() ?>
-         <?php if ($this->getLayer()->getState()->getFilters()): ?>
-             <div class="actions"><a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
-         <?php endif; ?>
-         <?php $_filters = $this->getFilters() ?>
-         <?php foreach ($_filters as $_filter):
-             if($_filter->getItemsCount()):
-                 switch($filtermode){
-                     case 2:
-                         //enable selected filters
-                         if (in_array($_filter->getAttributeModel()->getAttributeId(), $filtersselected)) {
-                          //   echo "<dt>". $this->__($_filter->getName()) ."</dt>";
-                             echo "<dd class='sort-arrow' style='margin-top: 20px;'>". $_filter->getHtml() ."</dd>";
-                         }
-                         break;
-                     case 3:
-                         //disable selected filters
-                         if (!in_array($_filter->getAttributeModel()->getAttributeId(), $filtersselected)) {
-                           //  echo "<dt>". $this->__($_filter->getName()) ."</dt>";
-                             echo "<dd class='sort-arrow'>". $_filter->getHtml() ."</dd>";
-                         }
-                         break;
-                     default:
-                         //disabled. show all.
-                       //  echo  "<dt>". $this->__($_filter->getName()) ."</dt>";
-                         echo "<dd class='sort-arrow'>". $_filter->getHtml() ."</dd>";
-                 }
-             endif;
-         endforeach; ?>
-                </dl>
-        <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+    <div class="block block-layered-nav lightborder" >
+        <div class="block-title text-center rowspan">
+            <strong><span><?php echo $this->__('Shop By') ?></span></strong>
+        </div>
+        <div class="block-content">
+            <?php echo $this->getStateHtml() ?>
+            <?php if ($this->getLayer()->getState()->getFilters()): ?>
+                <div class="actions links">
+                    <a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
+            <?php endif; ?>
+            <?php if($this->canShowOptions()): ?>
+                <hr>
+                <dl id="narrow-by-list">
+                    <?php $_filters = $this->getFilters() ?>
+                    <?php foreach ($_filters as $_filter): ?>
+                        <?php if($_filter->getItemsCount()): ?>
+                            <dt  class="layered" >
+                                <a href="/"><?php echo $this->__($_filter->getName()) ?>
 
+                                </a>
+                            </dt>
+
+                            <dd><?php echo $_filter->getHtml() ?></dd>
+                            <hr>
+
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </dl>
+                <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+            <?php endif; ?>
+        </div>
     </div>
 <?php endif; ?>
+</div>
+
 
 
 <script type="text/javascript">
-    //<![CDATA[
 
-    <?php foreach ($_filters as $_filter): ?>
-
-   var _used_filter = push('<?php echo $_filter->getRequestVar() ?>');
-    <?php endforeach; ?>
-
-    function showAttribute()
-    {
-        if(jQuery(".block-layered-nav").is(":visible"))
-            jQuery(".block-layered-nav").hide();
-        else
-            jQuery(".block-layered-nav").show();
-    }
-    //]]>
+    jQuery(document).ready(function(){
+        jQuery("dl#narrow-by-list> dd").show();
+        jQuery("dl#narrow-by-list> dt").click(function(){
+            jQuery(this).next("dd").slideToggle("slow");
+            return false;
+        });
+    });
 </script>
+

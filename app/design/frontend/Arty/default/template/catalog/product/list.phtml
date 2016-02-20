@@ -33,11 +33,12 @@
  */
 /* @var $this Mage_Catalog_Block_Product_List */
 ?>
-
-
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+<div >
+
 <?php echo $this->getToolbarHtml() ?>
 
 <?php
@@ -48,10 +49,10 @@ $_helper = $this->helper('catalog/output');
     <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
 
-<div>
+<div class="col-lg-8">
     <!--<span class='st_email' displayText='Email'></span> -->
 
-    <div class="container">
+    <div class="" >
         <div class="pin"><!-- Go to www.addthis.com/dashboard to customize your tools -->
 
 
@@ -67,20 +68,28 @@ $_helper = $this->helper('catalog/output');
 
                         <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
                             <!-- product block header  -->
-                            <div class="lightborder">
+                            <div class="lightborder" >
 
-                                <div class="add-to-box">
-                                    <?php echo $this->getChildHtml('addto') ?>
-                                </div>
 
-                                <a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>"
-                                   onclick="setColor(event, 'button', 'grey')" ; data-count="1"
-                                   class="glyphicon glyphicon-star-empty link-wishlist">
-                                </a>
+                                    <?php $wishlist = Mage::getModel('wishlist/item')->load($_product->getId(),'product_id');
+                                    if($wishlist->getId())
+                                        //product is added
+                                        echo "<span title='Moved to favorites' class='favoritesbtnS'/> ";
+                                    else
+                                        //add product to wishlist
+                                        echo "<a class='favoritesbtnF' title='Add to Favorites' href='".$this->helper('wishlist')->getAddUrl($_product) ."'></a>";
+                                    ;?>
+
+
 
                                 <button type="button" class="glyphicon glyphicon-plus-sign "
+                                        onclick="lightbox_open(this.id);"
                                         style="background: none ;margin-right:5% ;border: none">
                                 </button>
+
+
+
+
 
                                 <button id="share" type="button"
                                         class="st_sharethis_custom glyphicon glyphicon-share-alt ">
@@ -92,14 +101,21 @@ $_helper = $this->helper('catalog/output');
 
 
                             <div class=" well " style="padding: 0px 0px 0px 0px ; margin: 0px 0px 0px 0px">
+
+                                    <?php // $_imgSize = 200 ; ?>
+                                    <div id="light">
+                                    <img id="product-collection-image-<?php echo $_product->getId(); ?>" width="100%"
+                                         src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                                         alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+                                    </div>
                                 <a href="<?php echo $_product->getProductUrl() ?>"
                                    title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
-                                    <?php // $_imgSize = 200 ; ?>
                                     <img id="product-collection-image-<?php echo $_product->getId(); ?>" width="100%"
                                          src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
                                          alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
                                 </a>
 
+                                <div id="fade" onClick="lightbox_close();"></div>
                             </div>
 
 
@@ -147,9 +163,9 @@ $_helper = $this->helper('catalog/output');
                                         <div class="actions">
                                             <?php if (!$_product->canConfigure() && $_product->isSaleable()): ?>
                                                 <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
-                                                        class="up-arrow"
+                                                        class="addtocart"
                                                         onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
-                                                    <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+
                                                 </button>
                                             <?php elseif ($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>
                                                 <a title="<?php echo $this->__('View Details') ?>" class="button"
@@ -177,7 +193,7 @@ $_helper = $this->helper('catalog/output');
         </div>
     </div>
 </div>
-
+</div>
 <?php
 // Provides a block where additional page components may be attached, primarily good for in-page JavaScript
 if ($this->getChild('after')) {
@@ -203,4 +219,23 @@ if ($this->getChild('after')) {
         target.style.backgroundColor = count === 1 ? "yellow" : '#FFFFFF';
         target.dataset.count = count === 1 ? 0 : 1;
     }
+    window.document.onkeydown = function (e)
+    {
+        if (!e){
+            e = event;
+        }
+        if (e.keyCode == 27){
+            lightbox_close();
+        }
+    }
+    function lightbox_open(){
+        window.scrollTo(0,0);
+        document.getElementById('light').style.display='block';
+        document.getElementById('fade').style.display='block';
+    }
+    function lightbox_close(){
+        document.getElementById('light').style.display='none';
+        document.getElementById('fade').style.display='none';
+    }
 </script>
+
