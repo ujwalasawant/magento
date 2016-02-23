@@ -3,6 +3,8 @@
     <default translate="label" module="page">
         <reference name="head">
             <!--Adding Javascripts -->
+
+
             <action method="addItem">
                 <script>lib/jquery/jquery-1.10.2.min.js</script>
             </action>
@@ -107,6 +109,7 @@
         </reference>
 
         <reference name="header">
+
             <block type="cms/block" name="topbar_cmslinks" as="topbar_cmslinks">
                 <action method="setBlockId">
                     <block_id>topbar_cmslinks</block_id>
@@ -120,14 +123,15 @@
                     <action method="addCartLink"></action>
                     <action method="addCheckoutLink"></action>
                 </block>
+
             </reference>
             <reference name="root">
-            <reference name="header">
-                <action method="unsetChild">
-                    <name>topLinks</name>
-                </action>
-                <block type="page/template_links" name="top.links" as="topLinks"/>
-            </reference>
+                <reference name="header">
+                    <action method="unsetChild">
+                        <name>topLinks</name>
+                    </action>
+                    <block type="page/template_links" name="top.links" as="topLinks"/>
+                </reference>
                 <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
 
                 <block type="core/text_list" name="left_first" as="left_first" translate="label">
@@ -248,9 +252,12 @@
             <reference name="product.info">
                 <block type="catalog/product_view" name="catalog.product.crosssell" as="crosssell"
                        template="catalog/product/view/crosssell.phtml"/>
-                <block type="catalog/product_list_related" name="catalog.product.related" as="related_products" template="catalog/product/list/related.phtml"/>
-                <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml"/>
-                    <block type="reports/product_widget_viewed" name="viewed.product" template="reports/widget/viewed/content/viewed_grid.phtml"></block>
+                <block type="catalog/product_list_related" name="catalog.product.related" as="related_products"
+                       template="catalog/product/list/related.phtml"/>
+                <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products"
+                       template="catalog/product/list/upsell.phtml"/>
+                <block type="reports/product_widget_viewed" name="viewed.product"
+                       template="reports/widget/viewed/content/viewed_grid.phtml"></block>
             </reference>
 
 
@@ -315,18 +322,57 @@
             </block>
         </reference>
     </PRODUCT_TYPE_configurable>
-
+    <catalog_category_default translate="label">
+        <label>Catalog Category (Non-Anchor)</label>
+        <reference name="left_first">
+            <block type="catalog/navigation" name="catalog.leftnav" after="currency" template="catalog/navigation/left.phtml">
+                <block type="core/text_list" name="catalog.leftnav.state.renderers" as="state_renderers" />
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
+                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+                    <block type="core/text_list" name="product_list.name.after" as="name.after" />
+                    <block type="core/text_list" name="product_list.after" as="after" />
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                        <!-- The following code shows how to set your own pager increments -->
+                        <!--
+                            <action method="setDefaultListPerPage"><limit>4</limit></action>
+                            <action method="setDefaultGridPerPage"><limit>9</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
+                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+                        -->
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                    <!-- Since the addColumnCountLayoutDepend does not work, we are manually setting the max columns -->
+                    <action method="setColumnCount"><count>4</count></action>
+                </block>
+            </block>
+        </reference>
+    </catalog_category_default>
 
 
     <catalog_category_layered translate="label">
         <label>Catalog Category (Anchor)</label>
-        <reference name="left_first">
+
+        <reference name="left">
+
             <action method="unsetChild">
-            <name>catalog.leftnav</name>
+                <name>catalog.leftnav</name>
             </action>
-
+            <action method="insert">
+                <child>catalog.leftnav</child>
+            </action>
         </reference>
-
         <reference name="content">
             <action method="unsetChild">
                 <name>category.products</name>
@@ -335,10 +381,11 @@
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
 
                 <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
-                    <block type="core/text_list" name="product_list.name.after" as="name.after" />
-                    <block type="core/text_list" name="product_list.after" as="after" />
+                    <block type="core/text_list" name="product_list.name.after" as="name.after"/>
+                    <block type="core/text_list" name="product_list.after" as="after"/>
                     <!-- <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/su.phtml</template></action> -->
-                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar"
+                           template="catalog/product/list/toolbar.phtml">
                         <block type="page/html_pager" name="product_list_toolbar_pager"/>
                         <!-- The following code shows how to set your own pager increments -->
                         <!--
@@ -355,14 +402,33 @@
                             <action method="addPagerLimit" translate="label"><mode>grid</mode><limit>all</limit><label>All</label></action>
                         -->
                     </block>
-                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
-                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>empty</layout>
+                        <count>6</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>one_column</layout>
+                        <count>5</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_left</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_right</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>three_columns</layout>
+                        <count>3</count>
+                    </action>
+                    <action method="setToolbarBlockName">
+                        <name>product_list_toolbar</name>
+                    </action>
                     <!-- Since the addColumnCountLayoutDepend does not work, we are manually setting the max columns -->
-                    <action method="setColumnCount"><count>4</count></action>
+                    <action method="setColumnCount">
+                        <count>4</count>
+                    </action>
                 </block>
             </block>
         </reference>
@@ -460,6 +526,9 @@
 
 
     <!--End of checkout Page Handlers-->
+
+
+
     <!--Customer Page Handlers-->
 
     <review_product_list>

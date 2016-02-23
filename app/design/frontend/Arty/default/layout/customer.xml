@@ -74,6 +74,38 @@ Load this update on every page when customer is logged in
                 <urlParams/>
                 <position>100</position>
             </action>
+            <action method="addLink" translate="label title" module="customer">
+                <label>My Order</label>
+                <url>customer/account/</url>
+                <title>My Order</title>
+                <prepare>true</prepare>
+                <urlParams/>
+                <position>100</position>
+            </action>
+            <action method="addLink" translate="label title" module="customer">
+                <label>Payment History</label>
+                <url>arty_paymenthistory/index/index/</url>
+                <title>Payment History</title>
+                <prepare>true</prepare>
+                <urlParams/>
+                <position>100</position>
+            </action>
+            <action method="addLink" translate="label title" module="customer">
+                <label>Setting</label>
+                <url>customer/account/edit/</url>
+                <title>Setting</title>
+                <prepare>true</prepare>
+                <urlParams/>
+                <position>100</position>
+            </action>
+            <action method="addLink" translate="label title" module="customer">
+                <label>My Stuff</label>
+                <url>review/customer/</url>
+                <title>My Stuff</title>
+                <prepare>true</prepare>
+                <urlParams/>
+                <position>100</position>
+            </action>
         </reference>
     </customer_logged_in>
 

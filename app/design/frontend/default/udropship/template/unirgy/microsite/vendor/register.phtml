@@ -47,7 +47,7 @@ if (!$_r->getCarrierCode()) {
 <div class="login-box generic-box">
     <div class="col-1 registered-users">
             <div class="box-head"><h3><?php echo Mage::helper('udropship')->__('Dropship Vendor Registration') ?></h3></div>
-            <table style="width:100%"><tbody><tr><td>
+            <table style="width:100%;"><tbody><tr><td>
                 <ul class="form-list">
                     <li>
                         <label for="vendor_name"><?php echo Mage::helper('udropship')->__('Business Name') ?> <span class="required">*</span></label><br />
@@ -85,7 +85,8 @@ if (!$_r->getCarrierCode()) {
 
                     <li>
                         <label for="url_key"><?php echo Mage::helper('udropship')->__('Preferred subdomain name') ?> <?php echo $_qrRequired?></label><br />
-                        <input name="url_key" value="<?php echo $_r->getUrlKey()?>" title="<?php echo Mage::helper('udropship')->__('URL Key') ?>" id="url_key" type="text" class="input-text <?php echo $_qrRequired2?> validate-urlkey" style="width:100px"/> <strong>.<?php echo $_hlp->getDomainName() ?></strong>
+                        <input name="url_key" value="<?php echo $_r->getUrlKey()?>" title="<?php echo Mage::helper('udropship')->__('URL Key') ?>" id="url_key" type="text" class="input-text <?php echo $_qrRequired2?> validate-urlkey" style="width:100px"/>
+                        <strong>.<?php echo $_hlp->getDomainName() ?></strong>
                     </li>
                     <li>
                         <label for="comments"><?php echo Mage::helper('udropship')->__('Comments') ?></label><br />
@@ -127,6 +128,7 @@ if (!$_r->getCarrierCode()) {
                         <label for="country_id"><?php echo Mage::helper('udropship')->__('Country') ?> <?php echo $_qrRequired?></label><br />
                         <?php echo $this->getCountryHtmlSelect($_r->getCountryId()) ?>
                     </li>
+
                 </ul>
                 <ul class="form-list">
                     <?php echo $this->getChildHtml('form.additional.info'); ?>

@@ -60,11 +60,12 @@
                         <?php $_vendorName = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?>
                         <?php echo $_vendorName->getVendorName() ?>
 
-                        <?php echo $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('my_text_field') ?>
+                        <?php echo $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('bank_account_no') ?>
 
 
 
                         <!-- === any field vendor profile ===
+                        <?php echo Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('part_name') ?>
                           <?php echo Mage::helper('udropship')->getVendor($_product)->getData('bank_name'); ?>
                             <?php echo Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('City') ?>
                             <?php $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?> <?php echo $_vendor->getData('name') ?>
