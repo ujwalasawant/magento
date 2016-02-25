@@ -26,8 +26,8 @@
  * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
- 
-class Arty_Chnagepassword_IndexController extends Mage_Core_Controller_Front_Action {
+class Arty_Chnagepassword_IndexController extends Mage_Core_Controller_Front_Action
+{
     public function preDispatch()
     {
         parent::preDispatch();
@@ -37,12 +37,18 @@ class Arty_Chnagepassword_IndexController extends Mage_Core_Controller_Front_Act
         if (!Mage::getSingleton('customer/session')->authenticate($this, $loginUrl)) {
             $this->setFlag('', self::FLAG_NO_DISPATCH, true);
         }
-    }      
+    }
+
     public function indexAction()
     {
         $this->loadLayout();
         $this->renderLayout();
+
+
+
+
     }
+
     public function paymentAction()
     {
         $this->loadLayout();

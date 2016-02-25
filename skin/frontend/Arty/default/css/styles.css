@@ -8167,7 +8167,6 @@ select {
 /******** cart *********/
 .minicart-wrapper {
   clear: both;
-  border: solid;
 }
 
 /* .minicart-wrapper:after {
@@ -8190,7 +8189,6 @@ select {
 
 .skip-content.skip-active {
   display: block;
-  border: solid;
   margin-top: 0%;
   position: relative;
 }
@@ -8198,7 +8196,6 @@ select {
 @media only screen and (max-width: 917px) and (min-width: 771px) {
   .skip-content.skip-active {
     display: block;
-    border: solid;
     margin-top: 20%;
   }
 }
@@ -10492,7 +10489,7 @@ form .form-instructions {
   .page-headerf {
     background: white;
     max-width: 1680px;
-    height: 85px;
+    height: 100px;
     margin: 0 0;
     padding: 0 0;
     background-image: url("../images/smallHeader.png");
@@ -10774,7 +10771,6 @@ a.skip-link {
 .skip-content.skip-active {
   display: block;
   background: #EDEDED;
-  border: solid black;
 }
 
 /* ============================================ *
@@ -11161,25 +11157,53 @@ a.skip-link {
     border: solid 1px #CCCCCC;
     outline: none;
     display: block;
-    position: relative;
+    position: absolute;
     z-index: 200;
     float: right;
-    right: 5%;
-    top: 1%;
+    right: 10%;
+    top: 90px;
     width: 200px;
   }
 }
-@media only screen and (min-width: 771px) and (max-width: 917px) {
+@media only screen and (min-width: 771px) and (max-width: 1199px) and (min-width: 918px) {
   #header-account.skip-active {
     background: #FBFBFB;
-    border: solid 1px red;
+    border: solid 1px #CCCCCC;
     outline: none;
     display: block;
-    position: relative;
+    position: absolute;
     z-index: 200;
     float: right;
-    right: 5%;
-    margin-top: 0;
+    right: 15%;
+    top: 130px;
+    width: 200px;
+  }
+}
+@media only screen and (min-width: 771px) and (max-width: 917px) and (min-width: 837px) {
+  #header-account.skip-active {
+    background: #FBFBFB;
+    border: solid 1px #CCCCCC;
+    outline: none;
+    display: block;
+    position: absolute;
+    z-index: 200;
+    float: right;
+    right: 10%;
+    margin-top: 50px;
+    width: 200px;
+  }
+}
+@media only screen and (min-width: 771px) and (max-width: 836px) and (min-width: 770px) {
+  #header-account.skip-active {
+    background: #FBFBFB;
+    border: solid 1px #CCCCCC;
+    outline: none;
+    display: block;
+    position: absolute;
+    z-index: 200;
+    float: right;
+    right: 10%;
+    margin-top: 90px;
     width: 200px;
   }
 }
@@ -12319,31 +12343,64 @@ a.skip-link {
     -moz-transform: rotateX(-5deg) rotateY(-360deg);
   }
 }*/
-.multi-item-carousel .carousel-inner > .item {
-  transition: .6s ease-in-out all;
+/*
+.multi-item-carousel{
+  .carousel-inner{
+    > .item{
+
+      transition: .6s ease-in-out all;
+    }
+    .active{
+      &.left{
+        left:-33%;
+      }
+      &.right{
+        left:33%;
+      }
+    }
+    .next{
+      left: 33%;
+    }
+    .prev{
+      left: -33%;
+    }
+  }
+  .carouse-control{
+    &.left, &.right{
+      background-image: none;
+    }
+  }
+
+  @media all and (transform-3d), (-webkit-transform-3d) {
+    &{
+      .carousel-inner {
+        > .item{
+
+          transition: .6s ease-in-out all;
+          -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+          -webkit-perspective: none;
+          -webkit-transform: none!important;
+          transform: none!important;
+        }
+      }
+    }
+  }
 }
-.multi-item-carousel .carousel-inner .active.left {
-  left: -33%;
+
+*/
+/*23 -02-16*/
+.example-two {
+  border: 1px solid lightgrey;
+  background: #dddddd;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
-.multi-item-carousel .carousel-inner .active.right {
-  left: 33%;
-}
-.multi-item-carousel .carousel-inner .next {
-  left: 33%;
-}
-.multi-item-carousel .carousel-inner .prev {
-  left: -33%;
-}
-.multi-item-carousel .carouse-control.left, .multi-item-carousel .carouse-control.right {
-  background-image: none;
-}
-@media all and (transform-3d), (-webkit-transform-3d) {
-  .multi-item-carousel .carousel-inner > .item {
-    transition: .6s ease-in-out all;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-    -webkit-perspective: none;
-    -webkit-transform: none !important;
-    transform: none !important;
+
+/*24-02-16*/
+@media only screen and (max-width: 771px) {
+  .xsoption {
+    border: 2px solid black;
   }
 }

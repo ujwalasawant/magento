@@ -67,6 +67,7 @@
                 <type>skin_js</type>
                 <name>js/bootstrap.min.js</name>
             </action>
+
             <action method="addItem">
                 <type>skin_js</type>
                 <name>js/app.js</name>
@@ -322,6 +323,7 @@
             </block>
         </reference>
     </PRODUCT_TYPE_configurable>
+
     <catalog_category_default translate="label">
         <label>Catalog Category (Non-Anchor)</label>
         <reference name="left_first">

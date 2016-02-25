@@ -228,7 +228,8 @@ $_session = Mage::getSingleton('udropship/session');
             return;
         }
 
-        function toggleNameRequired(){
+        function toggleNameRequired()
+        {
             var val = payout_selector.value;
             if (val == 'paypal') {
                 toggleElementRequired(name, true);

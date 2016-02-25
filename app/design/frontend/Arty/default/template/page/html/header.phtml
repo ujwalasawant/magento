@@ -73,9 +73,9 @@
         // See app.js for details ?>
 
         <!-- Skip Links -->
-        <div class="row" style="border: solid" >
+        <div class="row"  >
 
-        <div class="col-lg-offset-1 col-lg-5 col-md-5 col-sm-9  "  id="nav" >
+        <div class=" col-lg-5 col-md-6 col-sm-8  "  id="nav" >
 
         <div class="skip-links" >
             <a href="#header-nav" class="skip-link skip-nav">
@@ -87,13 +87,13 @@
         <?php echo $this->getChildHtml('topMenu') ?>
         </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-3 pull-right" >
-           <div class="float" id="searchId" style="padding: 0">
+        <div class="col-lg-3 col-md-4 col-sm-4 pull-right  "  >
+           <div class="float" id="searchId" >
                <a href="#header-search" class="skip-link skip-search">
                 <span class="icon"></span>
             </a>
            </div>
-          <div class="float" style="padding: 0">
+          <div class="float" >
            <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account" class="skip-link skip-account">
                 <span class="icon"></span>
                 </a>
@@ -117,7 +117,7 @@
         </div>
         <!-- Account -->
 
-        <div id="header-account" class="skip-content">
+        <div id="header-account" class="skip-content col-lg-3 col-md-4 col-sm-3 pull-right lightborder" >
             <?php echo $this->getChildHtml('topLinks') ?>
         </div>
 
@@ -130,7 +130,7 @@
 
 <?php echo $this->getChildHtml('topContainer'); ?>
 <script>
-/*
+
     jQuery(document).ready(function () {
 
         var hdNv = jQuery('#header');
@@ -152,11 +152,14 @@
                     jQuery(this).removeClass('default').addClass('fixed').show();
                     jQuery('.page-header').removeClass('page-header').addClass('page-headerf');
                     jQuery('.logo').removeClass('logo').addClass('logof');
-                    jQuery('#nav').removeClass('col-lg-7').addClass('col-lg-8');
-                    jQuery('#nav').removeClass('col-md-7').addClass('col-md-6');
+
+                    jQuery('#nav').removeClass('col-lg-5').addClass('col-lg-5');
+                    jQuery('#nav').removeClass('col-md-6').addClass('col-md-5');
+                    jQuery('#nav').removeClass('col-sm-5').addClass('col-md-3');
 
                     jQuery('#imgheader').removeClass('show').addClass('hidden');
                     jQuery('#imgheaderf').removeClass('hidden').addClass('show');
+
                 });
 
             }
@@ -167,8 +170,10 @@
                     jQuery(this).removeClass('fixed').addClass('default').removeAttr('style').show();
                     jQuery('.page-headerf').removeClass('page-headerf').addClass('page-header').removeAttr('style').show();
                     jQuery('.logof').removeClass('logof').addClass('logo').removeAttr('style').show();
-                    jQuery('#nav').removeClass('col-lg-8').addClass('col-lg-7');
-                    jQuery('#nav').removeClass('col-md-6').addClass('col-md-7');
+                    jQuery('#nav').removeClass('col-lg-5').addClass('col-lg-5');
+                    jQuery('#nav').removeClass('col-md-5').addClass('col-md-6');
+                    jQuery('#nav').removeClass('col-sm-3').addClass('col-sm-5');
+
                     jQuery('#imgheader').removeClass('hidden').addClass('show');
                     jQuery('#imgheaderf').removeClass('show').addClass('hidden');
                     // jQuery('#smallheader').removeClass('fixed').addClass('no-display').show();
@@ -186,6 +191,6 @@
 
         onscroll();
 
-    });*/
+    });
 </script>
 

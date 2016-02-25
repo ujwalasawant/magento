@@ -32,6 +32,8 @@
                         <label>Bank Account Number</label>
                         <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
                         <fieldset>integration</fieldset>
+
+                        <reg_class>validate-alphanum</reg_class>
                         <!-- Position within the fieldset -->
                         <position>11</position>
                         <!-- Default value for the field -->
@@ -45,6 +47,7 @@
                         <label>Confirm Bank Account Number</label>
                         <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
                         <fieldset>integration</fieldset>
+
                         <!-- Position within the fieldset -->
                         <position>13</position>
                         <!-- Default value for the field -->
@@ -72,6 +75,7 @@
                         <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
                         <fieldset>integration</fieldset>
                         <!-- Position within the fieldset -->
+                        <reg_class>validate-alphanum</reg_class>
                         <position>15</position>
                         <!-- Default value for the field -->
                         <default><![CDATA[]]></default>
@@ -84,6 +88,7 @@
                         <label>Cheque on Behalf</label>
                         <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
                         <fieldset>integration</fieldset>
+                        <reg_class>validate-alphanum</reg_class>
                         <!-- Position within the fieldset -->
                         <position>16</position>
                         <!-- Default value for the field -->
@@ -97,6 +102,7 @@
                         <label>IFSC code</label>
                         <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
                         <fieldset>integration</fieldset>
+                        <reg_class>validate-alphanum</reg_class>
                         <!-- Position within the fieldset -->
                         <position>17</position>
                         <!-- Default value for the field -->
@@ -123,6 +129,7 @@
                         <label>PAN no</label>
                         <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
                         <fieldset>integration</fieldset>
+                        <reg_class>validate-alphanum</reg_class>
                         <!-- Position within the fieldset -->
                         <position>19</position>
                         <!-- Default value for the field -->

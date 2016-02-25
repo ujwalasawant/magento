@@ -35,10 +35,11 @@
 ?>
 
 
-
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+
 
 <div>
 
@@ -101,26 +102,19 @@
                                 <div class=" well " style="padding: 0px 0px 0px 0px ; margin: 0px 0px 0px 0px">
 
 
-
-
-
                                     <?php // $_imgSize = 200 ; ?>
-                                    <div id="light">
-                                        <img id="product-collection-image-<?php echo $_product->getId(); ?>"
-                                             width="100%"
-                                             src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
-                                             alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
-                                    </div>
 
-                                    <a href="<?php echo $_product->getProductUrl() ?>"
-                                       title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
-                                        <img id="product-collection-image-<?php echo $_product->getId(); ?>"
-                                             width="100%"
-                                             src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
-                                             alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
-                                    </a>
 
-                                    <div id="fade" onClick="lightbox_close();"></div>
+
+                                        <a href="<?php echo $_product->getProductUrl() ?>"
+                                           title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
+                                            <img id="product-collection-image-<?php echo $_product->getId(); ?>"
+                                                 width="100%"
+                                                 src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                                                 alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+                                        </a>
+
+
                                 </div>
 
 
@@ -217,7 +211,12 @@ if ($this->getChild('after')) {
 <script type="text/javascript"> stLight.options({publisher: '12345',}); </script>
 
 <script>
-    /*function setColor(e, btn, color) {
+  /*  $(".box").bind('mouseenter', function (event) {
+        $(this).prev(".quickview").stop(true, true).fadeIn(100);
+    }).parent().bind('mouseleave', function (e) {
+        $(this).find(".quickview").stop(true, true).fadeOut(100);
+    });
+    function setColor(e, btn, color) {
      var target = e.target,
      count = +target.dataset.count;
 

@@ -381,14 +381,9 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
 
 
 
-            <?php $count = $this->helper('checkout/cart')->getSummaryCount();
-                if($count>1){
-                    /* remove last product work around */
-                }
 
-            ?>
             <a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove Item') ?>"
-               class="btn-remove btn-remove2"></a>
+               class="btn-remove btn-remove2">X</a>
 
 
         </div>

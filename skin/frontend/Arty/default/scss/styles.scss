@@ -880,7 +880,7 @@ select {
 .minicart-wrapper {
 
   clear: both;
-  border: solid;
+
 
 }
 
@@ -905,7 +905,7 @@ select {
 
 .skip-content.skip-active {
   display: block;
-  border: solid;
+
   margin-top: 0%;
   position: relative;
 
@@ -914,7 +914,8 @@ select {
 @media only screen and (max-width: 917px) and (min-width: 771px) {
   .skip-content.skip-active {
     display: block;
-    border: solid;
+
+
     margin-top: 20%;
 
   }
@@ -3694,7 +3695,7 @@ form .form-instructions {
   .page-headerf {
     background: white;
     max-width: 1680px;
-    height: 85px;
+    height: 100px;
 
     margin: 0 0;
     padding: 0 0;
@@ -3991,7 +3992,7 @@ a.skip-link {
 .skip-content.skip-active {
   display: block;
   background: #EDEDED;
-  border: solid black;
+
 }
 
 /* ============================================ *
@@ -4379,25 +4380,56 @@ a.skip-link {
     border: solid 1px #CCCCCC;
     outline: none;
     display: block;
-    position: relative;
+    position: absolute;
     z-index: 200;
     float: right;
-    right:5%;
-    top: 1%;
+    right:10%;
+    top: 90px;
     width: 200px;
   }
-  @media only screen and (max-width: 917px) {
-    #header-account.skip-active{background: #FBFBFB;
-      border: solid 1px red;
+
+  @media only screen and (max-width: 1199px) and (min-width:918px) {
+  #header-account.skip-active{
+    background: #FBFBFB;
+    border: solid 1px #CCCCCC;
+    outline: none;
+    display: block;
+    position:  absolute;
+    z-index: 200;
+    float: right;
+    right:15%;
+    top: 130px;
+    width: 200px;
+
+  }
+}
+
+  @media only screen and (max-width: 917px) and (min-width:837px) {
+    #header-account.skip-active{
+      background: #FBFBFB;
+      border: solid 1px #CCCCCC;
       outline: none;
       display: block;
-      position: relative;
+      position:  absolute;
       z-index: 200;
       float: right;
-      right:5%;
-      margin-top: 0;
+      right:10%;
+      margin-top:50px;
       width: 200px;
-
+    }
+  }
+  @media only screen and (max-width: 836px) and (min-width:770px) {
+    #header-account.skip-active{
+      background: #FBFBFB;
+      border: solid 1px #CCCCCC;
+      outline: none;
+      display: block;
+      position:  absolute;
+      z-index: 200;
+      float: right;
+      right:10%;
+      margin-top:90px;
+      width: 200px;
     }
   }
   #header-account a {
@@ -5666,7 +5698,7 @@ a.skip-link {
   }
 }*/
 
-
+/*
 .multi-item-carousel{
   .carousel-inner{
     > .item{
@@ -5708,5 +5740,30 @@ a.skip-link {
         }
       }
     }
+  }
+}
+
+*/
+
+/*23 -02-16*/
+
+.example-two {
+  border: 1px solid lightgrey;
+
+  background: #dddddd;
+  width:100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+
+/*24-02-16*/
+
+
+
+@media only screen and  (max-width: 771px) {
+  .xsoption
+  {
+    border: 2px solid black;
   }
 }
