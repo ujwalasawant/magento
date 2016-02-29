@@ -568,5 +568,20 @@
 
     </customer_account_create>
 
+    <catalogsearch_result_index translate="label">
+        <label>Quick Search Form</label>
+        <remove>left_first</remove>
+
+        <reference name="content">
+            <action method="unsetChild">
+                <name>search.result</name>
+            </action>
+            <action method="insert">
+                <child>search.result</child>
+            </action>
+
+        </reference>
+    </catalogsearch_result_index>
+
 
 </layout>

@@ -62,8 +62,8 @@
 
                         <?php echo $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('bank_account_no') ?>
 
-
-
+                        <?php echo $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('propic') ?>
+                        <?php echo $this->get('registration');?>
                         <!-- === any field vendor profile ===
                         <?php echo Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('part_name') ?>
                           <?php echo Mage::helper('udropship')->getVendor($_product)->getData('bank_name'); ?>
@@ -223,49 +223,46 @@
     <!--- crosssell Product -->
     <div>
         <?php if ($_crossSellProducts = $_product->getCrossSellProducts()): ?>
+                <?php $_countcrss = count($_crossSellProducts);?>
 
-            <div>
-                <h4><?php echo $this->__('Recommended Combo Offer:') ?></h4>
-
-
-                <div class="row container">
+        <?php endif; ?>
+        <?php if($_countcrss>1):?>
+        <div>
+            <h4><?php echo $this->__('Recommended Combo Offer:') ?></h4>
+        </div>
+                <div class="container">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#">Combo Offer</a></li>
 
                     </ul>
+
                     <?php foreach ($_crossSellProducts as $_item): ?>
 
                         <?php $_item = Mage::getModel('catalog/product')->load($_item->getId()); ?>
 
-                        <div class="col-lg-2 "> <!-- item-->
-                            <a class="product-image" href="<?php echo $_item->getProductUrl() ?>"
+                        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6 "> <!-- item-->
+                            <a href="<?php echo $_item->getProductUrl() ?>"
                                title="<?php echo $this->htmlEscape($_item->getName()) ?>">
-                                <img class="img img-responsive"
-                                     src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(150); ?>"
+                                <img class="product-image image img-responsive lightborder"
+                                     src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(200); ?>"
 
                                      alt="<?php echo $this->htmlEscape($_item->getName()) ?>"/>
                             </a>
 
 
-                            <h5 class="product-name">
+                            <h5 class="product-name ">
                                 <a
-                                    href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a>
+                                   class="upsellproductfont" href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a>
                             </h5>
-                            <span class="priceblack"><?php echo $this->getPriceHtml($_item, true) ?></span>
+                            <span class="priceblack upsellproductfont hidden-xs"><?php echo $this->getPriceHtml($_item, true) ?></span>
 
 
                         </div>
 
                     <?php endforeach; ?>
+                    <?php endif; ?>
+
                 </div>
-
-                <script
-                    type="text/javascript">decorateList('crosssell-products-list', 'none-recursive')</script>
-            </div>
-
-        <?php endif; ?>
-    </div>
-
 
     <!-- tab -->
     <div>

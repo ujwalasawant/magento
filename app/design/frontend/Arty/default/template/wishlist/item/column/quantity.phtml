@@ -32,7 +32,7 @@ $options = $this->getChild('customer.wishlist.item.options')
     ->setItem($item)
     ->getConfiguredOptions();
 ?>
-<div class=" cart-cell">
+<div class=" cart-cell hidden-xs">
     <div class="add-to-cart-alt">
     <?php if ($item->canHaveQty() && $item->getProduct()->isVisibleInSiteVisibility()): ?>
        <b> <?php echo $this->getAddToCartQty($item) * 1 ?></b>

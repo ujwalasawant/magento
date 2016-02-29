@@ -128,7 +128,7 @@
                                                 echo "(" . $id . ")" ?>
                                             </a>
                                         </li>
-                                        <li style="text-align: left; color: grey">
+                                        <li style="text-align: left; ">
                                             <?php
                                             $type = $_product->getTypeId();
                                             echo "$type";
@@ -149,7 +149,7 @@
                                         }
                                         ?>
                                         <li style="text-align: right">
-                                            <div class="product-price" style="color: orangered;">
+                                            <div class="product-price ">
 
                                                 <?php echo $this->getPriceHtml($_product, true) ?>
                                                 <?php if ($_product->getRatingSummary()): ?>

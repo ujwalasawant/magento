@@ -34,68 +34,68 @@ $categories = $category->getCollection()
                     <?php foreach ($products->getItems() as $product): ?>
 
 
-                            <div class="row float">
-                                <div class="list-group category-products float">
-                                    <div class="grid12-3 align-center " >
-                                        <a href="<?php echo $category->getUrl() ?>" class="clearfix">
-                                            <?php if ($thumbFile = $category->getThumbnail()): ?>
-                                                <img
-                                                    src="<?php echo Mage::getBaseUrl('media') . 'catalog' . DS . 'category' . DS . $thumbFile; ?>"
-                                                    alt="<?php echo $this->htmlEscape($category->getName()) ?>"/>
-                                            <?php endif; ?>
-                                            <h4 style="margin-left: 35%" class="align-center"><?php echo $category->getName() ?></h4>
-                                        </a>
-                                    </div>
-
-                                    <div class="product-img-box" >
-                                        <?php // Product Image ?>
-                                        <a href="<?php echo $product->getProductUrl() ?>"
-                                           title="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>"
-                                           class="product-image lightborder">
+                        <div class="row float">
+                            <div class="list-group category-products float">
+                                <div class="grid12-3 align-center " >
+                                    <a href="<?php echo $category->getUrl() ?>" class="clearfix">
+                                        <?php if ($thumbFile = $category->getThumbnail()): ?>
                                             <img
-                                                src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(200); ?>"
-                                                width="292" height="290"
-                                                alt="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>"/></a>
-                                        <?php // Product description ?>
-                                        <div >
+                                                src="<?php echo Mage::getBaseUrl('media') . 'catalog' . DS . 'category' . DS . $thumbFile; ?>"
+                                                alt="<?php echo $this->htmlEscape($category->getName()) ?>"/>
+                                        <?php endif; ?>
+                                        <h4 style="margin-left: 35%" class="align-center"><?php echo $category->getName() ?></h4>
+                                    </a>
+                                </div>
 
-                                            <div class="row pricerow">
-                                                <div class="col-lg-8">
-                                                    <h3 class="list-group-item-heading product-description"><a
-                                                            href="<?php echo $product->getProductUrl() ?>"
-                                                            title="<?php echo $this->stripTags($product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($product, $product->getName(), 'name') ?></a>
-                                                    </h3>
-                                                </div>
-                                                <div class="col-lg-4 categryprice">
+                                <div class="product-img-box" >
+                                    <?php // Product Image ?>
+                                    <a href="<?php echo $product->getProductUrl() ?>"
+                                       title="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>"
+                                       class="product-image lightborder">
+                                        <img
+                                            src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(200); ?>"
+                                            width="292" height="290"
+                                            alt="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>"/></a>
+                                    <?php // Product description ?>
+                                    <div >
 
-                                                        <?php
-                                                        $product->getId();
-                                                        $_product = Mage::getModel('catalog/product')->load($product->getId());
-
-
-                                                        $_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),true,false);
-                                                        $_formattedSpecialPrice = Mage::helper('core')->currency($_product->getFinalPrice(),true,false);
-
-                                                        if($_formattedActualPrice===$_formattedSpecialPrice)
-                                                        {
-                                                            echo "<br/>".$_formattedActualPrice;
-
-                                                        }
-                                                        else
-                                                        {
-                                                            echo "<br/>"."Actual Price : " .$_formattedActualPrice."<br/>";
-                                                            echo "Special Price : ".$_formattedSpecialPrice;
-                                                        }
-
-                                                        ?>
-
-                                                </div>
+                                        <div class="row pricerow">
+                                            <div class="col-lg-8">
+                                                <h3 class="list-group-item-heading product-description"><a
+                                                        href="<?php echo $product->getProductUrl() ?>"
+                                                        title="<?php echo $this->stripTags($product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($product, $product->getName(), 'name') ?></a>
+                                                </h3>
                                             </div>
+                                            <div class="col-lg-4 categryprice">
+
+                                                <?php
+                                                $product->getId();
+                                                $_product = Mage::getModel('catalog/product')->load($product->getId());
 
 
-                                            <div class="list-group-item-text" >
+                                                $_formattedActualPrice = Mage::helper('core')->currency($_product->getPrice(),true,false);
+                                                $_formattedSpecialPrice = Mage::helper('core')->currency($_product->getFinalPrice(),true,false);
 
-                                                <div class="row swatchesrow" >
+                                                if($_formattedActualPrice===$_formattedSpecialPrice)
+                                                {
+                                                    echo "<br/>".$_formattedActualPrice;
+
+                                                }
+                                                else
+                                                {
+                                                    echo "<br/>"."Actual Price : " .$_formattedActualPrice."<br/>";
+                                                    echo "Special Price : ".$_formattedSpecialPrice;
+                                                }
+
+                                                ?>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="list-group-item-text" >
+
+                                            <div class="row swatchesrow" >
                                                 <div class="swatches" >
                                                     <?php $swatchproductids=$product->getRelatedProductIds();
                                                     if(empty($swatchproductids))
@@ -109,78 +109,62 @@ $categories = $category->getCollection()
                                                     $productcount= count($swatchproductids);
                                                     $i=0;
                                                     foreach($swatchproductids as $swatchproductid):
-                                                    $obj = Mage::getModel('catalog/product');
+                                                        $obj = Mage::getModel('catalog/product');
                                                         $i++;
                                                         ?>
 
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align-center">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align-center">
 
-                                                        <?php
+                                                            <?php
 
-                                                        if($i< 3) :?>
+                                                            if($i< 3) :?>
 
-                                                        <?php
-                                                            $_productr = $obj->load($swatchproductid);?>
+                                                                <?php
+                                                                $_productr = $obj->load($swatchproductid);?>
 
-                                                        <a href="<?php echo $_productr->getProductUrl();?>" class="thumbnail box-border Hpadding swatch-back">
-                                                            <img src="<?php echo $this->helper('catalog/image')->init($_productr, 'small_image')->resize(70) ?>" width="90" height="100" alt="<?php echo $this->stripTags($_productr->getName(), null, true) ?>" />
-                                                        </a>
-                                                        <?php elseif($i==3):?>
+                                                                <a href="<?php echo $_productr->getProductUrl();?>" class="thumbnail box-border Hpadding swatch-back">
+                                                                    <img src="<?php echo $this->helper('catalog/image')->init($_productr, 'small_image')->resize(70) ?>" width="90" height="100" alt="<?php echo $this->stripTags($_productr->getName(), null, true) ?>" />
+                                                                </a>
+                                                            <?php elseif($i==3):?>
 
-                                                            <div class="thumbnail box-border Hpadding vbottom text-center" style="width:83px;height:80px; padding: 26%;">
-                                                                <?php echo "<b>".$productcount."</b>"."<br/>"."items";?>
+                                                                <div class="thumbnail box-border Hpadding vbottom text-center" style="width:83px;height:80px; padding: 26%;">
+                                                                    <?php echo "<b>".$productcount."</b>"."<br/>"."items";?>
+                                                                </div>
+
+                                                            <?php endif; ?>
                                                         </div>
 
-                                                        <?php endif; ?>
-                                                    </div>
 
-
-                                                 <?php endforeach;?>
+                                                    <?php endforeach;?>
 
 
 
                                                 </div>
 
                                             </div>
-                                             <div class="row product-owner ">
-                                                <div class="col-lg-2 product-category-profile" style="border: 1px solid black">
+                                            <div class="row product-owner ">
+                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 product-category-profile" style="border: 1px solid black">
 
                                                 </div>
-                                                <div class="col-lg-6 col-lg-offset-4">
+                                                <div class="col-lg-6 col-lg-offset-4" >
                                                     <?php
-                                                    /**
-                                                     * Instanciate reviews helper
-                                                     */
+
                                                     $this->_reviewsHelperBlock = $this->getLayout()->createBlock('review/helper');
 
-                                                    /**
-                                                     * Get products for your category
-                                                     */
 
-                                                    /**
-                                                     * Loop thru products
-                                                     */
-
-
-                                                        /**
-                                                         * Display review summary with stars.
-                                                         * If correctly configured in back-office: Catalog > Reviews and Ratings > Manage Ratings
-                                                         */
-                                                      echo   $this->_reviewsHelperBlock->getSummaryHtml($product, false, false);
+                                                    echo   $this->_reviewsHelperBlock->getSummaryHtml($product, false, false);
 
                                                     ?>
 
                                                 </div>
-                                                <div class="col-lg-3">
-
-                                                </div>
-                                            </div>
 
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                     <?php endforeach; ?>
                 </div>
@@ -188,4 +172,3 @@ $categories = $category->getCollection()
         <?php endforeach; ?>
     </ul>
 </div>
-

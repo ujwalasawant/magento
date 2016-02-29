@@ -37,90 +37,49 @@
 </style>
 
 <?php if ($_products = $this->getRecentlyViewedProducts()): ?>
-    <div>
+
         <div>
             <h2><?php echo $this->__('Recently Viewed') ?></h2>
         </div>
-        <div id="owl-demo" class="owl-carousel owl-theme">
-            <?php $_columnCount = $this->getColumnCount(); ?>
-            <?php foreach ($_products as $_product): ?>
-
-                <div class="item">
-                        <a href="<?php echo $_product->getProductUrl() ?>"
-                           title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
-                          <img
-                                src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(85) ?>"
-                                width="100" height="85"
-                                alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/></a>
 
 
-
-
-
-
-        </div>
-            <?php endforeach; ?>
-            </div>
-
-        </div>
-    </div>
 <?php endif; ?>
 
-<div class="container">
-    <div class="col-md-12">
-        <h1>Bootstrap 3 Thumbnail Slider</h1>
+<div class="container" >
+    <div class="col-md-12" >
 
-        <div class="well">
-            <div id="myCarousel" class="carousel slide">
-
+        <div class="well"    >
+            <div id="myCarousel" class="carousel slide" >
                 <!-- Carousel items -->
                 <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="row">
-                            <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-3"><a href="#x"><img src="http://placehold.it/500x500" alt="Image" class="img-responsive"></a>
-                            </div>
+                    <?php $i=0; foreach ($_products as $_product): ?>
+                        <?php if($i%4==0 ):   ?>
+                            <div class="item <?php if($i==0) { echo 'active'; } ?>">
+                            <div class="row">
+                        <?php endif; ?>
+
+                        <?php  if($i%4==0 ){ $j=1; } ?>
+                        <div class="col-sm-3  ">
+                            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+                                <img class="img-responsive lightborder" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(100)?>" width="180" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" />
+                            </a>
                         </div>
-                        <!--/row-->
-                    </div>
-                    <!--/item-->
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                        <?php $j++;?>
+
+                        <?php if($j==5): ?>
                             </div>
-                            <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            <!--/row-->
                             </div>
-                            <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                        </div>
-                        <!--/row-->
-                    </div>
-                    <!--/item-->
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                            <div class="col-sm-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
-                            </div>
-                        </div>
-                        <!--/row-->
-                    </div>
+                        <?php endif; ?>
+                        <a class="left carousel-control" style="color: black;" href="#myCarousel" data-slide="prev"></a>
+                        <a class="right carousel-control" style="color: black;" href="#myCarousel" data-slide="next"></a>
+
+                    <?php $i++; endforeach;  ?>
+
                     <!--/item-->
                 </div>
-                <!--/carousel-inner--> <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                <!--/carousel-inner-->
 
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
             </div>
             <!--/myCarousel-->
         </div>

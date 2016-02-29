@@ -44,14 +44,14 @@ if(empty($_cartQty)) {
 
     <p class="block-subtitle">
         <?php echo $this->__('Recently added item(s)') ?>
-        <a class="close skip-link-close" href="#" title="<?php echo $this->__('Close'); ?>">&times;</a>
+        <a class="close skip-link-close" href="#" title="<?php echo $this->__('Close'); ?>"></a>
     </p>
 
     <?php $_items = $this->getRecentItems() ?>
     <?php $countItems = count($_items); ?>
     <?php if($countItems): ?>
         <div>
-            <ul id="cart-sidebar" class="mini-products-list">
+            <ul id="cart-sidebar" class="mini-products-list" style="margin-left: 25px">
                 <?php foreach($_items as $_item): ?>
                     <?php echo $this->getItemHtml($_item) ?>
                 <?php endforeach; ?>
@@ -72,7 +72,7 @@ if(empty($_cartQty)) {
         <div id="minicart-widgets">
             <?php echo $this->getChildHtml('cart_promotion') ?>
         </div>
-        <div class="block-content" style="background-color: lightgrey">
+        <div class="block-content " style="background-color: lightgrey; margin-left: 10%;">
             <p class="subtotal text-center">
                 <?php if ($this->canApplyMsrp()): ?>
                     <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>

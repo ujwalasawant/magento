@@ -61,12 +61,13 @@
     </div>
 </div>
 
-<header id="header" class="page-header" >
+<header id="header" class="page-header" style="border: none">
     <div>
 
         <a class="logo" href="<?php echo $this->getUrl('') ?>">
             <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
-            <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small" />
+            <img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small" />
+
         </a>
 
         <?php // In order for the language switcher to display next to logo on smaller viewports, it will be moved here.
@@ -87,7 +88,7 @@
         <?php echo $this->getChildHtml('topMenu') ?>
         </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-4 pull-right  "  >
+        <div class="col-lg-3 col-md-4 col-sm-4 pull-right"  >
            <div class="float" id="searchId" >
                <a href="#header-search" class="skip-link skip-search">
                 <span class="icon"></span>
@@ -130,7 +131,7 @@
 
 <?php echo $this->getChildHtml('topContainer'); ?>
 <script>
-
+/*
     jQuery(document).ready(function () {
 
         var hdNv = jQuery('#header');
@@ -156,6 +157,8 @@
                     jQuery('#nav').removeClass('col-lg-5').addClass('col-lg-5');
                     jQuery('#nav').removeClass('col-md-6').addClass('col-md-5');
                     jQuery('#nav').removeClass('col-sm-5').addClass('col-md-3');
+                    jQuery('#header-account').removeClass('skip-active');
+
 
                     jQuery('#imgheader').removeClass('show').addClass('hidden');
                     jQuery('#imgheaderf').removeClass('hidden').addClass('show');
@@ -191,6 +194,6 @@
 
         onscroll();
 
-    });
+    });*/
 </script>
 

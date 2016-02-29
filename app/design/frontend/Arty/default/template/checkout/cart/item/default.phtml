@@ -28,6 +28,11 @@
 ?>
 
 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+
 
 <?php
 $_item = $this->getItem();
@@ -39,7 +44,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <div class="row">
             <!-- 1st column -->
 
-            <div class="col-lg-2 col-md-2 col-sm-2 product-cart-image vcenter">
+            <div class="col-lg-2 col-md-2 col-sm-2 product-cart-image vcenter cartpddng" >
 
                 <?php if ($this->hasProductUrl()): ?>
                 <a href="<?php echo $this->getProductUrl() ?>"
@@ -81,7 +86,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
 
                             );
                             ?>
-                            <ul>
+                            <ul class="list-unstyled">
                                 <li><span
                                         style="font-weight:bold;"> <?php echo $data[$attribute->getAttributeCode()]['label']; ?></span>:
                                     <span><?php echo $data[$attribute->getAttributeCode()]['value']; ?></span></li>
@@ -93,7 +98,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                 ?>
 
                 <?php if ($_options = $this->getOptionList()): ?>
-                <dl class="item-options">
+                <dl class="item-options" style="display: none">
                     <?php foreach ($_options as $_option) : ?>
                     <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
                     <dt><?php echo $this->escapeHtml($_option['label']) ?></dt>
@@ -380,10 +385,10 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <?php endif; ?>
 
 
+        <a style="color: rgb(204, 78, 92)" href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove Item') ?>">
+            <span class="glyphicon glyphicon-trash"></span>
+        </a>
 
-
-            <a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove Item') ?>"
-               class="btn-remove btn-remove2">X</a>
 
 
         </div>
