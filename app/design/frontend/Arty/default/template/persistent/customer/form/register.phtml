@@ -46,8 +46,8 @@
             <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>"/>
 
             <h2 class="legend"><?php echo $this->__('Personal Information') ?></h2>
-            <ul class="form-list">
-                <li class="fields" style="display: none">
+            <ul class="list-unstyled">
+                <li class="fields" >
                     <?php  $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
                 </li>
                 <li>
@@ -58,7 +58,7 @@
                         <input type="text" name="email" id="email_address"
                                value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>"
                                title="<?php echo $this->__('Email Address') ?>"
-                               class="input-text validate-email required-entry"/>
+                               class="input-text validate-email required-entry themeborder"/>
                     </div>
                 </li>
 
@@ -70,7 +70,7 @@
                 <input type="hidden" name="create_address" value="1"/>
 
                 <h2 class="legend"><?php echo $this->__('Address Information') ?></h2>
-                <ul class="form-list">
+                <ul class="list-unstyled">
                     <li class="fields">
                         <div class="field">
                             <label for="company"><?php echo $this->__('Company') ?></label>
@@ -181,7 +181,7 @@
         <?php endif; ?>
         <div class="fieldset">
             <h2 class="legend"><?php echo $this->__('Login Information') ?></h2>
-            <ul class="form-list">
+            <ul class="list-unstyled">
                 <li class="fields">
                     <div class="field">
                         <label for="password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
@@ -189,7 +189,7 @@
                         <div class="input-box">
                             <input type="password" name="password" id="password"
                                    title="<?php echo $this->__('Password') ?>"
-                                   class="input-text required-entry validate-password"/>
+                                   class="input-text required-entry validate-password themeborder"/>
                         </div>
                     </div>
                     <div class="field">
@@ -199,7 +199,7 @@
                         <div class="input-box">
                             <input type="password" name="confirmation"
                                    title="<?php echo $this->__('Confirm Password') ?>" id="confirmation"
-                                   class="input-text required-entry validate-cpassword"/>
+                                   class="input-text required-entry validate-cpassword themeborder"/>
                         </div>
                     </div>
                 </li>
@@ -213,7 +213,7 @@
 
             <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link">
                     <small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
-            <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button">
+            <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button Artybutton">
                 <span><span><?php echo $this->__('Submit') ?></span></span></button>
         </div>
         <?php if (Mage::helper('checkout')->isContextCheckout()): ?>

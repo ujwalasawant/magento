@@ -42,19 +42,19 @@
         <a href="" data-toggle="modal" data-target="#RegisterModal">Sign Up</a>
     </p>
     <?php  echo $this->getChildHtml('form_fields_before') ?>
-    <?php  //echo $this->getMessagesBlock()->toHtml() ?>
+    <?php // echo $this->getMessagesBlock()->toHtml() ?>
 
     <input type="hidden" name="form_key"
            value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>"/>
     <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>"/>
     <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>"/>
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
         <div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="Sign Up"
              aria-hidden="true">
 
-            <div class="modal-dialog">
-                <div class="modal-content">
+            <div class="modal-dialog " >
+                <div class="modal-content col-lg-12 col-md-10 col-sm-9 col-xs-4">
 
                     <div class="modal-header">
                         <div class="row">
@@ -64,20 +64,16 @@
                                 </button>
                             </div>
                             <div class="col-md-6 col-sm-6  col-xs-6 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-                                <h5 class="modal-title">Welcome to <img
-                                        src="<?php echo $this->getSkinUrl('images/artcrt.png') ?>" height="50px"
-                                        width="80px"/>
+                                <h5 class="modal-title">Welcome to <img  src="<?php echo $this->getSkinUrl('images/cart.jpg') ?>" />
                                 </h5>
                             </div>
                         </div>
                     </div>
 
                     <div class="modal-body">
-                        <input type="checkbox" id="c1" name="cc" />
-                        <label for="c1"><span></span>Check Box 1</label>
 
                         <div class="row">
-                            <div class="col-lg-7 col-md-6">
+                            <div class="col-lg-6 col-md-6">
 
                                 <div class="block-content">
                                     <div class="row">
@@ -96,8 +92,8 @@
 
                                         <div class="row text-center row-height">
                                             <div class="col-md-4 col-sm-6 col-xs-12">
-                                                <label for="email"
-                                                       class="required login-font"><?php echo $this->__('Email Id') ?></label>
+                                                <label for="email_address"
+                                                       class="required "><?php echo $this->__('Email Id') ?></label>
 
                                             </div>
 
@@ -242,7 +238,7 @@
                                     <div class="row text-center row-height">
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <label for="password"
-                                                   class="required login-font"><em>*</em><?php echo $this->__('Password') ?>
+                                                   class="required "><em>*</em><?php echo $this->__('Password') ?>
                                             </label>
                                         </div>
 
@@ -256,7 +252,7 @@
                                     <div class="row text-center row-height">
                                         <div class="col-md-4 col-sm-6 col-xs-12">
                                             <label for="confirmation"
-                                                   class="required login-font"><em>*</em><?php echo $this->__('Confirm Password') ?>
+                                                   class="required "><em>*</em><?php echo $this->__('Confirm Password') ?>
                                             </label>
                                         </div>
 
@@ -277,7 +273,7 @@
                                     <div class="row row-height buttons-set ">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 actions text-center">
                                             <button type="submit" title="<?php echo $this->__('Submit') ?>"
-                                                    class="Artybutton">
+                                                    class="Artybutton" >
                                                 <span><span><?php echo $this->__('Register') ?></span></span></button>
                                         </div>
 
@@ -302,14 +298,14 @@
         </div>
     </div>
 </form>
+
 <script type="text/javascript">
+
     //<![CDATA[
     var dataForm = new VarienForm('form-validate', true);
     <?php if($this->getShowAddressFields()): ?>
     new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
     <?php endif; ?>
-    $('#RegisterModal').on('hidden.bs.modal', function () {
-        $('#form-validate').formValidation('resetForm', true);
     //]]>
 </script>
 

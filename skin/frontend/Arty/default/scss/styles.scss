@@ -586,11 +586,6 @@ $gray: #5B5B5B;
   margin: 0em 0.1em 0em 0.1em;
 }
 
-.product-category-profile {
-  border: solid 1px #DDD;
-  height: 60px;
-}
-
 .product-owner {
   margin-left: 1px;
   margin-right: 1px;
@@ -659,6 +654,11 @@ $gray: #5B5B5B;
   -webkit-overflow-scrolling: touch;
 }
 
+@media only screen and (max-width: 413px) {
+  .modal-body {
+    max-height: 350px;
+  }
+}
 .modal {
   position: fixed;
   top: 3%;
@@ -3697,7 +3697,7 @@ form .form-instructions {
   .page-headerf {
     background: white;
     max-width: 1680px;
-    height: 90px;
+    height: 100px;
 
     margin: 0 0;
     padding: 0 0;
@@ -3778,7 +3778,7 @@ form .form-instructions {
 
 @media only screen and (max-width: 770px) {
   .header-language-background {
-    display: none;
+
   }
 }
 
@@ -3994,6 +3994,7 @@ a.skip-link {
 .skip-content.skip-active {
   display: block;
   background: #EDEDED;
+  z-index: 1;
 
 }
 
@@ -4284,6 +4285,7 @@ a.skip-link {
  * ============================================ */
 #header-search {
   padding: 20px;
+
 }
 
 @media only screen and (min-width: 1366px) {
@@ -4385,7 +4387,7 @@ a.skip-link {
     position: absolute;
     z-index: 200;
     float: right;
-    right: 10%;
+    right: 42%;
 
     width: 200px;
   }
@@ -4417,8 +4419,10 @@ a.skip-link {
 #header-account a {
   position: relative;
   display: block;
-  padding: 5px 10px;
-  line-height: 23px;
+  padding-top: 2px;
+  padding-right: 5px;
+  padding-left: 5px;
+  line-height: 20px;
   text-align: center;
 }
 
@@ -4458,6 +4462,11 @@ a.skip-link {
     background: white;
   }
 }
+#header-account
+{
+  margin-top: 0;
+}
+
 
 /* -------------------------------------------- *
  * Skip Cart Notifier
@@ -5852,7 +5861,7 @@ figure:hover figcaption {
   top: 0;
 }
 
-figcaption {
+figcaption  {
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   filter: alpha(opacity=0);
   opacity: 0;
@@ -5957,4 +5966,63 @@ figcaption a:hover {
   {
     display: none;
   }
+}
+
+
+/*29-2-16*/
+
+.marginbottom{
+  margin-bottom: 3%;
+}
+
+.old-price .price-label{
+  color: darkorange;
+  font-size: 16px;
+}
+
+.old-price .price{
+  color: darkorange;
+  font-size: 18px;
+}
+
+.special-price .price-label{
+  color: darkorange;
+  font-size: 16px;
+}
+
+.special-price .price{
+  color: darkorange;
+  font-size: 18px;
+}
+
+.headerlablepd{
+  padding:2%;
+}
+.header2pd{
+  padding:1%;
+}
+
+/* 1-2-2016 */
+.modal-content .col-xs-4{
+  text-align: center;
+  height: 50%;
+}
+
+
+.Artylognbutton {
+  background: orange;
+  color: White;
+  border: 0 none;
+
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  padding: 12px 45px;
+  text-transform: none;
+
+  transition: all 100ms ease-in-out;
+
+  width: auto;
+  text-align: center;
 }

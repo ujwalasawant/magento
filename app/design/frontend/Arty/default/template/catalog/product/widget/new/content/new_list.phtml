@@ -27,7 +27,7 @@ $categories = $category->getCollection()
             ?>
             <div class="widget widget-new-products widget-center">
 
-                <div class="widget-products widget-container" style="margin: 0 0 0 10%">
+                <div class="widget-products widget-container" >
                     <?php echo $this->getPagerHtml() ?>
 
                     <!-- Display Each product's detailed info  -->
@@ -142,9 +142,10 @@ $categories = $category->getCollection()
                                                 </div>
 
                                             </div>
-                                            <div class="row product-owner ">
-                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 product-category-profile" style="border: 1px solid black">
-
+                                            <div class="row product-owner lightborder ">
+                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 " >
+                                                    <?php $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getFileUrl('propic') ?>
+                                                    <img src="<?php echo $_vendor; ?>" style=" width:80px ; height: 80px;"/>
                                                 </div>
                                                 <div class="col-lg-6 col-lg-offset-4" >
                                                     <?php

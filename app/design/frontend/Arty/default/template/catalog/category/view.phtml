@@ -58,35 +58,38 @@
 
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 
-<!--
+
 <div class="col-lg-2 float" style="border-right: 1px solid lightgrey; padding-left: 4%;" >
-    <?php //echo $this->getLayout()->createBlock('core/template')->setTemplate('catalog/homecategories.phtml')->toHtml(); ?>
+    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('catalog/homecategories.phtml')->toHtml(); ?>
 
-</div>-->
+</div>
 
-
+<div class="col-lg-10" >
         <?php if($_imgUrl): ?>
             <?php echo $_imgHtml ?>
         <?php endif; ?>
 
-
-
-
-<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
-    <div class="category-description std" >
-        <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
-    </div>
+    <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+        <div class="category-description std" >
+            <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+        </div>
     <?php endif; ?>
 
-<div class="row" >
-<?php if($this->isContentMode()): ?>
-    <?php echo $this->getCmsBlockHtml() ?>
+    <div class="row" >
+        <?php if($this->isContentMode()): ?>
+            <?php echo $this->getCmsBlockHtml() ?>
 
-<?php elseif($this->isMixedMode()): ?>
-    <?php echo $this->getCmsBlockHtml() ?>
-    <?php echo $this->getProductListHtml() ?>
+        <?php elseif($this->isMixedMode()): ?>
+            <?php echo $this->getCmsBlockHtml() ?>
+            <?php echo $this->getProductListHtml() ?>
 
-<?php else: ?>
-    <?php echo $this->getProductListHtml() ?>
-<?php endif; ?>
+        <?php else: ?>
+            <?php echo $this->getProductListHtml() ?>
+        <?php endif; ?>
+
+
+    </div>
+
+
+
 </div>

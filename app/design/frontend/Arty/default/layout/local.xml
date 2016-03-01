@@ -193,6 +193,9 @@
         <reference name="content">
             <block type="catalog/List" name="product_list_my" template="catalog/product/category.phtml"/>
             <block type="catalog/product_bestseller" template="catalog/product/bestseller.phtml"/>
+
+
+
         </reference>
 
         <reference name="footer">
@@ -331,34 +334,24 @@
                 <block type="core/text_list" name="catalog.leftnav.state.renderers" as="state_renderers" />
             </block>
         </reference>
+        <reference name="left">
+
+            <action method="unsetChild">
+                <name>catalog.leftnav</name>
+            </action>
+            <action method="insert">
+                <child>catalog.leftnav</child>
+            </action>
+        </reference>
         <reference name="content">
-            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
-                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
-                    <block type="core/text_list" name="product_list.name.after" as="name.after" />
-                    <block type="core/text_list" name="product_list.after" as="after" />
-                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
-                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
-                        <!-- The following code shows how to set your own pager increments -->
-                        <!--
-                            <action method="setDefaultListPerPage"><limit>4</limit></action>
-                            <action method="setDefaultGridPerPage"><limit>9</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
-                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
-                        -->
-                    </block>
-                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
-                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
-                    <!-- Since the addColumnCountLayoutDepend does not work, we are manually setting the max columns -->
-                    <action method="setColumnCount"><count>4</count></action>
-                </block>
-            </block>
+            <action method="unsetChild">
+                <name>category.products</name>
+            </action>
+            <action method="insert">
+                <child>category.products</child>
+            </action>
+
+
         </reference>
     </catalog_category_default>
 
@@ -380,59 +373,11 @@
                 <name>category.products</name>
             </action>
 
-            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
+            <action method="insert">
+                <child>category.products</child>
+            </action>
 
-                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
-                    <block type="core/text_list" name="product_list.name.after" as="name.after"/>
-                    <block type="core/text_list" name="product_list.after" as="after"/>
-                    <!-- <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/su.phtml</template></action> -->
-                    <block type="catalog/product_list_toolbar" name="product_list_toolbar"
-                           template="catalog/product/list/toolbar.phtml">
-                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
-                        <!-- The following code shows how to set your own pager increments -->
-                        <!--
-                            <action method="setDefaultListPerPage"><limit>4</limit></action>
-                            <action method="setDefaultGridPerPage"><limit>3</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
-                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
-                            <action method="addPagerLimit"><mode>grid</mode><limit>3</limit></action>
-                            <action method="addPagerLimit"><mode>grid</mode><limit>6</limit></action>
-                            <action method="addPagerLimit"><mode>grid</mode><limit>9</limit></action>
-                            <action method="addPagerLimit" translate="label"><mode>grid</mode><limit>all</limit><label>All</label></action>
-                        -->
-                    </block>
-                    <action method="addColumnCountLayoutDepend">
-                        <layout>empty</layout>
-                        <count>6</count>
-                    </action>
-                    <action method="addColumnCountLayoutDepend">
-                        <layout>one_column</layout>
-                        <count>5</count>
-                    </action>
-                    <action method="addColumnCountLayoutDepend">
-                        <layout>two_columns_left</layout>
-                        <count>4</count>
-                    </action>
-                    <action method="addColumnCountLayoutDepend">
-                        <layout>two_columns_right</layout>
-                        <count>4</count>
-                    </action>
-                    <action method="addColumnCountLayoutDepend">
-                        <layout>three_columns</layout>
-                        <count>3</count>
-                    </action>
-                    <action method="setToolbarBlockName">
-                        <name>product_list_toolbar</name>
-                    </action>
-                    <!-- Since the addColumnCountLayoutDepend does not work, we are manually setting the max columns -->
-                    <action method="setColumnCount">
-                        <count>4</count>
-                    </action>
-                </block>
-            </block>
+
         </reference>
     </catalog_category_layered>
     <!--<catalog_category_layered>
@@ -551,25 +496,18 @@
     </review_product_list>
 
 
-    <customer_logged_out>
-        <reference name="header">
-            <block type="customer/form_login" name="header_customer_form_mini_login"
-                   template="customer/form/mini.login.phtml"/>
-            <block type="customer/form_register" name="customer_form_register"
-                   template="customer/form/mini.register.phtml">
-            </block>
-        </reference>
-    </customer_logged_out>
 
     <!--End of Customer Page Handlers-->
 
     <!-- registration block (sneha) -->
-    <customer_account_create>
 
-    </customer_account_create>
+
 
     <catalogsearch_result_index translate="label">
         <label>Quick Search Form</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
         <remove>left_first</remove>
 
         <reference name="content">

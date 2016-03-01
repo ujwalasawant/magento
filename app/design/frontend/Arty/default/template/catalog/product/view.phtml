@@ -54,81 +54,93 @@
 
 
                     <div class="row">
-                        <div class="product-name">
-                            <h4> <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h4>
-                        </div>
-                        <?php $_vendorName = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?>
-                        <?php echo $_vendorName->getVendorName() ?>
 
-                        <?php echo $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('bank_account_no') ?>
 
-                        <?php echo $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('propic') ?>
-                        <?php echo $this->get('registration');?>
-                        <!-- === any field vendor profile ===
-                        <?php echo Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('part_name') ?>
-                          <?php echo Mage::helper('udropship')->getVendor($_product)->getData('bank_name'); ?>
-                            <?php echo Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('City') ?>
-                            <?php $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?> <?php echo $_vendor->getData('name') ?>
-
-                            -->
 
                         <div>
-                            <?php echo $this->getChildHtml('alert_urls') ?>
-                        </div>
-                        <div>
-                            <?php echo $this->getChildHtml('product_type_data') ?>
-                        </div>
+                            <div class="row" >
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    <h5>
+                                        <?php echo "Company Name" . ": " . $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('company_name') ?>
+                                    </h5>
 
-                        <div>
+                                    <div class="product-name">
+                                        <h4> <?php echo "Product Name" . ": " . $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h4>
+                                    </div>
 
-                            <?php echo $this->getChildHtml('extrahint') ?>
-                        </div>
-                        <div>
-                            <?php if (!$this->hasOptions()): ?>
-                                <div class="add-to-box">
-                                    <?php if ($_product->isSaleable()): ?>
-                                        <?php echo $this->getChildHtml('addtocart') ?>
-                                        <?php if ($this->helper('wishlist')->isAllow() || $_compareUrl = $this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
-                                            <span class="or"></span>
+                                    <div>
+                                        <?php $_vendorName = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?>
+                                        <?php echo "Vendor Name" . ": " . $_vendorName->getVendorName() ?>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" >
+                                    <a>
+                                    <?php $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getFileUrl('propic') ?>
+                                    <img class="img img-responsive" src="<?php echo $_vendor; ?>" style=" width:80px ; height: 80px;"/>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <?php echo $this->getChildHtml('alert_urls') ?>
+                            </div>
+                            <div>
+                                <?php echo $this->getChildHtml('product_type_data') ?>
+                            </div>
+
+                            <div>
+
+                                <?php echo $this->getChildHtml('extrahint') ?>
+                            </div>
+                            <div>
+                                <?php if (!$this->hasOptions()): ?>
+                                    <div class="add-to-box">
+                                        <?php if ($_product->isSaleable()): ?>
+                                            <?php echo $this->getChildHtml('addtocart') ?>
+                                            <?php if ($this->helper('wishlist')->isAllow() || $_compareUrl = $this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                                                <span class="or"></span>
+                                            <?php endif; ?>
                                         <?php endif; ?>
-                                    <?php endif; ?>
-                                    <?php echo $this->getChildHtml('addto') ?>
-                                </div>
-                                <?php echo $this->getChildHtml('extra_buttons') ?>
-                            <?php elseif (!$_product->isSaleable()): ?>
-                                <div class="add-to-box">
-                                    <?php echo $this->getChildHtml('addto') ?>
-                                </div>
+                                        <?php echo $this->getChildHtml('addto') ?>
+                                    </div>
+                                    <?php echo $this->getChildHtml('extra_buttons') ?>
+                                <?php elseif (!$_product->isSaleable()): ?>
+                                    <div class="add-to-box">
+                                        <?php echo $this->getChildHtml('addto') ?>
+                                    </div>
 
-                            <?php endif; ?>
-                        </div>
-                        <div>
-                            <?php echo $this->getChildHtml('zipcode'); ?>
-                        </div>
-
-
-                        <div>
-                            <?php echo $this->getChildHtml('other'); ?>
-                        </div>
-                        <div class="priceli">
-                            <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
-                                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
-                            <?php endif; ?>
-                        </div>
-                        <div>
+                                <?php endif; ?>
+                            </div>
                             <div>
                                 <?php echo $this->getChildHtml('zipcode'); ?>
                             </div>
 
-                            <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
-                                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
-                            <?php endif; ?>
+
+                            <div>
+                                <?php echo $this->getChildHtml('other'); ?>
+                            </div>
+                            <div class="priceli">
+                                <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                                    <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                                <?php endif; ?>
+                            </div>
+                            <div>
+                                <div>
+                                    <?php echo $this->getChildHtml('zipcode'); ?>
+                                </div>
+
+                                <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                                    <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                                <?php endif; ?>
+                            </div>
                         </div>
+
+
                     </div>
-
-
                 </div>
-            </div>
 
 
         </form>
@@ -223,58 +235,60 @@
     <!--- crosssell Product -->
     <div>
         <?php if ($_crossSellProducts = $_product->getCrossSellProducts()): ?>
-                <?php $_countcrss = count($_crossSellProducts);?>
+            <?php $_countcrss = count($_crossSellProducts); ?>
 
         <?php endif; ?>
-        <?php if($_countcrss>1):?>
+        <?php if ($_countcrss > 1): ?>
         <div>
             <h4><?php echo $this->__('Recommended Combo Offer:') ?></h4>
         </div>
-                <div class="container">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#">Combo Offer</a></li>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#">Combo Offer</a></li>
 
-                    </ul>
+            </ul>
 
-                    <?php foreach ($_crossSellProducts as $_item): ?>
+            <?php foreach ($_crossSellProducts as $_item): ?>
 
-                        <?php $_item = Mage::getModel('catalog/product')->load($_item->getId()); ?>
+                <?php $_item = Mage::getModel('catalog/product')->load($_item->getId()); ?>
 
-                        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6 "> <!-- item-->
-                            <a href="<?php echo $_item->getProductUrl() ?>"
-                               title="<?php echo $this->htmlEscape($_item->getName()) ?>">
-                                <img class="product-image image img-responsive lightborder"
-                                     src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(200); ?>"
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-6 "> <!-- item-->
+                    <a href="<?php echo $_item->getProductUrl() ?>"
+                       title="<?php echo $this->htmlEscape($_item->getName()) ?>">
+                        <img class="product-image image img-responsive lightborder"
+                             src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(200); ?>"
 
-                                     alt="<?php echo $this->htmlEscape($_item->getName()) ?>"/>
-                            </a>
-
-
-                            <h5 class="product-name ">
-                                <a
-                                   class="upsellproductfont" href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a>
-                            </h5>
-                            <span class="priceblack upsellproductfont hidden-xs"><?php echo $this->getPriceHtml($_item, true) ?></span>
+                             alt="<?php echo $this->htmlEscape($_item->getName()) ?>"/>
+                    </a>
 
 
-                        </div>
+                    <h5 class="product-name ">
+                        <a
+                            class="upsellproductfont"
+                            href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a>
+                    </h5>
+                    <span
+                        class="priceblack upsellproductfont hidden-xs"><?php echo $this->getPriceHtml($_item, true) ?></span>
 
-                    <?php endforeach; ?>
-                    <?php endif; ?>
 
                 </div>
 
-    <!-- tab -->
-    <div>
-        <?php echo $this->getChildHtml('product_additional_data') ?>
+            <?php endforeach; ?>
+            <?php endif; ?>
+
+        </div>
+
+        <!-- tab -->
+        <div>
+            <?php echo $this->getChildHtml('product_additional_data') ?>
+        </div>
+
+        <!-- recently viewed product -->
+        <div>
+            <?php echo $this->getChildHtml('viewed.product') ?>
+
+        </div>
     </div>
+    <script type="text/javascript">
 
-    <!-- recently viewed product -->
-    <div>
-        <?php echo $this->getChildHtml('viewed.product') ?>
-
-    </div>
-</div>
-<script type="text/javascript">
-
-</script>
+    </script>

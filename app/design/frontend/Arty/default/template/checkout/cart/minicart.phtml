@@ -40,7 +40,7 @@ $_cartQty = Mage::getSingleton('checkout/cart')->getItemsCount();
     <span>  <img src="<?php echo $this->getSkinUrl('images/artcrt.png') ?>"/>
 
 </span>
-    <span> <?php echo "cart"."(".$_cartQty.")"; ?></span>
+    <span> <?php echo $_cartQty; ?></span>
 
 </a>
 <div id="header-cart" class="block block-cart skip-content">

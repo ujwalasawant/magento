@@ -116,10 +116,24 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
-                    <div class="input-box">
-                        <?php echo $this->getCountryHtmlSelect() ?>
-                    </div>
+                    <?php $_countries = Mage::getResourceModel('directory/country_collection')
+                        ->loadData()
+                        ->toOptionArray(false) ?>
+                    <?php if (count($_countries) > 0): ?>
+                        <div class="themeborder" style="width:280px;">
+                        <span class="span">
+                         <select name="country" style="width:265px" class="gender"  id="country">
+                                <option value="">– Please Select –</option>
+                                 <?php foreach($_countries as $_country): ?>
+                                     <option value="<?php echo $_country['value'] ?>">
+                                      <?php echo $_country['label'] ?>
+                                       </option>
+                                        <?php endforeach; ?>
+                          </select>
+
+                        </span>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </li>
             <li<?php if($this->canSetAsDefaultBilling()) echo ' class="control"' ?>>

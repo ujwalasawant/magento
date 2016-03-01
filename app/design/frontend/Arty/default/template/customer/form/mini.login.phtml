@@ -33,7 +33,7 @@
 <div class="container-fluid">
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content col-lg-12 col-md-10 col-sm-9 col-xs-4">
             <div class="modal-header">
 
                 <div class="row">
@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body ">
                 <!-- The form is placed inside the body of modal -->
 
 
@@ -113,40 +113,10 @@
 </div>
     <div>
 </form>
+
+
 <script type="text/javascript">
     //<![CDATA[
     var dataForm = new VarienForm('login-form', true);
     //]]>
-</script>
-<script>
-    $(document).ready(function () {
-        $('#loginForm').formValidation({
-            framework: 'bootstrap',
-            excluded: ':disabled',
-            icon: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                username: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The username is required'
-                        }
-                    }
-                },
-                password: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The password is required'
-                        }
-                    }
-                }
-            }
-        });
-    });
-    $('#loginModal').on('hidden.bs.modal', function () {
-        $('#loginForm').formValidation('resetForm', true);
-    });
 </script>

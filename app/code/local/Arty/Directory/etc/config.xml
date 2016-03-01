@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Arty_Directory>
+            <version>0.1.0</version>
+        </Arty_Directory>
+    </modules>
+    <global>
+        <blocks>
+            <arty_directory>
+                <class>Arty_Directory_Block</class>
+            </arty_directory>
+        </blocks>
+        <helpers>
+            <arty_directory>
+                <class>Arty_Directory_Helper</class>
+            </arty_directory>
+        </helpers>
+    </global>
+</config>

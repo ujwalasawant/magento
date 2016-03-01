@@ -77,8 +77,8 @@
                     <div class="row">
 
                     <div class="col-lg-offset-4 col-lg-2 col-md-offset-4 col-md-2 col-sm-offset-4 col-sm-2 col-xs-offset-3  actions text-left addnewadd " style="padding-top: 3% ">
-                        <a href="javaScript:void(0);" id="btnAddNewShipAddress"
-                           class="btn delvryhr"><?php echo $this->__('+ Add New Address'); ?>
+                        <a href="#demo1" id="btnAddNewShipAddress" data-toggle="collapse"
+                           class="btn delvryhr btn btn-info"><?php echo $this->__('+ Add New Address'); ?>
                         </a>
 
                         <script>
@@ -112,8 +112,8 @@
         <?php endif ?>
 
 
-        <li class="list-unstyled"
-            id="shipping-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif ?>>
+        <li class="collapse list-unstyled"
+            id="demo1"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif ?>>
             <fieldset class="my_account">
                 <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>"
                        id="shipping:address_id"/>

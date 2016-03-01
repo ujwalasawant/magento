@@ -38,81 +38,82 @@ $div = 1; ?>
         <?php foreach ($_categories as $_category): ?>
 
 
-                <div class="row <?php $I++;
-                if ($I == 1) {
-                    echo 'thirdH';
-                } elseif ($I == 2) {
-                    echo 'firstH';
-                } elseif ($I == 3) {
-                    echo 'secondH';
-                } elseif ($I == 4) {
-                    echo 'fourthH';
-                } elseif ($I == 5) {
-                    echo 'fifthH';
-                } else {
-                    echo 'sixthH';
-                }
 
-                ?>">
-                    <a href="<?php echo $_helper->getCategoryUrl($_category) ?>">
+            <div class="row  <?php $I++;
+            if ($I == 1) {
+                echo 'thirdH';
+            } elseif ($I == 2) {
+                echo 'firstH';
+            } elseif ($I == 3) {
+                echo 'secondH';
+            } elseif ($I == 4) {
+                echo 'fourthH';
+            } elseif ($I == 5) {
+                echo 'fifthH';
+            } else {
+                echo 'sixthH';
+            }
 
-                        <?php echo $_category->getName() . '<br/>';
+            ?>">
+                <a style="text-decoration: none;" href="<?php echo $_helper->getCategoryUrl($_category) ?>">
+
+                    <h3 style="color:white; padding-left: 1%; "> <?php echo $_category->getName() . '<br/>';
 
                         $products = Mage::getModel('catalog/product')
                             ->getCollection()
                             ->addCategoryFilter($_category)
                             ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
                             ->load();
-                        ?>
-                    </a>
-                </div>
-
-
-
+                        ?></h3>
+                </a>
+            </div>
 
             <div class="row subcontent">
+
                 <?php $i = 1;
                 foreach ($products as $product): ?>
 
                     <?php if ($i == 5): ?>
 
-                        <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-6 _sub-padding <?php if ($div % 2 == 0) {
-                            echo "pull-left";
-                        } ?>  ">
-                        <a href="<?php echo $product->getProductUrl() ?>">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 sub-padding <?php if ($div % 2 == 0) {
+                            echo "pull-left";} ?>">
+                            <a href="<?php echo $product->getProductUrl() ?>">
 
-                             <figure>
-                                <img class=" lightborder img img-responsive imgF " style="border:solid black"
-                                     src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(600) ?>"
-                                     alt="<?php echo $this->stripTags($product->getName(), null, true) ?>"/>
+                                <figure>
+                                    <img class=" lightborder img img-responsive imgF " style="border:solid black"
+                                         src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(600) ?>"
+                                         alt="<?php echo $this->stripTags($product->getName(), null, true) ?>"/>
 
-                                     <figcaption>
-                                     <h3>I like it!</h3>
-                                     <p><?php echo $product->getName() ?></p>
-                                     </figcaption>
-                                     </figure>
+                                    <figcaption>
+                                        <h3>I like it!</h3>
 
-                        </a>
+                                        <p><?php echo $product->getName() ?></p>
+                                    </figcaption>
+                                </figure>
+
+                            </a>
 
                         </div>
                     <?php else: ?>
 
                         <?php if ($i == 1) : ?>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 _subpadding <?php if ($div % 2 == 0) {
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 subpadding <?php if ($div % 2 == 0) {
                                 echo "pull-right";
                             }
                             $div++; ?>" >
                             <div class="row" >
                         <?php endif; ?>
-                        <div data-content="<?php echo $this->stripTags($product->getName(), null, true) ?>" class=" col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
+                        <div data-content="<?php echo $this->stripTags($product->getName(), null, true) ?>"
+                             class=" col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
                             <a href="<?php echo $product->getProductUrl() ?>">
 
                                 <figure>
-                                <img class="img img-responsive lightborder imgF" style="border: solid black"
-                                     src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(600) ?>"
-                                     alt="<?php echo $this->stripTags($product->getName(), null, true) ?>"/>
+                                    <img class="img img-responsive lightborder imgF" style="border: solid black"
+                                         src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(600) ?>"
+                                         alt="<?php echo $this->stripTags($product->getName(), null, true) ?>"/>
                                     <figcaption>
                                         <h3>I like it!</h3>
+
                                         <p><?php echo $product->getName() ?></p>
                                     </figcaption>
 
@@ -130,7 +131,6 @@ $div = 1; ?>
                     $i++;
 
                 endforeach; ?>
-
 
             </div>
 

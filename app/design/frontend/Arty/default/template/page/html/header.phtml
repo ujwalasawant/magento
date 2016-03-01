@@ -76,7 +76,7 @@
         <!-- Skip Links -->
         <div class="row"  >
 
-        <div class=" col-lg-5 col-md-6 col-sm-8  "  id="nav" >
+        <div class=" col-lg-5 col-md-5 col-sm-8  "  id="nav" >
 
         <div class="skip-links" >
             <a href="#header-nav" class="skip-link skip-nav">
@@ -88,19 +88,22 @@
         <?php echo $this->getChildHtml('topMenu') ?>
         </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-4 pull-right"  >
-           <div class="float" id="searchId" >
+        <div class="col-lg-3 col-md-3 col-sm-3 pull-right" style="margin-top: 0" >
+           <div class="float" id="searchId"  style="padding-bottom: 2%">
                <a href="#header-search" class="skip-link skip-search">
                 <span class="icon"></span>
             </a>
            </div>
-          <div class="float" >
+          <div class="float" style="padding-bottom: 2%" >
            <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account" class="skip-link skip-account">
                 <span class="icon"></span>
                 </a>
-
+              <div id="header-account" class="skip-content col-lg-3 col-md-4 col-sm-3 pull-right lightborder" >
+                  <?php echo $this->getChildHtml('topLinks') ?>
+              </div>
           </div>
-            <div class="float " ><?php echo $this->getChildHtml('minicart_head'); ?>
+
+            <div class="float " style="padding-bottom: 2%"><?php echo $this->getChildHtml('minicart_head'); ?>
                </div>
         </div>
 
@@ -118,20 +121,18 @@
         </div>
         <!-- Account -->
 
-        <div id="header-account" class="skip-content col-lg-3 col-md-4 col-sm-3 pull-right lightborder" >
-            <?php echo $this->getChildHtml('topLinks') ?>
-        </div>
+
 
     </div>
 
 </header>
 
-<img  class="show img img-responsive" src="<?php echo $this->getSkinUrl('images/smallHeader.png')?>"  width="100%"/>
+<img  class="show img img-responsive" style="padding-top: 3%" src="<?php echo $this->getSkinUrl('images/smallHeader.png')?>"  width="100%"/>
 
 
 <?php echo $this->getChildHtml('topContainer'); ?>
-<script>
-/*
+<script>/*
+
     jQuery(document).ready(function () {
 
         var hdNv = jQuery('#header');
