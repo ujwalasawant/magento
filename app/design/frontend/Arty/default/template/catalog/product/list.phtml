@@ -34,11 +34,13 @@
 /* @var $this Mage_Catalog_Block_Product_List */
 ?>
 
-
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-
+<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({
+        publisher: "c2761162-70e8-4ef1-8f39-e76113afa873",
+        doNotHash: false,
+        doNotCopy: false,
+        hashAddressBar: false
+    });</script>
 
 
 <div>
@@ -54,143 +56,166 @@
     <?php else: ?>
 
 
-        <!--<span class='st_email' displayText='Email'></span> -->
+    <!--<span class='st_email' displayText='Email'></span> -->
 
-        <div class="">
-            <div class="pin"><!-- Go to www.addthis.com/dashboard to customize your tools -->
-
-
-                <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
-                <?php $_collectionSize = $_productCollection->count() ?>
-                <?php $_columnCount = $this->getColumnCount(); ?>
-                <ul class="products-grid products-grid--max-<?php echo $_columnCount; ?>-col">
-                    <?php $i = 0;
-                    foreach ($_productCollection as $_product): ?>
-
-                        <div class="item ">
+    <div class="">
+        <div class="pin"><!-- Go to www.addthis.com/dashboard to customize your tools -->
 
 
-                            <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
-                                <!-- product block header  -->
-                                <div class="lightborder">
+            <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+            <?php $_collectionSize = $_productCollection->count() ?>
+            <?php $_columnCount = $this->getColumnCount(); ?>
+            <ul class="products-grid products-grid--max-<?php echo $_columnCount; ?>-col">
+                <?php $i = 0;
+                foreach ($_productCollection as $_product): ?>
+
+                    <div class="item ">
 
 
-                                    <?php $wishlist = Mage::getModel('wishlist/item')->load($_product->getId(), 'product_id');
-                                    if ($wishlist->getId())
-                                        //product is added
-                                        echo "<span title='Moved to favorites' class='favoritesbtnS'/> ";
-                                    else
-                                        //add product to wishlist
-                                        echo "<a class='favoritesbtnF' title='Add to Favorites' href='" . $this->helper('wishlist')->getAddUrl($_product) . "'></a>";; ?>
+                        <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
+                            <!-- product block header  -->
+                            <div class=" lightborder ">
 
 
-                                    <button type="button" class="glyphicon glyphicon-plus-sign "
-                                            onclick="lightbox_open(this.id);"
-                                            style="background: none ;margin-right:5% ;border: none">
-                                    </button>
+                                <?php $wishlist = Mage::getModel('wishlist/item')->load($_product->getId(), 'product_id');
+                                if ($wishlist->getId())
+                                    //product is added
+                                    echo "<span title='Moved to favorites' class='favoritesbtnS'/> ";
+                                else
+                                    //add product to wishlist
+                                    echo "<a class='favoritesbtnF' title='Add to Favorites' href='" . $this->helper('wishlist')->getAddUrl($_product) . "'></a>";; ?>
 
 
-                                    <button id="share" type="button"
-                                            class="st_sharethis_custom glyphicon glyphicon-share-alt ">
-
-                                    </button>
 
 
+                                <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+                                <script type="text/javascript">stLight.options({
+                                        publisher: "c2761162-70e8-4ef1-8f39-e76113afa873",
+                                        doNotHash: false,
+                                        doNotCopy: false,
+                                        hashAddressBar: false
+                                    });</script>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel"> share products</h4>
+
+                                            </div>
+                                            <div class="modal-body">
+                                                <span class='st_facebook_large' displayText='Facebook'></span>
+                                                <span class='st_pinterest_large' displayText='Pinterest'></span>
+                                                <span class='st_twitter_large' displayText='Tweet'></span>
+                                                <span class='st_googleplus_large' displayText='Google +'></span>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
+                                <button id="myBtn" class="sharethis1 glyphicon glyphicon-share-alt" data-toggle="modal" data-target="#myModal"></button>
+
+                                <script>
+                                    $(document).ready(function () {
+
+                                        $("#myBtn").click(function(){
+                                            $('#myModal').modal('show');
+                                        });
+                                    });
+
+                                </script>
 
 
-                                <div class=" well " style="padding: 0px 0px 0px 0px ; margin: 0px 0px 0px 0px">
+
+                            </div>
 
 
-                                    <?php // $_imgSize = 200 ; ?>
+                            <div class=" well wellpdmg btm" style="margin-bottom: 0">
 
 
-
-                                        <a href="<?php echo $_product->getProductUrl() ?>"
-                                           title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
-                                            <img id="product-collection-image-<?php echo $_product->getId(); ?>"
-                                                 width="100%"
-                                                 src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
-                                                 alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
-                                        </a>
+                                <?php // $_imgSize = 200 ; ?>
 
 
-                                </div>
+                                <a href="<?php echo $_product->getProductUrl() ?>"
+                                   title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>">
+                                    <img id="product-collection-image-<?php echo $_product->getId(); ?>"
+                                         width="100%"
+                                         src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize($_imgSize); ?>"
+                                         alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+                                </a>
 
 
-                                <div class="product-info lightborder" style=" margin: 2px 0px 1px 0px ;">
+                            </div>
 
-                                    <ul class="list-unstyled">
-                                        <li style="text-align: left ; ">
-                                            <a href="<?php echo $_product->getProductUrl() ?>"
+
+                            <div class="product-info lightborder paddngLeft">
+
+                                <ul class="list-unstyled ">
+                                    <li class="text-left">
+                                        <b> <a href="<?php echo $_product->getProductUrl() ?>" class="blackColor"
                                                title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
                                                 <?php $id = $_product->getId();
                                                 echo "(" . $id . ")" ?>
-                                            </a>
-                                        </li>
-                                        <li style="text-align: left; ">
-                                            <?php
-                                            $type = $_product->getTypeId();
-                                            echo "$type";
-                                            ?>
-                                        </li>
+                                            </a></b>
+                                    </li>
+                                   
 
-                                        <?php
-                                        // Provides extra blocks on which to hang some features for products in the list
-                                        // Features providing UI elements targeting this block will display directly below the product name
+                                    <?php
+                                    // Provides extra blocks on which to hang some features for products in the list
+                                    // Features providing UI elements targeting this block will display directly below the product name
 
-                                        if ($this->getChild('name.after')) {
-                                            $_nameAfterChildren = $this->getChild('name.after')->getSortedChildren();
-                                            foreach ($_nameAfterChildren as $_nameAfterChildName) {
-                                                $_nameAfterChild = $this->getChild('name.after')->getChild($_nameAfterChildName);
-                                                $_nameAfterChild->setProduct($_product);
-                                                echo $_nameAfterChild->toHtml();
-                                            }
+                                    if ($this->getChild('name.after')) {
+                                        $_nameAfterChildren = $this->getChild('name.after')->getSortedChildren();
+                                        foreach ($_nameAfterChildren as $_nameAfterChildName) {
+                                            $_nameAfterChild = $this->getChild('name.after')->getChild($_nameAfterChildName);
+                                            $_nameAfterChild->setProduct($_product);
+                                            echo $_nameAfterChild->toHtml();
                                         }
-                                        ?>
-                                        <li style="text-align: right">
-                                            <div class="product-price ">
+                                    }
+                                    ?>
+                                    <li class="text-right paddingRight">
+                                        <div class="product-price ">
 
-                                                <?php echo $this->getPriceHtml($_product, true) ?>
-                                                <?php if ($_product->getRatingSummary()): ?>
-                                                    <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
-                                                <?php endif; ?>
-                                            </div>
-                                        </li>
+                                            <?php echo $this->getPriceHtml($_product, true) ?>
+                                            <?php if ($_product->getRatingSummary()): ?>
+                                                <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </li>
 
-                                        <li style="text-align: left ; margin: 2px 0px 10px 0px">
-                                            <div class="actions">
-                                                <?php if (!$_product->canConfigure() && $_product->isSaleable()): ?>
-                                                    <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
-                                                            class="addtocart"
-                                                            onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+                                    <li class="text-left">
 
-                                                    </button>
-                                                <?php elseif ($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>
-                                                    <a title="<?php echo $this->__('View Details') ?>" class="button"
-                                                       href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('View Details') ?></a>
-                                                <?php else: ?>
-                                                    <p class="availability out-of-stock">
-                                                        <span><?php echo $this->__('Out of stock') ?></span></p>
-                                                <?php endif; ?>
+                                        <?php if (!$_product->canConfigure() && $_product->isSaleable()): ?>
+                                            <button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+                                                    class="addtocart"
+                                                    onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
 
-                                            </div>
-                                        </li>
+                                            </button>
 
-                                    </ul>
+                                        <?php else: ?>
+                                            <p class="availability out-of-stock">
+                                                <span><?php echo $this->__('Out of stock') ?></span></p>
+                                        <?php endif; ?>
 
-                                </div>
-                            </li>
+                                    </li>
 
-                        </div>
-                    <?php endforeach ?>
+                                </ul>
 
-                    <script
-                        type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd', 'even', 'first', 'last'])</script>
-                    <?php endif; ?>
-                </ul>
-            </div>
+                            </div>
+                        </li>
+
+                    </div>
+                <?php endforeach ?>
+
+                <script
+                    type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd', 'even', 'first', 'last'])</script>
+                <?php endif; ?>
+            </ul>
         </div>
+    </div>
 
 </div>
 <?php
@@ -211,12 +236,12 @@ if ($this->getChild('after')) {
 <script type="text/javascript"> stLight.options({publisher: '12345',}); </script>
 
 <script>
-  /*  $(".box").bind('mouseenter', function (event) {
-        $(this).prev(".quickview").stop(true, true).fadeIn(100);
-    }).parent().bind('mouseleave', function (e) {
-        $(this).find(".quickview").stop(true, true).fadeOut(100);
-    });
-    function setColor(e, btn, color) {
+    /*  $(".box").bind('mouseenter', function (event) {
+     $(this).prev(".quickview").stop(true, true).fadeIn(100);
+     }).parent().bind('mouseleave', function (e) {
+     $(this).find(".quickview").stop(true, true).fadeOut(100);
+     });
+     function setColor(e, btn, color) {
      var target = e.target,
      count = +target.dataset.count;
 

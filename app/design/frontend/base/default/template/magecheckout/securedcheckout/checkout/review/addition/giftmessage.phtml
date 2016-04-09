@@ -1,0 +1,44 @@
+<?php
+/**
+ * Magecheckout
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://wiki.magecheckout.com/general/license.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magecheckout
+ * @package     Magecheckout_SecuredCheckout
+ * @copyright   Copyright (c) 2015 Magecheckout (http://www.magecheckout.com/)
+ * @license     http://wiki.magecheckout.com/general/license.html
+ */
+?>
+<?php $_helper = Mage::helper('securedcheckout/checkout_giftmessage'); ?>
+<?php if ($this->canShow()): ?>
+    <div id="one-step-checkout-order-review-giftmessage">
+        <div class="securedcheckout-giftmessage">
+            <?php if (!$this->getQuote()->isVirtual()): ?>
+                <?php echo $_helper->getInline('onepage_checkout', $this->getQuote(), $this->getDontDisplayContainer()) ?>
+            <?php endif; ?>
+        </div>
+    </div>
+    <script>
+        //<![CDATA[
+        var securedCheckoutGiftMessage = new MagecheckoutSecuredCheckoutReviewGiftmessage({
+            giftMessageUrl: '<?php echo $this->getGiftMessageUrl()?>',
+            giftMessageContainer: '#one-step-checkout-order-review-giftmessage',
+            giftMessageForm: '#use-gift-message-form',
+            useGiftmessageCheckbox: '#use_gift_messages',
+            isUsedGiftMessage: '#is_used_gift_messages',
+            inputElementIds: ['gift-message-whole-from', 'gift-message-whole-to', 'gift-message-whole-message']
+
+        });
+        //]]>
+    </script>
+<?php endif; ?>

@@ -31,19 +31,20 @@
  * @see Mage_Customer_Block_Address_Edit
  */
 ?>
-<?php if($this->getTitle()): ?>
-    <div class="page-title">
-        <h1><?php echo $this->getTitle() ?></h1>
-    </div>
-<?php endif; ?>
+<div class="AccC">
 <?php echo $this->getMessagesBlock()->toHtml() ?>
-<form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate" class="scaffold-form" enctype="multipart/form-data">
+<form action="<?php echo $this->getSaveUrl() ?>" method="post" id="form-validate" class="scaffold-form  " enctype="multipart/form-data">
+    <div class="block-title text-left" >
+        <h4 class="CcSubheader"><strong><?php echo $this->__('Address'); ?></strong></h4>
+    </div>
+
+    <div class=" hotsell paddngLeft " >
     <div class="fieldset">
         <?php echo $this->getBlockHtml('formkey')?>
         <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
         <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
-        <h2 class="legend"><?php echo $this->__('Address') ?></h2>
-        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+
+
         <ul class="form-list list-unstyled">
             <li class="fields">
                 <?php echo $this->getNameBlockHtml() ?>
@@ -93,7 +94,24 @@
                         <input type="text" name="city" value="<?php echo $this->escapeHtml($this->getAddress()->getCity()) ?>"  title="<?php echo $this->__('City') ?>" class="input-text themeborder <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" id="city" />
                     </div>
                 </div>
+                
+            </li>
+            <li class="fields">
                 <div class="field">
+                    <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text themeborder validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="country" class="required "><em>*</em><?php echo $this->__('Country') ?></label>
+                    <div class="input-box ">
+                        <?php echo $this->getCountryHtmlSelect() ?>
+
+                    </div>
+                </div>
+
+<div class="field">
                     <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
                     <div class="input-box">
                         <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select themeborder" style="display:none;">
@@ -106,34 +124,6 @@
                         </script>
                         <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" />
                     </div>
-                </div>
-            </li>
-            <li class="fields">
-                <div class="field">
-                    <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
-                    <div class="input-box">
-                        <input type="text" name="postcode" value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text themeborder validate-zip-international <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" />
-                    </div>
-                </div>
-                <div class="field">
-                    <?php $_countries = Mage::getResourceModel('directory/country_collection')
-                        ->loadData()
-                        ->toOptionArray(false) ?>
-                    <?php if (count($_countries) > 0): ?>
-                        <div class="themeborder" style="width:280px;">
-                        <span class="span">
-                         <select name="country" style="width:265px" class="gender"  id="country">
-                                <option value="">– Please Select –</option>
-                                 <?php foreach($_countries as $_country): ?>
-                                     <option value="<?php echo $_country['value'] ?>">
-                                      <?php echo $_country['label'] ?>
-                                       </option>
-                                        <?php endforeach; ?>
-                          </select>
-
-                        </span>
-                        </div>
-                    <?php endif; ?>
                 </div>
             </li>
             <li<?php if($this->canSetAsDefaultBilling()) echo ' class="control"' ?>>
@@ -156,12 +146,13 @@
             </li>
         </ul>
     </div>
-    <div class="buttons-set">
-        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+    <div class="buttons-set" style="padding-bottom: 2%;" >
         <button type="submit" title="<?php echo $this->__('Save Address') ?>" class="button Artybutton"><span><span><?php echo $this->__('Save Address') ?></span></span></button>
     </div>
+    </div>
 </form>
-<script type="text/javascript">
+</div>
+    <script type="text/javascript">
     //<![CDATA[
     var dataForm = new VarienForm('form-validate', true);
     new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');

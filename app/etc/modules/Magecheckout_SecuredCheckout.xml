@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magecheckout_SecuredCheckout>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Magecheckout_SecuredCheckout>
+    </modules>
+</config>

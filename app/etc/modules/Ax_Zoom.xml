@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<!--
+/**
+*  Module: jQuery AJAX-ZOOM for Magento, /app/etc/modules/Ax_Zoom.xml
+*  Copyright: Copyright (c) 2010-2015 Vadim Jacobi
+*  License Agreement: http://www.ajax-zoom.com/index.php?cid=download
+*  Version: 1.0.9
+*  Date: 2015-12-01
+*  Review: 2015-12-01
+*  URL: http://www.ajax-zoom.com
+*  Documentation: http://www.ajax-zoom.com/index.php?cid=modules&module=magento
+*
+*  @author    AJAX-ZOOM <support@ajax-zoom.com>
+*  @copyright 2010-2015 AJAX-ZOOM, Vadim Jacobi
+*  @license   http://www.ajax-zoom.com/index.php?cid=download
+*/
+-->
+<config>
+    <modules>
+        <Ax_Zoom>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Ax_Zoom>
+    </modules>
+</config>

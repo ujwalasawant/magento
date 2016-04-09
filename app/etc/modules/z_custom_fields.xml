@@ -88,7 +88,7 @@
                         <label>Cheque on Behalf</label>
                         <!-- Fieldset to show the field in, see udropship config.xml for default ones -->
                         <fieldset>integration</fieldset>
-                        <reg_class>validate-alphanum</reg_class>
+
                         <!-- Position within the fieldset -->
                         <position>16</position>
                         <!-- Default value for the field -->
@@ -145,6 +145,33 @@
                         <position>99</position>
                     </propic>
 
+                    <Banner>
+                        <label>Banner</label>
+                        <type>image</type>
+                        <fieldset>integration</fieldset>
+                        <position>98</position>
+                    </Banner>
+
+                    <PanCard>
+                        <label>Pancard Image</label>
+                        <type>image</type>
+                        <fieldset>integration</fieldset>
+                        <position>97</position>
+                    </PanCard>
+
+                    <AddrsPrf>
+                        <label>Address Proof Image</label>
+                        <type>image</type>
+                        <fieldset>integration</fieldset>
+                        <position>96</position>
+                    </AddrsPrf>
+
+                    <CancelCheque>
+                        <label>CancelCheque</label>
+                        <type>image</type>
+                        <fieldset>integration</fieldset>
+                        <position>95</position>
+                    </CancelCheque>
 
                     <!-- Dropdown field -->
                     <my_country_field>

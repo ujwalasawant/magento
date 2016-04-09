@@ -4,7 +4,7 @@
 
 
 <div class="block block-homepage">
-    <div class="row secondH header2pd" style="color:black;">
+    <div class="row secondH header2pd Hpaddnglft" style="color:black;">
         <span><?php echo $this->getTitle(); ?></span>
     </div>
 
@@ -22,32 +22,33 @@
 
                             <?php // echo $_product->getData('is_salable') . Mage::getStoreConfig('homepage/options/salable');  ?>
                             <?php if ($_product->getData('is_salable')): ?>
-                                <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 subpadding">
+                                <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 wellpdmg">
                                     <a href="<?php echo $_product->getProductUrl() ?>">
                                         <figure>
-                                        <img class="lightborder img img-responsive"  style="border: solid black"
-                                             src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(280) ?>"
-                                             alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
-                                        <figcaption>
-                                            <h3>I like it!</h3>
-                                            <p><?php echo $_product->getName() ?></p>
-                                        </figcaption>
+                                            <img class="lightborder img img-responsive"
+                                                 src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(280) ?>"
+                                                 alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
+                                            <figcaption>
+                                                <h3>I like it!</h3>
+
+                                                <p><?php echo $_product->getName() ?></p>
+                                            </figcaption>
                                         </figure>
                                     </a>
                                 </div>
                             <?php else: ?>
                                 <?php if (Mage::getStoreConfig('homepage/options/salable')) : ?>
-                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 subpadding">
+                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 wellpdmg">
                                         <a href="<?php echo $_product->getProductUrl() ?>">
 
                                             <figure>
-                                            <img class="lightborder img img-responsive"  style="border: solid black"
-                                                 src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(280) ?>"
-                                                 alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
-                                            <figcaption>
-                                                <h3>I like it!</h3>
-                                                <p><?php echo $_product->getName() ?></p>
-                                            </figcaption>
+                                                <img class="lightborder img img-responsive"
+                                                     src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(280) ?>"
+                                                     alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
+                                                <figcaption>
+
+                                                    <p><?php echo $_product->getName() ?></p>
+                                                </figcaption>
                                             </figure>
                                         </a>
                                     </div>
@@ -61,19 +62,23 @@
                 </div>
             </div>
             <?php if ($_product->getData('is_salable')): ?>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  sub-padding" >
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 wellpdmg">
 
-                <a href="<?php echo $_product->getProductUrl() ?>" >
-                    <figure>
-                    <img class="lightborder img img-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(572) ?>"  style="border: solid black" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" />
-                        <figcaption>
-                            <h3>I like it!</h3>
-                            <p><?php echo $_product->getName() ?></p>
-                        </figcaption>
-                    </figure>
-                </a>
+                    <a href="<?php echo $_product->getProductUrl() ?>">
+                        <figure >
+                            <img class="lightborder  img img-responsive"
+                                 src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(572) ?>"
 
-            </div>
+                                 alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
+                            <figcaption>
+
+
+                                <p><?php echo $_product->getName() ?></p>
+                            </figcaption>
+                        </figure>
+                    </a>
+
+                </div>
             <?php endif; ?>
         </div>
     <?php else: ?>

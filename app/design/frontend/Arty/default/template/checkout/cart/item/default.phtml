@@ -28,10 +28,6 @@
 ?>
 
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-
 
 
 <?php
@@ -385,7 +381,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <?php endif; ?>
 
 
-        <a style="color: rgb(204, 78, 92)" href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove Item') ?>">
+        <a class="paddnlft ColorShdR"  href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove Item') ?>">
             <span class="glyphicon glyphicon-trash"></span>
         </a>
 

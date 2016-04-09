@@ -1,0 +1,72 @@
+<?php
+/**
+ * Magecheckout
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://wiki.magecheckout.com/general/license.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magecheckout
+ * @package     Magecheckout_SecuredCheckout
+ * @copyright   Copyright (c) 2015 Magecheckout (http://www.magecheckout.com/)
+ * @license     http://wiki.magecheckout.com/general/license.html
+ */
+?>
+<?php $_canShow = $this->canShow(); ?>
+<?php if ($_canShow): ?>
+    <?php $_helper = $this->getHelperConfig(); ?>
+    <?php if ($_helper->isCoupon()): ?>
+        <?php $_currentCoupon = $this->getCouponCode(); ?>
+        <div class="block-wrapper">
+            <div class="coupon-message"></div>
+            <div id="discount-code" class="discount-form">
+                <label for="coupon_code"><?php echo $this->__('Coupon Code:') ?></label>
+
+                <div class="input-box">
+                    <input type="text" id="coupon_code" class="input-text" name="coupon_code"
+                           value="<?php echo $_currentCoupon ? $_currentCoupon : ''; ?>"/>
+                </div>
+                <div class="ac-button">
+                    <?php if ($_helper->isApplyCouponButton()) : ?>
+                        <button id="one-step-checkout-coupon-code-cancel-btn" type="button" class="button"
+                                onclick="return false;"<?php if (!$_currentCoupon) : ?> style="display:none;"<?php endif; ?>
+                                title="<?php echo $this->__('Cancel Coupon'); ?>"
+                            >
+                            <span><span><?php echo $this->__('Cancel Coupon'); ?></span></span>
+                        </button>
+                        <button type="button" id="one-step-checkout-coupon-code-apply-btn" class="button"
+                                onclick="return false;"<?php if ($_currentCoupon) : ?> style="display:none;"<?php endif; ?>
+                                title="<?php echo $this->__('Apply Coupon'); ?>"
+                            >
+                            <span><span><?php echo $this->__('Apply Coupon'); ?></span></span>
+                        </button>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+	<script>
+		//<![CDATA[
+		var securedCheckoutReviewCoupon = new MagecheckoutSecuredCheckoutReviewCoupon({
+			couponContainer: '#one-step-checkout-review-coupon',
+			couponInput: 'coupon_code',
+			applyCouponUrl: '<?php echo $this->getApplyCouponAjaxUrl()?>',
+			isAppliedCoupon: <?php echo $this->getCouponCode() ? 1 : 0; ?>,
+			showApplyButton: <?php echo $this->getShowApplyButton()?1:0 ?>,
+			applyCouponButton: '#one-step-checkout-coupon-code-apply-btn',
+			cancelCouponButton: '#one-step-checkout-coupon-code-cancel-btn',
+			messageContainer: '.coupon-message',
+			errorClass: 'one-step-checkout-error-msg',
+			successClass: 'one-step-checkout-success-msg'
+		})
+		//]]>
+	</script>
+<?php endif; ?>

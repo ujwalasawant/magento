@@ -1,0 +1,52 @@
+<?php
+/**
+ * Magecheckout
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://wiki.magecheckout.com/general/license.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magecheckout
+ * @package     Magecheckout_SecuredCheckout
+ * @copyright   Copyright (c) 2015 Magecheckout (http://www.magecheckout.com/)
+ * @license     http://wiki.magecheckout.com/general/license.html
+ */
+?>
+<div id="one-step-checkout-place-order">
+    <button class="button" type="button"
+            title="<?php echo $this->__('Place Order Now'); ?>"
+            id="place-order-button">
+        <?php if ($this->showGrandTotal()): ?>
+            <span class="one-step-checkout-place-order-grand-total">
+				<span class="total-span">
+                   <p
+                       class="one-step-checkout-place-order-label"><?php echo $this->__('Grand Total'); ?>
+                       <span
+                           class="one-step-checkout-place-order-amount"><?php echo $this->getGrandTotal(); ?></span>
+                   </p>
+                    <span class="one-step-checkout-place-order-process"
+                          style="display:none;">
+					<img
+                        src="<?php echo $this->getSkinUrl('css/magecheckout/securedcheckout/images/ajax-loader.gif') ?>"/>
+					</span>
+				</span>
+            </span>
+        <?php endif; ?>
+
+        <span
+            class="one-step-checkout-place-order-title"><?php echo $this->__('Place Order'); ?></span>
+    </button>
+    <div class="one-step-checkout-place-order-please-wait"
+         style="display: none">
+        <img
+            src="<?php echo $this->getSkinUrl('css/magecheckout/securedcheckout/images/notice-loader.gif') ?>"/>
+        <?php echo $this->__('Please wait, processing your order...') ?>
+    </div>
+</div>

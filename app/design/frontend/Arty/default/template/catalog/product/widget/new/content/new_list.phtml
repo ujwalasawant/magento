@@ -12,9 +12,6 @@ $categories = $category->getCollection()
         <!-- Display Each Subcategory Image and Name  -->
 
         <?php foreach ($categories as $category): ?>
-
-
-
             <!--  Products from within each subcategory  -->
             <?php
             $_helper = $this->helper('catalog/output');
@@ -28,7 +25,6 @@ $categories = $category->getCollection()
             <div class="widget widget-new-products widget-center">
 
                 <div class="widget-products widget-container" >
-                    <?php echo $this->getPagerHtml() ?>
 
                     <!-- Display Each product's detailed info  -->
                     <?php foreach ($products->getItems() as $product): ?>
@@ -43,7 +39,7 @@ $categories = $category->getCollection()
                                                 src="<?php echo Mage::getBaseUrl('media') . 'catalog' . DS . 'category' . DS . $thumbFile; ?>"
                                                 alt="<?php echo $this->htmlEscape($category->getName()) ?>"/>
                                         <?php endif; ?>
-                                        <h4 style="margin-left: 35%" class="align-center"><?php echo $category->getName() ?></h4>
+                                        <h4  class="align-center"><?php echo $category->getName() ?></h4>
                                     </a>
                                 </div>
 
@@ -57,7 +53,7 @@ $categories = $category->getCollection()
                                             width="292" height="290"
                                             alt="<?php echo $this->stripTags($this->getImageLabel($product, 'small_image'), null, true) ?>"/></a>
                                     <?php // Product description ?>
-                                    <div >
+
 
                                         <div class="row pricerow">
                                             <div class="col-lg-8">
@@ -143,9 +139,13 @@ $categories = $category->getCollection()
 
                                             </div>
                                             <div class="row product-owner lightborder ">
-                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 " >
-                                                    <?php $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getFileUrl('propic') ?>
-                                                    <img src="<?php echo $_vendor; ?>" style=" width:80px ; height: 80px;"/>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 " >
+                                                    <a href="<?php  echo
+                                                     Mage::helper('umicrosite')->getVendorBaseUrl($_product->getUdropshipVendor()) ?>">
+                           <?php  $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getFileUrl('propic') ?>
+                                                        <img class="img img-responsive" src="<?php echo $_vendor; ?>" width="265px"
+                                                             height="265px"/>
+                                                    </a>
                                                 </div>
                                                 <div class="col-lg-6 col-lg-offset-4" >
                                                     <?php
@@ -162,7 +162,7 @@ $categories = $category->getCollection()
                                             </div>
 
                                         </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

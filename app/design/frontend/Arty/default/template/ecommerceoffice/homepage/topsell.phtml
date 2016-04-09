@@ -4,68 +4,66 @@
 
 
 <div class="block block-homepage">
-    <div class="text-right row block-title title-homepage-topsellers firstH headerlablepd" style="color:white;">
+    <div class=" row block-title title-homepage-topsellers firstH textH mdtextH textxshd" style="color:white;">
         <span class=""><?php echo $this->getTitle(); ?></span>
     </div>
 
 
-        <?php if (sizeof($_products)): ?>
-        <div class="row subcontent" >
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
-            <?php foreach ($_products->getItems() as $_product): ?>
+    <?php if (sizeof($_products)): ?>
+        <div class="row subcontent">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    <?php foreach ($_products->getItems() as $_product): ?>
 
-                <div class=" products-grid">
-
-
-                        <?php //echo $_product->getData('is_salable') . Mage::getStoreConfig('homepage/options/salable');  ?>
-                        <?php if ($_product->getData('is_salable')): ?>
-
-                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 subpadding" >
-                                <a href="<?php echo $_product->getProductUrl() ?>" >
-                                    <figure>
-                                    <img class="lightborder img img-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(280) ?>" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"  style="border: solid black"/>
-                                        <figcaption>
-                                            <h3>I like it!</h3>
-                                            <p><?php echo $_product->getName() ?></p>
-                                        </figcaption>
-                                    </figure>
-                                </a>
-                            </div>
+                        <div class=" products-grid">
 
 
-                        <?php else: ?>
-                            <?php if( Mage::getStoreConfig('homepage/options/salable')) : ?>
+                            <?php //echo $_product->getData('is_salable') . Mage::getStoreConfig('homepage/options/salable');  ?>
+                            <?php if ($_product->getData('is_salable')): ?>
 
-                                <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 subpadding" >
-                                    <a href="<?php echo $_product->getProductUrl() ?>" >
-                                        <figure>
-                                        <img class="lightborder img img-responsive" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(280) ?>" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"  style="border: solid black"/>
-                                            <figcaption>
-                                                <h3>I like it!</h3>
-                                                <p><?php echo $_product->getName() ?></p>
-                                            </figcaption>
-                                        </figure>
+                                <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 paddngHM" >
+                                    <a href="<?php echo $_product->getProductUrl() ?>">
+
+                                        <img class="lightborder img img-responsive hotsell"
+                                             src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(280) ?>"
+                                             alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"
+                                             />
+
                                     </a>
                                 </div>
 
+
+                            <?php else: ?>
+                                <?php if (Mage::getStoreConfig('homepage/options/salable')) : ?>
+
+                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 subpadding">
+                                        <a href="<?php echo $_product->getProductUrl() ?>">
+
+                                            <img class="lightborder img img-responsive hotsell"
+                                                 src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(280) ?>"
+                                                 alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"
+                                                 />
+
+                                        </a>
+                                    </div>
+
+                                <?php endif; ?>
                             <?php endif; ?>
-                        <?php endif; ?>
 
 
+                        </div>
+
+                    <?php endforeach; ?>
                 </div>
-
-            <?php endforeach; ?>
-            </div>
             </div>
         </div>
 
-        <?php else: ?>
-            <ol id="bestseller-sidebar" class="mini-products-list">
-                <li class="item odd">
-                    <?php echo Mage::getStoreConfig('homepage/options/noproduct') ?>
-                </li>
-            </ol>
-        <?php endif; ?>
+    <?php else: ?>
+        <ol id="bestseller-sidebar" class="mini-products-list">
+            <li class="item odd">
+                <?php echo Mage::getStoreConfig('homepage/options/noproduct') ?>
+            </li>
+        </ol>
+    <?php endif; ?>
 
 </div>

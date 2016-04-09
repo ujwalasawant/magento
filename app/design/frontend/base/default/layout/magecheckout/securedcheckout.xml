@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <onestepcheckout_index_index translate="label">
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addJs">
+                <script>magecheckout/securedcheckout/securedcheckout.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>magecheckout/tinybox2/tinybox.js</script>
+            </action>
+            <action method="addJs">
+                <script>mage/centinel.js</script>
+            </action>
+            <action method="addJs">
+                <script>prototype/window.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magecheckout/securedcheckout/css/style.css</name>
+            </action>
+            <action method="addCss" ifconfig="securedcheckout/general/disable_custom_css">
+                <stylesheet>css/magecheckout/securedcheckout/css/style/default.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magecheckout/securedcheckout/css/grid-magecheckout.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magecheckout/securedcheckout/css/tinybox2/style.css</name>
+            </action>
+            <!--Jquery-->
+            <action method="addJs" ifconfig="securedcheckout/design_configuration/add_jquery_library">
+                <script>magecheckout/securedcheckout/jquery/jquery-1.11.1.min.js</script>
+            </action>
+            <action method="addJs" ifconfig="securedcheckout/design_configuration/add_jquery_library">
+                <script>magecheckout/securedcheckout/jquery/jquery-noconflict.js</script>
+            </action>
+            <!--Awesome Font-->
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magecheckout/securedcheckout/css/font-awesome/css/font-awesome.css</name>
+                <params/>
+            </action>
+            <!--Design Configuration-->
+            <block type="core/text" name="securedcheckout.custom.css">
+                <action method="setText">
+                    <text helper="securedcheckout/generator_css/getDesignFile"/>
+                </action>
+            </block>
+            <!--Google address api-->
+            <block type="core/text" name="securedcheckout.googlemap">
+                <action method="setText">
+                    <text>
+                        <![CDATA[<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>]]>
+                    </text>
+                </action>
+            </block>
+            <label>MageCheckout One Step Checkout</label>
+            <remove name="left"/>
+            <remove name="right"/>
+        </reference>
+        <reference name="content">
+            <block type="securedcheckout/container" name="securedcheckout.container">
+                <action method="setTemplate">
+                    <template helper="securedcheckout/config/getLayoutTemplate"/>
+                </action>
+                <block type="core/text_list" name="one.step.checkout.container.methods.top" as="onestep_topmethod" />
+                <block type="securedcheckout/addition_login_form" name="one.step.checkout.container.login"
+                       as="form.login" template="magecheckout/securedcheckout/addition/login.phtml">
+                    <block type="securedcheckout/addition_login_popup" name="one.step.checkout.container.login.popup"
+                           as="form.login.popup" template="magecheckout/securedcheckout/addition/login/popup.phtml">
+                        <block type="core/text_list" name="form.captcha.login">
+                            <block type="captcha/captcha" name="captcha.login">
+                                <reference name="head">
+                                    <action method="addJs">
+                                        <file>mage/captcha.js</file>
+                                    </action>
+                                </reference>
+                                <action method="setFormId">
+                                    <formId>user_login</formId>
+                                </action>
+                                <action method="setImgWidth">
+                                    <width>230</width>
+                                </action>
+                                <action method="setImgHeight">
+                                    <width>50</width>
+                                </action>
+                            </block>
+                        </block>
+                        <block type="core/text_list" name="form.captcha.forgot">
+                            <block type="captcha/captcha" name="captcha.forgot">
+                                <reference name="head">
+                                    <action method="addJs">
+                                        <file>mage/captcha.js</file>
+                                    </action>
+                                </reference>
+                                <action method="setFormId">
+                                    <formId>user_forgotpassword</formId>
+                                </action>
+                                <action method="setImgWidth">
+                                    <width>230</width>
+                                </action>
+                                <action method="setImgHeight">
+                                    <width>50</width>
+                                </action>
+                            </block>
+                        </block>
+                    </block>
+                </block>
+                <block type="securedcheckout/checkout_address" name="one.step.checkout.container.form.address"
+                       as="address" template="magecheckout/securedcheckout/checkout/address.phtml">
+                    <action method="setTemplate">
+                        <template helper="securedcheckout/checkout_address/getAddressTemplate"/>
+                    </action>
+                    <block type="securedcheckout/checkout_address_billing" name="one.step.checkout.container.form.address.billing"
+                           as="billing.address">
+                        <action method="setTemplate">
+                            <template helper="securedcheckout/checkout_address/getBillingTemplate"/>
+                        </action>
+                        <block type="securedcheckout/checkout_address_billing_attributes" name="one.step.checkout.container.form.address.billing.attributes" as="attributes"
+                               template="magecheckout/securedcheckout/checkout/address/billing/attributes.phtml"
+                                />
+                        <block type="core/text_list" name="one.step.checkout.container.form.address.billing.extra" as="extra"/>
+                    </block>
+                    <block type="securedcheckout/checkout_address_shipping" name="one.step.checkout.container.form.address.shipping"
+                           as="shipping.address">
+                        <action method="setTemplate">
+                            <template helper="securedcheckout/checkout_address/getShippingTemplate"/>
+                        </action>
+                        <block type="securedcheckout/checkout_address_shipping_attributes" name="one.step.checkout.container.form.address.shipping.attributes" as="attributes"
+                               template="magecheckout/securedcheckout/checkout/address/shipping/attributes.phtml"
+                                />
+                        <block type="core/text_list" name="one.step.checkout.container.form.address.shipping.extra" as="extra"
+                                />
+                    </block>
+                    <block type="core/text_list" name="one.step.checkout.container.form.address.extra" as="address.extra"/>
+                </block>
+                <block type="securedcheckout/checkout_shipping" name="one.step.checkout.container.form.shipping.method"
+                       as="shipping.method"
+                        >
+                    <action method="setTemplate">
+                        <template helper="securedcheckout/checkout_shipping/getShippingMethodTemplate"/>
+                    </action>
+                    <block type="securedcheckout/checkout_shipping_available" name="one.step.checkout.container.form.shipping.method.available" as="available"
+                           template="magecheckout/securedcheckout/checkout/shipping/available.phtml"
+                            >
+                        <block type="core/text_list" name="one.step.checkout.container.form.shipping.method.available.extra" as="available.extra"
+                                />
+                    </block>
+                    <block type="core/text_list" name="one.step.checkout.container.form.shipping.method.extra" as="extra"
+                            />
+                </block>
+                <block type="securedcheckout/checkout_payment" name="one.step.checkout.container.form.payment"
+                       as="payment.method" template="magecheckout/securedcheckout/checkout/payment.phtml">
+                    <block type="securedcheckout/checkout_payment_methods" name="one.step.checkout.container.form.payment.method"
+                           as="methods" template="magecheckout/securedcheckout/checkout/payment/methods.phtml"/>
+                    <block type="core/text_list" name="one.step.checkout.container.form.payment.method.extra" as="extra"/>
+                </block>
+                <block type="securedcheckout/checkout_review" name="one.step.checkout.container.form.review" as="order.review"
+                       template="magecheckout/securedcheckout/checkout/review.phtml">
+                    <block type="securedcheckout/checkout_review_items" name="one.step.checkout.container.form.review.items"
+                           as="review.items" template="magecheckout/securedcheckout/checkout/review/items.phtml">
+                        <!--Add Item Renderer see from app/design/frontend/base/default/layout/checkout.xml:457-->
+                        <action method="addItemRender">
+                            <type>default</type>
+                            <block>checkout/cart_item_renderer</block>
+                            <template>magecheckout/securedcheckout/checkout/review/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>grouped</type>
+                            <block>checkout/cart_item_renderer_grouped</block>
+                            <template>magecheckout/securedcheckout/checkout/review/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>configurable</type>
+                            <block>checkout/cart_item_renderer_configurable</block>
+                            <template>magecheckout/securedcheckout/checkout/review/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>bundle</type>
+                            <block>bundle/checkout_cart_item_renderer</block>
+                            <template>magecheckout/securedcheckout/checkout/review/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>downloadable</type>
+                            <block>downloadable/checkout_cart_item_renderer</block>
+                            <template>magecheckout/securedcheckout/checkout/review/items/renderer/downloadable.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>giftcard</type>
+                            <block>enterprise_giftcard/checkout_cart_item_renderer</block>
+                            <template>magecheckout/securedcheckout/checkout/review/items/renderer/default.phtml</template>
+                        </action>
+                        <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals"
+                               as="totals" template="magecheckout/securedcheckout/checkout/review/totals.phtml"/>
+                    </block>
+                    <!--Coupon-->
+                    <block type="securedcheckout/checkout_review_coupon" name="one.step.checkout.container.form.review.coupon"
+                           as="review.coupon" template="magecheckout/securedcheckout/checkout/review/coupon.phtml">
+                    </block>
+                    <block type="core/text_list" name="one.step.checkout.container.form.review.discount" as="review.discount"
+                            />
+                    <block type="securedcheckout/checkout_review_comment" name="one.step.checkout.container.form.review.comment"
+                           as="review.comment" template="magecheckout/securedcheckout/checkout/review/comment.phtml"/>
+                    <block type="core/text_list" name="one.step.checkout.container.form.review.addition" as="review.addition"
+                            >
+                        <!--Gift Message-->
+                        <block type="securedcheckout/checkout_review_giftmessage" name="one.step.checkout.container.form.review.giftmessage"
+                               as="review.giftmessage" template="magecheckout/securedcheckout/checkout/review/addition/giftmessage.phtml"/>
+                        <!--Gift Wrap-->
+                        <block type="securedcheckout/checkout_review_giftwrap" name="one.step.checkout.container.form.review.giftwrap"
+                               as="review.giftwrap" template="magecheckout/securedcheckout/checkout/review/addition/giftwrap.phtml"/>
+                        <block type="securedcheckout/checkout_review_newsletter" name="one.step.checkout.container.form.review.newsletter"
+                               as="review.newsletter" template="magecheckout/securedcheckout/checkout/review/addition/newsletter.phtml"/>
+                    </block>
+                    <!--Terms and Conditions-->
+                    <block type="securedcheckout/checkout_review_term" name="one.step.checkout.container.form.review.term"
+                           as="review.term" template="magecheckout/securedcheckout/checkout/review/term.phtml"/>
+                    <!--Place Order Button-->
+                    <block type="securedcheckout/checkout_review_placeorder" name="one.step.checkout.container.form.review.place.order"
+                           as="review.place.order" template="magecheckout/securedcheckout/checkout/review/placeorder.phtml"/>
+                    <!--Extra content-->
+                    <block type="core/text_list" name="one.step.checkout.container.form.review.extra" as="review.extra"/>
+                </block>
+                <block type="cms/block" name="magecheckout-osc-1column-top">
+                    <action method="setBlockId">
+                        <block_id>magecheckout-osc-1column-top</block_id>
+                    </action>
+                </block>
+
+                <block type="cms/block" name="magecheckout-osc-1column-middle">
+                    <action method="setBlockId">
+                        <block_id>magecheckout-osc-1column-middle</block_id>
+                    </action>
+                </block>
+                <block type="cms/block" name="magecheckout-osc-1column-bottom">
+                    <action method="setBlockId">
+                        <block_id>magecheckout-osc-1column-bottom</block_id>
+                    </action>
+                </block>
+                <block type="securedcheckout/checkout_form" name="securedcheckout.container.checkout.form" as="checkout.form" template="magecheckout/securedcheckout/checkout/form.phtml"></block>
+            </block>
+        </reference>
+    </onestepcheckout_index_index>
+    <!--Adding Custom Static block-->
+    <onestepcheckout_index_index>
+        <!--Add Block below Fields-->
+        <reference name="one.step.checkout.container.form.address.billing.extra">
+            <block type="cms/block" name="securedcheckout.billing.address.below">
+                <action method="setBlockId">
+                    <block_id helper="securedcheckout/config/getBlockBelowBillingAddress"/>
+                </action>
+            </block>
+        </reference>
+        <reference name="one.step.checkout.container.form.address.shipping.extra">
+            <block type="cms/block" name="securedcheckout.shipping.address.below">
+                <action method="setBlockId">
+                    <block_id helper="securedcheckout/config/getBlockBelowShippingAddress"/>
+                </action>
+            </block>
+        </reference>
+        <reference name="one.step.checkout.container.form.shipping.method.extra">
+            <block type="cms/block" name="securedcheckout.shipping.method.below">
+                <action method="setBlockId">
+                    <block_id helper="securedcheckout/config/getBlockBelowShippingMethod"/>
+                </action>
+            </block>
+        </reference>
+        <reference name="one.step.checkout.container.form.payment.method.extra">
+            <block type="cms/block" name="securedcheckout.payment.method.below">
+                <action method="setBlockId">
+                    <block_id helper="securedcheckout/config/getBlockBelowPaymentMethod"/>
+                </action>
+            </block>
+        </reference>
+        <!--/Add Block below Fields-->
+    </onestepcheckout_index_index>
+    <!--PCA Address-->
+    <onestepcheckout_index_index>
+        <reference name="head">
+            <!--PCA Address-->
+            <action method="addJs">
+                <script>magecheckout/securedcheckout/pca/address-3.40.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/magecheckout/securedcheckout/css/pca/address-3.40.min.css</name>
+            </action>
+        </reference>
+        <reference name="one.step.checkout.container.form.address.extra">
+            <block type="securedcheckout/checkout_address_pca_script" name="one.step.checkout.container.form.address.pca" template="magecheckout/securedcheckout/checkout/address/pca/script.phtml"/>
+        </reference>
+    </onestepcheckout_index_index>
+    <!--/PCA Address-->
+    <!--Intergrate 3D Checkout-->
+    <onestepcheckout_index_saveorder>
+        <remove name="right"/>
+        <remove name="left"/>
+        <block type="centinel/authentication" name="centinel.frame" template="magecheckout/securedcheckout/centinel/authentication.phtml">
+            <action method="setAuthenticationStartMode">
+                <mode>instant</mode>
+            </action>
+        </block>
+        <block type="paypal/iframe" name="paypal.iframe"/>
+        <block type="directpost/form" name="payment.form.directpost" template="magecheckout/securedcheckout/checkout/payment/authorizenet/directpost/form.phtml">
+            <action method="setMethodInfo"></action>
+        </block>
+    </onestepcheckout_index_saveorder>
+    <!--/Intergrate 3D Checkout-->
+    <magestore_storepickup>
+        <reference name="one.step.checkout.container.form.shipping.method.available">
+            <block type="storepickup/checkout_store" name="storepickup" as="storepickup">
+                <block type="storepickup/location" name="store_location" as="store_location" template="storepickup/store_location.phtml"/>
+                <block type="storepickup/checkout_store" name="list_store" as="list_store" template="storepickup/store.phtml"/>
+            </block>
+        </reference>
+    </magestore_storepickup>
+    <!--Footer-->
+    <magecheckout_securedcheckout_footter>
+        <reference name="footer_links">
+            <action method="addLink" translate="label title" module="securedcheckout">
+                <label>How to checkout</label>
+                <url helper="securedcheckout/getHowToCheckoutUrl"/>
+                <title>How to checkout</title>
+                <prepare/>
+                <urlParams/>
+                <position>121</position>
+            </action>
+        </reference>
+    </magecheckout_securedcheckout_footter>
+    <customer_account_login>
+        <update handle="magecheckout_securedcheckout_footter"/>
+    </customer_account_login>
+    <onestepcheckout_index_index>
+        <update handle="magecheckout_securedcheckout_footter"/>
+    </onestepcheckout_index_index>
+    <!--\Footer-->
+
+    <!-- Order View -->
+    <sales_order_view>
+        <reference name="order_totals">
+            <block type="securedcheckout/totals_order_giftwrap" name="mage.checkout.giftwrap"/>
+        </reference>
+    </sales_order_view>
+    <sales_order_print>
+        <reference name="order_totals">
+            <block type="securedcheckout/totals_order_giftwrap" name="mage.checkout.giftwrap"/>
+        </reference>
+    </sales_order_print>
+    <sales_email_order_items>
+        <reference name="items">
+            <action method="setTemplate">
+                <template>magecheckout/securedcheckout/order/email.phtml</template>
+            </action>
+        </reference>
+        <reference name="order_totals">
+            <block type="securedcheckout/totals_order_giftwrap" name="mage.checkout.giftwrap"/>
+        </reference>
+    </sales_email_order_items>
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="securedcheckout/totals_invoice_giftwrap" name="mage.checkout.giftwrap"/>
+        </reference>
+    </sales_order_invoice>
+    <sales_order_printinvoice>
+        <reference name="invoice_totals">
+            <block type="securedcheckout/totals_invoice_giftwrap" name="mage.checkout.giftwrap"/>
+        </reference>
+    </sales_order_printinvoice>
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="securedcheckout/totals_invoice_giftwrap" name="mage.checkout.giftwrap"/>
+        </reference>
+    </sales_email_order_invoice_items>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="securedcheckout/totals_creditmemo_giftwrap" name="mage.checkout.giftwrap"/>
+        </reference>
+    </sales_order_creditmemo>
+    <sales_order_printcreditmemo>
+        <reference name="creditmemo_totals">
+            <block type="securedcheckout/totals_creditmemo_giftwrap" name="mage.checkout.giftwrap"/>
+        </reference>
+    </sales_order_printcreditmemo>
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="securedcheckout/totals_creditmemo_giftwrap" name="mage.checkout.giftwrap"/>
+        </reference>
+    </sales_email_order_creditmemo_items>
+</layout>

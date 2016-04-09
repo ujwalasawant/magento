@@ -36,12 +36,13 @@ function getProductData()
     }
     return $this->getProductCacheData();
 }?>
-<div class="page-title my-account">
-    <h1 class="legend"> <?php echo $this->__('Reviews & Ratings') ?></h1>
-</div>
+<div class="AccC">
+    <div class="block-title text-left" >
+        <h4 class="CcSubheader"><strong><?php echo $this->__('Reviews and Ratings'); ?></strong></h4>
+    </div>
 <?php if( $this->getCollection() && $this->count()): ?>
     <?php echo $this->getToolbarHtml() ?>
-    <div class="row" id="my-reviews-table">
+    <div class="row hotsell " id="my-reviews-table">
 
 
         <?php foreach ($this->getCollection() as $_review): ?>
@@ -132,8 +133,10 @@ function getProductData()
     <script type="text/javascript">decorateTable('my-reviews-table')</script>
     <?php echo $this->getToolbarHtml() ?>
 <?php else: ?>
-    <p><?php echo $this->__('You have submitted no reviews.') ?></p>
+    <div class="hotsell ">
+    <p class="paddngLeft"><?php echo $this->__('You have submitted no reviews.') ?></p>
+    </div>
 <?php endif; ?>
-<div class="buttons-set">
-    <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+
 </div>
+

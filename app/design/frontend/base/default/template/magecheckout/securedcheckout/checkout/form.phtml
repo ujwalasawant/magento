@@ -1,0 +1,58 @@
+<?php
+/**
+ * Magecheckout
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://wiki.magecheckout.com/general/license.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magecheckout
+ * @package     Magecheckout_SecuredCheckout
+ * @copyright   Copyright (c) 2015 Magecheckout (http://www.magecheckout.com/)
+ * @license     http://wiki.magecheckout.com/general/license.html
+ */
+?>
+<script>
+    //<![CDATA[
+//    document.observe('dom:loaded', function () {
+        MagecheckoutSecuredCheckout.setBlocks({
+            blocks: <?php echo $this->getBlockSection()?>
+        });
+        var securedCheckoutForm = new MagecheckoutSecuredCheckoutForm({
+            checkoutForm: 'one-step-checkout-form',
+            //Shipping Method
+            shippingMethodWrapper: '#one-step-checkout-shipping-method',
+            shippingMethodInput: 'shipping_method',
+            shippingMethodAdvice: '#one-step-checkout-shipping-method .validation-advice.shipping-method',
+            shippingValidationMessage: "<?php echo $this->__('Please specify shipping method.'); ?>",
+            //Payment Method
+            paymentMethodWrapper: '#one-step-checkout-payment-method',
+            paymentMethodInput: 'payment[method]',
+            paymentMethodAdvice: '#one-step-checkout-payment-method .validation-advice.payment-method',
+            paymentValidationMessage: "<?php echo $this->__('Please specify a payment method.');?>",
+            //Place Order
+            placeOrderButton: 'place-order-button',
+            reviewCartContainer: '#one-step-checkout-review-items',
+            placeOrderUrl: '<?php echo $this->getPlaceOrderUrl()?>',
+            successUrl: '<?php echo $this->getCheckoutSuccessUrl();?>',
+            showGrandTotalAmount:<?php echo $this->showGrandTotal()?1:0?>,
+            grandTotalAmount: '.one-step-checkout-place-order-amount',
+            grandTotalAmountProcess: '.one-step-checkout-place-order-process',
+            pleaseWaitNotice: '.one-step-checkout-place-order-please-wait',
+            disabledClassName: 'place-order-button-disabled',
+            overlayClassName: 'one-step-checkout-place-order-overlay'
+        })
+        <?php if($this->getHelperConfig()->getDefaultShippingMethod() ||$this->getHelperConfig()->getDefaultPaymentMethod()):?>
+        securedCheckoutAddress.changeAddressFinish();
+        <?php endif;?>
+//    })
+
+    //]]>
+</script>

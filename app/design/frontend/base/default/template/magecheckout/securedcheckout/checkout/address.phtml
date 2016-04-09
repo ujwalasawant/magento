@@ -1,0 +1,117 @@
+<?php
+/**
+ * Magecheckout
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://wiki.magecheckout.com/general/license.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magecheckout
+ * @package     Magecheckout_SecuredCheckout
+ * @copyright   Copyright (c) 2015 Magecheckout (http://www.magecheckout.com/)
+ * @license     http://wiki.magecheckout.com/general/license.html
+ */
+?>
+<div class="one-step-checkout-address">
+    <script type="text/javascript">
+        //<![CDATA[
+        securedCheckoutAddress = new MagecheckoutSecuredCheckoutAddress({
+            addressContainer: '.one-step-checkout-address',
+            saveAddressUrl: '<?php echo $this->getChangeAddressUrl()?>',
+        });
+        //]]>
+    </script>
+    <div class="billing-address">
+        <?php echo $this->getChildHtml('billing.address'); ?>
+    </div>
+    <?php if ($this->allowShipToDifferent()): ?>
+        <div class="shipping-address"
+            <?php if ($this->allowShipToDifferentChecked()): ?>
+                style="display: none;"
+            <?php endif; ?>
+            >
+            <?php echo $this->getChildHtml('shipping.address'); ?>
+        </div>
+    <?php endif; ?>
+    <?php echo $this->getChildHtml('address.extra'); ?>
+    <script type="text/javascript">
+        //<![CDATA[
+        securedCheckoutAddress.initAddress();
+        securedCheckoutAddress.initObserver();
+        <?php if (Mage::helper('securedcheckout/config')->isAutoDetectedAddress()): ?>
+        var billingUpdater = typeof billingRegionUpdater !== 'undefined' ? billingRegionUpdater : null;
+        var billingAddressAutoFill = new MagecheckoutSecuredCheckoutAddressDetect(
+            {
+                inputSelector: "billing:street1",
+                addressType: "billing",
+                addressElementsIds: [
+                    'street1', 'city', 'region_id', 'region', 'country_id', 'postcode'
+                ],
+                componentForm: {
+                    street_number: 'short_name',
+                    route: 'long_name',
+                    neighborhood: 'short_name',
+                    sublocality_level_1: 'short_name',
+//                    administrative_area_level_2: 'short_name',
+                    locality: 'long_name',
+                    administrative_area_level_1: 'short_name',
+                    country: 'short_name',
+                    postal_code: 'short_name',
+                    sublocality: 'long_name'
+                },
+                regionUpdater: billingUpdater,
+                securedCheckoutAddress: securedCheckoutAddress,
+                geolocation: 'mc-geolocation',
+                specificCountry: '<?php echo $this->getGoogleSpecificCountry()?>'
+            }
+        );
+        var shippingUpdater = typeof shippingRegionUpdater !== 'undefined' ? shippingRegionUpdater : null;
+        var shippingAddressAutoFill = new MagecheckoutSecuredCheckoutAddressDetect(
+            {
+                inputSelector: "shipping:street1",
+                addressType: "shipping",
+                addressElementsIds: [
+                    'street1', 'city', 'region_id', 'region', 'country_id', 'postcode'
+                ],
+                componentForm: {
+                    street_number: 'short_name',
+                    route: 'long_name',
+                    neighborhood: 'short_name',
+                    sublocality_level_1: 'short_name',
+                    administrative_area_level_2: 'short_name',
+                    locality: 'long_name',
+                    administrative_area_level_1: 'short_name',
+                    country: 'short_name',
+                    postal_code: 'short_name',
+                    sublocality: 'long_name'
+                },
+                regionUpdater: shippingUpdater,
+                securedCheckoutAddress: securedCheckoutAddress,
+                specificCountry: '<?php echo $this->getGoogleSpecificCountry()?>'
+            }
+        );
+        <?php endif; ?>
+        // Compatible with Magento Tempate
+        window.billing = {
+            newAddress: Prototype.emptyFunction
+        };
+        window.shipping = {
+            newAddress: Prototype.emptyFunction,
+            setSameAsBilling: Prototype.emptyFunction
+        };
+        <?php if($this->getHelperConfig()->getDefaultShippingMethod() ||$this->getHelperConfig()->getDefaultPaymentMethod()):?>
+        document.observe('dom:loaded', function () {
+            securedCheckoutAddress.changeAddressFinish();
+        })
+        <?php endif;?>
+        //]]>
+    </script>
+</div>
+

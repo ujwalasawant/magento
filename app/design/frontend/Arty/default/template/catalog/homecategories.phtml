@@ -1,39 +1,37 @@
-
-
-
-    <ul class="list-unstyled">
-        <?php
+<ul class="list-unstyled  paddngLeft">
+    <?php
         $obj = new Mage_Catalog_Block_Navigation();
         $storeCategories = $obj->getStoreCategories();
 
-        Mage::registry('current_category') ? $currentCategoryId = Mage::registry('current_category')->getId() : $currentCategoryId='';
+        Mage::registry('current_category') ? $currentCategoryId = Mage::registry('current_category')->getId() : $currentCategoryId = '';
+    
+    foreach ($storeCategories as $_category):
+        ?>
+        <li class="list-unstyled rowspan ">
+            <?php $catid = $_category->getId(); ?>
+            <?php if ($catid === $currentCategoryId): ?>
 
-        foreach ($storeCategories as $_category):
-            ?>
-            <li>
-                <?php $catid=$_category->getId(); ?>
-                <?php if($catid===$currentCategoryId):?>
-                <strong><?php echo $_category->getName(); ?></strong>
+                <?php echo $_category->getName(); ?>
                 <?php $categoryChildren = $_category->getChildren(); ?>
-                <?php if($categoryChildren->count()) : ?>
-                    <ul>
+                <?php if ($categoryChildren->count()) : ?>
+                    <ul class="list-unstyled">
 
-                        <?php foreach($categoryChildren as $_categoryChild) : ?>
-                            <?php $_categoryChildModel = Mage::getModel('catalog/category')->load($_categoryChild->getId());?>
-                            <?php $categoryGrandchildren=$_categoryChild->getChildren(); ?>
+                        <?php foreach ($categoryChildren as $_categoryChild) : ?>
+                            <?php $_categoryChildModel = Mage::getModel('catalog/category')->load($_categoryChild->getId()); ?>
+                            <?php $categoryGrandchildren = $_categoryChild->getChildren(); ?>
                             <li class="rowspan">
                                 <?php
-                                $currentCategoryId===$_categoryChild->getId() ? $bold="style=\"font-weight:bold\"" : $bold='';
-                                echo  '<a href="' . $_categoryChildModel->getUrl() . '"' . $bold . '>' .  $_categoryChild->getName() . '(' . $_categoryChildModel->getProductCollection()->count() . ')</a>';
+                                $currentCategoryId === $_categoryChild->getId() ? $bold = "style=\"font-weight:bold\"" : $bold = '';
+                                echo '<a class="catanchor" href="' . $_categoryChildModel->getUrl() . '"' . $bold . '>' . $_categoryChild->getName() . '(' . $_categoryChildModel->getProductCollection()->count() . ')</a>';
                                 ?>
                             </li>
-                            <?php if($categoryGrandchildren->count()) : ?>
-                                <?php foreach($categoryGrandchildren as $_categoryGrandchild) : ?>
-                                    <?php $_categoryGrandchildModel = Mage::getModel('catalog/category')->load($_categoryGrandchild->getId());?>
+                            <?php if ($categoryGrandchildren->count()) : ?>
+                                <?php foreach ($categoryGrandchildren as $_categoryGrandchild) : ?>
+                                    <?php $_categoryGrandchildModel = Mage::getModel('catalog/category')->load($_categoryGrandchild->getId()); ?>
                                     <li class="list-unstyled rowspan">
                                         <?php
-                                        $currentCategoryId===$_categoryChild->getId() ? $bold="style=\"font-weight:bold\"" : $bold='';
-                                        echo  '<a href="' . $_categoryGrandchildModel->getUrl() . '"' . $bold . '>' .  $_categoryGrandchild->getName() . '(' . $_categoryGrandchildModel->getProductCount() . ')</a>';
+                                        $currentCategoryId === $_categoryChild->getId() ? $bold = "style=\"font-weight:bold\"" : $bold = '';
+                                        echo '<a class="catanchor" href="' . $_categoryGrandchildModel->getUrl() . '"' . $bold . '>' . $_categoryGrandchild->getName() . '(' . $_categoryGrandchildModel->getProductCount() . ')</a>';
                                         ?>
                                     </li>
                                 <?php endforeach; ?>
@@ -41,11 +39,11 @@
                         <?php endforeach; ?>
                     </ul>
                 <?php endif; ?>
-                <?php endif; ?>
+            <?php endif; ?>
 
-            </li>
-        <?php endforeach ?>
-    </ul>
+        </li>
+    <?php endforeach ?>
+</ul>
 
 
 

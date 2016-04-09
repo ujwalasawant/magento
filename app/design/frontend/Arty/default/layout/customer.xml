@@ -57,6 +57,7 @@ Default layout, loads most of the pages
                 <urlParams/>
                 <position>10</position>
             </action>
+
         </reference>
 
     </default>
@@ -64,6 +65,12 @@ Default layout, loads most of the pages
     <!--
 Load this update on every page when customer is logged in
 -->
+    <!--<customer_account_create>
+
+        <block type="customer/form_register" name="customer_form_register"
+               template="customer/form/mini.register.phtml">
+        </block>
+    </customer_account_create>-->
 
     <customer_logged_in>
         <reference name="top.links">
@@ -133,7 +140,19 @@ Load this update on every page when customer is logged out
 
 
         </reference>
+        <reference name="top.links">
+            <action method="addLink" translate="label title" module="customer"><label>Log In</label><url helper="customer/getLoginUrl"/><title>Log In</title><prepare/><urlParams/><position>100</position></action>
+           <!-- <action method="addLink" translate="label title" module="customer"><label>Sign Up</label><url helper="customer/getRegisterUrl"/><title>Sign Up</title><prepare/><urlParams/><position>100</position></action>-->
+            <action method="addLink" translate="label title" module="customer">
+                <label>My Account</label>
+                <url helper="customer/getAccountUrl"/>
+                <title>My Account</title>
+                <prepare/>
+                <urlParams/>
+                <position>10</position>
+            </action>
 
+        </reference>
         <remove name="reorder"></remove>
     </customer_logged_out>
 
@@ -318,13 +337,13 @@ Customer account pages, rendered for all tabs in dashboard
                 <action method="addLink" translate="label" module="customer">
                     <name>Heading_Setting</name>
                     <path>customer/account/edit/</path>
-                    <label>Setting</label>
+                    <label>Settings</label>
                 </action>
 
                 <action method="addLink" translate="label" module="customer">
                     <name>account_edit</name>
                     <path>customer/account/edit/</path>
-                    <label>Personal Informations</label>
+                    <label>Personal Information</label>
                 </action>
                 <action method="addLink">
                     <name>arty_changepassword</name>
@@ -334,13 +353,13 @@ Customer account pages, rendered for all tabs in dashboard
                 <action method="addLink" translate="label" module="customer">
                     <name>address_book</name>
                     <path>customer/address</path>
-                    <label>Address</label>
+                    <label>Addresses</label>
                 </action>
 
                 <action method="addLink">
                     <name>arty_notification</name>
                     <path>arty_notification/index/index</path>
-                    <label>Notification</label>
+                    <label>Notifications</label>
                 </action>
                 <action method="addLink" translate="label" module="customer">
                     <name>Heading_Stuff</name>
@@ -350,7 +369,7 @@ Customer account pages, rendered for all tabs in dashboard
                 <action method="addLink" translate="label" module="review">
                     <name>ratingreviews</name>
                     <path>review/customer</path>
-                    <label>Reviews and Rating</label>
+                    <label>My Reviews and Rating</label>
                 </action>
                 <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
                     <name>MyStuff_wishlist</name>

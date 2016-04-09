@@ -24,12 +24,14 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
+<div class="AccC">
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <?php $_orders = $this->getOrders(); ?>
-<div class="page-title">
-    <h1><?php echo $this->__('Payment History') ?></h1>
+<div class="block-title text-left" >
+    <h4 class="CcSubheader"><strong><?php echo $this->__('Payment History'); ?></strong></h4>
 </div>
-<?php echo $this->getPagerHtml(); ?>
+    <div class=" hotsell " >
 <?php if($_orders->getSize()): ?>
 
 
@@ -90,8 +92,9 @@
 
    </div>
 
-    <?php echo $this->getPagerHtml(); ?>
     <script type="text/javascript">decorateTable('my-orders-table');</script>
 <?php else: ?>
-    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+    <p class="paddngLeft"> <?php echo $this->__('You have placed no orders.'); ?></p>
 <?php endif ?>
+    </div>
+</div>

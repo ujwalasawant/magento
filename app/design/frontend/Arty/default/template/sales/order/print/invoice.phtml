@@ -24,6 +24,7 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+<div class="container">
 <?php $_order = $this->getOrder() ?>
 <h1><?php echo $this->__('Order #%s', $_order->getRealOrderId()) ?></h1>
 <p class="order-date"><?php echo $this->__('Order Date: %s', $this->formatDate($_order->getCreatedAtStoreDate(), 'long')) ?></p>
@@ -35,7 +36,7 @@
 <?php endif; ?>
 <?php foreach ($_invoices as $_invoice): ?>
     <h2 class="h2"><?php echo $this->__('Invoice #%s', $_invoice->getIncrementId()) ?></h2>
-    <div class="col2-set">
+    <div class="row">
         <div class="col-1">
         <?php if (!$_order->getIsVirtual()): ?>
             <h3><?php echo $this->__('Shipping Address') ?></h3>
@@ -89,6 +90,9 @@
         </tbody>
         <?php endforeach; ?>
     </table>
+
+
     <script type="text/javascript">decorateTable('my-invoice-table-<?php echo $_invoice->getId(); ?>', {'tbody' : ['odd', 'even'], 'tbody tr' : ['first', 'last']})</script>
 <?php endforeach; ?>
 <script type="text/javascript">window.print();</script>
+</div>

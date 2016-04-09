@@ -25,29 +25,31 @@
  */
 ?>
 
+<div class="AccC" >
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <?php $_orders = $this->getOrders(); ?>
-<div class="page-title">
-    <h1><?php echo $this->__('My Orders') ?></h1>
-</div>
-<?php echo $this->getPagerHtml(); ?>
+    <div class="block-title text-left" >
+        <h4 class="CcSubheader"><strong><?php echo $this->__('My Orders'); ?></strong></h4>
+    </div>
+    <div class="  " >
+
 <?php if ($_orders->getSize()): ?>
 
     <div class="lightborder">
 
         <?php $_odd = ''; ?>
         <?php foreach ($_orders as $_order): ?>
-        <div class="personal-info " >
+        <div class="personal-info marginbottom" >
 
+                        <div class="topping bottomsp">
+                    <label class="paddngLeft font-size18"><?php echo $this->__('Date : ') ?></label><?php echo  $this->formatDate($_order->getCreatedAtStoreDate()) ?>
 
-                    <label><?php echo $this->__('Date : ') ?></label><?php echo  $this->formatDate($_order->getCreatedAtStoreDate()) ?>
-
-                    <label><?php echo $this->__('Order #') ?></label><?php echo  " ".$_order->getRealOrderId() ?>
-
+                    <label class="paddngLeft font-size18"><?php echo $this->__('Order #') ?></label><?php echo  " ".$_order->getRealOrderId() ?>
+                        </div>
 
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">Products</div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 text-right " style=" padding-right:4%;">Qty</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 leftpaddng5">Products</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 text-right rightpadding4" >Qty</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-left" >Price</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 xssalesorder" >Status </div>
 
@@ -71,7 +73,7 @@
                             }
 
                             ?>
-                            <div class="row xssalesorder">
+                            <div class="row xssalesorder marginbottom">
 
                                 <!-- product img product name-->
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 lgimage xsimage" >
@@ -79,12 +81,12 @@
                                         src="<?php echo Mage::helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>"
                                         width="100" height="100" alt="" style="display: inline-block"/>
 
-
+                                    <li class="list-unstyled text-center xssalesorder">
                                     <?php
 
                                     echo $product_name = $item->getName();
                                     //  echo $product_id = $item->product_id ;
-                                    ?>
+                                    ?></li>
                                 </div>
 
                                 <!-- product quantity -->
@@ -124,21 +126,21 @@
                                         <strong><?php $item->getQtyOrdered() * 1 ?></strong><br/>
                                     <?php endif;
                                     if ($item->getQtyShipped() > 0): ?>
-                                        <?php echo $this->__('Shipped'); ?>:
+                                        <?php echo $this->__('Shipped'); ?>
                                         <strong><?php $item->getQtyShipped() * 1 ?></strong><br/>
                                     <?php endif;
                                     if ($item->getQtyCanceled() > 0): ?>
-                                        <?php echo $this->__('Canceled'); ?>:
+                                        <?php echo $this->__('Canceled'); ?>
                                         <strong><?php $item->getQtyCanceled() * 1 ?></strong><br/>
                                     <?php endif;
                                     if ($item->getQtyRefunded() > 0): ?>
-                                        <?php echo $this->__('Refunded'); ?>:
+                                        <?php echo $this->__('Refunded'); ?>
                                         <strong><?php $item->getQtyRefunded() * 1 ?></strong><br/>
                                     <?php endif; ?>
                                 </div>
                             </div> <?php
                         }
-                        echo "<hr>";
+
                     }
 ?>
         </div>     <?php
@@ -150,6 +152,7 @@
     <script type="text/javascript">decorateTable('my-orders-table');</script>
 
 <?php else: ?>
-    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+    <p class="paddngLeft"><?php echo $this->__('You have placed no orders.'); ?></p>
 <?php endif ?>
-<?php echo $this->getPagerHtml(); ?>
+    </div>
+</div>

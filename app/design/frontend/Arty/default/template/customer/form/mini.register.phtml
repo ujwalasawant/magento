@@ -63,9 +63,8 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="col-md-6 col-sm-6  col-xs-6 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-                                <h5 class="modal-title">Welcome to <img  src="<?php echo $this->getSkinUrl('images/cart.jpg') ?>" />
-                                </h5>
+                            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-7 col-sm-offset-3  col-xs-11 ">
+                                <h6 class="float text-center" >Welcome to <img  src="<?php echo $this->getSkinUrl('images/smalllogo.png') ?>" width="45%" height="50%"/></h6>
                             </div>
                         </div>
                     </div>
@@ -73,16 +72,17 @@
                     <div class="modal-body">
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-6">
+                            <div class="col-lg-6 col-md-6 line" >
 
-                                <div class="block-content">
+                                <div class="block-content" >
                                     <div class="row">
-                                        <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
                                             <div class="text-center Login-header">
                                                 <span><?php echo $this->__('Register') ?></span>
                                             </div>
                                         </div>
                                     </div>
+
 
                                         <div class="row text-center row-height" style="display: none">
                                             <div class="col-lg-7">
@@ -90,14 +90,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="row text-center row-height">
-                                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="row  row-height">
+                                            <div class="col-md-4 col-sm-4 col-xs-8 ">
                                                 <label for="email_address"
                                                        class="required "><?php echo $this->__('Email Id') ?></label>
 
                                             </div>
 
-                                            <div class="input-box col-md-8 col-sm-6 col-xs-12">
+                                            <div class="input-box col-md-8 col-sm-6 col-xs-12 ">
                                                 <input type="text" name="email" id="email_address"
                                                        value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>"
                                                        title="<?php echo $this->__('Email Address') ?>"
@@ -235,8 +235,8 @@
                                     <?php endif; ?>
 
 
-                                    <div class="row text-center row-height">
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="row  row-height">
+                                        <div class="col-md-4 col-sm-4 col-xs-9 ">
                                             <label for="password"
                                                    class="required "><em>*</em><?php echo $this->__('Password') ?>
                                             </label>
@@ -249,15 +249,15 @@
                                                    class="input-text required-entry validate-password form-control login-textbox"/>
                                         </div>
                                     </div>
-                                    <div class="row text-center row-height">
-                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="row  row-height">
+                                        <div class="col-md-4 col-sm-4 col-xs-11">
                                             <label for="confirmation"
                                                    class="required "><em>*</em><?php echo $this->__('Confirm Password') ?>
                                             </label>
                                         </div>
 
 
-                                        <div class="input-box col-md-8 col-sm-6 col-xs-12">
+                                        <div class="input-box  col-md-8 col-sm-6 col-xs-12">
                                             <input type="password" name="confirmation"
                                                    title="<?php echo $this->__('Confirm Password') ?>" id="confirmation"
                                                    class="input-text required-entry validate-cpassword form-control login-textbox"/>
@@ -284,10 +284,21 @@
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-md-6 hidden-sm hidden-xs">
-                                <?php echo $this->__(' This is a site for fjsdfjsdfa for seling and buying We would not post on your
-                                behalf is a site for dbfsjdfjh for seling ad buying We would not post on your
-                                behalf ') ?>
+                            <div class="col-lg-5 col-md-6 text-center hidden-sm hidden-xs reglgF">
+                                <?php echo $this->__(' Explore treasures of arts and crafts with blissful experience. ') ?>
+ <div class="text-center rowspan">
+                                <a>
+                                    <img  src="<?php echo $this->getSkinUrl('images/Google.png') ?>" width="150"/>
+
+                                </a>
+
+                                </div>
+                            <div  class="text-center rowspan">
+                                <a>
+                                    <img  src="<?php echo $this->getSkinUrl('images/facebook.png') ?>" width="150"/>
+
+                                </a>
+                                </div>
                             </div>
 
 

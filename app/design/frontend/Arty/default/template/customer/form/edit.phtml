@@ -26,21 +26,24 @@
 ?>
 
 <?/** removed Edit Account Information') */?>
+<div class="AccC">
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <form action="<?php echo $this->getUrl('customer/account/editPost') ?>" method="post" id="form-validate" autocomplete="off">
-    <div class="personal-info marginbottom">
 
-       <div class="fieldset "><?php echo $this->getBlockHtml('formkey')?>
-            <h2 class="legend"><?php echo $this->__('Personal Information') ?></h2>
+    <div class="block-title text-left" >
+        <h4 class="CcSubheader"><strong><?php echo $this->__('Personal Information'); ?></strong></h4>
+    </div>
+       <div class=" hotsell  "><?php echo $this->getBlockHtml('formkey')?>
 
-                <div class="personal col-md-12 text-center">
-                    <div class=" row " >
 
+                <div class="personal  col-md-12 ">
+                    <div class=" row Fname" >
+                        <div class="col-lg-6 addresspd mdaddresspd xsaddresspd xxsaddresspd">
                         <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?>
-
+                        </div>
                     </div>
 
-                    <div class="row rowspan" >
+                    <div class="row rowspan Fname" >
                         <div class="col-lg-6 col-md-6 col-sm-6 "  >
                             <div class="row" style="padding-left: 3%;" >
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 text-center" >
@@ -53,7 +56,7 @@
 
                         </div>
                     </div>
-                    <div class="row rowspan">
+                    <div class="row rowspan Fname">
                         <div class="col-lg-6 col-md-6 col-sm-6 " >
                             <div class="row" style="padding-left: 3%;">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 text-center">
@@ -67,7 +70,7 @@
                     </div>
 
 
-                    <div class="row ">
+                    <div class="row Fname">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"    >
                             <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
                             <?php if ($_dob->isEnabled()): ?>
@@ -122,12 +125,13 @@
                 </li>
             </ul>
         </div>
-        <p class="back-link rowspanm"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+
         <div class="buttons-set text-center">
             <button type="submit" title="<?php echo $this->__('Save') ?>" class="button Artybutton"><span><span><?php echo $this->__('Save') ?></span></span></button>
         </div>
     </div>
 </form>
+</div>
 <script type="text/javascript">
     //<![CDATA[
     var dataForm = new VarienForm('form-validate', true);

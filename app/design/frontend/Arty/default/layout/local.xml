@@ -228,6 +228,7 @@
             </block>
         </reference>
     </default>
+
     <!--Handlers-->
     <!--Category page Handlers-->
     <PRODUCT_TYPE_configurable translate="label" module="catalog">

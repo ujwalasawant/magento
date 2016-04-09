@@ -1,0 +1,68 @@
+<?php
+/**
+ * Magecheckout
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://wiki.magecheckout.com/general/license.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magecheckout
+ * @package     Magecheckout_SecuredCheckout
+ * @copyright   Copyright (c) 2015 Magecheckout (http://www.magecheckout.com/)
+ * @license     http://wiki.magecheckout.com/general/license.html
+ */
+?>
+<?php $_helperConfig = Mage::helper('securedcheckout/config'); ?>
+<?php $isShow = $_helperConfig->isEnabledReviewCartSection() ?>
+<div id="one-step-checkout-review-items">
+    <div id="one-step-checkout-review-items-table">
+        <?php if ($isShow) : ?>
+            <?php echo $this->getHelperTimerBlockHtml(); ?>
+            <table class="one-step-checkout-cart-table">
+                <col/>
+                <col width="1"/>
+                <col width="1"/>
+                <thead>
+                <tr>
+                    <th class="name a-center" style="width:70%;"><?php echo $this->__('Product Name') ?></th>
+                    <th class="a-center qty" style="width:16%;"><?php echo $this->__('Qty') ?></th>
+                    <th class="total" style="width:30%"><?php echo $this->__('Subtotal') ?></th>
+                    <th class="hidden-col-remove">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($this->getItems() as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach ?>
+                </tbody>
+                <?php echo $this->getChildHtml('totals'); ?>
+            </table>
+        <?php else: ?>
+            <div class="grand-total col-mg mg-12">
+            <span>
+                <?php echo $this->__('Grand Total: ') ?>
+            </span>
+                <?php echo $this->getGrandTotal(); ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+<script>
+    //<![CDATA[
+    securedCheckoutReviewCart = new MagecheckoutSecuredCheckoutReviewCart({
+        removeProductLinks: '#one-step-checkout-review-items a.remove',
+        removeProductConfirmMessage: '<?php echo $this->__('Are you sure you would like to remove this item from the shopping cart?');?>',
+        plusProductLinks: '#one-step-checkout-review-items a.plus',
+        minusProductLinks: '#one-step-checkout-review-items a.minus',
+        updateProductInput: '#one-step-checkout-review-items .input-text.update',
+        ajaxCartItemUrl: '<?php echo $this->getAjaxCartItemUrl()?>'
+    });
+    //]]>
+</script>

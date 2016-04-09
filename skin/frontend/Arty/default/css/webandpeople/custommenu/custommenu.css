@@ -1,11 +1,13 @@
 #custommenu {
     position: relative;
     font-size: 12px;
-    padding: 0px 0px 0px 0px;
-    width: 100%;
+    padding: 0px 0px 0px 0;
+
     border-radius: 2px;
     height: auto;
-    margin: 0 auto;
+    margin: auto auto;
+    text-align: center;
+	width: 771px;
 }
 /*IE7 fix*/
 *:first-child+html #custommenu {
@@ -47,17 +49,24 @@ div.menu a, div.wp-custom-menu-popup a {
     cursor: pointer;
     _height: 0;
     height: auto;
-    line-height:13px;
+    line-height:15px;
 }
 div.level1 {
     margin-bottom: 5px;
+}
+
+div .level1 a:after {
+   content: "\2023";
+}
+div .level1 a:hover {
+   content: "\2023";
 }
 div.level2 {
     margin-bottom: 5px;
 }
 div.level3 {
     margin-bottom: 5px;
-    padding: 5px;
+    padding: 10px;
 }
 div.block2 {
     padding-top: 0px;
@@ -70,6 +79,7 @@ a.level1:link, a.level1:visited {
     margin-bottom: 10px;
     padding: 5px 10px;
     border-radius: 2px;
+font-size: 14px;
 }
 a.level2:link, a.level2:visited {
     padding: 3px 10px;
@@ -126,6 +136,11 @@ div.column {
     width: 18%; /* for 5 columns*/
     padding: 0px 1%;
     margin: 0px 0px 0px 0px;
+ 	-webkit-column-rule-style: solid; /* Chrome, Safari, Opera */
+
+    -moz-column-rule-style: solid; /* Firefox */
+
+    column-rule-style: solid;
 }
 /*end COLUMN WIDTH  */
 
@@ -181,17 +196,17 @@ div.menu {
 }
 a.level1:link, a.level1:visited {
     text-transform: none;
-    font-weight: normal;
+    font-weight: bold;
 }
 a.level2:link, a.level2:visited {
     font-weight: normal;
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 24px;
 }
 a.level3:link, a.level3:visited {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: normal;
-    line-height: 100%;
+    line-height: 18px;
     margin-bottom: 0px;
 }
 /*COLOR*/
@@ -228,6 +243,13 @@ a.level2:hover {
     margin-right: 20px;
     margin-left: 0px;
 }
+
+div .level2 a:after {
+   content: "";
+}
+div .level3 a:after {
+   content: "";
+}
 /*MOBILE MENU STYLES*/
 #menu-button, .parentMenu {
     display: inline-block;
@@ -236,7 +258,7 @@ html[xmlns] #menu-button, html[xmlns] .parentMenu {
     display: block;
 }
 * html #menu-button, * html .parentMenu {
-    height: 1%;
+    height:0;
 }
 #menu-button:after, .parentMenu:after {
     content: ".";
@@ -253,12 +275,12 @@ html[xmlns] #menu-button, html[xmlns] .parentMenu {
     z-index: 999;
 }
 #menu-button {
+
     float: none;
     padding: 10px 0px 10px 0px;
     margin: 0px 0px 0px 0px;
-    width: 100%;
-    border-bottom: 1px solid #fff;
     text-transform: uppercase;
+    text-align: center;
 }
 #menu-button a:link, #menu-button a:visited {
     color: #fff;
@@ -347,12 +369,16 @@ html[xmlns] #menu-button, html[xmlns] .parentMenu {
 }
 .parentMenu {
     position: relative;
+    border-right: 1px solid lightgrey ;
+    padding: 0 0 0 8px;
 }
 .parentMenu a {
     display: block;
 }
 #menu-button {
     cursor: pointer;
+    width:100%;
+
 }
 .menu-mobile div.level2 {
     margin-bottom: 0;

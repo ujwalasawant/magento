@@ -25,7 +25,7 @@
  */
 ?>
 
-<?php echo $this->getLayout()->createBlock('newproducts/newproducts')->setTemplate('magehit/newproducts/newproductsblock.phtml')->toHtml(); ?>
+
 <?php $_helper = Mage::helper('catalog/category') ?>
 <?php $_categories = $_helper->getStoreCategories() ?>
 
@@ -33,7 +33,7 @@
 $div = 1; ?>
 <?php if (count($_categories) > 0): ?>
 
-    <div class="container  ">
+    <div class="containersub  ">
 
         <?php foreach ($_categories as $_category): ?>
 
@@ -49,45 +49,54 @@ $div = 1; ?>
             } elseif ($I == 4) {
                 echo 'fourthH';
             } elseif ($I == 5) {
-                echo 'fifthH';
-            } else {
+                echo 'thirdH';
+            }
+            elseif ($I == 6) {
+                echo 'firstH';
+            }
+            elseif ($I == 7) {
+                echo 'secondH';
+            }
+            elseif ($I == 8 ) {
+                echo 'thirdH';
+            }
+            else {
                 echo 'sixthH';
             }
 
             ?>">
                 <a style="text-decoration: none;" href="<?php echo $_helper->getCategoryUrl($_category) ?>">
 
-                    <h3 style="color:white; padding-left: 1%; "> <?php echo $_category->getName() . '<br/>';
+                    <h4 style="color:white; padding-left: 1%; "> <?php echo $_category->getName() . '<br/>';
 
                         $products = Mage::getModel('catalog/product')
                             ->getCollection()
                             ->addCategoryFilter($_category)
                             ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
                             ->load();
-                        ?></h3>
+                        ?></h4>
                 </a>
             </div>
 
-            <div class="row subcontent">
+            <div class="row subcontent hmpggrid">
 
                 <?php $i = 1;
+ 		$countproduct=count($products);
                 foreach ($products as $product): ?>
 
                     <?php if ($i == 5): ?>
 
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 sub-padding <?php if ($div % 2 == 0) {
+                        <div style="padding:5px 0 0 0 " class="col-lg-6 col-md-6 col-sm-6 col-xs-6 <?php if ($div % 2 == 0) {
                             echo "pull-left";} ?>">
                             <a href="<?php echo $product->getProductUrl() ?>">
 
-                                <figure>
-                                    <img class=" lightborder img img-responsive imgF " style="border:solid black"
-                                         src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(600) ?>"
+                                <figure >
+                                    <img class=" lightborder img img-responsive imgF "
+                                             src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(600) ?>"
                                          alt="<?php echo $this->stripTags($product->getName(), null, true) ?>"/>
 
                                     <figcaption>
-                                        <h3>I like it!</h3>
-
-                                        <p><?php echo $product->getName() ?></p>
+                                    <p><?php echo $product->getName() ?></p>
                                     </figcaption>
                                 </figure>
 
@@ -97,22 +106,22 @@ $div = 1; ?>
                     <?php else: ?>
 
                         <?php if ($i == 1) : ?>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 subpadding <?php if ($div % 2 == 0) {
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  <?php if ($div % 2 == 0) {
                                 echo "pull-right";
                             }
                             $div++; ?>" >
-                            <div class="row" >
+                            <div class="row">
                         <?php endif; ?>
                         <div data-content="<?php echo $this->stripTags($product->getName(), null, true) ?>"
-                             class=" col-lg-6 col-md-6 col-sm-6 col-xs-6  ">
+                             class=" col-lg-6 col-md-6 col-sm-6 col-xs-6  " style="padding:5px 0 0 0">
                             <a href="<?php echo $product->getProductUrl() ?>">
 
                                 <figure>
-                                    <img class="img img-responsive lightborder imgF" style="border: solid black"
-                                         src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(600) ?>"
+                                    <img class="img img-responsive lightborder imgF"
+                                         src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(280) ?>"
                                          alt="<?php echo $this->stripTags($product->getName(), null, true) ?>"/>
                                     <figcaption>
-                                        <h3>I like it!</h3>
+                                       
 
                                         <p><?php echo $product->getName() ?></p>
                                     </figcaption>
@@ -123,6 +132,24 @@ $div = 1; ?>
                         <?php if ($i == 4) : ?>
                             </div>
                             </div>
+                        <?php endif; ?>
+ 			 <?php if ($countproduct == 1) : ?>
+                            <?php if($i==1):?>
+                                </div>
+                                 </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                         <?php if ($countproduct == 2) : ?>
+                            <?php if($i==2):?>
+                                </div>
+                                 </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                         <?php if ($countproduct == 3) : ?>
+                            <?php if($i==3):?>
+                                </div>
+                                 </div>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php endif; ?>
                     <?php if ($i == 5) {

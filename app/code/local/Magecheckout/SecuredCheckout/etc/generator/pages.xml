@@ -1,0 +1,73 @@
+<root>
+    <pages>
+        <cms_page>
+            <title>How to checkout</title>
+            <identifier>how-to-checkout-our-store</identifier>
+            <content>
+                <![CDATA[
+           <div>
+<h2>The detailed guides to get the checkout process in {{config path="web/unsecure/base_url"}}</h2>
+<p>&nbsp;</p>
+<p><img title="" alt="" src="https://docs.google.com/a/magecheckout.com/drawings/image?id=sFYb0LsZvckvRebNgZ06Eiw&amp;rev=80&amp;h=97&amp;w=624&amp;ac=1" /></p>
+<p>&nbsp;</p>
+<p><img title="" alt="loop-video[1].gif" src="https://lh6.googleusercontent.com/lHJp2ifuDXRJOD1ipChYZAoDJ_HaAjnQkeCZLIl3ahPZBFuKn0keAGPtnFt6H4yPaLXaME1bCTTqDcGes9e-od7Dysl7V0EtC2Bf07v2KZ5cbqB5Ocdmc2eEPLAVWid1lD0Pb_1-" /></p>
+<p>&nbsp;</p>
+<h1>Add products to shopping cart</h1>
+<p>Customers visit store&rsquo;s home page to select the favourite items. Complete the required information of each product as the quality of product and then let add it to shopping cart for the checkout process.</p>
+<p>&nbsp;</p>
+<p><img title="" alt="2016-01-08_10-46-54.png" src="https://lh5.googleusercontent.com/sxWtbXjLWo5RmKmlvqySiNpxghAWSMWBu7Z1wZoEhdf4DuFtjK7rQhimWN3x57pPeNsjNI7Eq_XAUARRyNxXg-64cJOKyjIxHjTOJkUwx1lXYiXZUyg78QDx3VzCdBdhMCIJTXFq" /></p>
+<p>&nbsp;</p>
+<p>In the shopping cart, it is flexible to edit or update other items.</p>
+<p>&nbsp;</p>
+<p><img title="" alt="2016-01-08_10-57-54.png" src="https://lh3.googleusercontent.com/wttxFxQhASJQOvQ8D9BD-JPoClGUrjjP__yMUw7zAMOj86lLpzIZ40I11Pd61LMxD-YkwaWjND4_ODz80IjJYs8G3M5q7gr8OhvUOvDMoBY1ggAvwIvYjbdcScyqUf81JULaMW1j" /></p>
+<h1>Perform checkout process</h1>
+<p>Pass 6 steps to finish the Magento checkout process, now our we combine all steps into one, called <a href="https://www.magecheckout.com/magento-one-step-checkout.html">One Step Checkout</a>&nbsp;or One Page Checkout, see the following process:</p>
+<p>&nbsp;</p>
+<p><img title="" alt="" src="https://docs.google.com/a/magecheckout.com/drawings/image?id=sbK3BX80m_qtrhLblmT8GeQ&amp;rev=54&amp;h=465&amp;w=537&amp;ac=1" /></p>
+<h2>Fill billing address</h2>
+<p>Customers as guests need to enter their billing address manually, differing from registered audiences, the billing information is auto-updated by their accounts.</p>
+<p>&nbsp;</p>
+<p><img title="" alt="2016-01-08_15-19-40.png" src="https://lh3.googleusercontent.com/0_2WOYFzZ60FdyUgserEI9O4nO1l8LIX5dd9OxRr5IjhiK8FYlEnMbw62pZ8MUE18_fRWD03wFLwBj0EhsjdPC6Yzs9q2lCGdj8mJ6bHcMXfMU5ZHrvBM3FnhYcJPIwRuA4wsHps" /></p>
+<h2>Fill shipping address</h2>
+<p>Guests will enter the shipping address manually while signed-up customers use the address is updated in the address book from their personal account.</p>
+<p><img title="" alt="2016-01-08_15-20-46.png" src="https://lh3.googleusercontent.com/eLaQo-EWgIaA3T2VeE3bl7PdTh-xaXrKyT1NDH0ss1XYWN5foDVBlg50aIgjAIptH9zEuB70l3rfaBBinRkwzcm0lMekLj-EQCBGLQB0-ryE19LgCbEaPtx1eMjatecungZ5v4dI" /></p>
+<h2>Choose shipping method</h2>
+<p>Enable the customers to select the relevant shipping method from a list of the given methods by store owner.</p>
+<p>&nbsp;</p>
+<p><img title="" alt="2016-01-09_9-06-51.png" src="https://lh4.googleusercontent.com/083FzXpVGfgILpPwi8eMDDou8kfWRiiDJjw7c8wCRCtnljMD-qBAa3vM5AepODGsdS9-GIDJQbIHltavnpeutxO7QUvWPGKcLSTEcjhHWWPL2GV-eb3yhRbVM3T3BT87gnJjpUkI" /></p>
+<h2>Choose payment method</h2>
+<p>There are payment methods applied for the customer&rsquo;s payment and then let choose one of which are offered. Depending on what the chosen method is in order to complete other requests of this transaction by the customers.</p>
+<p>&nbsp;</p>
+<p><img title="" alt="2016-01-08_15-15-24.png" src="https://lh3.googleusercontent.com/CX4pn2Sgwr60YmtEo94Xkq3idP6z1HGYzd7YVFtlXGd-vRRIdaQXoMrgJRtIT-A6uzQR7FBa-mEFZ5ioakDUaU5RBz5ydBctebq_u1I8Pqz7jSUXtjkMVECDOlrLC86zAla9fsev" /></p>
+<h2>Review order</h2>
+<p>Within the checkout process, the customers will track their purchase and total paid for that in order to review section which is auto-updated instantly.</p>
+<p>&nbsp;</p>
+<p><img title="" alt="2016-01-09_9-11-53.png" src="https://lh5.googleusercontent.com/kVvLXl-a-5LgwKSkK-XKsuMzZNF7bSG5z_J_oNgFyNWAqPqdWNOOTmoyiUQkgZ33QCXVS1P8m7BETZ8xAjZoQIY8P04m9CVwa2CTQzyxfwzgYgXCzWSU970P9FAhGLY-69xTuPXD" /></p>
+<h2>Place order</h2>
+<p>Before placing the order, Terms and Conditions might be read or not depending on admin&rsquo;s configuration.</p>
+<p>&nbsp;</p>
+<p><img title="" alt="" src="https://docs.google.com/a/magecheckout.com/drawings/image?id=s6eX2xeKkSGyhyekdoBAeew&amp;rev=52&amp;h=459&amp;w=624&amp;ac=1" /></p>
+<h1>Receive confirmation&nbsp;</h1>
+<p>After the order is placed, the success page appears while the customers will receive a confirmation email with details of their orders. Especially with the registered customers, the direct link to order information is already included.</p>
+<p>&nbsp;</p>
+<p><img title="" alt="2016-01-08_14-48-05.png" src="https://lh6.googleusercontent.com/Z5qWcJmrAtacK7-8-5ExNuER3uAL07yJWv67z8ewCQO3ASRmQUY4XREs7uNqFLsnuKjjs18GbZExbSq9EIgWk1XBk3oJpAY5q29LiJ_pEoxbXg2h2mL0pIohnqM3ZMuc2rBh7LMK" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Thanks for reading this guide.</p>
+<p>Powered by One step checkout extension&nbsp;by Magecheckout.</p>
+<p>Thanks for Magento ecommerce platform.</p>
+<p>&nbsp;</p>
+<p>Have a great day!</p>
+<p>{{config path="trans_email/ident_general/name"}} team.</p>
+</div>
+                ]]>
+            </content>
+            <is_active>1</is_active>
+            <stores>
+                <item>0</item>
+            </stores>
+        </cms_page>
+    </pages>
+</root>

@@ -1,0 +1,71 @@
+<?php
+/**
+ * Magecheckout
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magecheckout.com license that is
+ * available through the world-wide-web at this URL:
+ * http://wiki.magecheckout.com/general/license.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magecheckout
+ * @package     Magecheckout_SecuredCheckout
+ * @copyright   Copyright (c) 2015 Magecheckout (http://www.magecheckout.com/)
+ * @license     http://wiki.magecheckout.com/general/license.html
+ */
+?>
+<?php if ($this->canShip() && $this->canShow()): ?>
+    <div class="col-wrapper">
+        <?php $blockNumber = $this->getNumbering(); ?>
+        <?php if ($blockNumber): ?>
+            <div class="onestep-title-number">
+                <span class="one-step-checkout-number"><?php echo $blockNumber; ?></span>
+
+                <h2>
+                    <?php echo $this->__('SHIPPING ADDRESS'); ?></h2>
+            </div>
+        <?php else: ?>
+            <div class="onestep-title">
+                <h2>
+                    <i class="fa fa-home"></i>
+                    <?php echo $this->__('SHIPPING ADDRESS'); ?></h2>
+            </div>
+        <?php endif; ?>
+        <div class="form-list">
+            <?php if ($this->customerHasAddresses()): ?>
+                <div class="secured-checkout-form-field">
+                    <label
+                        for="shipping-address-select"><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></label>
+
+                    <div class="input-box">
+                        <?php echo $this->getAddressesHtmlSelect('shipping') ?>
+                    </div>
+                    <div class="mc-clear"></div>
+                </div>
+            <?php endif; ?>
+            <?php echo $this->getChildHtml('attributes'); ?>
+        </div>
+        <?php echo $this->getChildHtml('extra'); ?>
+    </div>
+<?php endif; // end can show?>
+<script>
+    //<![CDATA[
+    securedCheckoutAddress.setShippingAddress({
+        container: '.shipping-address',
+        addressSelect: '#shipping-address-select',
+        newAddressContainer: '#shipping-address-fields',
+        triggerElements: <?php echo $this->getShippingTriggerElements()?>,
+        countryRegionElements: {
+            'countrySelect': 'shipping:country_id',
+            'regionSelect': 'shipping:region',
+            'regionInput': 'shipping:region_id'
+        }
+    })
+    ;
+    //]]>
+</script>

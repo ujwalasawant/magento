@@ -33,7 +33,7 @@
 ?>
 
 
-<div class="cart">
+
     <div class="page-title title-buttons">
         <h4><?php echo $this->__('Cart') ?>
             <?php
@@ -49,21 +49,21 @@
     <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
         <?php echo $this->getBlockHtml('formkey'); ?>
 
-        <fieldset>
+
             <div class="">
                 <table class="table table-striped">
                     <tr>
                         <td>
                             <div class="row hidden-sm hidden-xs">
 
-                                <div class="col-lg-2 col-lg-offset-2 col-md-offset-2  vcenter text-center ">Product
+                                <div class="col-lg-2 col-lg-offset-2 col-md-2  col-md-offset-2  vcenter text-center ">Product
                                     name
                                 </div>
-                                <div class="col-lg-1 col-md-2  vcenter text-center">Qty</div>
-                                <div class="col-lg-1 col-md-1  vcenter text-center">Price</div>
-                                <div class="col-lg-2 col-md-3  vcenter text-center">Delivery Details</div>
-                                <div class="col-lg-2 col-md-1  vcenter text-center">Subtotal</div>
-                                <div class="col-lg-1 col-md-1  vcenter text-center">Remove</div>
+                                <div class="col-lg-1 col-md-1  vcenter text-center">Qty</div>
+                                <div class="col-lg-1 col-md-2  vcenter text-center">Price</div>
+                                <div class="col-lg-2 col-md-2  vcenter text-center">Delivery Details</div>
+                                <div class="col-lg-2 col-md-2  vcenter text-center">Subtotal</div>
+                                <div class="col-lg-1 hidden-md  vcenter text-center">Remove</div>
 
                             </div>
                         </td>
@@ -154,16 +154,16 @@
                         </div>
 
                     </div>
-                    <div class="">
-                        <div class="col-lg-2 col-lg-offset-8">
+
+                        <div class="col-lg-2 col-lg-offset-8 ">
                             <?php if ($this->getContinueShoppingUrl()): ?>
-                                <button style="width: 180px" type="button"
-                                        title="<?php echo $this->__('Continue Shop') ?>" class="button btn-continue"
+                                <button type="button"
+                                        title="<?php echo $this->__('Continue Shop') ?>" class="button btn-continue cartShpmr "
                                         onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')">
-                                    <span><span><?php echo $this->__('Shop More') ?></span></span></button>
+                                    <span><span style="color:black"><?php echo $this->__('Shop More') ?></span></span></button>
                             <?php endif; ?>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-1">
                             <?php if (!$this->hasError()): ?>
                                 <ul class=" checkout-types list-unstyled">
                                     <?php foreach ($this->getMethods('top_methods') as $method): ?>
@@ -198,7 +198,7 @@
                             <![endif]-->
 
 
-                    </div>
+
 
                     </tfoot>
                 </table>
@@ -206,7 +206,5 @@
             </div>
 
             <script type="text/javascript">decorateTable('shopping-cart-table')</script>
-        </fieldset>
-    </form>
+          </form>
 
-</div>

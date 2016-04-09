@@ -24,7 +24,7 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div class="text-right">
+<div class="text-right wishlistbtn">
 <?php if($this->getWishlist()->getItemsCount() && $this->getWishlist()->isSalable()): ?>
     <button type="button" title="<?php echo $this->__('Add All to Cart') ?>" onclick="addAllWItemsToCart()" class="button btn-add Artybutton"><span><span><?php echo $this->__('Add All to Cart') ?></span></span></button>
 <?php endif;?>

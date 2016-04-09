@@ -1,0 +1,526 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <magecheckout translate="label comment">
+            <label>MageCheckout Extensions</label>
+            <sort_order>100</sort_order>
+        </magecheckout>
+    </tabs>
+    <sections>
+        <securedcheckout translate="label comment" module="securedcheckout">
+            <label>One Step Checkout</label>
+            <tab>magecheckout</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label comment">
+                    <label>General Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+
+                        <field_notification translate="label comment">
+                            <label>
+                                <![CDATA[
+                                        - <a href="http://wiki.magecheckout.com/one-step-checkout/" target="_blank">User Guide</a> <br>
+                                        - <a href="http://wiki.magecheckout.com/one-step-checkout/faq.html" target="_blank">FAQ</a> <br>
+                                        - Update latest One Step Checkout <a href="https://www.magecheckout.com/magento-one-step-checkout/pricing.html?utm_source=installed&utm_medium=field_notification&utm_campaign=onestepcheckout-standard">here</a> <br>
+                                        - Recommend <a href="http://wiki.magecheckout.com/one-step-checkout/recommendation.html">Themes, Extensions</a>
+                                        ]]>
+                            </label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>securedcheckout/adminhtml_system_config_form_field_notification</frontend_model>
+                            <margin_top>0px</margin_top>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </field_notification>
+
+
+                        <is_enabled translate="label comment">
+                            <label>Enable One Step Checkout</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </is_enabled>
+                        <title translate="label comment">
+                            <label>One Step Checkout Page Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <router_name>
+                            <label>One Step Checkout Router Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Default: securecheckout</comment>
+                        </router_name>
+                        <description translate="label comment">
+                            <label>One Step Checkout Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <comment>HTML allowed</comment>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </description>
+                        <default_country_id translate="label comment">
+                            <label>Default Country</label>
+                            <comment><![CDATA[ Select default country for Billing address and Shipping address. ]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <frontend_class>countries</frontend_class>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_country_id>
+                        <default_shipping_method translate="label comment">
+                            <label>Default Shipping Method</label>
+                            <comment><![CDATA[ Set default shipping method in the checkout process. ]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_shipping_methods</source_model>
+                        </default_shipping_method>
+                        <default_payment_method translate="label comment">
+                            <label>Default Payment Method</label>
+                            <comment><![CDATA[ Set default payment method in the checkout process. ]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_payment_methods</source_model>
+                        </default_payment_method>
+                        <allow_guest_checkout translate="label comment">
+                            <label>Allow Guest Checkout</label>
+                            <comment>Allow checking out as a guest. Guest can create an account in the checkout page.</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </allow_guest_checkout>
+                        <allow_ship_to_defferent_address translate="label comment">
+                            <label>Allow shipping To Different Address</label>
+                            <comment><![CDATA[ Allow customers can shipping to a different address from billing address. ]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </allow_ship_to_defferent_address>
+                        <auto_detect_address>
+                            <label>Use Auto Suggestion Technology</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>101</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_address_suggest</source_model>
+                            <comment>When customer fills address fields, it will suggest a list of full addresses.</comment>
+                        </auto_detect_address>
+                        <google_specific_country>
+                            <label>Restrict the auto suggestion for a specific country</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>102</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <auto_detect_address>google</auto_detect_address>
+                            </depends>
+                        </google_specific_country>
+                        <pca_website_key>
+                            <label>Capture+ Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>102</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <auto_detect_address>pca</auto_detect_address>
+                            </depends>
+                            <comment>
+                                <![CDATA[
+                                To set up a Capture+ account or these keys, please visit <a href="http://www.pcapredict.com/en-us/address-capture-software/?utm_source=magecheckout.com&utm_medium=one-step-checkout&utm_campaign=one-step-checkout" target="_blank" style="margin-left:0;">Getting Started</a> page]]>
+                            </comment>
+                        </pca_website_key>
+                        <pca_country_lookup>
+                            <label>IP Country Lookup</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>103</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <depends>
+                                <auto_detect_address>pca</auto_detect_address>
+                            </depends>
+                            <comment>The default country will be set based on location of the customer.</comment>
+                        </pca_country_lookup>
+                    </fields>
+                </general>
+                <display_configuration translate="label comment">
+                    <label>Display Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <is_enabled_review_cart_section translate="label comment">
+                            <label>Show Order Review Section</label>
+                            <comment>You can disable Order Review Section. It is enabled by default.</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_enableddisabled</source_model>
+                        </is_enabled_review_cart_section>
+                        <is_show_product_image translate="label comment">
+                            <label>Show Product Thumbnail Image</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <depends>
+                                <is_enabled_review_cart_section>1</is_enabled_review_cart_section>
+                            </depends>
+                        </is_show_product_image>
+                        <product_image_width translate="label comment">
+                            <label>Thumbnail Image Width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <is_show_product_image>1</is_show_product_image>
+                                <is_enabled_review_cart_section>1</is_enabled_review_cart_section>
+                            </depends>
+                            <comment>in pixel, e.g: 75</comment>
+                        </product_image_width>
+                        <product_image_height translate="label comment">
+                            <label>Thumbnail Image Height</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <is_show_product_image>1</is_show_product_image>
+                                <is_enabled_review_cart_section>1</is_enabled_review_cart_section>
+                            </depends>
+                            <comment>in pixel, e.g: 75</comment>
+                        </product_image_height>
+                        <is_show_edit_cart_link translate="label comment">
+                            <label>Show Edit Cart Link</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </is_show_edit_cart_link>
+                        <is_enabled_coupon translate="label comment">
+                            <label>Discount Code Section</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_enableddisabled</source_model>
+                            <comment>Show Discount Code box in Checkout page.</comment>
+                        </is_enabled_coupon>
+                        <display_apply_coupon_button translate="label comment">
+                            <label>"Apply Coupon" Button</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_enableddisabled</source_model>
+                            <comment><![CDATA[If "Disabled", Coupon code will be validated automatically after enter coupon code.]]></comment>
+                            <depends>
+                                <is_enabled_coupon>1</is_enabled_coupon>
+                            </depends>
+                        </display_apply_coupon_button>
+                        <is_enabled_comments translate="label comment">
+                            <label>Order Comment</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_enableddisabled</source_model>
+                            <comment><![CDATA[Allow customer comment in order.]]></comment>
+                        </is_enabled_comments>
+                        <is_enabled_giftmessage translate="label comment">
+                            <label>Gift Message</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_giftmessage</source_model>
+                        </is_enabled_giftmessage>
+                        <is_enabled_giftwrap translate="label comment">
+                            <label>Gift Wrap</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_enableddisabled</source_model>
+                        </is_enabled_giftwrap>
+                        <giftwrap_type translate="label comment">
+                            <label>Calculate Method</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>securedcheckout/system_config_source_giftwrap</source_model>
+                            <comment><![CDATA[To calculate gift wrap fee based on item or order.]]>
+                            </comment>
+                            <sort_order>41</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <is_enabled_giftwrap>1</is_enabled_giftwrap>
+                            </depends>
+                        </giftwrap_type>
+                        <giftwrap_amount translate="label comment">
+                            <label>Amount</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>42</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <is_enabled_giftwrap>1</is_enabled_giftwrap>
+                            </depends>
+                            <comment><![CDATA[Enter the amount of gift wrap fee.]]></comment>
+                        </giftwrap_amount>
+                        <is_enabled_newsletter translate="label comment">
+                            <label>Newsletter Checkbox</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show Sign up newsletter selection]]></comment>
+                            <source_model>securedcheckout/system_config_source_enableddisabled</source_model>
+                        </is_enabled_newsletter>
+                        <is_checked_newsletter translate="label comment">
+                            <label>Checked Newsletter by default</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>61</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <is_enabled_newsletter>1</is_enabled_newsletter>
+                            </depends>
+                        </is_checked_newsletter>
+                    </fields>
+                </display_configuration>
+                <design_configuration translate="label comment">
+                    <label>Design Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <page_layout translate="label comment">
+                            <label>Checkout Page Layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>securedcheckout/system_config_source_layout</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <!--<tooltip></tooltip>-->
+                        </page_layout>
+                        <is_show_numbering translate="label comment">
+                            <label>Heading</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>securedcheckout/system_config_source_heading_icon</source_model>
+                            <comment>Display number/icon in heading.</comment>
+                            <tooltip>
+                                <![CDATA[
+                                <strong>Icon heading</strong> <br>
+                                <img src="https://lh4.googleusercontent.com/vsA6HKmJkOu0UirjKLBMNcHDQ-zlcOB8MYqgNphNqn5MXXnnOmx6Yiq2XkVtpKd_qHzgIy-kSI--dy5k4LPnW9mMJn05Nuo9aVgmXzO-fdDnn-SB85GqcqtC9HHMFuglMfm-DOU" /> <br>
+
+                                <strong>Number heading</strong> <br>
+                                <img src="https://lh4.googleusercontent.com/f6aspr4tKqHjYcEy_w0fWOccv2JR8tvV6-pkZTa042Kp2i7-A8cni_6apm3mXNuYpETi_NDy9_2xzqiKQOOna-CWAo2heptLDPEdsvaHZCbPPFVMB-6Rf33jhNYv6abhr9FA9y4" /> <br>
+
+                            ]]>
+                            </tooltip>
+                        </is_show_numbering>
+
+                        <heading_style translate="label comment">
+                            <label>Heading Style</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>securedcheckout/system_config_source_heading</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </heading_style>
+                        <style_color translate="label comment">
+                            <label>Heading Background Color</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>securedcheckout/system_config_source_color</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </style_color>
+                        <style_custom translate="label comment">
+                            <label>Custom Heading Background Color</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>color</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <style_color>custom</style_color>
+                            </depends>
+                        </style_custom>
+                        <style_heading_custom translate="label comment">
+                            <label>Heading Text Color</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>color</validate>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </style_heading_custom>
+                        <place_order_color>
+                            <label>Place Order button color</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>color</validate>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </place_order_color>
+                        <add_jquery_library translate="label comment">
+                            <label>Add jQuery Library</label>
+                            <comment>If you have ready jQuery in All pages, you should disable this by choosing No.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </add_jquery_library>
+                    </fields>
+                </design_configuration>
+                <terms_conditions translate="label comment">
+                    <label>Terms and Conditions Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled_terms translate="label comment">
+                            <label>Terms and Conditions (TOS)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Enable/Disable TOS. <br>
+                            ]]></comment>
+                        </enabled_terms>
+                        <require_read translate="label comment">
+                            <label>Have to read TOS before checking the checkbox</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Customers have to read all TOS before clicking on ACCEPT.]]> </comment>
+                            <depends>
+                                <enabled_terms>1</enabled_terms>
+                            </depends>
+                        </require_read>
+                        <checkbox_text translate="label comment">
+                            <label>Checkbox Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled_terms>1</enabled_terms>
+                            </depends>
+
+                        </checkbox_text>
+                        <term_title translate="label comment">
+                            <label>Terms and Conditions Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled_terms>1</enabled_terms>
+                            </depends>
+                        </term_title>
+                        <term_html translate="label comment">
+                            <label>Terms and Conditions Content</label>
+                            <frontend_model>securedcheckout/adminhtml_system_config_form_field_term_html</frontend_model>
+                            <frontend_type>editor</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Allowed HTML. Support CMS Static Block syntax.]]></comment>
+                            <depends>
+                                <enabled_terms>1</enabled_terms>
+                            </depends>
+                        </term_html>
+                    </fields>
+                </terms_conditions>
+            </groups>
+        </securedcheckout>
+    </sections>
+</config>

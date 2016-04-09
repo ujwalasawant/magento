@@ -17,7 +17,7 @@
         </div>
         <div class="clearBoth"></div>
     </div>
-    <div id="custommenu" class="$xRtl" style="display:none;">
+    <div id="custommenu" class="$xRtl menuwidthf" style="display:none;" >
         <div class="menu">
             <div class="parentMenu menu0">
                 <a href="javascript:;">
@@ -27,23 +27,20 @@
         </div>
         <div class="clearBoth"></div>
     </div>
-    <div id="custommenu-mobile" class="$xRtl" style="display:none;">
-        <div id="menu-button" onclick="wpMenuButtonToggle()">
-            <a href="javascript:void(0);">
-                <span>$txtMenu</span>
-            </a>
-        </div>
-        <div id="menu-content" style="display:none;">
-            <div id="menu-mobile-loading" class="menu-mobile level0">
-                <div class="parentMenu">
-                    <a href="javascript:;">
-                        <span>$txtLoading</span>
-                    </a>
-                </div>
-            </div>
-            <div class="clearBoth"></div>
-        </div>
-    </div>
+   <div id="custommenu-mobile" class="$xRtl" style="display:none;">
+
+                     <div id="menu-content" style="display:none;" >
+                         <div id="menu-mobile-loading" class="menu-mobile level0">
+                             <div class="parentMenu">
+                                 <a href="javascript:;">
+                                     <?php echo $this->__('Menu') ?>
+                                 </a>
+                             </div>
+                         </div>
+                         <div class="clearBoth"></div>
+                     </div>
+                 </div>
+                 </div>
 HTML;
 ?>
 <div class="nav-container" id="wp-nav-container"></div>

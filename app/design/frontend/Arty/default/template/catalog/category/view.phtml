@@ -58,16 +58,20 @@
 
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 
-
-<div class="col-lg-2 float" style="border-right: 1px solid lightgrey; padding-left: 4%;" >
+<div class="row">
+<div class="col-lg-3 col-md-3 col-sm-3 paddnlft" >
     <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('catalog/homecategories.phtml')->toHtml(); ?>
 
-</div>
 
-<div class="col-lg-10" >
-        <?php if($_imgUrl): ?>
-            <?php echo $_imgHtml ?>
-        <?php endif; ?>
+</div>
+<div class="col-lg-9 col-md-9 col-sm-9">
+    <?php if($_imgUrl): ?>
+        <?php echo $_imgHtml ?>
+    <?php endif; ?>
+</div>
+</div>
+<div class="col-lg-12 text-center " >
+
 
     <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
         <div class="category-description std" >

@@ -4,23 +4,22 @@
  * @see Mage_Customer_Block_Widget_Dob
  */
 ?>
-<div class="row genderpage Fname">
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6  text-center ">
-        <label for="<?php echo $this->getFieldId('month') ?>"<?php if ($this->isRequired()) {
+<div class="row dobpd">
+    <div class=" ">
+        <label for="<?php echo $this->getFieldId('month') ?>"<?php if ($this->isRequired())
+        {
             echo ' class="required"';
         } ?>><?php echo $this->__('Birthday') ?>
         </label>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-2 customer-dob text-left lgdobpd dobpd xsdobpd" >
 
         <table class="borderless dobtxtbox ">
             <tbody>
-            <tr class="themeborder" style="height: 30px">
+            <tr class="themeborder " style="height: 30px">
                 <td>
                     <div class="dob-day">
                         <div class="span ">
                             <select class="date " name="<?php echo $this->getFieldName('day'); ?>"
-                                      id="<?php echo $this->getFieldId('day'); ?>">
+                                        id="<?php echo $this->getFieldId('day'); ?>">
                                 <option value="" class="watermark">DD</option>
                                 <?php for ($i = 1; $i <= 31; $i++): ?>
                                     <?php $day = (strlen($i) == 1) ? "0" . $i : $i; ?>

@@ -1647,7 +1647,7 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 .page-header {
     padding-bottom: 9px;
-    margin: 40px 0 20px;
+    margin: 0 0 0 0;
     border-bottom: 1px solid #eee
 }
 
@@ -1843,7 +1843,7 @@ pre code {
 
 @media (min-width: 1200px) {
     .container {
-        width: 1170px
+        width: 980px
     }
 }
 

@@ -25,7 +25,7 @@
                 <use>standard</use>
                 <args>
                     <module>Arty_Chnagepassword</module>
-                    <frontName>arty_chnagepassword</frontName>
+                    <frontName>changepassword</frontName>
                 </args>
             </arty_chnagepassword>
         </routers>

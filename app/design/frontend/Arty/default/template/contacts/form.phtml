@@ -28,13 +28,14 @@
     <div class="page-title">
     <h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
 </div>
-<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post" class="text-center lightborder marginbottom">
-    <div class="fieldset ">
+<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post" class=" lightborder marginbottom">
+<div style="margin:auto auto; width:30%;">    
+<div class="fieldset ">
         <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact Information') ?></h2>
         <ul class="list-unstyled">
             <li class="fields">
                 <div class="field">
-                    <label for="name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
+                    <label for="name" class="required text-left"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
                     <div class="input-box ">
                         <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry themeborder" type="text" />
                     </div>
@@ -65,6 +66,7 @@
         <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
         <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button Artybutton"><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
     </div>
+</div>
 </form>
 <script type="text/javascript">
 //<![CDATA[
