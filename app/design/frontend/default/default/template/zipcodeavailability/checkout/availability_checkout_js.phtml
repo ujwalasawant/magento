@@ -1,0 +1,114 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Techinflo   
+ * @package     Techinflo_Zipcodeavailability
+ * @copyright   Techinflo(www.techinflo.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * Product view template
+ *
+ * @see Techinflo_Zipcodeavailability_Block_view
+ * @see Techinflo_Zipcodeavailability_Block_view
+ */
+?>
+<?php if ($this->getIsActive()): ?>
+    <?php
+	
+    $session = Mage::getSingleton('checkout/session');
+    $i = 1;
+	foreach ($session->getQuote()->getAllItems() as $item) {
+        $ids[] = $item->getProductId();
+	}
+    
+    if ($this->getZipcode()) {
+        $zip = $this->getZipcode();
+    }
+    ?>
+    <script>
+        var cb = jQuery.noConflict();
+        cb(document).ready(function() {
+            cb(".button").attr('disabled','disabled');
+            var billpost = document.getElementById('billing:postcode');
+            billpost.className += " valzip";
+            var shippost = document.getElementById('shipping:postcode');
+            shippost.className += " avlship";
+            var checkadd = document.getElementById('billing:use_for_shipping_yes');
+            checkadd.className += " use_for_shipping_yes";
+			<?php if ((isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') || (isset($_COOKIE["avl_pin_code"]) && $_COOKIE["avl_pin_code"] != "")) { ?>
+			<?php if (isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') { ?>
+                    var pintext = "<?php echo $_COOKIE["pin_code"]; ?>";
+			<?php } else { ?>
+                    var pintext = "<?php echo $_COOKIE["avl_pin_code"]; ?>";
+			<?php } ?>
+			<?php if (!$myStatus) { ?>
+                    cb(".valzip").val(pintext);
+                    cb(".valzip").change();
+                    cb(".avlship").val(pintext);
+                    cb(".avlship").change();
+			<?php } ?>
+        <?php if ($myStatus) { ?>
+                    var pintext = "<?php echo $zip; ?>";
+        <?php } ?>
+                chkavail(pintext);
+    <?php } ?>
+            var remember = document.getElementById('billing:use_for_shipping_yes');
+            cb(".valzip").focusout(function() {
+                if (remember.checked) {
+                    var pin = cb(".valzip").val();
+                    setTimeout("chkavail(" + pin + ")", 30);
+                }
+            });
+            cb(".avlship").focusout(function() {
+                var pin = cb(".avlship").val();
+                setTimeout("chkavail(" + pin + ")", 30);
+            });
+
+        });
+        cb(".use_for_shipping_yes").click(function() {
+            var remember = document.getElementById('billing:use_for_shipping_yes');
+            if (remember.checked) {
+                var pin = cb(".valzip").val();
+                setTimeout("chkavail(" + pin + ")", 30);
+            }
+        });
+        function chkavail(pintext) {
+            var cb = jQuery.noConflict();
+            cb("#resp").html('');
+            var id = '<?php echo serialize($ids); ?>';
+            if (pintext == 'undefined' || pintext == '') {
+                var pintext = cb("#checkpin").val();
+            }
+            url = "<?php echo Mage::getUrl('zipcodeavailability/index/checkoutpage') ?>";
+            cb("#loader").show();
+            cb("#ckhbtn").hide();
+
+            cb.ajax({url: url, method:"POST", data:{ productid:id, zipcode:pintext}, success: 
+				function(result) {
+                    var resp_result = cb.trim(result); 
+					var checkout_result = JSON.parse(resp_result);
+					if(checkout_result['status'] == 0){
+						cb(".button").attr("onclick","alert('There are item(s) in your cart that cannot be shipped to your location.')");
+						alert("There are item(s) in your cart that cannot be shipped to your location.");
+						var Rurl = "<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>";
+						window.location.replace(Rurl);
+					}				  
+                }
+			});
+            return false;
+        }
+    </script>
+
+<?php endif; ?>

@@ -33,10 +33,10 @@
  * @see Mage_Catalog_Block_Layer_View
  */
 ?>
-<div class="col-lg-12 col-md-12 col-sm-12" >
+<div class="col-lg-10 col-md-12 col-sm-12" style="margin: 0 ;padding: 0" >
 <?php if($this->canShowBlock()): ?>
     <div class="block block-layered-nav " >
-        <div class="block-title text-center rowspan">
+        <div class="block-title text-center ">
             <strong><span><?php echo $this->__('Shop By') ?></span></strong>
         </div>
         <div class="block-content">
@@ -46,7 +46,7 @@
                     <a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
             <?php endif; ?>
             <?php if($this->canShowOptions()): ?>
-                <hr>
+
                 <dl id="narrow-by-list">
                     <?php $_filters = $this->getFilters() ?>
                     <?php foreach ($_filters as $_filter): ?>
@@ -58,7 +58,7 @@
                             </dt>
 
                             <dd><?php echo $_filter->getHtml() ?></dd>
-                            <hr>
+<hr>
 
                         <?php endif; ?>
                     <?php endforeach; ?>

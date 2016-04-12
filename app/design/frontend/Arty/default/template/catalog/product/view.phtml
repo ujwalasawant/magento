@@ -32,7 +32,6 @@
  */
 
 ?>
-
 <?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); ?>
 <script type="text/javascript">
@@ -65,7 +64,7 @@
 
                                     <div class="product-name">
                                         <h4> <?php echo  $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h4>
-                                       </div>
+                                    </div>
 
                                     <div>
                                         <?php  $_vendorName = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?>
@@ -83,8 +82,6 @@
                                     </a>
                                 </div>
                             </div>
-
-
                             <div>
                                 <?php echo $this->getChildHtml('alert_urls') ?>
                             </div>
@@ -159,16 +156,14 @@
                         ?>
 
                             </div>
-
                             <div>
-
-                                <?php echo $this->getChildHtml('extrahint') ?>
+                             <?php echo $this->getChildHtml('extrahint') ?>
                             </div>
                             <div>
                                 <?php if (!$this->hasOptions()): ?>
                                     <div class="add-to-box">
                                         <?php if ($_product->isSaleable()): ?>
- <div class="price-info priceli">
+                        <div class="price-info priceli">
                             <?php echo $this->getPriceHtml($_product); ?>
                             <?php echo $this->getChildHtml('bundle_prices') ?>
                             <?php echo $this->getTierPriceHtml() ?>
@@ -192,8 +187,6 @@
                             <div>
                                 <?php echo $this->getChildHtml('zipcode'); ?>
                             </div>
-
-
                             <div>
                                 <?php echo $this->getChildHtml('other'); ?>
                             </div>
@@ -217,7 +210,7 @@
                     </div>
                 </div>
 
-
+            </div>
         </form>
 
         <script type="text/javascript">
@@ -283,7 +276,7 @@
 
             }
         </script>
-    </div>
+
 
     <div class="product-collateral toggle-content tabs" style="display:none">
         <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')): ?>
@@ -318,7 +311,7 @@
             <h4><?php echo $this->__('Recommended Combo Offer:') ?></h4>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <ul class="nav nav-tabs">
+            <ul class="">
                 <li class="active"><a href="#">Combo Offer</a></li>
 
             </ul>
@@ -360,7 +353,4 @@
             <?php echo $this->getChildHtml('viewed.product') ?>
 
         </div>
-</div>
-    <script type="text/javascript">
 
-    </script>

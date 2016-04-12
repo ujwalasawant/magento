@@ -1,0 +1,431 @@
+<!--
+/**
+*  Module: jQuery AJAX-ZOOM for Magento, /app/design/adminhtml/default/default/template/axzoom/tab360-sets.phtml
+*  Copyright: Copyright (c) 2010-2016 Vadim Jacobi
+*  License Agreement: http://www.ajax-zoom.com/index.php?cid=download
+*  Version: 1.1.2
+*  Date: 2016-03-31
+*  Review: 2016-03-31
+*  URL: http://www.ajax-zoom.com
+*  Documentation: http://www.ajax-zoom.com/index.php?cid=modules&module=magento
+*
+*  @author    AJAX-ZOOM <support@ajax-zoom.com>
+*  @copyright 2010-2016 AJAX-ZOOM, Vadim Jacobi
+*  @license   http://www.ajax-zoom.com/index.php?cid=download
+*/
+-->
+
+<?php
+$model = Mage::getModel('axzoom/ax360');
+$setsGroups = $model->getCollection()->addFieldToFilter('id_product', $productId)->getData();
+
+$model = Mage::getModel('axzoom/ax360set');
+$sets = $model->getSets($productId);
+
+$conf = Mage::getStoreConfig('axzoom_options');
+
+?>
+<style type="text/css">
+	.hide {
+		display: none !important;
+	}
+	
+	#set_name{
+		width: 278px;
+	}
+	
+	#save_set{
+		margin-top: 10px;
+	}
+	
+	#imageTableSetsRows .active td {
+		background-color: #FFFFE0 !important;
+	}
+	
+	#imageTableSetsRows .images_set>span {
+		padding-left: 20px;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAb1BMVEUAAADo6Ojx8fHw8PDx8fHy8vLv7+/x8fH39/fw8PD6+vr7+/v29vb6+vr7+/v4+Pj8/Pz9/f37+/v8/Pz8/Pz+/v79/f39/f39/f39/f37+/v+/v7+/v7+/v7+/v79/f39/f3+/v79/f3+/v7////JrJzFAAAAInRSTlMAAgQKDBAYGiIuNDY4OkpaaHCNj6Glr7fL09/l7e/x+/39QQhj+gAAAF9JREFUeNqNztcOgCAMQNE6cOPeIK7+/zdKBEHfvEmT5qQPhT+tzLTfMCt35bAX+EX2hWCsiQUC4MWhvUh4Q+ViIF0QBYXIeaBFmRjOKTeg6zWUna5SsHGT+vRAG/zoAstNCsH1/nWyAAAAAElFTkSuQmCC);
+		background-repeat: no-repeat;
+	}
+	#imageTableSetsRows .preview_set>span {
+		padding-left: 20px;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAA8klEQVQoU43MoUsEYRAF8Mclg4hsMB0iF8QgIqZDLi5m8yEGEf8CwyFWg4gYRIxy0b/gohhNJrkkKmK6tLret9/OzPsMG2TXvcM3ZYb3Y4D/Z9y0Z5Ni9PBvvcChXha7dfS+Wkf2GIKdFRc3K+Bz1h4YGGR3AmBXB1ns24Br+U46p6t6VwHSB5IZvWUIgV+yl7ZqgJ4wybfdop7T/FoJhK70ARvqKQC8NuxNj2s+2JNeAMCoYR/aqwF6RCf7fkNvaNlyCUjMF14n83pFYaAxSPkD4GPZcetAGo1Xvpt8p+VbmJy8Tc9RtjSFyIENXDQF/OYHw2GYt0Xo/PcAAAAASUVORK5CYII=);
+		background-repeat: no-repeat;
+	}
+	
+	#file360-add-button span{
+		padding-left: 20px;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAulBMVEUAAADj4+Pi4uLk5OTm5ubn5+fo6Ojy8vLn5+fv7+/w8PDo6Oj29vbv7+/29vb19fX39/f7+/v6+vr8/Pz7+/v+/v77+/v8/Pz8/Pz7+/v7+/v8/Pz9/f38/Pz9/f38/Pz8/Pz9/f37+/v9/f39/f38/Pz9/f38/Pz9/f3+/v7////7+/v8/Pz9/f39/f39/f39/f39/f39/f39/f38/Pz8/Pz9/f39/f3+/v7+/v79/f3+/v7+/v7///84WsHxAAAAPHRSTlMAAgQEBAQEBAYIDBAYHBweLD5ESlBgbnJ4h42PkZmdn6Ghp6eztbm7u729y8vP1dvd3+Hp7e/v8fP3+f27bAlAAAAAjklEQVR42mXIxwKCMBRE0WfvqIiKYseCFWyAZvL/v+WLISvurOZQvsPNtNMAdwQJ1TcDfy11Gbgz01jDdGOaaACkmvzs5xr0xbZt9a0/+McTb9FcCYhlg2EwVFU9xLUYHoOQ3L2URhc6RykDVNcWOmWqdMHwVBAXQ7zphZChUFeRI5JeIhwGkx08Apvy/QCdyxpVfEL2sAAAAABJRU5ErkJggg==);
+		background-repeat: no-repeat;
+	}
+
+	.link_add{
+		margin-top: 2px;
+		margin-bottom: 2px;
+	}
+	
+	.link_add span{
+		padding-left: 20px;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAFVBMVEUAAAD///////////////////////9Iz20EAAAABnRSTlMAMjxaYmqUPYFrAAAAKElEQVQI12NgwAvEknAwGAXNUgQFgAy2NCBIQGYwKbmlKing144TAABpqwir9l/p6wAAAABJRU5ErkJggg==);
+		background-repeat: no-repeat;
+	}
+	
+	.link_add_opened span{
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAACVBMVEUAAAD9/f39/f0xxUhDAAAAA3RSTlMA1d8QVTrBAAAAFUlEQVR4AWMYOMAIB1ABJjgYOEcBABCrAB8vkuA9AAAAAElFTkSuQmCC);
+	}
+	
+
+	#imageTableSets tr>td:nth-child(1){
+		width: 100px;
+	}
+</style>
+
+
+
+<div id="product-images360sets" class="entry-edit">
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('360/3D Views') ?></h4>
+		<div class="right"><button class="link_add" href="#"> <i class="icon-plus"></i> <span><?php echo $this->__('Add a new 360/3D view') ?></span></button></div>
+	</div>
+	<div class="fieldset fieldset-wide" id="group_fields9">
+		<div class="hor-scroll">
+
+			<br>
+
+			<div class="row" id="newForm" style="display:none">
+				<table cellspacing="0" class="form-list">
+					<tbody>
+						<tr>
+							<td class="label"><label for="set_name"><?php echo $this->__('Create a new') ?></label></td>
+							<td class="value">
+								<input type="text" id="set_name" name="set_name" value="" />
+								<p class="note"><?php echo $this->__('Please enter any name') ?></p>
+							</td>
+							<td class="scope-label"><span class="nobr"></span></td>
+						</tr>
+						<?php if ($setsGroups): ?>
+						<tr>
+							<td colspan="3"><span style="font-weight: bold; padding: 5px;"><?php echo $this->__('OR') ?></span></td>
+						</tr>
+						<tr>
+							<td class="label"><label for="existing"><?php echo $this->__('Add to existing 3D as next row') ?></label></td>
+							<td class="value">
+								<select name="existing" id="existing">
+									<option value="" style="min-width: 100px"><?php echo $this->__('Select') ?></option>
+									<?php foreach ($setsGroups as $group): ?>
+									<option value="<?php echo $group['id_360'] ?>"><?php echo $group['name'] ?></option>
+									<?php endforeach ?>
+								</select>
+								<p class="note"><?php echo $this->__('You should not select anything here unless you want to create 3D (not 360) which contains more than one row!') ?></p>
+							</td>
+							<td class="scope-label"><span class="nobr"></span></td>
+						</tr>
+						<?php endif; ?>
+						
+						<tr>
+							<td class="label"><label for="zip"><?php echo $this->__('Add images from ZIP archive') ?></label></td>
+							<td class="value">
+								<input type="checkbox" id="zip" name="zip" value="1" />
+								<p class="note"><?php echo $this->__('This is the most easy and quick way of adding 360 views to your product! Upload over FTP your 360\'s zipped (each images set in one zip file) to /js/axzoom/zip/ directory. After you did so these zip files will instantly appear in the select field below. All you have to do then is select one of the zip files and press \'add\' button. Images from the selected zip file will be instantly imported.') ?></p>
+							</td>
+							<td class="scope-label"><span class="nobr"></span></td>
+						</tr>
+						<tr class="field-arcfile" style="display:none;">
+							<td class="label"><label for="arcfile"><?php echo $this->__('Select ZIP archive or folder') ?></label></td>
+							<td class="value">
+								<?php if ($files): ?>
+								<select name="arcfile" id="arcfile">
+									<option value=""><?php echo $this->__('Select') ?></option>
+									<?php foreach ($files as $file): ?>
+									<option value="<?php echo $file ?>"><?php echo $file ?></option>
+									<?php endforeach; ?>
+								</select>
+								<?php else: ?>
+								<p><b><?php echo $this->__('There are no files found in the "js/axzoom/zip" folder') ?></b></p>
+								<?php endif; ?>
+							</td>
+							<td class="scope-label"><span class="nobr"></span></td>
+						</tr>
+						<tr class="field-arcfile" style="display:none;">
+							<td class="label"><label for="zip"><?php echo $this->__('Delete Zip/Dir after import') ?></label></td>
+							<td class="value">
+								<input type="checkbox" id="delete" name="delete" value="1" />
+								<p class="note"><?php echo $this->__('') ?></p>
+							</td>
+							<td class="scope-label"><span class="nobr"></span></td>
+						</tr>
+
+						<tr>
+							<td></td>
+							<td>
+								<button type="button" class="scalable save save_set" >
+									<span><?php echo $this->__('Add / Import') ?></span>
+								</button>
+							</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<div class="row">
+				<div class="grid">
+					<table class="data border" id="imageTableSets" cellspacing="0">
+						<thead>
+							<tr class="headings">
+								<th><?php echo $this->__('Cover Image'); ?></th>
+								<th><?php echo $this->__('Name'); ?></th>
+								<th><?php echo $this->__('Active'); ?></th>
+								<th class="last" style="width:240px;"><?php echo $this->__('Actions'); ?></th>
+							</tr>
+						</thead>
+						<tbody id="imageTableSetsRows">
+						</tbody>
+					</table>
+				</div>
+
+				<table id="lineSet" style="display:none;" cellspacing="0">
+					<tr id="set_id" data-group="group_id">
+						<td><img src="../modules/ajaxzoom/views/img/image_path.gif" alt="legend" title="legend" class="img-thumbnail" /></td>
+						<td>legend</td>
+						<td>
+							<span class="switch prestashop-switch fixed-width-lg hide_class switch-status">
+								<input type="radio" name="status_field" id="status_field_on" value="1" checked_on />
+								<label class="t" for="status_field_on"><?php echo $this->__('Yes'); ?></label>
+								<input type="radio" name="status_field" id="status_field_off" value="0" checked_off />
+								<label class="t" for="status_field_off"><?php echo $this->__('No'); ?></label>
+								<a class="slide-button btn"></a>
+							</span>
+						</td>
+						<td>
+							<button class="delete_set scalable delete"><span><?php echo $this->__('Delete'); ?></span></button>
+							<button class="images_set scalable"><span><?php echo $this->__('Images'); ?></span></button>
+							<button class="scalable preview_set hide_class"><span><?php echo $this->__('Preview'); ?></span></button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+    var id_product = '<?php echo $productId;?>';
+    var mediaPath = '<?php $mageUrl = parse_url(Mage::getBaseUrl('media')); echo $mageUrl['path'];?>catalog/product';
+    var mediaPathTmp = '<?php $mageUrl = parse_url(Mage::getBaseUrl('media')); echo $mageUrl['path'];?>tmp/catalog/product';
+    
+    jQuery(document).ready(function($){        
+        <?php if ($conf['magento']['magentoAdminThumb'] == 'true'): ?>
+            setInterval(function(){
+                $('tr td:first-child','#media_gallery_content_list').each(function(){
+                    var el = $(this);
+                    if ($('img', el).css('display') == 'none'){
+                        var azImgPath = $('.cell-image input', el.parent()).val();
+                        if (typeof azImgPath == 'string'){
+                            if (azImgPath.substring(azImgPath.length - 3) == 'tmp'){
+                                azImgPath = mediaPathTmp + azImgPath.substring(0, azImgPath.length - 4);
+                            }else{
+                                azImgPath = mediaPath + azImgPath;
+                            }
+                            $('.place-holder').css({'display': 'none'});
+                            $('img', el).css({'display': '', 'cursor': 'pointer'})
+                            .attr('src', '<?php echo Mage::getBaseUrl('js'); ?>axzoom/axZm/zoomLoad.php?azImg='+azImgPath+'&width=100&height=300&qual=90')
+                            .bind('click', function(){
+                                window.open(azImgPath);
+                            })
+                        }
+                    }
+                });
+                
+            }, 1000);
+            
+        <?php endif; ?>
+		
+		function setLine(id, path, position, legend, status, group_id)
+		{
+			var line = $("#lineSet").html();
+			line = line.replace(/set_id/g, id);
+			line = line.replace(/group_id/g, group_id);
+			line = line.replace(/legend/g, legend);
+			line = line.replace(/status_field/g, 'status_' + id);
+			line = line.replace(/\.\.\/modules\/ajaxzoom\/views\/img\/image_path\.gif/g, path);
+			line = line.replace(/<tbody>/gi, "");
+			line = line.replace(/<\/tbody>/gi, "");
+
+			if(status == '1') {
+				line = line.replace(/checked_on/g, 'checked');
+				line = line.replace(/checked_off/g, '');
+			} else {
+				line = line.replace(/checked_on/g, '');
+				line = line.replace(/checked_off/g, 'checked');
+			}
+
+			if($('tr[data-group=' + group_id + ']').length) {
+				line = line.replace(/hide_class/g, 'hide');
+			}
+
+			$("#imageTableSetsRows").append(line);
+		}
+
+		function afterUpdateStatus(data) {
+			data = $.parseJSON(data);
+			showSuccessMessage(data.confirmations);
+		}
+
+		function afterDeleteSet(data) {
+			var data = $.parseJSON(data);
+			$('tr#' + data.id_360set).remove();
+			showSuccessMessage(data.confirmations);
+
+			// remove set option from the dropdowns
+			if(data.removed == '1') {
+				$("select#id_360 option[value='" + data.id_360 + "']").remove();
+				$("select#existing option[value='" + data.id_360 + "']").remove();
+			}
+		}
+
+		function afterAddSet(data) {
+			var data = $.parseJSON(data);
+
+			if(data.sets.length > 0) {
+				for (var i = 0; i < data.sets.length; i++) {
+					var set = data.sets[i];
+					setLine(set.id_360set, set.path, "", set.name, set.status, set.id_360);
+				};
+			} else {
+				setLine(data.id_360set, data.path, "", data.name, data.status, data.id_360);
+			}
+
+			$('.link_add').removeClass('link_add_opened').find('i').removeClass('icon-minus').addClass('icon-plus');
+			
+			$('#newForm').hide();
+			$('#set_name').val('');
+			$('#existing').val('');
+
+			if(data.new_id != '') {
+				$('select#id_360')
+					.append($("<option></option>")
+					.attr("value", data.new_id)
+					.attr('data-settings', data.new_settings)
+					.attr('data-combinations', '[]')
+					.text(data.new_name)); 
+				$('select#existing').append($("<option></option>").attr("value", data.new_id).text(data.new_name)); 
+			}
+			showSuccessMessage(data.confirmations);
+		}
+
+		function afterGetImages(data) {
+			var data = $.parseJSON(data);
+			
+			for (var i = 0; i < data.images.length; i++) {
+				imageLine360(data.images[i]['id'], data.images[i]['thumb'], '', "", "", "");
+			};
+			
+		}
+
+
+		$('#zip').change(function () {
+			if($(this).is(':checked')) {
+				$('.field-arcfile').show();
+			} else {
+				$('.field-arcfile').hide();
+			}
+		});
+
+		$('.link_add').click(function (e) {
+			e.preventDefault();
+
+			var icon = $(this).find('i');
+
+			if(icon.hasClass('icon-plus')) {
+				icon.removeClass('icon-plus').addClass('icon-minus');
+				$(this).addClass('link_add_opened')
+				$('#newForm').show();
+			} else {
+				icon.removeClass('icon-minus').addClass('icon-plus');
+				$(this).removeClass('link_add_opened')
+				$('#newForm').hide();
+			}
+		});
+
+		$('.switch-status input').die().live('change', function(e) {
+			e.preventDefault();
+			var status = $(this).val();
+			var group_id = $(this).parent().parent().parent().data('group');
+
+			doAdminAjax360('<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/axzoom/set360Status") ?>', {
+					"id_product" : <?php echo $productId ?>,
+					"id_360" : group_id,
+					"status" : status}, afterUpdateStatus
+			);
+			
+		});
+
+		$('.preview_set').die().live('click', function(e) {
+			e.preventDefault();
+
+			var id360 = $(this).parent().parent().data('group');
+			var id360set = $(this).parent().parent().attr('id');
+
+			$.openAjaxZoomInFancyBox({href: '<?php echo Mage::getBaseUrl('js') ?>axzoom/preview/preview.php?3dDir=<?php echo Mage::getModel('axzoom/ax360')->rootFolder() ?>js/axzoom/pic/360/' + id_product + '/' + id360+'&group='+id360+'&id='+id360set, iframe: true});
+		});
+
+		$('.images_set').die().live('click', function(e) {
+			e.preventDefault();
+			
+			$('#imageTableSetsRows').find('tr').removeClass('active');
+			$(this).parent().parent().addClass('active');
+			$('#imageList360').html('');
+			$('#file360-success').parent().hide();
+
+			var id = $(this).parent().parent().attr('id');
+
+			doAdminAjax360('<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/axzoom/getImages") ?>', {
+					"id_product" : <?php echo $productId ?>,
+					"id_360set" : id}, afterGetImages
+			);
+			
+			$('#id_360set').val(id);
+			$('#product-images360').show();
+		});
+
+
+		$('.save_set').click(function (e) {
+			e.preventDefault();	
+			if (!$('#set_name').val()){
+                $('#set_name').val('no_name_'+(new Date().getTime()));  
+            }
+			doAdminAjax360('<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/axzoom/addSet") ?>', {
+					"name":$('#set_name').val(),
+					"existing":$('#existing').val(),
+					"zip":$('#zip').is(':checked'),
+					"delete":$('#delete').is(':checked'),
+					"arcfile":$('#arcfile').val(),
+					"id_product" : <?php echo $productId ?>}, afterAddSet
+			);
+		});
+
+
+		$('.delete_set').die().live('click', function(e)
+		{
+			e.preventDefault();
+
+			$('#product-images360').hide();
+			$('#imageList360').html('');
+
+			var id = $(this).parent().parent().attr('id');
+			if (confirm("<?php echo $this->__('Are you sure?') ?>"))
+			doAdminAjax360('<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/axzoom/deleteSet") ?>', {
+					"id_360set":id,
+					"id_product" : <?php echo $productId ?>}, afterDeleteSet
+			);
+		});
+        
+        
+		<?php foreach ($sets as $set): ?>
+			setLine("<?php echo $set['id_360set'] ?>", "<?php echo $set['path'] ?>", "", "<?php echo $set['name'] ?>", "<?php echo $set['status'] ?>", "<?php echo $set['id_360'] ?>");
+		<?php endforeach; ?>
+        
+	});
+</script>

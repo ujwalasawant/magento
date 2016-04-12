@@ -1,0 +1,165 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Techinflo   
+ * @package     Techinflo_zipcodeavailability
+ * @copyright   Techinflo(www.techinflo.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * 
+ * /**
+ * Product view template
+ *
+ * @see Techinflo_Zipcodeavailability_Block_view
+ * @see Techinflo_Zipcodeavailability_Block_view
+ */
+?>
+<?php if ($this->getIsActive()):   ?>
+    <?php $set = $this->cookieparams() ?>
+	<div class="cart_pin chkavl" id="<?php echo $this->getTechinfloTheme(); ?>">
+		<div id="check-data" >
+            <input class="check-input input-text" type="text" id="checkpin" name="checkpin" value="" />
+            <div class="check-data">
+				<button class="btn button" id="ckhbtn" type="button" onclick="chkavail('');" ><span>check</span>
+				</button>
+                <span id="loader" style="display:none;">
+					<img src="<?php echo $this->getSkinUrl('css/zipcodeavailability/ajax-loader.gif'); ?>">
+				</span>
+				</div>
+        </div>
+        <div class="check-avail check-avail1" id="check-avail1">
+			<a  href="javascript:void(0);"><?php
+				if ((($_COOKIE["avl_pin_code"] != '') && isset($_COOKIE["avl_pin_code"])) || (($_COOKIE["pin_code"] != '') && isset($_COOKIE["pin_code"]))) {
+					if ($_COOKIE["avl_pin_code"] != '' && isset($_COOKIE["avl_pin_code"]) )
+						echo "<span>Available at " . $_COOKIE["avl_pin_code"] . "</span>";
+					if ($_COOKIE["pin_code"] != '' && isset($_COOKIE["pin_code"]))
+						echo "<span>Not Available in " . $_COOKIE["pin_code"] . "</span>";
+				}else {
+					echo "<span>Check Avaliabilty</span>";
+				}
+			?></a>
+			&nbsp;<span class='changepin'>Change</span>
+		</div>        
+    </div>
+    <?php $ids = $this->cartitemids(); 
+		$skus = $this->cartitemSku();
+	?>
+    <script>
+        var cb = jQuery.noConflict();
+        cb(document).ready(function() {
+			var target = cb('#techinflo_rwd').parent().parent('ul.checkout-types'); 
+			if (target.length) {
+				cb(target).attr("id", "techinflo-zipcart");
+			}
+            cb(".cart .page-title").prepend('<div id="location_msg" class="error-msg" style="display:none"></div>');
+    <?php if ((isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') || (isset($_COOKIE["avl_pin_code"]) && $_COOKIE["avl_pin_code"] != "")) { ?>
+
+        <?php if (isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') { ?>
+                    var pintext = "<?php echo $_COOKIE["pin_code"]; ?>";
+        <?php } else { ?>
+                    var pintext = "<?php echo $_COOKIE["avl_pin_code"]; ?>";
+        <?php } ?>
+                chkavail(pintext);
+
+    <?php } ?>
+        });
+
+        function chkavail(pintext) {
+            var cb = jQuery.noConflict();
+			cb('.btn-proceed-checkout').attr('disabled','disabled');
+            var id = '<?php echo serialize($ids); ?>';
+            if (pintext == 'undefined' || pintext == '') {
+                var pintext = cb("#checkpin").val();
+            }
+            url = "<?php echo Mage::getUrl('zipcodeavailability/index/cartpageavailable') ?>";
+            cb("#loader").show();
+            cb("#ckhbtn").hide();
+            cb.ajax({url: url, method:"POST", data:{ productid:id, zipcode:pintext}, success: function(result) {
+                    var resp_result = cb.trim(result);	
+					var cart_result = JSON.parse(resp_result);					
+                    var html = "";
+                    cb.each(cart_result['item'], function (index, value)  
+					{  
+						if(value == 0){
+							cb('#Item_'+index).addClass('zipcode_error');
+							cb("#Item_"+index+" .product-name").append("<div class='product_avl_info error-msg'>Not available</div>");
+							cb(".product_avl_info").show();
+						}else {
+							cb(".product-name").append("<div class='product_avl_info'></div>");
+							cb(".product_avl_info").remove();
+							cb('#Item_'+index).removeClass('zipcode_error');
+						}
+					}); 
+					
+                    if (cart_result['status'] == '0' ) {
+                        setCookie("avl_pin_code", '', 1);
+                        cb("#loader").hide();
+                        cb("#ckhbtn").show();
+						cb("#check-data").hide();
+						cb("#location_msg").html("There are item(s) in your cart that cannot be shipped to your location.").show();
+						cb('.btn-proceed-checkout').attr('disabled','disabled');                       
+                        setCookie("pin_code", pintext, 1);
+                        cb("#check-avail1 a").html('<span class="lbl not_available">Not Available in </span><span class="pinonly not_available">' + pintext + '</span>');
+                        cb(".product_avl_info").show();
+						cb("#check-avail1").show();
+						
+                    } else {
+						cb('.btn-proceed-checkout').attr('disabled', false);
+						cb("#check-data").hide();
+                        cb("#check-avail1 a").html('<span class="lbl available">Available in </span><span class="pinonly available">' + pintext + '</span>');
+                        cb("#loader").hide();
+                        cb("#ckhbtn").show();
+                        setCookie("pin_code", pintext, 1);
+                        setCookie("avl_pin_code", pintext, 1);
+                        cb("#checkpin").val(pintext);
+                        cb(".product_avl_info").hide();
+                        cb("#location_msg").hide();
+                        if (cb("#checkpin").val() == "") {
+                            setCookie("pin_code", '', 1);
+                            setCookie("avl_pin_code", '', 1);
+                            cb("#check-avail1 a").html('<span>Check Avaliabilty</span>');
+                            var response = "";
+                            cb("#location_msg_avl").hide();
+                        } else {
+                            cb(".product_avl_info").hide();
+                            cb("#checkpin").val(cb.trim(pintext));
+                        }
+						cb("#check-avail1").show();
+                    }
+                }});
+
+            return false;
+        }
+        function setCookie(c_name, value, exdays)
+        {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value + ";path=/";
+        }
+
+        var $p = jQuery.noConflict();
+        $p('#check-avail1').click(function() {
+            $p(".check-data").show();
+            $p("#checkpin").show();
+            $p(this).hide();
+            $p('#check-avail2').show();
+            $p('#check-data').show();
+        });
+        $p('#check-avail2').click(function() {
+            $p(this).hide();
+            $p('#check-avail1').show();
+            $p('#check-data').hide();
+        });
+    </script>
+<?php endif; ?>

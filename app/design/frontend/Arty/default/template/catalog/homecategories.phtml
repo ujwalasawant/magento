@@ -19,7 +19,7 @@
                         <?php foreach ($categoryChildren as $_categoryChild) : ?>
                             <?php $_categoryChildModel = Mage::getModel('catalog/category')->load($_categoryChild->getId()); ?>
                             <?php $categoryGrandchildren = $_categoryChild->getChildren(); ?>
-                            <li class="rowspan">
+                            <li class="">
                                 <?php
                                 $currentCategoryId === $_categoryChild->getId() ? $bold = "style=\"font-weight:bold\"" : $bold = '';
                                 echo '<a class="catanchor" href="' . $_categoryChildModel->getUrl() . '"' . $bold . '>' . $_categoryChild->getName() . '(' . $_categoryChildModel->getProductCollection()->count() . ')</a>';
@@ -28,10 +28,10 @@
                             <?php if ($categoryGrandchildren->count()) : ?>
                                 <?php foreach ($categoryGrandchildren as $_categoryGrandchild) : ?>
                                     <?php $_categoryGrandchildModel = Mage::getModel('catalog/category')->load($_categoryGrandchild->getId()); ?>
-                                    <li class="list-unstyled rowspan">
+                                    <li class="list-unstyled ">
                                         <?php
                                         $currentCategoryId === $_categoryChild->getId() ? $bold = "style=\"font-weight:bold\"" : $bold = '';
-                                        echo '<a class="catanchor" href="' . $_categoryGrandchildModel->getUrl() . '"' . $bold . '>' . $_categoryGrandchild->getName() . '(' . $_categoryGrandchildModel->getProductCount() . ')</a>';
+                                         '<a class="catanchor" href="' . $_categoryGrandchildModel->getUrl() . '"' . $bold . '>' . $_categoryGrandchild->getName() . '(' . $_categoryGrandchildModel->getProductCount() . ')</a>';
                                         ?>
                                     </li>
                                 <?php endforeach; ?>

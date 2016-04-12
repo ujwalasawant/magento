@@ -1,0 +1,55 @@
+<!--
+/**
+*  Module: jQuery AJAX-ZOOM for Magento, /app/design/adminhtml/default/default/template/axzoom/tab.phtml
+*  Copyright: Copyright (c) 2010-2016 Vadim Jacobi
+*  License Agreement: http://www.ajax-zoom.com/index.php?cid=download
+*  Version: 1.0.12
+*  Date: 2016-03-02
+*  Review: 2016-03-02
+*  URL: http://www.ajax-zoom.com
+*  Documentation: http://www.ajax-zoom.com/index.php?cid=modules&module=magento
+*
+*  @author    AJAX-ZOOM <support@ajax-zoom.com>
+*  @copyright 2010-2015 AJAX-ZOOM, Vadim Jacobi
+*  @license   http://www.ajax-zoom.com/index.php?cid=download
+*/
+-->
+
+<script type="text/javascript">
+function showSuccessMessage(message)
+{
+	//console.log(message);
+}
+
+function doAdminAjax360(url, data, success_func, error_func)
+{
+	jQuery.ajax(
+	{
+		url : url,
+		data : data,
+		type : 'GET',
+		success : function(data){
+			if (success_func)
+				return success_func(data);
+
+			data = jQuery.parseJSON(data);
+			if (data.confirmations.length != 0)
+				showSuccessMessage(data.confirmations);
+			else
+				showErrorMessage(data.error);
+		},
+		error : function(data){
+			if (error_func)
+				return error_func(data);
+
+			alert("[TECHNICAL ERROR]");
+		}
+	});
+}
+</script>
+
+<?php $productId = (int)Mage::app()->getRequest()->getParam('id'); ?>
+
+<?php require 'tab360-settings.phtml'; ?>
+<?php require 'tab360-sets.phtml'; ?>
+<?php require 'tab360.phtml'; ?>

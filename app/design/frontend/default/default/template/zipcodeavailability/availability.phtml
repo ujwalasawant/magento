@@ -1,0 +1,154 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    Techinflo   
+ * @package     Techinflo_Zipcodeavailability
+ * @copyright   Techinflo(www.techinflo.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/**
+ * Product view template
+ *
+ * @see Techinflo_Zipcodeavailability_Block_view
+ * @see Techinflo_Zipcodeavailability_Block_view
+ */
+?>
+<?php if ($this->getIsActive()): ?>
+    <?php $pid = Mage::registry('current_product')->getId(); ?>
+    <?php $set = $this->cookieparams(); ?>
+    <div class="chkavl" id="<?php echo $this->getTechinfloTheme(); ?>"> 
+        <div class="check-avail check-avail1" id="check-avail1">
+			<a  href="javascript:void(0);"><?php
+                if ((($_COOKIE["avl_pin_code"] != '') && isset($_COOKIE["avl_pin_code"])) || (($_COOKIE["pin_code"] != '') && isset($_COOKIE["pin_code"]))) {
+                    if ($_COOKIE["avl_pin_code"] != '' && isset($_COOKIE["avl_pin_code"]))
+                        echo "<span class='available'>Available at " . $_COOKIE["avl_pin_code"] . "</span>";
+                    if ($_COOKIE["pin_code"] != '' && isset($_COOKIE["pin_code"]))
+                        echo "<span>Not Available in " . $_COOKIE["pin_code"] . "</span>";
+                }else {
+                    echo "&nbsp;<span>Check Avaliabilty</span>";
+                }
+                ?>
+			</a>&nbsp;<span class='changepin'>Change</span>
+		</div>
+
+        <div id="check-data" >
+            <input class="check-input input-text" type="text" id="checkpin" name="checkpin" maxlength="8" value="" />
+            <div class="check-data"><button class="btn button" id="ckhbtn" type="button" onclick="chkavail();" ><span>check</span></button>
+                <span id="loader" style="display:none;"><img src="<?php echo $this->getSkinUrl('css/zipcodeavailability/ajax-loader.gif'); ?>"></span></div>	
+            <div id="resps" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+    <?php  if ((isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') || (isset($_COOKIE["avl_pin_code"]) && $_COOKIE["avl_pin_code"] != "")) { ?>
+            var cb = jQuery.noConflict();
+            cb(document).ready(function() {
+                var cb = jQuery.noConflict();               
+                var id = "<?php echo $pid; ?>";
+        <?php if (isset($_COOKIE["pin_code"]) && $_COOKIE["pin_code"] != '') { ?>
+                    var pintext = "<?php echo $_COOKIE["pin_code"]; ?>";
+        <?php } else { ?>
+                    var pintext = "<?php echo $_COOKIE["avl_pin_code"]; ?>";
+        <?php } ?>
+                url = "<?php echo Mage::getUrl('zipcodeavailability/index/pdp') ?>";
+                cb("#loader").show();
+                cb("#ckhbtn").hide();
+                cb.ajax({url: url, method:"POST", data:{ productid:id, zipcode:pintext}, success: function(result) {
+                    var resp_result = cb.trim(result);                    
+					if(resp_result == 1) {
+						cb("#loader").hide();
+						cb("#ckhbtn").show();
+						setCookie("pin_code", '', 1);
+						setCookie("avl_pin_code", pintext, 1);
+						cb("#check-avail1 a").html('<span class="lbl available" >Available at </span><span class="pinonly available">' + pintext + '</span>');						
+						cb("#check-data").slideUp();
+						cb("#check-avail2").slideUp();
+						cb("#check-avail1").slideDown();
+						cb('.add-to-cart-buttons button').prop( "disabled", false );
+					}else {
+						cb("#loader").hide();
+						cb("#ckhbtn").show();	
+						cb("#check-data").slideUp();
+						cb('.add-to-cart-buttons .btn-cart').attr('disabled','disabled');
+						cb("#check-avail1 a").html('<span class="lbl not_available" >Not Available in </span><span 	class="pinonly not_available">' + pintext + '</span>');
+						cb("#check-avail1").slideDown();
+					} 
+                }});
+                return false;
+            });
+    <?php  } else { ?>
+			var cb = jQuery.noConflict();
+            cb(document).ready(function() {
+				cb('.add-to-cart-buttons .btn-cart').attr('disabled','disabled');
+			});
+	<?php } ?>
+        function chkavail() {
+            var cb = jQuery.noConflict();
+            var id = "<?php echo $pid; ?>";
+            var pintext = cb("#checkpin").val();
+            url = "<?php echo Mage::getUrl('zipcodeavailability/index/pdp') ?>";
+            cb("#loader").css({"display":"block"});
+            cb("#ckhbtn").hide();
+            cb.ajax({url: url, method:"POST", data:{ productid:id, zipcode:pintext}, success: function(result) {
+                    var resp_result = cb.trim(result);
+                    var html = "";
+					if(resp_result == 1) {
+						cb("#loader").hide();
+						cb("#ckhbtn").show();
+						setCookie("pin_code", '', 1);
+						setCookie("avl_pin_code", pintext, 1);
+						cb("#check-avail1 a").html('<span class="lbl available" >Available at </span><span class="pinonly available">' + pintext + '</span>');						
+						cb("#check-data").slideUp();
+						cb("#check-avail2").slideUp();
+						cb("#check-avail1").slideDown();
+						cb('.add-to-cart-buttons button').prop( "disabled", false );
+					}else {
+						cb("#loader").hide();
+						cb("#ckhbtn").show();	
+						cb("#check-data").slideUp();
+						setCookie("avl_pin_code", '', 1);
+						setCookie("pin_code", pintext, 1);
+						cb('.add-to-cart-buttons .btn-cart').attr('disabled','disabled');
+						cb("#check-avail1 a").html('<span class="lbl not_available" >Not Available in </span><span 	class="pinonly not_available">' + pintext + '</span>');
+						cb("#check-avail1").slideDown();						
+					}
+                }});
+            return false;
+        }
+        function setCookie(c_name, value, exdays)
+        {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value + ";path=/";
+        }
+
+    </script>
+    <script>
+        var $p = jQuery.noConflict();
+        $p('#check-avail1').click(function() {
+            $p(".check-data").show();
+			$p("#ckhbtn").show();
+            $p("#checkpin").show();
+            $p(this).hide();
+            $p('#check-avail2').show();
+            $p('#check-data').show();
+        });
+        $p('#check-avail2').click(function() {
+            $p(this).hide();
+            $p('#check-avail1').show();
+            $p('#check-data').hide();
+        });
+    </script>
+<?php endif; ?>

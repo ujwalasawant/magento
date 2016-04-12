@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <zipcodeavailability_adminhtml_zipcodeavailability_index>
+        <reference name="content">
+            <block type="zipcodeavailability/adminhtml_zipcodeavailability" name="zipcodeavailability" />
+        </reference>
+    </zipcodeavailability_adminhtml_zipcodeavailability_index>
+	<adminhtml_catalog_product_edit>
+		<reference name="product_tabs">
+			<action method="addTab">
+				<name>techinflo_zipcodeavailability</name>
+				<block>zipcodeavailability/adminhtml_catalog_product_tab</block>
+			</action>
+		</reference>
+	</adminhtml_catalog_product_edit>
+	<default>
+        <reference name="head">
+			<action method="addCss">
+                <name>zipcodeavailability/css/techinflo_admin_zipcode.css</name>
+            </action>
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>zipcodeavailability/js/jquery.min.js</name>
+			</action>
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>zipcodeavailability/js/noConflict.js</name>
+			</action>
+			<action method="addItem">
+				<type>skin_js</type>
+				<name>zipcodeavailability/js/zipcode.js</name>
+			</action>
+        </reference>
+	</default>
+</layout>

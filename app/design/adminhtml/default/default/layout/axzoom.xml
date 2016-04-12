@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+*  Module: jQuery AJAX-ZOOM for Magento, /app/design/adminhtml/default/default/layout/axzoom.xml
+*  Copyright: Copyright (c) 2010-2015 Vadim Jacobi
+*  License Agreement: http://www.ajax-zoom.com/index.php?cid=download
+*  Version: 1.0.0
+*  Date: 2015-09-08
+*  Review: 2015-09-08
+*  URL: http://www.ajax-zoom.com
+*  Documentation: http://www.ajax-zoom.com/index.php?cid=modules&module=magento
+*
+*  @author    AJAX-ZOOM <support@ajax-zoom.com>
+*  @copyright 2010-2015 AJAX-ZOOM, Vadim Jacobi
+*  @license   http://www.ajax-zoom.com/index.php?cid=download
+*/
+-->
+<layout>
+	<adminhtml_catalog_product_edit>
+		<reference name="head">
+			
+			<!-- If jQuery is not defined inject jQuery 1.11.3 core with jQuery.noConflict() and jquery-migrate 1.2.1 -->
+			<action method="addJs"><script>axzoom/check_jquery_admin.js</script></action>
+			
+			<!-- Scripts and CSS for preview AJAX-ZOOM in a Fancybox -->
+            <action method="addItem">
+               <type>js_css</type>
+               <name>axzoom/axZm/plugins/demo/jquery.fancybox/jquery.fancybox-1.3.4.css</name>
+            </action>
+			<action method="addJs"><script>axzoom/axZm/plugins/demo/jquery.fancybox/jquery.fancybox-1.3.4.pack.js</script></action>
+			<action method="addJs"><script>axzoom/axZm/extensions/jquery.axZm.openAjaxZoomInFancyBox.js</script></action>
+			
+			<!-- Fileupload for 360 images -->
+			<action method="addJs"><script>axzoom/jquery.ui.widget.min.js</script></action>
+			<action method="addJs"><script>axzoom/jquery.fileupload.js</script></action>
+			<action method="addJs"><script>axzoom/jquery.fileupload-process.js</script></action>
+			<action method="addJs"><script>axzoom/jquery.fileupload-validate.js</script></action>
+            
+            <!-- test 
+            <action method="addJs"><script>axzoom/jquery.livequery.min.js</script></action>
+            -->
+            
+		</reference>
+	</adminhtml_catalog_product_edit>
+</layout>

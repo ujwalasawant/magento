@@ -1,0 +1,186 @@
+.github.ribbon {
+	position: fixed;
+	display: block;
+	top: 40px;
+	right: 0;
+	border: 0;
+	z-index: 1001;
+}
+
+.prettyprint {
+	padding: 10px!important;
+}
+
+#wrap {
+	padding-top: 70px;
+}
+
+#home h1 {
+	margin-bottom: 30px;
+}
+#techinflo_zipcode  { padding: 0; }
+#demo,
+#examples,
+#support,
+#download {
+	padding-top: 40px;
+}
+
+.glyphicon {
+    display: inline-block;
+    font-family: "Glyphicons Halflings";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    position: relative;
+    top: 1px;
+}
+
+.glyphicon-forward::before {
+    content: "";
+}
+*::after, *::before {
+    box-sizing: border-box;
+}
+*::after, *::before {
+    box-sizing: border-box;
+}
+#zipocdessellerzone  {
+	width: 600px;
+}
+
+#selected_zipcodezones  .input-text {
+	padding;5px;
+	text-align:center;
+	vertical-align:middle;
+}
+
+#zipocdessellerzone select {
+	width: 100%;
+}
+
+#zipocdessellerzone >.col-sm-5  {
+	float: left;
+    width: 40%;
+}
+#zipocdessellerzone >.col-sm-2  {
+	float: left;
+    width: 20%;
+}
+.col-sm-2 button {
+	display: block;
+    margin: 6px auto;
+    padding: 0 11px;
+}
+
+.glyphicon {
+    display: inline-block;
+    font-family: "Glyphicons Halflings";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    position: relative;
+    top: 1px;
+}
+* {
+    box-sizing: border-box;
+}
+.btn {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.zipcodeAvailability {
+	margin:0px;padding:0px;
+	width:100%;
+	
+	border:1px solid #ddd2d2;
+
+}
+.zipcodeAvailability table{
+    border-collapse: collapse;
+    border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}
+.zipcodeAvailability tr:last-child td:last-child {
+	-moz-border-radius-bottomright:0px;
+	-webkit-border-bottom-right-radius:0px;
+	border-bottom-right-radius:0px;
+}
+.zipcodeAvailability table tr:first-child th:first-child {
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
+}
+.zipcodeAvailability table tr:first-child td:first-child {
+	-moz-border-radius-topleft:0px;
+	-webkit-border-top-left-radius:0px;
+	border-top-left-radius:0px;
+}
+.zipcodeAvailability table tr:first-child td:last-child {
+	-moz-border-radius-topright:0px;
+	-webkit-border-top-right-radius:0px;
+	border-top-right-radius:0px;
+}
+.zipcodeAvailability tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:0px;
+	-webkit-border-bottom-left-radius:0px;
+	border-bottom-left-radius:0px;
+}
+.zipcodeAvailability tr:hover td{
+	
+}
+.edit_zone_template { display: none;}
+.zipcodeAvailability tr:nth-child(odd){ background-color:#E7EFEF; }
+.zipcodeAvailability tr:nth-child(even)    { background-color:#ffffff; }
+#zipcode_multiselect {
+		padding:15px;
+}
+#zipcode_multiselect > select, 
+#zipcode_tempalte > option { padding: 2px 6px; }
+
+.zipcodeAvailability td{
+	vertical-align:middle;	
+	border:1px solid #ddd2d2;
+	border-width:0px 1px 1px 0px;
+	text-align:center;
+	padding:8px;
+	font-size:10px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#000000;
+}
+.zipcodeAvailability tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}
+.zipcodeAvailability tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}
+.zipcodeAvailability tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+.zipcodeAvailability tr:first-child td{
+	background:-o-linear-gradient(bottom, #6f8992 5%, #6f8992 100%);		
+	background:-moz-linear-gradient( center top, #6f8992 5%, #6f8992 100% );
+	background-color:#6f8992;
+	border:0px solid #d6d6d6;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:14px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#ffffff;
+}
+
+.zipcodeAvailability tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.zipcodeAvailability tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
+}

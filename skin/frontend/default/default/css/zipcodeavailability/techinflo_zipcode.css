@@ -1,0 +1,146 @@
+.chkavl {
+    clear: both;
+    float: left;
+    margin: 5px;
+	margin-left:0px;
+	min-height:62px;
+}
+
+.check-avail {
+    color: #EE8827;
+    float: left;
+    margin-top: 0;
+}
+
+.check-avail a {
+    color: #EE8827;
+}
+
+.check-avail a {
+    text-decoration: none;
+}
+
+.pinonly {
+    font-weight: bold;
+}
+
+#check-avail1 a:hover { text-decoration:none; }
+#check-data {
+    display: none;
+    margin-top: 10px;
+    text-align: left;   
+    z-index: 99;
+}
+
+.check-input {
+    border: 1px solid #CCCCCC;
+    font-family: inherit;
+    font-size: 13px;
+    padding: 5px 6px;
+    resize: none;
+    width: 160px !important;
+}
+
+.check-data {
+    float: left;
+    left: 10px;
+    position: relative;
+}
+
+.check-data #loader {
+    margin-left: 5px;
+    margin-top: 6px;
+}
+
+#location_msg {
+    background: none repeat scroll 0 0 #FCE7E7;
+    border: 1px solid #BB0000;
+    clear: both;
+    color: #BB0000;
+    float: left;
+    margin: 4px 0;
+    padding: 3px;
+}
+
+#location_msg_avl {
+	background: none repeat scroll 0 0 #D0F7C8;
+	border: 1px solid #197704;
+	clear: both;
+	color: #197704;
+	float: left;
+	margin: 4px 0;
+	padding: 3px;
+}
+
+.cart #location_msg {  
+	float: none !important;
+	text-align: center;
+	font-weight: bold;
+  
+}
+.unservicable-warning {  
+	float: none !important;
+	font-size: 15px;
+	text-align: center;
+}
+
+.co_item_not_serviceable {
+	background-color: #F2F2F2;
+	border-bottom: 1px solid #BB0000;
+	font-size: 13px;
+	font-weight: normal;
+	margin: 10px 0;
+}
+
+.co_item_not_serviceable .message {
+	background-color: #BB0000;
+	border-bottom: 3px solid #FFFFFF;
+	color: #FFFFFF;
+	font-size: 13px;
+	font-weight: normal;
+	padding: 5px;
+}
+
+.cart .title-buttons .checkout-types li {
+    float: none !important;
+}
+
+.co_summary_not_allowed th{
+	background: #ddd;
+    font-weight: bold;
+}
+
+.checkout-types #check-data {  position:relative; right:0px; }
+.zipcode_error {
+    opacity: 0.35;
+    padding: 8px;
+}
+
+#checkpin { 
+	width: 100px !important;  
+	float:left;
+}
+
+.changepin { cursor: pointer; text-decoration:underline; }
+.available { color: #11b400; }
+.not_available { color: red; }
+
+#techinflo_rwd .chkavl {
+	clear: both;
+	float: left;
+	margin: 5px 5px 5px 0px;
+	min-height:100px;
+} 
+#techinflo_rwd #checkpin { 
+	width: 100px !important;  
+	float:left;
+	min-height: 40px;
+}
+#techinflo-zipcart li { display: block; }
+#techinflo-zipcart #checkpin {  min-height: 33px; }
+
+.product_avl_info.error-msg {
+    color: red;
+    font-size: 12px;
+    text-transform: none;
+}

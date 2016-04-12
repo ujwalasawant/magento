@@ -1,0 +1,24 @@
+<layout version="0.1.0">
+    <default>
+	 
+        <reference name="head">
+            <action method="addJs" ifconfig="bannerconfig/bannerstatus/jqenable">
+                <script>Atlas/jquery.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>Atlas/jquery.bxslider.js</script>
+            </action>
+            <action method="addJs">
+                <script>Atlas/jquery.bxslider.min.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>atlasbannerslider/css/atlasbanner.css</stylesheet>
+            </action>
+        </reference>
+        
+    
+		  
+    </default>
+  
+	
+</layout>

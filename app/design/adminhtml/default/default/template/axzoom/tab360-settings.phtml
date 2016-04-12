@@ -1,0 +1,311 @@
+<!--
+/**
+*  Module: jQuery AJAX-ZOOM for Magento, /app/design/adminhtml/default/default/template/axzoom/tab360-settings.phtml
+*  Copyright: Copyright (c) 2010-2015 Vadim Jacobi
+*  License Agreement: http://www.ajax-zoom.com/index.php?cid=download
+*  Version: 1.0.9
+*  Date: 2015-12-01
+*  Review: 2015-12-01
+*  URL: http://www.ajax-zoom.com
+*  Documentation: http://www.ajax-zoom.com/index.php?cid=modules&module=magento
+*
+*  @author    AJAX-ZOOM <support@ajax-zoom.com>
+*  @copyright 2010-2015 AJAX-ZOOM, Vadim Jacobi
+*  @license   http://www.ajax-zoom.com/index.php?cid=download
+*/
+-->
+
+<?php
+$model = Mage::getModel('axzoom/ax360');
+$groups = $model->getCollection()->addFieldToFilter('id_product', $productId)->getData();
+$active = !Mage::getModel('axzoom/axproducts')->getCollection()->addFieldToFilter('id_product', $productId)->count();
+
+// associated products
+$associated = array();
+$product = Mage::getModel('catalog/product')->load($productId); 
+if ($product->isConfigurable()) {
+	$childProducts = Mage::getModel('catalog/product_type_configurable')
+	                    ->getUsedProducts(null,$product);
+
+	foreach ($childProducts as $child) {
+		$p = Mage::getModel('catalog/product')->load($child->getId()); 
+	    $associated[$child->getId()] = $p->getName() . ' (' . $child->getSku() . ')';
+	}
+}
+?>
+<style type="text/css">
+.pull-right {
+	float: right;
+}
+#pairRows input, #pairRows textarea{
+	margin-bottom: 3px;
+}
+
+#pairRows textarea{
+	resize: vertical;
+}
+
+#pairRows td:nth-child(3){
+	padding-right: 10px;
+}
+
+.link_add_option{
+	margin-top: 5px;
+}
+
+</style>
+
+
+<div class="entry-edit">
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Enable / Disable AJAX-ZOOM for this product') ?></h4>
+	</div>
+	<div class="fieldset fieldset-wide" id="group_fields9">
+		<div class="hor-scroll">
+			<table cellspacing="0" class="form-list" cellspacing="0">
+				<tbody>
+					<tr>
+						<td class="label"><label for="meta_title"><?php echo $this->__('AJAX ZOOM enabled for this product\'s detail view') ?></label></td>
+						<td class="value">
+							<input type="radio" name="az_active" id="az_active_on" value="1" <?php if($active == 1):?>checked="checked"<?php endif ?>/>
+							<label class="t" for="az_active_on"><?php echo $this->__('Yes') ?></label>
+							<input type="radio" name="az_active" id="az_active_off" value="0" <?php if($active == 0):?>checked="checked"<?php endif ?>/>
+							<label class="t" for="az_active_off"><?php echo $this->__('No') ?></label>
+						</td>
+						<td class="scope-label"><span class="nobr"></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<div class="entry-edit">
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('SETTINGS FOR EXISTING 360/3D') ?></h4>
+	</div>
+	<div class="fieldset fieldset-wide" id="group_fields9">
+		<div class="hor-scroll">
+			<table cellspacing="0" class="form-list" cellspacing="0">
+				<tbody>
+					<tr>
+						<td class="label"><label for="meta_title"><?php echo $this->__('360/3D View') ?></label></td>
+						<td class="value">
+							<?php foreach ($groups as $group): ?>
+							<input type="hidden" name="settings[<?php echo $group['id_360'] ?>]" id="settings_<?php echo $group['id_360'] ?>" value="<?php echo urlencode($group['settings']) ?>">
+							<input type="hidden" name="comb[<?php echo $group['id_360'] ?>]" id="settings_comb_<?php echo $group['id_360'] ?>" value="<?php echo urlencode($group['combinations']) ?>">
+							
+							<?php endforeach; ?>
+							<select id="id_360" name="id_360" style="min-width: 100px">
+								<option value=""><?php echo $this->__('Select') ?></option>
+								<?php foreach ($groups as $group): ?>
+								<option value="<?php echo $group['id_360']; ?>" data-settings="<?php echo urlencode($group['settings']) ?>" data-combinations="[<?php echo urlencode($group['combinations']) ?>]"><?php echo $group['name'] ?></option>
+								<?php endforeach; ?>
+							</select>						
+						</td>
+						<td class="scope-label"><span class="nobr"></span></td>
+					</tr>
+					<tr id="pairs" style="display:none;">
+						<td class="label"><label for="meta_title"><?php echo $this->__('Settings') ?></label></td>
+						<td class="value">
+							<table cellspacing="0">
+								<thead>
+									<tr>
+										<th><?php echo $this->__('Name') ?></th>
+										<th></th>
+										<th style="width: 220px"><?php echo $this->__('Value') ?></th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody id="pairRows">
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="4">
+											<div class="row_">
+												<button class="scalable add link_add_option">
+													<span><span><span><?php echo $this->__('Add an option'); ?></span></span></span>
+												</button>
+											</div>
+											<p class="note">
+												 <?php echo $this->__('AJAX-ZOOM has several hundreds options. Most of them can be set dynamically over JS and here, some need to be set in the config file. The most important are already listed above but you can add more if needed! For more options directly related to 360 please refere to AJAX-ZOOM documentation.'); ?>
+											</p>
+										</td>
+									</tr>
+								</tfoot>	
+							</table>
+							<table id="pairTemplate" style="display: none" cellspacing="0">
+								<tr>
+									<td><input type="text" name="name[]" value="name_placeholder" class="pair-names"></td>
+									<td>&nbsp; : &nbsp;</td>
+									<td><input type="text" name="value[]" value="value_placeholder" class="pair-values"></td>
+									<td>
+										<a class="link_textarea_option" href="#">
+											<?php echo $this->__('Edit') ?>
+										</a>
+										&nbsp;&nbsp;
+										<a class="link_remove_option" href="#">
+											<?php echo $this->__('Delete') ?>
+										</a>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+
+					<?php if (count($associated)): ?>
+					<tr id="comb" style="display:none;">
+						<td class="label"><label for="meta_title"><?php echo $this->__('Associated products') ?></label></td>
+						<td class="value">
+							<button class="comb-check-all" style="margin-bottom: 10px;" value="check all" >check all</button><br>
+
+							<?php foreach ($associated as $id => $name): ?>
+							<input type="checkbox" name="combinations[]" value="<?php echo $id ?>" class="settings-combinations"> <?php echo $name ?><br>
+							<?php endforeach; ?>
+							
+							<div class="" style="display: block; margin-top: 10px;">
+								<?php echo $this->__('Here you can define if this 360 should be bind to associated products.') ?>
+								<?php echo $this->__('If you do not select any this 360 will be shown in all associated products.') ?>
+							</div>							
+						</td>
+					</tr>
+					<?php endif; ?>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+jQuery(function ($) {
+	
+	function pairLine(name, value)
+	{ 
+		var line = $("#pairTemplate").html();
+		line = line.replace(/name_placeholder/g, name);
+		line = line.replace(/value_placeholder/g, value);
+		line = line.replace(/<tbody>/gi, "");
+		line = line.replace(/<\/tbody>/gi, "");
+		$("#pairRows").append(line);
+	}	
+
+	function afterSaveSettings(data) { 
+		var data = $.parseJSON(data);
+
+		$('#id_360').replaceWith(data.select);
+		$('#pairs').hide();
+		$('#comb').hide();
+		$('select#id_360').val('');
+		showSuccessMessage(data.confirmations);
+	} 
+
+	function getFieldValues(class1) {
+		var inputs = document.getElementsByClassName( class1 );
+		var res = [];
+		for (var i = 0; i < inputs.length; i++) {
+			res.push(inputs[i].value);
+		};
+    	return res;
+	}
+
+	function setPairString() {
+    	var names = getFieldValues('pair-names');
+    	var values = getFieldValues('pair-values');
+    	var res = {};
+    	for (var i = 0; i < names.length; i++) {
+    		if(names[i] == 'name_placeholder') continue;
+    		res[names[i]] = values[i];
+    	};
+    	
+    	$('#settings_' + $('select#id_360').val()).val(encodeURIComponent(JSON.stringify(res)));
+	}
+
+	function setComb() {
+    	
+    	var values = [];
+    	$('.settings-combinations:checked').each(function () {
+    		values.push($(this).val());
+    	});
+    	
+    	$('#settings_comb_' + $('select#id_360').val()).val(encodeURIComponent(JSON.stringify(values)));
+	}
+	
+	$('.pair-names, .pair-values').die()
+	.live('change', function(e) {
+		setPairString();
+	} );
+
+	$('.settings-combinations').die()
+	.live('change', function(e) {
+		setComb();
+	} );
+
+
+	$('.link_add_option').click(function (e) {
+		e.preventDefault();
+		pairLine('', '');
+	} );
+
+	$('.link_remove_option').die()
+	.live('click', function(e) {
+		e.preventDefault();
+		$(this).parent().parent().remove();
+		setPairString();
+	} );
+	
+	$('.link_textarea_option').die()
+	.live('click', function(e) {
+		e.preventDefault();
+		var td = $(this).parent().prev();
+		if ($('input', td).length == 1) { 
+			var Val = $('input', td).val();
+			$('input', td).replaceWith('<textarea class="pair-values" type="text" name="value[]">'+Val+'</textarea>');
+		} else if ($('textarea', td).length == 1) { 
+			var Val = $('textarea', td).val();
+			$('textarea', td).replaceWith('<input class="pair-values" type="text" value="'+Val+'" name="value[]">');
+		}
+	} );
+	
+	$('select#id_360').die().live('change', function(e) {	
+		
+		$('#pairRows').html('');
+
+		if($(this).val() != '') { 
+
+			// set pairs name:value
+			var settings = $.parseJSON(unescape($('option:selected', $(this)).attr('data-settings')));
+			for(var k in settings) { 
+				pairLine(k, settings[k])
+			} 
+
+			// set combinations checkboxes
+			var combinations = $.parseJSON(unescape($('option:selected', $(this)).attr('data-combinations')))[0];
+			
+			$('input.settings-combinations').attr('checked', false);
+			if(combinations && combinations.length) {
+				for (var i = combinations.length - 1; i >= 0; i--) {
+					$('input.settings-combinations[value=' + combinations[i] + ']').attr('checked', true);
+				};
+			}
+
+			$('#pairs').show();
+			$('#comb').show();
+		} else {
+			$('#pairs').hide();
+			$('#comb').hide();
+		}
+	});
+
+    $('.comb-check-all:button').toggle(function() { 
+        $('input.settings-combinations').attr('checked','checked');
+        $(this).val('uncheck all');
+        setComb();
+    } ,function() { 
+        $('input.settings-combinations').removeAttr('checked');
+        $(this).val('check all');
+        setComb();
+    } );
+});
+</script>

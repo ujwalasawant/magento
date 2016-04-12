@@ -1,0 +1,148 @@
+<!--
+/**
+*  Module: jQuery AJAX-ZOOM for Magento, /app/design/adminhtml/default/default/template/axzoom/tab360.phtml
+*  Copyright: Copyright (c) 2010-2016 Vadim Jacobi
+*  License Agreement: http://www.ajax-zoom.com/index.php?cid=download
+*  Version: 1.0.12
+*  Date: 2016-03-02
+*  Review: 2016-03-02
+*  URL: http://www.ajax-zoom.com
+*  Documentation: http://www.ajax-zoom.com/index.php?cid=modules&module=magento
+*
+*  @author    AJAX-ZOOM <support@ajax-zoom.com>
+*  @copyright 2010-2016 AJAX-ZOOM, Vadim Jacobi
+*  @license   http://www.ajax-zoom.com/index.php?cid=download
+*/
+-->
+
+<?php $maxImageSize = ini_get('upload_max_filesize'); ?>
+
+<input type="hidden" name="id_360set" id="id_360set" value="" />
+
+<div id="product-images360" class="entry-edit" style="display: none">
+	<div class="entry-edit-head">
+		<h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Images') ?></h4>
+	</div>
+	<div class="fieldset fieldset-wide" id="group_fields9">
+		<div class="hor-scroll">
+			<input type="hidden" name="submitted_tabs[]" value="Images360" />
+
+			<div class="row">
+				<div class="form-group">
+					<div class="col-lg-9">
+						<?php require "uploader.phtml"; ?>
+					</div>
+				</div>
+			</div>
+			<div class="grid">
+				<table class="data border" id="imageTable360" cellspacing="0">
+					<thead>
+						<tr class="headings">
+							<th><?php echo $this->__('Image') ?></th>
+							<th><?php echo $this->__('Actions') ?></th>
+						</tr>
+					</thead>
+					<tbody id="imageList360">
+					</tbody>
+				</table>
+			</div>
+			<table id="lineType360" style="display:none;" cellspacing="0">
+				<tr id="image_id">
+					<td>
+						<img src="<?php echo Mage::getModel('axzoom/ax360')->rootFolder() ?>js/axzoom/image_path.gif" alt="legend" title="legend" class="img-thumbnail" />
+					</td>
+					<td style="width:75px;">
+						<button type="button" class="delete_product_image360 scalable delete" >
+							<span><?php echo $this->__('Delete this image') ?></span>
+						</button>
+					</td>
+				</tr>
+			</table>
+			<div class="panel-footer">
+				<button class="btn_cancel"><span><?php echo $this->__('Cancel') ?></span></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	/*
+	var hookGetUrlParam = function(name, url) { 
+	    if (!url) {
+	     url = window.location.href;
+	    } 
+	    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
+	    if (!results) { 
+	        return undefined;
+	    } 
+	    return results[1] || undefined;
+	}  	
+		
+	jQuery( document ).bind('ajaxComplete.azHook', function( event, xhr, settings ) {
+		var dataString = '?'+settings.data;
+		if (hookGetUrlParam('action', dataString) == 'deleteProductImage') {
+			var id_image = hookGetUrlParam('id_image', dataString);
+			//console.log('Send request to delete AJAX-ZOOM cache for this image ID: '+id_image);
+			doAdminAjax360('<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/axzoom/clearAzImageCache") ?>', { 
+				"deletedImgID" : id_image
+			 } );
+		}
+	} );
+	*/
+		
+	function imageLine360(id, path, position, cover, shops, legend)
+	{
+		line = jQuery("#lineType360").html();
+		line = line.replace(/image_id/g, id);
+		line = line.replace(/"(.*?)path\.gif"/g, path);
+		line = line.replace(/icon-check-empty/g, cover);
+		line = line.replace(/<tbody>/gi, "");
+		line = line.replace(/<\/tbody>/gi, "");
+		
+		jQuery("#imageList360").append(line);
+	}
+
+	jQuery(document).ready(function($){
+		
+		function afterDeleteProductImage360(data)
+		{
+			data = $.parseJSON(data);
+			if (data)
+			{
+				id = data.content.id;
+				if (data.status == 'ok')
+				{
+					$("#" + id).remove();
+				}
+
+				showSuccessMessage(data.confirmations);
+			}
+		}
+
+		$('.btn_cancel').die().live('click', function(e)
+		{
+			e.preventDefault();
+			$('#product-images360').hide();
+			$('#imageTableSetsRows tr').removeClass('active');
+		});
+
+
+		$('.delete_product_image360').die().live('click', function(e)
+		{
+			e.preventDefault();
+			id = $(this).parent().parent().attr('id');
+			var id_360set = $('#id_360set').val();
+			var ext = $(this).parent().parent().find('img').attr('src').split('.').pop();
+			if (confirm("<?php echo $this->__('Are you sure?') ?>"))
+			doAdminAjax360('<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/axzoom/deleteProductImage360") ?>', {
+					"id_image":id,
+					'id_360set': id_360set,
+					"ext":ext,
+					"id_product" : <?php echo $productId ?>
+					}, afterDeleteProductImage360
+			);
+		});
+
+		$('.fancybox').fancybox();
+	});
+</script>

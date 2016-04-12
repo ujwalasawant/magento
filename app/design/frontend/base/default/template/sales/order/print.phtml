@@ -40,6 +40,7 @@
         <h2><?php echo $this->__('Billing Address') ?></h2>
         <address><?php echo $_order->getBillingAddress()->format('html') ?></address>
     </div>
+        </div>
 <?php if (!$_order->getIsVirtual()): ?>
 </div>
 <div class="col2-set">

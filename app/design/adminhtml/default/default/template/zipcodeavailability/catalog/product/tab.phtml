@@ -1,0 +1,132 @@
+<?php
+/*
+ * ZipcodeAvailability tab template
+ */
+?>
+<div class="entry-edit">
+	<div class="fieldset fieldset-wide">
+	<div id="techinflo_zipcode">
+		<div class="entry-edit-head">
+			<h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('catalog')->__('Zipcode Availability') ?></h4>
+		</div>
+		<div class="input-field" id="zipcode_multiselect">
+			<input type="hidden" id="zipcodectrl" value="<?php echo $this->getUrl('zipcodeavailability/index/getzipcodezone'); ?>"/>
+			<input type="hidden" id="adminzipcodectrl" value="<?php echo $this->getUrl('zipcodeavailability/adminhtml_zipcodeavailability/getzipcodezone'); ?>"/>
+			<input type="hidden" id="zipcode_product" value="<?php echo $this->getRequest()->getParam('id'); ?>"/>
+	<?php
+			
+		// Loading all Zipcode Tempaltes 
+		$zipcodeTempaltes = Mage::getModel('zipcodeavailability/zipcodeavailability')->getCollection()
+			->addFieldtoFilter('status', 1)
+			->getData();
+		
+		// Load Product zipcode Tempaltes
+		$zipcodeproducts = Mage::getModel('zipcodeavailability/productzipcode')->getCollection()
+					->addFieldToFilter('product', $this->getRequest()->getParam('id'));
+		$productZipsColl = $zipcodeproducts->getData();
+
+		// Get Seleted zipcodeTempaltes ids
+		$zipcodeTempalteIds = Mage::getModel('zipcodeavailability/productzipcode')->getCollection()
+				->addFieldToFilter('product', $this->getRequest()->getParam('id'))
+				->addFieldToSelect('zipcode_template');
+		$tempalteIds = $zipcodeTempalteIds->getData();
+	?>
+		<label for="zipcode_tempalte"></label>
+		<select name="zipcode_tempalte" id="zipcode_tempalte" multiple="multiple">
+		<?php if(count($zipcodeTempaltes) >0){ 
+			foreach($zipcodeTempaltes as $ziptemp){?>
+			<option value="<?php echo $ziptemp['zipcodeavailability_id']; ?>"  
+				<?php if(in_array($ziptemp['zipcodeavailability_id'], $tempalteIds)){ ?> selected='selected' <?php }  ?>>
+				<?php echo $ziptemp['title']; ?>
+			</option>
+		 <?php } 
+			} ?>
+		</select>
+		</div>
+		<div class="zipcodeAvailability" id="newzones" style="display:none;">
+			<table id="addnewzone">
+			<tbody>
+				<tr>
+					<td>State</td> <td>City</td> <td>Available zone(s)</td> <td>Except zipcod(s)</td><td>Remove</td>		
+				</tr>
+			</tbody>
+			</table>
+		</div>
+		<h3>product zipcode list</h3>
+		<div class="zipcodeAvailability">
+			<input type="hidden" value="<?php echo $this->getUrl('zipcodeavailability/index/removeproductzipzone'); ?>" id="removeZoneURl" />
+			<input type="hidden" value="<?php echo $this->getUrl('zipcodeavailability/index/updateproductzipzone'); ?>" id="updateZoneURl" />
+		<table class="zipcode_tempaltes" id="selected_zipcodezones">
+		<tbody>
+			<tr>
+				<td>State</td> <td>City</td><td>Available zone(s)</td><td>Except zipcod(s)</td><td>Update zipcod(s)</td><td>Delete</td>
+			</tr>
+			<?php 
+			if(count($productZipsColl) ==0 ) {
+				echo "<tr><td></td><td>Soory there is no zipcode record(s) for this product!</td><td></td></tr>";
+			}else
+			{ 	
+				foreach($productZipsColl as $zipTempalte){
+					$zone_id = $zipTempalte['zipcode_template'];	?>
+					<tr id="pzipcode_<?php echo $zone_id; ?>">
+						<td>
+							<div class="show_zone_template show_<?php echo $zone_id; ?>" id="show_state_<?php echo $zone_id; ?>"> 
+								<?php echo $zipTempalte['product_state']; ?> 
+							</div>
+							<div class="edit_zone_template edit_<?php echo $zone_id; ?>"> 
+								<input type="text" class="input-text" id="update_state_<?php echo $zone_id; ?>" name="update_state_<?php echo $zone_id; ?>" value="<?php echo $zipTempalte['product_state']; ?>" /> 
+							</div>
+						</td>
+						<td>	
+							<div class="show_zone_template show_<?php echo $zone_id; ?>" id="show_city_<?php echo $zone_id; ?>"> 
+								<?php echo $zipTempalte['product_city']; ?>	
+							</div>
+							<div class="edit_zone_template edit_<?php echo $zone_id; ?>"> 
+								<input type="text" class="input-text" name="update_city_<?php echo $zone_id; ?>" id="update_city_<?php echo $zone_id; ?>" value="<?php echo $zipTempalte['product_city']; ?>" />
+							</div>
+						</td>
+						<td> 
+							<div class="show_zone_template show_<?php echo $zone_id; ?>" id="show_zipcode_<?php echo $zone_id; ?>">
+								<?php echo $zipTempalte['product_zipcode']; ?>
+							</div>
+							<div class="edit_zone_template edit_<?php echo $zone_id; ?>"> 
+								<textarea name="update_zipcode_<?php echo $zone_id; ?>" id="update_zipcode_<?php echo $zone_id; ?>" id="update_zipcode"><?php echo $zipTempalte['product_zipcode']; ?></textarea>
+							</div>
+						</td>
+						<td>
+							<div class="show_zone_template show_<?php echo $zone_id; ?>" id="show_expZip_<?php echo $zone_id; ?>"> 
+								<?php echo $zipTempalte['product_zipcode_exp']; ?>
+							</div>
+							<div class="edit_zone_template edit_<?php echo $zone_id; ?>"> 
+								<textarea name="update_expZip_<?php echo $zone_id; ?>" id="update_expZip_<?php echo $zone_id; ?>" id="update_expZip"><?php echo $zipTempalte['product_zipcode_exp']; ?></textarea>
+							</div>
+						</td>
+						<td>
+							<div class="show_zone_template show_<?php echo $zone_id; ?>"> 
+								<span class="zipcode_update" onclick="updateTempalte(<?php echo $zone_id; ?>);">
+								Update
+								</span>
+							</div>
+							<div class="edit_zone_template edit_<?php echo $zone_id; ?>"> 
+								<span onclick="saveTempalte(<?php echo $zone_id; ?>);">Save</span>
+							</div>						
+						</td>
+						<td>
+							<span class="zipcode_delete" onclick="rmvProductTempalte(<?php echo $zone_id; ?>);">Delete</span>	
+						</td>
+					</tr>
+				<?php
+				} 
+			} ?>
+		</tbody>
+		</table>
+		</div>
+	</div>
+	<script>
+	$jq = jQuery.noConflict();
+	$jq(document).ready(function(){
+		var selectedTemplates = "<?php echo $tempaltIds; ?>";
+	});
+	</script>
+	</div>
+</div>

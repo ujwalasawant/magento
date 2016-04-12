@@ -1,0 +1,406 @@
+<?php
+/**
+ * Atlas Extensions
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Atlas Commercial License
+ * that is available through the world-wide-web at this URL:
+ *
+ * @copyright   Copyright (c) 2015 Atlas Extensions
+ * @license     Commercial
+ */
+if (Mage::getStoreConfig('bannerconfig/bannerstatus/enabled') == 1)
+{
+
+
+    $groupid = $this->getGroupid();
+    $collection = $this->sample();
+    $seprated = $this->getNameInLayout();
+
+//var_dump($this);
+    if (!empty($collection) && isset($collection))
+    {
+        $count = $collection->count();
+    }
+    if ($count > 0)
+    {
+        $store_id = Mage::app()->getStore()->getId();
+
+        $pager = Mage::getStoreConfig('bannerconfig/banneroption/banner_pager');
+        $speed = Mage::getStoreConfig('bannerconfig/banneroption/banner_speed');
+        $pause = Mage::getStoreConfig('bannerconfig/banneroption/banner_pause');
+        $slideWidth = Mage::getStoreConfig('bannerconfig/banneroption/banner_maxwidth');
+        $pagercircle = Mage::getStoreConfig('bannerconfig/banneroption/banner_pagercircle');
+        if (isset($pagercircle) && empty($pagercircle))
+        {
+            $pagercircle = "666666";
+        }
+        $pageracircle = Mage::getStoreConfig('bannerconfig/banneroption/banner_pageracircle');
+        if (isset($pageracircle) && empty($pageracircle))
+        {
+            $pageracircle = "000000";
+        }
+
+        if (Mage::getStoreConfig('bannerconfig/banneroption/banner_control') == 0)
+        {
+            $controls = "false";
+        }
+        else
+        {
+            $controls = "true";
+        };
+
+        if (Mage::getStoreConfig('bannerconfig/banneroption/banner_effect') == 0)
+        {
+            $mode = "horizontal";
+        }
+        elseif (Mage::getStoreConfig('bannerconfig/banneroption/banner_effect') == 1)
+        {
+            $mode = "vertical";
+        }
+        else
+        {
+            $mode = "fade";
+        }
+
+
+        if (Mage::getStoreConfig('bannerconfig/banneroption/banner_caption') == 0)
+        {
+            $captions = "false";
+        }
+        else
+        {
+            $captions = "true";
+        };
+
+        if (Mage::getStoreConfig('bannerconfig/banneroption/banner_pager') == 0)
+        {
+            $pager = "false";
+        }
+        else
+        {
+            $pager = "true";
+        };
+
+        if (Mage::getStoreConfig('bannerconfig/banneroption/banner_autohover') == 0)
+        {
+            $autoHover = "false";
+        }
+        else
+        {
+            $autoHover = "true";
+        };
+
+        $borderwidth = Mage::getStoreConfig('bannerconfig/banneroption/banner_borderwith');
+        if (isset($borderwidth) && empty($borderwidth))
+        {
+            $borderwidth = "5";
+        }
+
+        $bordercolor = Mage::getStoreConfig('bannerconfig/banneroption/banner_bordercolor');
+        if (isset($bordercolor) && empty($bordercolor))
+        {
+            $bordercolor = "FFFFFF";
+        }
+        $descfont = Mage::getStoreConfig('bannerconfig/banneroption/banner_fontsize');
+        if (isset($descfont) && empty($descfont))
+        {
+            $descfont = "10";
+        }
+        $descfontcolor = Mage::getStoreConfig('bannerconfig/banneroption/banner_fontcolor');
+        if (!isset($descfontcolor) && empty($descfontcolor))
+        {
+            $descfontcolor = "FFFFFF";
+        }
+
+        $lefnav = Mage::getStoreConfig('bannerconfig/banneroption/banner_leftnav');
+        if (isset($lefnav) && empty($lefnav) || $lefnav == NULL)
+        {
+            $lefnav = "default/prew.png";
+        }
+        $rightnav = Mage::getStoreConfig('bannerconfig/banneroption/banner_rightnav');
+        if (isset($rightnav) && empty($rightnav) || $rightnav == NULL)
+        {
+            $rightnav = "default/next.png";
+        }
+        $adptiveheight = Mage::getStoreConfig('bannerconfig/banneroption/banner_height');
+        $sliderheight = Mage::getStoreConfig('bannerconfig/banneroption/banner_maxheight');
+        if (Mage::getStoreConfig('bannerconfig/banneroption/banner_height') == 0)
+        {
+            $adptiveheight = "false";
+        }
+        else
+        {
+            $adptiveheight = "true";
+        };
+        if (Mage::getStoreConfig('bannerconfig/banneroption/banner_height') == 1)
+        {
+            $sliderheight = "auto";
+        }
+        else if (isset($sliderheight) && empty($sliderheight))
+        {
+            $sliderheight = "auto";
+        }
+        else
+        {
+            $sliderheight = "$sliderheight" . "px";
+        }
+
+
+//if ($adptiveheight == 0 && isset($sliderheight) && empty($sliderheight) ) { $sliderheight="auto";} else { $sliderheight = "$sliderheight"."px";} 
+        ?>
+        <style>
+
+            .bx-wrapper .bx-pager.bx-default-pager a{ background-color: <?php echo "#" . $pagercircle; ?> !important; }
+            .bx-wrapper .bx-pager.bx-default-pager a:hover,
+            .bx-wrapper .bx-pager.bx-default-pager a.active {
+                background: <?php echo "#" . $pageracircle; ?> !important;}
+
+
+            .bx-wrapper .bx-viewport { border: <?php echo $borderwidth; ?>px solid <?php echo "#" . $bordercolor; ?> !important; }
+            .bx-wrapper .bx-caption span {   font-size: <?php echo $descfont; ?>px !important; color: <?php echo "#" . $descfontcolor; ?>; }
+
+            .bx-wrapper .bx-prev { background: url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . "atlas_banner/" . $lefnav; ?>') no-repeat !important; }
+            .bx-wrapper .bx-next { background: url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . "atlas_banner/" . $rightnav; ?>') no-repeat !important;  }
+
+            .bx-wrapper img {
+                max-width: 100%;
+                display: block;
+                width:100%;
+                height: <?php echo $sliderheight; ?>;
+
+            }
+            .bx-wrapper .bx-viewport .bx-wrapper .bx-viewport{left:0px !important;border:none !important;}
+            .bx-wrapper .bx-viewport .bx-wrapper .bx-controls{display:none !important;}
+
+        </style>
+        <?php
+        if (Mage::getStoreConfig('bannerconfig/banneroption/thumbnail_control') == 1)
+        {
+            $thumbnailbordercolor = Mage::getStoreConfig('bannerconfig/banneroption/thumbnail_bordercolor');
+            if (empty($thumbnailbordercolor))
+            {
+                $thumbnailbordercolor = FFF;
+            }
+            $thumbnailhoverbordercolor = Mage::getStoreConfig('bannerconfig/banneroption/thumbnailhover_bordercolor');
+            if (empty($thumbnailhoverbordercolor))
+            {
+                $thumbnailhoverbordercolor = FFF;
+            }
+            $thumbnailborderwidth = Mage::getStoreConfig('bannerconfig/banneroption/thumbnail_borderwith');
+            if (empty($thumbnailborderwidth))
+            {
+                $thumbnailborderwidth = 1;
+            }
+            $thumbnailheightwidth = Mage::getStoreConfig('bannerconfig/banneroption/thumbnail_heightwidth');
+            if (empty($thumbnailheightwidth))
+            {
+                $thumbnailheightwidth = 70;
+            }
+            ?>
+            <style type="text/css">
+                .bx-wrapper .bx-pager a img{height:<?php echo $thumbnailheightwidth; ?>px;width:<?php echo $thumbnailheightwidth; ?>px;}
+                .bx-wrapper .bx-pager {
+                    bottom: -95px;
+                }
+
+                .bx-wrapper .bx-pager a {
+                    border: solid #<?php echo $thumbnailbordercolor; ?> <?php echo $thumbnailborderwidth; ?>px;
+                    display: block;
+                    margin: 0 5px;
+                    padding: 3px;
+                }
+
+                .bx-wrapper .bx-pager a:hover,
+                .bx-wrapper .bx-pager a.active {
+                    border: solid #<?php echo $thumbnailhoverbordercolor; ?> <?php echo $thumbnailborderwidth; ?>px;
+                }
+
+                .bx-wrapper {
+                    margin-bottom: 120px;
+                }
+            </style>
+        <?php } ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+            jQuery(".bxslider<?php echo $seprated . '_' . $groupid; ?>").bxSlider({
+            mode: <?php
+        if (isset($mode) && !empty($mode))
+        {
+            echo "'" . $mode . "'";
+        }
+        else
+        {
+            "'horizontal'";
+        }
+        ?>,
+                    auto: true,
+                    adaptiveHeight:<?php
+        if (isset($adptiveheight) && !empty($adptiveheight))
+        {
+            echo $adptiveheight;
+        }
+        else
+        {
+            echo "true";
+        }
+        ?>,
+                    captions: <?php
+        if (isset($captions) && !empty($captions))
+        {
+            echo $captions;
+        }
+        else
+        {
+            echo "''";
+        }
+        ?>,
+                    pager: <?php
+        if (isset($pager) && !empty($pager))
+        {
+            echo $pager;
+        }
+        else
+        {
+            echo "''";
+        }
+        ?>,
+                    controls: <?php
+        if (isset($controls) && !empty($controls))
+        {
+            echo $controls;
+        }
+        else
+        {
+            echo "false";
+        }
+        ?>,
+                    speed: <?php
+        if (isset($speed) && !empty($speed))
+        {
+            echo $speed;
+        }
+        else
+        {
+            echo "600";
+        }
+        ?>,
+                    autoHover: <?php
+        if (isset($autoHover) && !empty($autoHover))
+        {
+            echo $autoHover;
+        }
+        else
+        {
+            echo "true";
+        }
+        ?>,
+        <?php
+        if (isset($slideWidth) && !empty($slideWidth))
+        {
+            echo "slideWidth: " . $slideWidth . ",";
+        }
+        ?>
+        <?php
+        if (isset($pause) && !empty($pause))
+        {
+            echo "pause: " . $pause . ",";
+        }
+        ?>
+        <?php if (Mage::getStoreConfig('bannerconfig/banneroption/thumbnail_control') == 1)
+        {
+            ?>
+                buildPager: function(slideIndex){
+                switch (slideIndex){
+            <?php
+            $index = 0;
+            foreach ($collection as $data)
+            {
+                $image = $data->getData('img');
+                if (isset($image) && !empty($image))
+                {
+                    $var1 = $data->getData('store_id');
+                    $data1 = strpos($var1, $store_id);
+                    if ($data1 !== false || $var1 == 0)
+                    {
+                        ?>
+                            case <?php echo $index ?>:
+                                    return '<img height="<?php echo $thumbnailheightwidth; ?>" width="<?php echo $thumbnailheightwidth; ?>" src="<?php
+                        $img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $data->getData('img');
+                        if (isset($img) && !empty($img))
+                        {
+                            echo $img;
+                        }
+                        ?>">';
+                                <?php
+                                   $index++;
+                               } /* closing for store view check */
+                           } /* closing for image check */
+                       } /* */
+                       ?>
+
+                }
+                }
+                         <?php } ?>
+            });
+            });
+        </script>
+
+        <ul class="bxslider<?php echo $seprated . '_' . $groupid; ?>">
+
+            <?php
+            foreach ($collection as $data)
+            {
+                $image = $data->getData('img');
+                if (isset($image) && !empty($image))
+                {
+                    $var1 = $data->getData('store_id');
+                    $data1 = strpos($var1, $store_id);
+                    if ($data1 !== false || $var1 == 0)
+                    {
+                        ?>
+
+
+                        <li>
+                            <a target="_blank" href="<?php
+                    $url = $data->getData('url');
+                    if (isset($url) && !empty($url))
+                    {
+                        echo $url;
+                    }
+                    ?>">
+                                <img src="<?php
+                    $img = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $data->getData('img');
+                    if (isset($img) && !empty($img))
+                    {
+                        echo $img;
+                    }
+                    ?>" title="<?php
+                    $title = $data->getData('title');
+                    if (isset($title) && !empty($title))
+                    {
+                        echo $title;
+                    }
+                    ?>"  />
+                            </a>
+                        </li>
+
+
+
+                    <?php
+                } /* closing for store view check */
+            } /* closing for image check */
+        } /* */
+        ?>	
+
+        </ul>
+
+        <?php
+    } /* if condition end */
+    else
+    {
+        
+    }
+}
+?>

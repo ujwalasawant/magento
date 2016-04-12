@@ -43,8 +43,8 @@
         <?php foreach ($_additional as $_data): ?>
             <tr>
 		<?php if($this->htmlEscape($this->__($_data['label']))!="Status"):?>
-                <th class="label"><?php echo $this->htmlEscape($this->__($_data['label'])) ?></th>
-                <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+                <th class="tabLabel"><?php echo $this->htmlEscape($this->__($_data['label'])) ?></th>
+                <td class="data"><?php echo ": "." ".$_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
 <?php endif ; ?>
             </tr>
         <?php endforeach; ?>

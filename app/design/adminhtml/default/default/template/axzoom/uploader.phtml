@@ -1,0 +1,254 @@
+<!--
+/**
+*  Module: jQuery AJAX-ZOOM for Magento, /app/design/adminhtml/default/default/template/axzoom/uploader.phtml
+*  Copyright: Copyright (c) 2010-2016 Vadim Jacobi
+*  License Agreement: http://www.ajax-zoom.com/index.php?cid=download
+*  Version: 1.1.2
+*  Date: 2016-03-31
+*  Review: 2016-03-31
+*  URL: http://www.ajax-zoom.com
+*  Documentation: http://www.ajax-zoom.com/index.php?cid=modules&module=magento
+*
+*  @author    AJAX-ZOOM <support@ajax-zoom.com>
+*  @copyright 2010-2016 AJAX-ZOOM, Vadim Jacobi
+*  @license   http://www.ajax-zoom.com/index.php?cid=download
+*/
+-->
+
+<?php
+$id = 'file360';
+$name = 'file360';
+$url = Mage::helper("adminhtml")->getUrl("adminhtml/axzoom/addProductImage360", array('id_product' => $productId)) . '?isAjax=true&form_key=' . $this->getFormKey();
+$postMaxSize = return_bytes(ini_get('post_max_size'));
+$maxFiles = 120;
+
+function return_bytes($val) {
+    $val = trim($val);
+    $last = strtolower($val[strlen($val)-1]);
+    switch ($last) {
+        case 'g':
+            $val *= 1024;
+        case 'm':
+            $val *= 1024;
+        case 'k':
+            $val *= 1024;
+    }
+    return $val;
+}
+?>
+
+<style type="text/css">
+	.file-row_az{
+		background-color: #fff;
+		border: 1px solid #ccc;
+		margin: 0.5em 0 0.5em 0;
+		padding: 0.5em 0.6em;
+	}
+	
+	#file360-upload-button{
+		margin-bottom: 10px;
+	}
+	
+	#file360-upload-button span{
+		padding-left: 20px;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAflBMVEUAAADo6Ojs7Ozs7Ozv7+/n5+f19fX39/f19fX5+fnw8PD4+Pj5+fn6+vr7+/v7+/v7+/v6+vr6+vr8/Pz8/Pz8/Pz6+vr8/Pz7+/v8/Pz8/Pz9/f39/f39/f39/f39/f38/Pz9/f3+/v78/Pz+/v7+/v7+/v7+/v7+/v7///8NhBGQAAAAKXRSTlMAAgIEBAgMDhIcHh4mNjhGSlhgfH6Bh4mTl5+rrbHDzdPV19/n7/P3/SZ462sAAABbSURBVHjajYhHCoAwAARj7733Xvb/HzQEjXoRB5ZlhvzG9d7ubLv/dGMGFvt2tQNl1C4XajAa8Qx62y/AOg0W4ZRARe8jZEDBJaSTTFOmF7CQK5yUhSjhxOQHBxDGB7f22f/1AAAAAElFTkSuQmCC);
+		background-repeat: no-repeat;
+	}
+	
+	#file360-files-list .file-row_az button>span{
+		padding-left: 20px;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAVFBMVEUAAAD////s7Oz4+Pj29vbt7e339/f09PT4+Pj4+Pj4+Pj5+fn6+vr7+/v6+vr5+fn9/f38/Pz8/Pz8/Pz8/Pz7+/v9/f39/f38/Pz8/Pz8/Pz////7AOp8AAAAG3RSTlMAAhomKCwwOEZITFRUVmh2eoOHjY+Vmaevs8vqUEvPAAAASklEQVR4AaXIRw6AMAwEQNN7dyjs//9JFFYWN5CY48hHJbxWKFXd4R2qeYgKppEgMnLrTxoYE7Ya6FY4iyUGkvFfuAwo5kcQ48UFs6wJErHwwLUAAAAASUVORK5CYII=);
+		background-repeat: no-repeat;
+	}
+	
+	.btn_cancel span{
+		padding-left: 20px;
+		background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAA+ElEQVQoz4XRzy5DQRQH4FOJSrpvqok9a7HlHYQgEhYa7yEa+hQ8Ak/hT6RB4xHsJG57y01IxGcxtxcbZjYzv/kyZ3KmJv4eU9WqFYcxiNd4i4c4jnaVS3PdCLkL13LkttJJOl71gRN1IdTty3zanICmocyTwqLJjQueDc0mcICOFe8ezVVkD90E7o3VhV3caJSgbuwugTdXZdjDmVq5u1QkULgso5pz9CqQJ3BblgihoY+d3yW66FSPm/Po3bIODhKYNZSZr8iSwpPMUHPSqA2fMvumhTDjFB/WvjsZto2Ru9I3xsjGz1aH0NYz8KIwcKQ1yWv/ffcXQSMlGp3SsFgAAAAASUVORK5CYII=);
+		background-repeat: no-repeat;
+	}
+	
+	.noteUpload_az{
+	    background: rgba(0, 0, 0, 0) url("images/note_bg.gif") no-repeat scroll 1px 6px;
+	    font-size: 11px;
+	    margin: 0;
+	    padding: 0 0 0 13px;
+	}	
+</style>
+
+<div class="form-group clear">
+	<div class="col-lg-12">
+		
+		<button class="btn btn-default" data-style="expand-right" data-size="s" type="button" id="<?php echo $id ?>-add-button">
+			<i class="icon-folder-open"></i> <span><?php echo $this->__('Select local images to add...') ?></span>
+		</button>
+		<button class="btn_cancel" style="margin-left: 5px"><span><?php echo $this->__('Cancel') ?></span></button>
+		<input id="<?php echo $id ?>" type="file" name="<?php echo $name ?>[]" data-url="<?php echo $url ?>" multiple="multiple" style="width:0px;height:0px;" />
+		
+		<div class="form-list">
+			<p class="note" style="margin-bottom: 15px">
+				<?php echo $this->__('Add new image(s) to this image set. '); ?>
+				<?php echo $this->__('Format: JPG, GIF, PNG. Filesize: %s MB max (for each image)', intval($maxImageSize)); ?>
+			</p>
+		</div>
+	</div>
+</div>
+<div class="well" style="display:none">
+	<div id="<?php echo $id ?>-files-list"></div>
+	<button class="ladda-button btn btn-primary" data-style="expand-right" type="button" id="<?php echo $id ?>-upload-button" style="display:none;">
+		<span class="ladda-label"><i class="icon-check"></i> <?php echo $this->__('Upload files') ?></span>
+	</button>
+</div>
+<div class="row" style="display:none">
+	<div class="alert alert-success" id="<?php echo $id ?>-success"></div>
+</div>
+<div class="row" style="display:none">
+	<div class="alert alert-danger" id="<?php echo $id ?>-errors"></div>
+</div>
+
+<script type="text/javascript">
+	function humanizeSize(bytes)
+	{
+		if (typeof bytes !== 'number') {
+			return '';
+		}
+
+		if (bytes >= 1000000000) {
+			return (bytes / 1000000000).toFixed(2) + ' GB';
+		}
+
+		if (bytes >= 1000000) {
+			return (bytes / 1000000).toFixed(2) + ' MB';
+		}
+
+		return (bytes / 1000).toFixed(2) + ' KB';
+	}
+
+	jQuery( document ).ready(function($) {
+
+		<?php if (isset($files) && $files): ?>
+		$('#<?php echo $id ?>-images-thumbnails').parent().show();
+		<?php endif; ?>
+
+		var <?php echo $id ?>_total_files = 0;
+
+		$('#<?php echo $id ?>').fileupload({
+			dataType: 'json',
+			async: false,
+			autoUpload: false,
+			singleFileUploads: true,
+			maxFileSize: <?php echo $postMaxSize ?>,
+			start: function (e) {
+				$('#<?php echo $id ?>-upload-button').unbind('click'); //Important as we bind it for every elements in add function
+			},
+			fail: function (e, data) {
+				$('#<?php echo $id ?>-errors').html(data.errorThrown.message).parent().show();
+				$('#<?php echo $id ?>-files-list').html('').parent().hide();
+			},
+			done: function (e, data) {
+				if (data.result) {
+					if (typeof data.result.<?php echo $name ?> !== 'undefined') {
+						for (var i=0; i<data.result.<?php echo $name ?>.length; i++) {
+							if (typeof data.result.<?php echo $name ?>[i].error !== 'undefined' && data.result.<?php echo $name ?>[i].error != '') {
+								$('#<?php echo $id ?>-errors').html('<strong>'+data.result.<?php echo $name ?>[i].name+'</strong> : '+data.result.<?php echo $name ?>[i].error).parent().show();
+								$('#<?php echo $id ?>-files-list').html('').parent().hide();
+							}
+							else
+							{
+								$(data.context).appendTo($('#<?php echo $id ?>-success'));
+								$('#<?php echo $id ?>-success').parent().show();
+
+
+								if (data.result.<?php echo $name ?>[i] !== null && data.result.<?php echo $name ?>[i].status == 'ok')
+								{
+
+									var response = data.result.<?php echo $name ?>[i];
+									var cover = "icon-check-empty";
+									var legend = '';
+
+									imageLine360(response.id, response.path, response.position, cover, response.shops, legend);
+									$("#countImage").html(parseInt($("#countImage").html()) + 1);
+									$("#img" + id).remove();
+									$('#legend_1').val('');
+
+
+									// check if we need update an image
+									var elem = $('#imageTableSetsRows tr#' + response.id_360set + ' img');
+									if(elem.attr('src').search('no_image') != -1) {
+										elem.attr('src', response.path);
+									}
+								}
+							}
+
+						}
+					}
+					$(data.context).find('button').parent().remove();
+				}
+			},
+		}).on('fileuploadalways', function (e, data) {
+				<?php echo $id ?>_total_files--;
+
+				if (<?php echo $id ?>_total_files == 0)
+				{
+					$('#<?php echo $id ?>-upload-button').unbind('click');
+					$('#<?php echo $id ?>-files-list').parent().hide();
+				}
+				
+		}).on('fileuploadadd', function(e, data) {
+			if (typeof <?php echo $id ?>_max_files !== 'undefined') {
+				if (<?php echo $id ?>_total_files >= <?php echo $id ?>_max_files) {
+					e.preventDefault();
+					alert('You can upload a maximum of <?php echo $maxFiles ?> files');
+					return;
+				}
+			}
+
+			data.context = $('<div/>').addClass('form-group clear file-row_az').appendTo($('#<?php echo $id ?>-files-list'));
+			var file_name = $('<span/>').append('<i class="icon-picture-o"></i> <strong>'+data.files[0].name+'</strong> ('+humanizeSize(data.files[0].size)+')').appendTo(data.context);
+
+			var button = $('<button/>').addClass('btn btn-default pull-right').prop('type', 'button').html('<i class="icon-trash"></i> <span><?php echo $this->__('Remove file') ?></span>').appendTo(data.context).on('click', function() {
+				<?php echo $id ?>_total_files--;
+				data.files = null;
+
+				var total_elements = $(this).parent().siblings('div.form-group').length;
+				$(this).parent().remove();
+
+				if (total_elements == 0) {
+					$('#<?php echo $id ?>-files-list').html('').parent().hide();
+				}
+			});
+
+			$('#<?php echo $id ?>-files-list').parent().show();
+			$('#<?php echo $id ?>-upload-button').show().bind('click', function () {
+				if (data.files != null)
+					data.submit();
+			});
+
+			<?php echo $id ?>_total_files++;
+			
+		}).on('fileuploadprocessalways', function (e, data) {
+			var index = data.index,	file = data.files[index];
+
+			if (file.error) {
+				$('#<?php echo $id ?>-errors').append('<div class="form-group clear"><i class="icon-picture-o"></i> <strong>'+file.name+'</strong> ('+humanizeSize(file.size)+') : '+file.error+'</div>').parent().show();
+				$('#<?php echo $id ?>-files-list').html('').parent().hide();
+				$(data.context).find('button').trigger('click');
+			}
+			
+		}).on('fileuploadsubmit', function (e, data) {
+			var params = new Object();
+
+			params['id_360set'] = $('#id_360set').val();
+
+			data.formData = params;
+			
+		}).on('fileuploadstop', function (e, data) {
+			
+		});
+
+		$('#<?php echo $id ?>-add-button').on('click', function() {
+			$('#<?php echo $id ?>-success').html('').parent().hide();
+			$('#<?php echo $id ?>-errors').html('').parent().hide();
+			$('#<?php echo $id ?>').trigger('click');
+		});
+	});
+</script>

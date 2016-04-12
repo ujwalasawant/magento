@@ -6,23 +6,23 @@
  */
 @font-face {
   font-family: 'Arial';
-  src: url(../../../fonts/arial.ttf);
+  src: url(../fonts/arial.ttf);
 }
 @font-face {
   font-family: 'arialbd';
-  src: url(../../../fonts/arialbd.ttf);
+  src: url(../fonts/arialbd.ttf);
 }
 @font-face {
   font-family: 'avgardd';
-  src: url(../../../fonts/AVGARDD.TTF);
+  src: url(../fonts/AVGARDD.TTF);
 }
 @font-face {
   font-family: 'avgardn';
-  src: url(../../../fonts/AVGARDN.TTF);
+  src: url(../fonts/AVGARDN.TTF);
 }
 @font-face {
   font-family: 'felipe';
-  src: url(../../../fonts/Felipe.ttf);
+  src: url(../fonts/Felipe.ttf);
 }
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
@@ -7672,18 +7672,35 @@ a {
 
 .firstH {
   background-color: #DF3D5C;
+  height : 45px;
+}
+
+.firstH1 {
+  background-color: #e5637c;
+  height : 45px;
 }
 
 .secondH {
   background-color: #F3961E;
+  height:45px;
+}
+.secondH1 {
+  background-color: #f5ab4a;
+  height:45px;
 }
 
 .thirdH {
   background-color: #A1438D;
+  height : 45px;
+}
+.thirdH1 {
+  background-color: #bb5da4;
+  height : 45px;
 }
 
 .fourthH {
   background-color: #DF3D5C;
+  height: 45px;
 }
 
 .fifthH {
@@ -8492,13 +8509,13 @@ max-width: 100%;
 .pin {
   -moz-column-width: 15em;
   -webkit-column-width: 15em;
-  -moz-column-gap: 1em;
-  -webkit-column-gap: 1em;
+  -moz-column-gap: 1px;
+  -webkit-column-gap: 1px;
 }
 
 .item {
   display: inline-block;
-  padding: 0.25rem;
+  padding: 1px;
   width: 100%;
 }
 
@@ -9274,7 +9291,7 @@ p.product-name a:hover {
 
 .products-grid .price-box {
   color: #A0A0A0;
-  font-size: 13px;
+  font-size: 14px;
   margin: 0 0 5px;
 }
 
@@ -9684,9 +9701,13 @@ margin-left :60px;
   margin-top: 10px;
 }
 .block-layered-nav dl dd ol > li > span, .block-layered-nav dl dd ol > li > a {
-  padding: 5px 15px;
+  /*padding: 5px 15px;*/
   display: block;
 }
+.block-layered-nav dl dd ol  > li:not(:last-child)  {
+  float:left;
+}
+
 .block-layered-nav dl dd ol > li > a .count {
   color: #A0A0A0;
 }
@@ -9842,13 +9863,14 @@ button[title='check'] {
 }
 
 .price-box .regular-price .price {
-  font-size: 13px;
-  color: darkorange;
+  font-size: 18px;
+  color: orangered;
   word-spacing: 35px;
+  font-weight: bold;
 }
 
 .priceblack .price-box .regular-price .price {
-  font-size: 13px;
+  font-size: 14px;
   color: darkorange;
   word-spacing: 35px;
 }
@@ -10149,20 +10171,36 @@ form .form-instructions {
   top: 0;
   z-index: 99999;
   width: 100%;
-  background-image: url("../images/smallHeader.png");
+  /*background-image: url("../images/smallHeader.png");
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: 100% 15%;
-}
+  transition-property: width;*/
+  /*transition-timing-function: linear;
+  transition-duration: 1s;
 
+  transition-delay: 0s;*/
+}
+#header-nav
+{
+  transition: all 200ms linear 0s;
+}
 .fixedheader1 {
-  top: 80px;
+  display:none;
+  /*top: 80px;
   position: fixed !important;
-  width: 100%;
+  width: 100%;*/
   /*background-image: url("../images/smallHeader.png");*/
-  transform: translateY(-25px);
-}
+ /* transform: translateY(-25px);*/
+  /*transition-property: width;*/
+  /*transition-timing-function: linear;*/
 
+}
+.transitionHeader{
+  transition-duration: 3s;
+
+  transition-delay: -2s;
+}
 .Myorder {
   width: 50%;
   padding-left: 50px;
@@ -10558,9 +10596,10 @@ form .form-instructions {
  * Language switcher + welcome message
  * ============================================ */
 .header-language-background {
-  padding-top: 10px;
+
   background-color: white;
   text-transform: uppercase;
+  height: 20px;
 }
 
 .header-language-background .header-language-container {
@@ -10632,6 +10671,7 @@ form .form-instructions {
   text-align: center;
   padding: 0px;
   margin-left: 12%;
+
 }
 
 .logo img {
@@ -10660,6 +10700,9 @@ form .form-instructions {
   padding: 0px;
   margin-top: 0.5%;
   margin-left: 2%;
+/*  transition-duration: 3s;
+
+  transition-delay: 0s;*/
 }
 
 .logof img {
@@ -11110,6 +11153,8 @@ a.skip-link {
 #header-search {
   padding: 20px;
   height: 80px;
+  transition-delay: 0s;
+ /* transition-duration: 1s;*/
 }
 
 @media only screen and (min-width: 1024px) {
@@ -12008,7 +12053,7 @@ a.skip-link {
 }
 
 .categryprice {
-  font-size: 12px;
+  font-size: 14px;
   color: darkorange;
 }
 
@@ -12772,22 +12817,22 @@ figcaption a:hover {
 
 .old-price .price-label {
   color: darkorange;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .old-price .price {
   color: darkorange;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .special-price .price-label {
   color: darkorange;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .special-price .price {
   color: darkorange;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .headerlablepd {
@@ -12878,6 +12923,8 @@ figcaption a:hover {
 .headerimg {
   padding-top: 0;
   margin-top: 0;
+  transition-delay: 0s;
+  /*transition-duration: 1s ;*/
 }
 
 .header-searchwidthf {
@@ -13392,7 +13439,7 @@ select {
 
 a {
   color: burlywood;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .menuwidth {
@@ -13588,4 +13635,23 @@ position: absolute;
 .submitbottommargin
 {
 margin-bottom:15px;
+}
+
+.priceli .price-box .regular-price .price
+{
+  font-size: 28px;
+}
+
+
+.tabLink{
+  font-size:13px;
+  text-decoration: none;
+
+}
+.tabLink:hover{
+ color:black;
+}
+.tabLabel{
+  color : darkorange;
+  foont-size : 12px;
 }
