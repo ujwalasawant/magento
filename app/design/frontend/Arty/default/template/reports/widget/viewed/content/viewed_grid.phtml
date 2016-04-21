@@ -38,9 +38,9 @@
 
 <?php if ($_products = $this->getRecentlyViewedProducts()): ?>
 
-        <div>
-            <h4><?php echo $this->__('Recently Viewed') ?></h4>
-        </div>
+    <div>
+        <h4><?php echo $this->__('Recently Viewed') ?></h4>
+    </div>
 
 
 <?php endif; ?>
@@ -61,7 +61,7 @@
                         <?php  if($i%4==0 ){ $j=1; } ?>
                         <div class="col-sm-3  ">
                             <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
-                                <img class="img-responsive lightborder" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(100)?>" width="180" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" />
+                                <img class="img-responsive lightborder" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(265)?>" width="180" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" />
                             </a>
                         </div>
                         <?php $j++;?>
@@ -71,10 +71,10 @@
                             <!--/row-->
                             </div>
                         <?php endif; ?>
-                        <a class="left carousel-control" style="color: black;" href="#myCarousel" data-slide="prev"></a>
-                        <a class="right carousel-control" style="color: black;" href="#myCarousel" data-slide="next"></a>
+                        <a class="left carousel-control" style="color: black;" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                        <a class="right carousel-control" style="color: black;" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 
-                    <?php $i++; endforeach;  ?>
+                        <?php $i++; endforeach;  ?>
 
                     <!--/item-->
                 </div>

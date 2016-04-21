@@ -24,14 +24,18 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
 <?php
 $category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
 
 $categories = $category->getCollection()
     ->addAttributeToSelect(array('name', 'thumbnail'))
     ->addAttributeToFilter('is_active', 1)
-    ->addIdFilter($category->getChildren())
+    ->addIdFilter($category->getChildren());
+
+
 ?>
+
     <div class="widget widget-new-products">
         <div class="widget-title">
 
@@ -41,18 +45,55 @@ $categories = $category->getCollection()
             <?php  $_columnCount = 4; ?>
             <?php $i=0; ?>
             <ul class="products-grid products-grid--max-4-col">
+
 <?php foreach ($categories as $category): ?>
 <!--  Products from within each subcategory  -->
 <?php
-$_helper = $this->helper('catalog/output');
-    $_products = Mage::getModel('catalog/product')
-    ->getCollection()
-    ->addCategoryFilter($category)
-    ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
-    ->load();
+$_helper = $this->helper('catalog/category');
 
-?>
-<?php if ($_products->getSize()): ?>
+
+   ?>
+
+<div class="row  <?php $I++;
+if ($I == 1) {
+    echo 'thirdH';
+} elseif ($I == 2) {
+    echo 'firstH';
+} elseif ($I == 3) {
+    echo 'secondH';
+} elseif ($I == 4) {
+    echo 'thirdH1';
+} elseif ($I == 5) {
+    echo 'firstH1';
+}
+elseif ($I == 6) {
+    echo 'secondH1';
+}
+elseif ($I == 7) {
+    echo 'thirdH';
+}
+
+?>">
+
+    <a style="text-decoration: none;" href="<?php echo $_helper->getCategoryUrl($category) ?>">
+
+    <h4 style="color:white; padding-left: 1%; "> <?php echo $category->getName() . '<br/>';
+
+        $_products = Mage::getModel('catalog/product')
+                            ->getCollection()
+                            ->addCategoryFilter($category)
+                            ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
+                            ->load();
+
+                        ?>
+    </h4>
+    </a>
+</div>
+
+
+
+
+                <?php if ($_products->getSize()): ?>
 
                 <?php foreach ($_products->getItems() as $_product): ?>
                     <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?> ">
@@ -105,44 +146,10 @@ $_helper = $this->helper('catalog/output');
                                     <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                                 <?php endif; ?>
                                 <ul class="add-to-links Whitebackground">
-                                    <div class="row swatchesrow" >
-                                        <div class="swatches" >
-                                            <?php $swatchproductids=$_product->getRelatedProductIds();
-                                            if(empty($swatchproductids))
-                                            {
-                                                $swatchproductids = $_product->getUpSellProductIds();
-                                            }
-                                            if(empty($swatchproductids))
-                                            {
-                                                $swatchproductids = $_product->getCrossSellProductIds();
-                                            }
-                                            $productcount= count($swatchproductids);
-                                            $i=0;
-                                            foreach($swatchproductids as $swatchproductid):
-                                                $obj = Mage::getModel('catalog/product');
-                                                $i++;
-                                                ?>
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align-center <?php if($i==3){ echo  'Whitebackground'; }?>">
-                                                    <?php
-                                                    if($i< 3) :?>
-                                                        <?php
-                                                        $_productr = $obj->load($swatchproductid);?>
-                                                        <a href="<?php echo $_productr->getProductUrl();?>" class="thumbnail box-border Hpadding swatch-back">
-                                                            <img src="<?php echo $this->helper('catalog/image')->init($_productr, 'small_image')->resize(70) ?>" width="90" height="100" alt="<?php echo $this->stripTags($_productr->getName(), null, true) ?>" />
-                                                        </a>
-                                                    <?php elseif($i<=3):?>
-                                                        <div class="Hpadding vbottom text-center " style="height:80px;padding:12%">
-                                                            <?php echo "<b>".$productcount."</b>"."<br/>"."items";?>
 
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </div>
-                                            <?php endforeach;?>
-                                        </div>
-                                    </div>
                                     <div class="row product-owner lightborder " >
-                                        <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2 " >
-                                         
+                                        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-5 " >
+
                                             <a href="<?php  echo
                                     Mage::helper('umicrosite')->getVendorBaseUrl($_product->getUdropshipVendor()) ?>">
                                         <?php  $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getFileUrl('propic') ?>
@@ -150,9 +157,17 @@ $_helper = $this->helper('catalog/output');
                                            />
                                     </a>
                                         </div>
-                                       
+
                                         <div class="col-lg-5 col-lg-offset-4" >
-                                            <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                            <?php //echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                            <?php
+
+                                            $this->_reviewsHelperBlock = $this->getLayout()->createBlock('review/helper');
+
+
+                                            echo   $this->_reviewsHelperBlock->getSummaryHtml($product, false, false);
+
+                                            ?>
                                         </div>
 
                                     </div>

@@ -92,6 +92,7 @@
                 <params/>
                 <if>lt IE 9</if>
             </action>
+
             <!-- Removing the styles.css -->
             <action method="removeItem">
                 <type>skin_css</type>
@@ -107,6 +108,7 @@
                 <type>skin_css</type>
                 <stylesheet>css/styles.css</stylesheet>
             </action>
+
         </reference>
 
         <reference name="header">
@@ -243,6 +245,7 @@
         </reference>
     </PRODUCT_TYPE_configurable>
     <catalog_product_view>
+
         <reference name="head">
             <action method="addItem">
                 <type>skin_js</type>

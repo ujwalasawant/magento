@@ -192,6 +192,35 @@
                         <!-- Default value for the field -->
                         <default>0</default>
                     </my_dropdown_field>
+
+                    <aboutMe>
+                        <label>About Me</label>
+                        <fieldset>integration</fieldset>
+                        <type>textarea</type>
+                        <position>10</position>
+                    </aboutMe>
+
+                    <academics>
+                        <label>Academics</label>
+                        <fieldset>integration</fieldset>
+                        <type>textarea</type>
+                        <position>11</position>
+                    </academics>
+
+                    <Exhibitions>
+                        <label>Exhibitions</label>
+                        <fieldset>integration</fieldset>
+                        <type>textarea</type>
+                        <position>12</position>
+                    </Exhibitions>
+
+                    <Awards>
+                        <label>Awards and Recognitions</label>
+                        <fieldset>integration</fieldset>
+                        <type>textarea</type>
+                        <position>13</position>
+                    </Awards>
+
                 </fields>
             </vendor>
         </udropship>

@@ -76,7 +76,7 @@ div.block2 {
 }
 a.level1:link, a.level1:visited {
     margin-top: 10px;
-    margin-bottom: 10px;
+   /* margin-bottom: 5px;*/
     padding: 5px 10px;
     border-radius: 2px;
 font-size: 14px;
@@ -201,13 +201,13 @@ a.level1:link, a.level1:visited {
 a.level2:link, a.level2:visited {
     font-weight: normal;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 16px;
 }
 a.level3:link, a.level3:visited {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: normal;
-    line-height: 18px;
-    margin-bottom: 0px;
+    line-height: 20px;
+   
 }
 /*COLOR*/
 div.menu a:link, div.menu a:visited {
@@ -220,13 +220,16 @@ a.level3:link, a.level3:visited {
     color: #333333;
 }
 a.level3:hover {
-    color: #b43f74;
+    color: #333333;
+    background:#d3d3d3;
+	
 }
 a.level2:link, a.level2:visited {
     color: #000;
 }
 a.level1:hover {
     background: #d3d3d3;
+	color:#CC4E5C;
 }
 a.level2:hover {
     color: #000;
