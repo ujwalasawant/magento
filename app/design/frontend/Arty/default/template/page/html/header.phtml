@@ -127,7 +127,8 @@
     <img class="show img img-responsive" src="<?php echo $this->getSkinUrl('images/smallHeader1.png') ?>" width="100%"
          height="5px"/>
 
-    <div id="header-nav" class="skip-content"> <!--  id="header-nav"-->
+    <div id="header-nav" class="skip-content "> <!--  id="header-nav"-->
+
         <nav id="nav">
             <?php echo $this->getChildHtml('topMenu') ?>
         </nav>
@@ -153,7 +154,7 @@
                     jQuery('#iconS').addClass('Smallicon').show();
                     jQuery('#logo').addClass('logoSmaller').show();
                     // jQuery('#nav').addClass('fix').show();
-                     jQuery('#header-nav').addClass('fix').show();
+                    jQuery('#header-nav').addClass('fix').show();
 
                     jQuery('#imgheaderf').removeClass('hidden').addClass('show');
                 }
@@ -173,7 +174,7 @@
         else {
 
             jQuery('#header').removeClass('fixed');
-            jQuery('#header-nav').removeClass('fix').show();
+         //  jQuery('header-nav').removeClass('fixedheader1').show();
         }
 
     });

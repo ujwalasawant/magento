@@ -92,7 +92,12 @@
                 <params/>
                 <if>lt IE 9</if>
             </action>
-
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/owl.carousel.js</name>
+                <params/>
+                <if>lt IE 9</if>
+            </action>
             <!-- Removing the styles.css -->
             <action method="removeItem">
                 <type>skin_css</type>
@@ -108,7 +113,10 @@
                 <type>skin_css</type>
                 <stylesheet>css/styles.css</stylesheet>
             </action>
-
+            <action method="addItem">
+                <type>skin_css</type>
+                <stylesheet>css/owl.carousel.css</stylesheet>
+            </action>
         </reference>
 
         <reference name="header">

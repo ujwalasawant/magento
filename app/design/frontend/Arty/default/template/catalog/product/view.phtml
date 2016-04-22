@@ -59,8 +59,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <h5>
-                                <?php echo  $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getCollection() ?>
-
+                                <?php echo  $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('company_name') ?>
                             </h5>
 
                             <div class="product-name">
@@ -160,16 +159,26 @@
                     <div>
                         <?php echo $this->getChildHtml('extrahint') ?>
                     </div>
+                    <div class="price-info">
+                        <?php echo $this->getPriceHtml($_product); ?>
+                        <?php echo $this->getChildHtml('bundle_prices') ?>
+                        <?php echo $this->getTierPriceHtml() ?>
+                    </div>
+                    <div class="priceli">
+
+                        <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+
+
+                            <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                        <?php endif; ?>
+
+                    </div>
 
                     <div>
                         <?php if (!$this->hasOptions()): ?>
                             <div class="add-to-box">
                                 <?php if ($_product->isSaleable()): ?>
-                                    <div class="price-info priceli">
-                                        <?php echo $this->getPriceHtml($_product); ?>
-                                        <?php echo $this->getChildHtml('bundle_prices') ?>
-                                        <?php echo $this->getTierPriceHtml() ?>
-                                    </div>
+
                                     <?php echo $this->getChildHtml('addtocart') ?>
 
                                     <?php if ($this->helper('wishlist')->isAllow() || $_compareUrl = $this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
@@ -194,24 +203,13 @@
                     </div>
 
 
-                    <div class="priceli">
-
-                        <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
-                            <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
-                        <?php endif; ?>
-
-                    </div>
                     <div>
                         <div>
                             <?php echo $this->getChildHtml('zipcode'); ?>
                         </div>
 
                         <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
-                            <div class="price-info">
-                                <?php echo $this->getPriceHtml($_product); ?>
-                                <?php echo $this->getChildHtml('bundle_prices') ?>
-                                <?php echo $this->getTierPriceHtml() ?>
-                            </div>
+
                             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
                         <?php endif; ?>
 

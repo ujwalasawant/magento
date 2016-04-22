@@ -114,6 +114,11 @@ Load this update on every page when customer is logged in
                 <urlParams/>
                 <position>100</position>
             </action>
+            <action method="addLink" translate="label" module="wishlist" >
+                <name>MyStuff_wishlist</name>
+                <path>wishlist/</path>
+                <label>My Favorites</label>
+            </action>
 
         </reference>
     </customer_logged_in>
@@ -143,15 +148,11 @@ Load this update on every page when customer is logged out
         <reference name="top.links">
             <action method="addLink" translate="label title" module="customer"><label>Log In</label><url helper="customer/getLoginUrl"/><title>Log In</title><prepare/><urlParams/><position>100</position></action>
            <!-- <action method="addLink" translate="label title" module="customer"><label>Sign Up</label><url helper="customer/getRegisterUrl"/><title>Sign Up</title><prepare/><urlParams/><position>100</position></action>-->
-            <action method="addLink" translate="label title" module="customer">
-                <label>My Account</label>
-                <url helper="customer/getAccountUrl"/>
-                <title>My Account</title>
-                <prepare/>
-                <urlParams/>
-                <position>10</position>
+            <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
+                <name>MyStuff_wishlist</name>
+                <path>wishlist/</path>
+                <label>My Favorites</label>
             </action>
-
         </reference>
         <remove name="reorder"></remove>
     </customer_logged_out>
