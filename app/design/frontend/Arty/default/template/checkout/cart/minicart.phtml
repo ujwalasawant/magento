@@ -37,10 +37,10 @@
 $_cartQty = Mage::getSingleton('checkout/cart')->getItemsCount();
 ?>
 <a href="<?php echo $this->helper('checkout/cart')->getCartUrl(); ?>" data-target-element="#header-cart" class="xscart skip-link skip-cart <?php if ($_cartQty <= 0): ?> no-count<?php endif; ?>">
-    <span>  <img src="<?php echo $this->getSkinUrl('images/artcrt.png') ?>"/>
+    <span>  <img  width="25" height="20" src="<?php echo $this->getSkinUrl('images/cart_icon.jpg') ?>"/>
 
 </span>
-    <span class="anchorA label" style="border-radius: 50%"> <?php echo $_cartQty; ?></span>
+    <span class="anchorA label" > <?php echo $_cartQty; ?></span>
 
 </a>
 <div id="header-cart" class="block block-cart skip-content">

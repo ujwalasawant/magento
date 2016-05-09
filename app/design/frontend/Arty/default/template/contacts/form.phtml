@@ -25,46 +25,46 @@
  */
 ?>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
-    <div class="page-title">
-    <h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
-</div>
-<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post" class=" lightborder marginbottom">
-<div style="margin:auto auto; width:30%;">    
-<div class="fieldset ">
+
+<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post" class="row lightborder marginbottom">
+<div  class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-6" >
+<div class="fieldset">
         <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact Information') ?></h2>
         <ul class="list-unstyled">
-            <li class="fields">
+            <div class="fields">
                 <div class="field">
-                    <label for="name" class="required text-left"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
+                    <label for="name" class="required text-left"><?php echo Mage::helper('contacts')->__('Name') ?><em>*</em></label>
                     <div class="input-box ">
                         <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry themeborder" type="text" />
                     </div>
                 </div>
-                <div class="field">
-                    <label for="email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
+            </div>
+
+                <div class="field rowspan">
+                    <label for="email" class="required"><?php echo Mage::helper('contacts')->__('Email') ?><em>*</em></label>
                     <div class="input-box ">
                         <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email themeborder" type="text" />
                     </div>
                 </div>
-            </li>
-            <li>
+
+            <div class="rowspan">
                 <label for="telephone"><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
                 <div class="input-box ">
                     <input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="input-text themeborder" type="text" />
                 </div>
-            </li>
-            <li class="wide">
-                <label for="comment" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Comment') ?></label>
+            </div>
+            <div class="wide rowspan">
+                <label for="comment" class="required"><?php echo Mage::helper('contacts')->__('Comment') ?><em>*</em></label>
                 <div class="input-box ">
-                    <textarea  name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" class="required-entry input-text themeborder" cols="30" rows="5"></textarea>
+                    <textarea  name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" class="required-entry input-text themeborder" cols="50" rows="5"></textarea>
                 </div>
-            </li>
+            </div>
         </ul>
     </div>
     <div class="buttons-set">
         <p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
         <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
-        <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button Artybutton"><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
+        <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button Artybutton marginbottom" ><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
     </div>
 </div>
 </form>

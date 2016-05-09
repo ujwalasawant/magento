@@ -31,17 +31,18 @@
  * @see Mage_Catalog_Block_Product_List_Toolbar
  */
 ?>
-<div >
-<?php if ($this->getCollection()->getSize()): ?>
+
+<div class="text-right" style="padding-right: 10%;">
+    <?php if ($this->getCollection()->getSize()): ?>
 
 
         <?php if ($this->isExpanded()): ?>
 
-            <div >
+            <div>
 
-                <select  class="up-arrow" id="selectS"  onchange="setLocation(this.value)">
+                <select id="selectS"  onchange="setLocation(this.value)">
 
-                    <option>Sort By</option>
+
 
                     <option
                         value="<?php echo $this->getOrderUrl('price', 'asc') ?>"<?php if ($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
@@ -72,12 +73,12 @@
                         Oldest Products
                     </option>
                 </select>
-</span>
+
             </div>
 
         <?php endif; ?>
 
-<?php endif ?>
+    <?php endif ?>
 
 
 </div>

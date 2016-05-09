@@ -43,8 +43,11 @@
         <div class="after-header">
             <div class="container marginTopC" >
                 <div style="padding-left: 3%"><?php echo $this->getChildHtml('breadcrumbs') ?></div>
-                <div class="col-left sidebar col-lg-2 col-md-2 col-sm-4" style="padding: 0;"><?php echo $this->getChildHtml('left') ?></div>
+                <div class="col-left sidebar col-lg-2 col-md-2 col-sm-4" style="padding: 0;">
+
+                    <?php echo $this->getChildHtml('left') ?></div>
                 <div class="col-main col-lg-10 col-md-10 col-sm-8" >
+
                     <?php echo $this->getChildHtml('global_messages') ?>
                     <?php echo $this->getChildHtml('content') ?>
                 </div>

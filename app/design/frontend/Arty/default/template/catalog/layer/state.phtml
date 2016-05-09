@@ -36,9 +36,9 @@
 <?php if(!empty($_filters)): ?>
     <div class="currently">
         <p class="block-subtitle"><?php echo $this->__('Currently Shopping by:') ?></p>
-        <ol class=" list-unstyled">
+        <ol class=" list-unstyled" >
             <?php foreach ($_filters as $_filter): ?>
-                <li>
+                <li >
                     <span class="label" style="color: #DF3D5C;"><?php echo $this->__($_filter->getName()) ?>:</span> <span class="value"><?php echo $this->stripTags($_filter->getLabel()) ?></span>
                     <?php
                     $clearLinkUrl = $_filter->getClearLinkUrl();

@@ -4,8 +4,8 @@
 
 
 <div class="block block-homepage">
-    <div class=" row block-title firstH textH " style="color:white;">
-   <h4 style="color: white"><?php echo $this->getTitle(); ?></h4>
+    <div class=" row block-title firstH textH ">
+   <h4 class="textH" style="color:white; padding-left: 1%; "><?php echo $this->getTitle(); ?></h4>
     </div>
 
 
@@ -24,7 +24,7 @@
                                 <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6 paddngHM" >
                                     <a href="<?php echo $_product->getProductUrl() ?>">
 
-                                        <img class="lightborder img img-responsive hotsell"
+                                        <img class="lightborder img img-responsive lightborder"
                                              src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(280) ?>"
                                              alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"
                                              />

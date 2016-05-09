@@ -33,7 +33,6 @@
  * @see Mage_Catalog_Block_Layer_View
  */
 ?>
-
 <div class="col-lg-10 col-md-12 col-sm-12" style="margin: 0 ;padding: 0" >
 <?php if($this->canShowBlock()): ?>
     <div class="block block-layered-nav " >
@@ -45,12 +44,12 @@
         <div class="block-content">
             <?php echo $this->getStateHtml() ?>
             <?php if ($this->getLayer()->getState()->getFilters()): ?>
-                <div class="actions links">
+                <div class="actions links" >
                     <a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
             <?php endif; ?>
             <?php if($this->canShowOptions()): ?>
 
-                <dl id="narrow-by-list">
+                <dl id="narrow-by-list" >
                     <?php $_filters = $this->getFilters() ?>
                     <?php foreach ($_filters as $_filter): ?>
                         <?php if($_filter->getItemsCount()): ?>
@@ -61,7 +60,7 @@
                             </dt>
 
                             <dd><?php echo $_filter->getHtml() ?></dd>
-<hr>
+
 
                         <?php endif; ?>
                     <?php endforeach; ?>

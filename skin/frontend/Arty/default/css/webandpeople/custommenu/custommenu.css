@@ -212,7 +212,7 @@ a.level3:link, a.level3:visited {
 }
 /*COLOR*/
 div.menu a:link, div.menu a:visited {
-    color: black;
+    color: #CC4E5C;
 }
 div.menu a:hover, div.menu.active a {
     color: #000;

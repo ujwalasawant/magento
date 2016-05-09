@@ -379,6 +379,9 @@
             <action method="insert">
                 <child>catalog.leftnav</child>
             </action>
+
+
+
         </reference>
         <reference name="content">
             <action method="unsetChild">
@@ -389,7 +392,9 @@
                 <child>category.products</child>
             </action>
 
-
+            <action method="unsetChild">
+                <name>product_list_toolbar</name>
+            </action>
         </reference>
     </catalog_category_layered>
     <!--<catalog_category_layered>

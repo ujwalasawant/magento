@@ -52,7 +52,7 @@ span.validation-passed, div.validation-passed {
 .one-step-checkout-error-msg {
     color: #df280a;
     font-weight: normal;
-
+    padding-left: 3%;
 }
 
 .one-step-checkout-success-msg {

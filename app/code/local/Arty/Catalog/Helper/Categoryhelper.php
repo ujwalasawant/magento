@@ -1,11 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
- * User: ujwala
- * Date: 16/1/16
- * Time: 3:39 PM
- */ 
-class Arty_Catalog_Helper_Data extends Mage_Core_Helper_Abstract {
+ * User: sneha
+ * Date: 6/5/16
+ * Time: 5:25 PM
+ */
+class Arty_Catalog_Helper_Categoryhelper extends Mage_Core_Helper_Abstract {
+
     public function canShowheader($category)
     {
         if (is_int($category)) {
@@ -27,4 +29,7 @@ class Arty_Catalog_Helper_Data extends Mage_Core_Helper_Abstract {
         }
         return true;
     }
+
+
+
 }

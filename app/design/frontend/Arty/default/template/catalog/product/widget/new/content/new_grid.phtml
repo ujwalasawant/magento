@@ -24,155 +24,274 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php
-$category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
 
-$categories = $category->getCollection()
+<?php
+
+//$category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+//$subcategories = Mage::getModel('catalog/category')->getCategories($category->getId());
+
+//foreach ($subcategories as $subcategory)
+/*{
+    echo $xxx = $subcategory->getName();
+}
+*/
+/*$categories = $category->getCollection()
     ->addAttributeToSelect(array('name', 'thumbnail'))
+    //->addAttributeToFilter('level', 3)
     ->addAttributeToFilter('is_active', 1)
-    ->addIdFilter($category->getChildren())
-?>
-    <div class="widget widget-new-products">
-        <div class="widget-title">
+    ->addIdFilter($category->getChildrens());
+*/
 
-        </div>
-        <div class="widget-products">
-            <?php echo $this->getPagerHtml() ?>
-            <?php  $_columnCount = 4; ?>
-            <?php $i=0; ?>
-            <ul class="products-grid products-grid--max-4-col">
-<?php foreach ($categories as $category): ?>
-<!--  Products from within each subcategory  -->
+?>
 <?php
-$_helper = $this->helper('catalog/output');
-    $_products = Mage::getModel('catalog/product')
-    ->getCollection()
-    ->addCategoryFilter($category)
-    ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
-    ->load();
 
-?>
-<?php if ($_products->getSize()): ?>
+$_category = Mage::getSingleton('catalog/layer')->getCurrentCategory();
+$_subcategories = $_category->getChildrenCategories();
+$_helper = $this->helper('catalog/category');
 
-                <?php foreach ($_products->getItems() as $_product): ?>
-                    <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?> ">
+
+if (count($_subcategories) > 0) {
+    // echo $_category->getName()."<br/>";
+    // echo $_category->getId();
+
+    foreach ($_subcategories as $_subcategory) {
+        ?>
+
+        <div class="row  <?php $I++;
+
+        if($pcnt==1){
+            echo "disable";
+        }
+
+        if ($I == 1) {
+            echo 'thirdH';
+        } elseif ($I == 2) {
+            echo 'firstH';
+        } elseif ($I == 3) {
+            echo 'secondH';
+        } elseif ($I == 4) {
+            echo 'thirdH1';
+        } elseif ($I == 5) {
+            echo 'firstH1';
+        } elseif ($I == 6) {
+            echo 'secondH1';
+        } elseif ($I == 7) {
+            echo 'thirdH';
+        }
+
+        ?>">
+            <a style="text-decoration: none;" href="<?php echo $_helper->getCategoryUrl($_subcategory) ?>">
+
+                <h4 style="color:white; padding-left: 1%; "> <?php echo $_subcategory->getName() . '<br/>'; ?></h4>
+            </a>
+        </div>
+
+
+        <?php
+        // echo "level1".$_subcategory->getName()."<br/>";
+        // echo $_subcategory->getId();
+
+        $_subcategorychild = $_subcategory->getChildrenCategories();
+        if (count($_subcategories) > 0) { ?>
+
+
+            <?php echo $this->getPagerHtml() ?>
+            <?php $_columnCount = 4; ?>
+            <?php $i = 0;
+            $div = 0;
+            ?>
+
+            <div class="row products-grid products-grid--max-4-col">
+
+                <?php foreach ($_subcategorychild as $_subcategorychildren) {
+
+                    $_products = Mage::getModel('catalog/product')
+                        ->getCollection()
+                        ->addCategoryFilter($_subcategorychildren)
+                        ->addAttributeToSelect(array('name', 'product_url', 'small_image'))
+                        ->load();
+
+                    // echo "level2".$_subcategorychildren->getName()."<br/>";
+                    // echo $_subcategorychildren->getId();
+                    ?>
+
+
+                    <?php if ($ech = $_products->getSize()):
+                        // echo "product count" . $ech;
+                        $div = 0;
+
+                        ?>
+
+                        <?php foreach ($_products->getItems() as $_product):
+                        $div++;
+
+                        ?>
+
+                        <?php if ($div == 1) : ?>
+                        <li
+                        class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?> ">
+
                         <?php $_imgSize = 210; ?>
                         <?php // The image size is locked at 210 for this for display purposes. CSS has it at 75% which should equate to 278px?>
 
                         <?php //subcategory name?>
-                        <a href="<?php echo $category->getUrl() ?>" class="clearfix ">
-                            <?php if ($thumbFile = $category->getThumbnail()): ?>
+
+                        <a href="<?php echo $_subcategorychildren->getUrl() ?>" class="clearfix ">
+                            <?php if ($thumbFile = $_subcategorychildren->getThumbnail()): ?>
                                 <img
                                     src="<?php echo Mage::getBaseUrl('media') . 'catalog' . DS . 'category' . DS . $thumbFile; ?>"
-                                    alt="<?php echo $this->htmlEscape($category->getName()) ?>" />
+                                    alt="<?php echo $this->htmlEscape($_subcategorychildren->getName()) ?>"/>
                             <?php endif; ?>
-                            <h4  class="align-center"><?php echo $category->getName() ?></h4>
+                            <h4 class="align-center"><?php echo $_subcategorychildren->getName() ?></h4>
                         </a>
-                    <div class="graybakground">
-                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>" class="product-image lightborder">
-                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(350) ?>" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" />
+
+
+                        <div class="graybakground" >
+
+
+                        <a href="<?php echo $_product->getProductUrl() ?>"
+                           title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"
+                           class="product-image ">
+                            <img class="lightborder"
+                                src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(350) ?>"
+                                alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
                         </a>
-                        <div class="product-info">
-                            <div class="row">
+
+                        <div class="product-info" >
+                        <div class="row">
                             <div class="col-lg-6 text-center signupH">
-                                <b><a class="" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName() , 'name') ?>
-                                </a></b>
+                                <b><a class="" href="<?php echo $_product->getProductUrl() ?>"
+                                      title="<?php echo $this->stripTags($_product->getName(), null, true) ?>)"><?php echo $this->helper('catalog/output')->productAttribute($_product, $_product->getName(), 'name') ?>
+                                    </a></b>
                             </div>
-                            <div class="col-lg-5 text-center categryprice" >
+                            <div class="col-lg-5 text-center categryprice">
 
-                            <?php //echo $this->getPriceHtml($_product, true, '-widget-new-grid') ?>
-                            <?php
-                            $product = Mage::getModel('catalog/product')->load($_product->getId());
-                            $_formattedActualPrice = Mage::helper('core')->currency($product->getPrice(),true,false);
-                            $_formattedSpecialPrice = Mage::helper('core')->currency($product->getFinalPrice(),true,false);
-                            if($_formattedActualPrice===$_formattedSpecialPrice)
-                            {
-                                echo "<br/>".$_formattedActualPrice;
-                            }
-                            else
-                            {
-                                echo "<br/>"."Actual Price : " .$_formattedActualPrice."<br/>";
-                                echo "Special Price : ".$_formattedSpecialPrice;
-                            }
-                            ?>
+                                <?php //echo $this->getPriceHtml($_product, true, '-widget-new-grid') ?>
+                                <?php
+                                $product = Mage::getModel('catalog/product')->load($_product->getId());
+                                $_formattedActualPrice = Mage::helper('core')->currency($product->getPrice(), true, false);
+                                $_formattedSpecialPrice = Mage::helper('core')->currency($product->getFinalPrice(), true, false);
+                                if ($_formattedActualPrice === $_formattedSpecialPrice) {
+                                    echo "<br/>" . $_formattedActualPrice;
+                                } else {
+                                    echo "<br/>" . "Actual Price : " . $_formattedActualPrice . "<br/>";
+                                    echo "Special Price : " . $_formattedSpecialPrice;
+                                }
+                                ?>
 
-                            </div>
-                            </div>
-                            <div class="actions">
-                                <?php if ($_product->isSaleable()): ?>
-                                  <!--  <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>-->
-                                <?php else: ?>
-                                    <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
-                                <?php endif; ?>
-                                <ul class="add-to-links Whitebackground">
-                                    <div class="row swatchesrow" >
-                                        <div class="swatches" >
-                                            <?php $swatchproductids=$_product->getRelatedProductIds();
-                                            if(empty($swatchproductids))
-                                            {
-                                                $swatchproductids = $_product->getUpSellProductIds();
-                                            }
-                                            if(empty($swatchproductids))
-                                            {
-                                                $swatchproductids = $_product->getCrossSellProductIds();
-                                            }
-                                            $productcount= count($swatchproductids);
-                                            $i=0;
-                                            foreach($swatchproductids as $swatchproductid):
-                                                $obj = Mage::getModel('catalog/product');
-                                                $i++;
-                                                ?>
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 align-center <?php if($i==3){ echo  'Whitebackground'; }?>">
-                                                    <?php
-                                                    if($i< 3) :?>
-                                                        <?php
-                                                        $_productr = $obj->load($swatchproductid);?>
-                                                        <a href="<?php echo $_productr->getProductUrl();?>" class="thumbnail box-border Hpadding swatch-back">
-                                                            <img src="<?php echo $this->helper('catalog/image')->init($_productr, 'small_image')->resize(70) ?>" width="90" height="100" alt="<?php echo $this->stripTags($_productr->getName(), null, true) ?>" />
-                                                        </a>
-                                                    <?php elseif($i<=3):?>
-                                                        <div class="Hpadding vbottom text-center " style="height:80px;padding:12%">
-                                                            <?php echo "<b>".$productcount."</b>"."<br/>"."items";?>
-
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </div>
-                                            <?php endforeach;?>
-                                        </div>
-                                    </div>
-                                    <div class="row product-owner lightborder " >
-                                        <div class="col-lg-3 col-md-4 col-sm-5 col-xs-5 " >
-                                         
-                                            <a href="<?php  echo
-                                    Mage::helper('umicrosite')->getVendorBaseUrl($_product->getUdropshipVendor()) ?>">
-                                        <?php  $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getFileUrl('propic') ?>
-                                        <img class="img img-responsive" src="<?php  echo $_vendor; ?>" height="200" weight="200"
-                                           />
-                                    </a>
-                                        </div>
-                                       
-                                        <div class="col-lg-5 col-lg-offset-4" >
-                                            <?php //echo $this->getReviewsSummaryHtml($_product, 'short') ?>
-                                            <?php
-
-                                            $this->_reviewsHelperBlock = $this->getLayout()->createBlock('review/helper');
-
-
-                                            echo   $this->_reviewsHelperBlock->getSummaryHtml($product, false, false);
-
-                                            ?>
-                                        </div>
-
-                                    </div>
-                                </ul>
                             </div>
                         </div>
-</div>
-                    </li>
-                <?php endforeach; ?>
-          
-<?php endif; ?>
-<?php endforeach; ?>
-  </ul>
-        </div>
-    </div>
+
+
+                        <div class="actions">
+                        <?php if ($_product->isSaleable()): ?>
+                            <!--  <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>-->
+                        <?php else: ?>
+                            <p class="availability out-of-stock">
+                                <span><?php echo $this->__('Out of stock') ?></span></p>
+                        <?php endif; ?>
+
+
+                        <ul class="add-to-links Whitebackground">
+
+                        <div class="row swatchesrow">
+
+                    <?php endif; ?>
+
+
+                        <?php if ($div == 2 || $div == 3 ) : ?>
+                        <div class="swatches">
+
+                            <div
+                                class="col-lg-3 col-md-3 col-sm-4 col-xs-4 align-center <?php if ($i == 3) {
+                                    echo 'Whitebackground';
+                                } ?>">
+
+
+                                <a href="<?php echo $_product->getProductUrl() ?>"
+                                   title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"
+                                   class="product-image ">
+                                    <img class="lightborder"
+                                        src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(150) ?>"
+                                        alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>"/>
+                                </a>
+
+
+                            </div>
+
+                        </div>
+
+                    <?php endif; ?>
+
+                        <?php if ($div == 3 || ( $ech < 3 && $div == 2 ) || $ech==1 ): ?>
+                        <div class="swatches Hpadding vbottom text-center <?php if($ech == 1){ echo "disable";} ?>"  style="background-color: white ;width: 30%; height:30%; margin: 0 auto ; padding: 10px 5px 20px 0px;" >
+                            <?php  echo "<b>".$ech."</b>"."<br/>"."items";
+                            ?>
+
+                        </div>
+                        </div>
+
+
+                        <div class="row product-owner lightborder " >
+                            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-5 ">
+
+                                <a href="<?php echo
+                                Mage::helper('umicrosite')->getVendorBaseUrl($_product->getUdropshipVendor()) ?>">
+                                    <?php $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getFileUrl('propic') ?>
+                                    <img class="img img-responsive "
+                                         src="<?php echo $_vendor; ?>"
+                                         height="500" weight="500"
+                                    />
+                                </a>
+                            </div>
+
+                            <div class="col-lg-5 col-lg-offset-4">
+                                <?php //echo $this->getReviewsSummaryHtml($_product, 'short')
+                                ?>
+                                <?php
+
+                                $this->_reviewsHelperBlock = $this->getLayout()->createBlock('review/helper');
+
+
+                                echo $this->_reviewsHelperBlock->getSummaryHtml($product, false, false);
+
+                                ?>
+                            </div>
+
+                        </div>
+                        </ul>
+
+                        </div>
+
+                        </div>
+                        </div>
+
+
+                        <?php ?>
+
+                        </li>
+                    <?php endif; ?>
+
+                    <?php endforeach; ?>
+
+
+                    <?php endif; ?>
+
+
+                    <?php
+
+                }
+                ?>  </div>
+
+
+          <?php
+        }
+    }
+
+
+}
+?>
+
+
+
+

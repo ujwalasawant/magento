@@ -30,11 +30,11 @@
     <div class=" row marginbottom">
     <div class="col-lg-5 " >
 
-        <div class="">
+        <div class="rowspan">
         <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="addtocart " onclick="productAddToCartForm.submit(this)"></button>
         <?php echo $this->getChildHtml('', true, true) ?>
         </div>
-        <div class="">
+        <div class="rowspan">
         <button type="button" title="Buy Now" class="buynw" onclick="setcheckoutLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"></button>
         <?php echo $this->getChildHtml('', true, true) ?>
         </div>
