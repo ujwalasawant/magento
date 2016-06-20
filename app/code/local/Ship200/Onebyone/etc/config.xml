@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+
+<config>
+
+	<modules>
+
+		<Ship200_Onebyone>
+
+			<version>0.1.2</version>
+
+		</Ship200_Onebyone>
+
+	</modules>
+
+	<global>
+
+		<blocks>
+
+			<onebyone>
+
+				<class>Ship200_Onebyone_Block</class>
+
+			</onebyone>
+
+			<adminhtml>
+
+                <rewrite>
+
+                    <sales_order_view>Ship200_Onebyone_Block_Adminhtml_Sales_Order_View</sales_order_view>
+
+                </rewrite>
+
+            </adminhtml>
+
+		</blocks>
+
+		<helpers>
+
+			<onebyone>
+
+				<class>Ship200_Onebyone_Helper</class>
+
+			</onebyone>
+
+		</helpers>
+
+		<models>
+
+			<onebyone>
+
+				<class>Ship200_Onebyone_Model</class>
+
+			</onebyone>
+
+		</models>
+
+	</global>
+	<admin>
+       
+		<routers>
+			<onebyone>
+				<use>admin</use>
+				<args>
+					<module>Ship200_Onebyone</module>
+					<frontName>onebyone</frontName>
+				</args>
+			</onebyone>
+        </routers>
+		
+    </admin>
+	<adminhtml>
+
+		<layout>
+
+			<updates>
+
+				<Ship200_onebyone>
+
+					<file>Ship200_onebyone.xml</file>
+
+				</Ship200_onebyone>
+
+			</updates>
+
+		</layout>
+
+	</adminhtml>
+
+	<frontend>
+
+		<routers>
+
+			<onebyone>
+
+				<use>standard</use>
+
+				<args>
+
+					<module>Ship200_Onebyone</module>
+
+					<frontName>onebyone</frontName>
+
+				</args>
+
+			</onebyone>
+
+		</routers>
+
+	</frontend>
+	
+		
+	
+</config>

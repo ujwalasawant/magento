@@ -25,6 +25,7 @@
  */
 ?>
 
+
 <?php $_helper = Mage::helper('catalog/category') ?>
 <?php $_categories = $_helper->getStoreCategories() ?>
 
@@ -32,13 +33,15 @@
 $div = 1; ?>
 <?php if (count($_categories) > 0): ?>
 
+
+
     <div class="containersub  ">
 
         <?php foreach ($_categories as $_category): ?>
 
 
 
-            <div class="row  <?php $I++;
+               <div class="row  <?php $I++;
             if ($I == 1) {
                 echo 'thirdH';
             } elseif ($I == 2) {
@@ -46,12 +49,12 @@ $div = 1; ?>
             } elseif ($I == 3) {
                 echo 'secondH';
             } elseif ($I == 4) {
-                echo 'thirdH1';
+                echo 'thirdH';
             } elseif ($I == 5) {
-                echo 'firstH1';
+                echo 'firstH';
             }
             elseif ($I == 6) {
-                echo 'secondH1';
+                echo 'secondH';
             }
             elseif ($I == 7) {
                 echo 'thirdH';
@@ -69,8 +72,6 @@ $div = 1; ?>
                             ->load();
                         ?></h4>
                 </a>
-
-
             </div>
 
             <div class="row subcontent hmpggrid">
@@ -91,7 +92,7 @@ $div = 1; ?>
                                          alt="<?php echo $this->stripTags($product->getName(), null, true) ?>"/>
 
                                     <figcaption>
-<p><?php echo $product->getName() ?></p>
+                                    <p><?php echo $product->getName() ?></p>
                                     </figcaption>
                                 </figure>
 

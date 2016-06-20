@@ -35,7 +35,7 @@
                 <div class="field">
                     <label for="name" class="required text-left"><?php echo Mage::helper('contacts')->__('Name') ?><em>*</em></label>
                     <div class="input-box ">
-                        <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry themeborder" type="text" />
+                        <input style="width: 220px" name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry themeborder" type="text" />
                     </div>
                 </div>
             </div>
@@ -43,14 +43,14 @@
                 <div class="field rowspan">
                     <label for="email" class="required"><?php echo Mage::helper('contacts')->__('Email') ?><em>*</em></label>
                     <div class="input-box ">
-                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email themeborder" type="text" />
+                        <input name="email"  style="width: 220px" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email themeborder" type="text" />
                     </div>
                 </div>
 
             <div class="rowspan">
                 <label for="telephone"><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
                 <div class="input-box ">
-                    <input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="input-text themeborder" type="text" />
+                    <input name="telephone"  style="width: 220px" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="input-text themeborder" type="text" />
                 </div>
             </div>
             <div class="wide rowspan">
@@ -73,3 +73,4 @@
     var contactForm = new VarienForm('contactForm', true);
 //]]>
 </script>
+

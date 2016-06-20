@@ -55,25 +55,31 @@
 
             <div class="row leftpaddng10">
 
-                <div>
+                <div>n
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
                             <h5>
                                 <?php echo  $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getData('company_name') ?>
                             </h5>
 
                             <div class="product-name">
-                                <h4> <?php echo  $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h4>
+                                <h4 style="font-style: normal"> <?php echo  $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h4>
                             </div>
 
-                            <div>
+                            <div >
+                                <?php  echo
+                                Mage::helper('umicrosite')->getVendorBaseUrl($_product->getUdropshipVendor()) ?>
+                                <?php echo $pageTitle = Mage::getSingleton('cms/page')->getIdentifier(); ?>
+                                <a href="<?php echo
+                                Mage::helper('umicrosite')->getVendorBaseUrl($_product->getUdropshipVendor())."product" ?>">
                                 <?php  $_vendorName = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?>
-                                <a href="<?php echo $this->getUrl('vendor_profile'); ?>"><?php echo  $_vendorName->getVendorName() ?></a>
+                             <h4>   <?php echo  $_vendorName->getVendorName() ?> </h4>
+                                </a>
                             </div>
                         </div>
 
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" >
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 " >
                             <a href="<?php  echo
                             Mage::helper('umicrosite')->getVendorBaseUrl($_product->getUdropshipVendor()) ?>">
                                 <?php  $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getFileUrl('propic') ?>
@@ -365,4 +371,5 @@
     <?php echo $this->getChildHtml('viewed.product') ?>
 
 </div>
+
 

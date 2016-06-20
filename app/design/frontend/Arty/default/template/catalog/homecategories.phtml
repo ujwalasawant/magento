@@ -13,7 +13,7 @@
 
                 <?php echo $_category->getName(); ?>
                 <?php $categoryChildren = $_category->getChildren(); ?>
-                    <?php if ($categoryChildren->count()) : ?>
+                <?php if ($categoryChildren->count()) : ?>
                     <ul class="list-unstyled">
 
                         <?php foreach ($categoryChildren as $_categoryChild) : ?>
@@ -35,7 +35,7 @@
                                         ?>
                                     </li>
                                 <?php endforeach; ?>
-                                <?php endif; ?>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </ul>
                 <?php endif; ?>
@@ -44,5 +44,6 @@
         </li>
     <?php endforeach ?>
 </ul>
+
 
 

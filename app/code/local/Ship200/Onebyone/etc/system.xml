@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <tabs>
+
+        <!--Here is the tabs definition-->
+
+        <onebyonesetting translate="label" module="onebyone">
+
+            <label>Ship200 OneByOne Addon</label>
+
+            <sort_order>10</sort_order>
+
+            <sort_order>700</sort_order>
+
+            <show_in_default>1</show_in_default>
+
+            <show_in_website>1</show_in_website>
+
+            <show_in_store>1</show_in_store>
+
+        </onebyonesetting>
+
+    </tabs>
+
+    <sections>
+
+        <!--Here are the sections definition-->
+
+        <onebyone translate="label" module="onebyone">
+
+            <class>separator-top</class>
+
+            <label>OneByOne Settings</label>
+
+            <tab>onebyonesetting</tab>
+
+            <sort_order>700</sort_order>
+
+            <show_in_default>1</show_in_default>
+
+            <show_in_website>1</show_in_website>
+
+            <show_in_store>1</show_in_store>
+
+            <groups>
+
+                <!--Here are the groups definitions-->
+
+                <info translate="label">
+
+                    <label>OneByOne General information</label>
+
+                    <frontend_type>text</frontend_type>
+
+                    <sort_order>1</sort_order>
+
+                    <show_in_default>1</show_in_default>
+
+                    <show_in_website>1</show_in_website>
+
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+
+                        <!--Here are the fields definition-->
+
+                        <enable translate="label">
+
+                            <label>Enable</label>
+
+                            <frontend_type>select</frontend_type>
+
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+
+							<sort_order>0</sort_order>
+
+							<show_in_default>1</show_in_default>
+
+							<show_in_website>1</show_in_website>
+
+							<show_in_store>1</show_in_store>
+
+                        </enable>
+						
+						<!--<shippingmapping translate="label comment">
+							<label>Shipping Mapping </label>
+							<frontend_type>textarea</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<sort_order>80</sort_order>
+						</shippingmapping>-->
+						
+
+						<appkey translate="label">
+
+                            <label>Ship200 Key</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>1</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+							<comment>
+                <![CDATA[<br>1. Login in into your Ship200.com account.  <br> 2. On top menu go to "Settings" -&gt; "OneByOne Plugin"  <br> 3.  Click "Generate Key for OneByOne Plugin", then insert your key into "Ship200 Key" field on this page.]]>
+              </comment>
+                            
+
+                        </appkey>
+
+						
+
+						<carrier translate="label">
+
+                            <label>Default Carrier Service</label>
+
+                            <frontend_type>select</frontend_type>
+
+                            <source_model>onebyone/source_carrier</source_model>
+
+                            <sort_order>2</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <comment><![CDATA[for detailed ship methods mapping edit file "app\design\adminhtml\default\default\template\onebyone\sales\order\view\info.phtml"]]> </comment>
+							
+
+                        </carrier> 
+
+						<order_status_tracking translate="label">
+
+                            <label>Order Status For Update With Tracking</label>
+
+                            <frontend_type>select</frontend_type>
+
+							<source_model>adminhtml/system_config_source_order_status</source_model>
+
+							<sort_order>3</sort_order>
+
+							<show_in_default>1</show_in_default>
+
+							<show_in_website>1</show_in_website>
+
+							<show_in_store>1</show_in_store>
+
+                        </order_status_tracking>
+
+						<!--<notify_customer translate="label">
+
+                            <label>Notify Customer</label>
+
+                            <frontend_type>select</frontend_type>
+
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+
+							<sort_order>4</sort_order>
+
+							<show_in_default>1</show_in_default>
+
+							<show_in_website>1</show_in_website>
+
+							<show_in_store>1</show_in_store>
+
+                        </notify_customer>
+						-->
+						<!--<mapp translate="label comment">
+                            <label>Generate Mapping</label>
+							<comment>Save the Config then Generate Mapping</comment>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>onebyone/adminhtml_system_config_form_button</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<sort_order>100</sort_order>
+                        </mapp>-->
+
+                    </fields>
+
+                </info>
+
+            </groups>
+
+        </onebyone>
+
+    </sections>
+
+</config>

@@ -40,16 +40,17 @@
 
         <?php $_u = 'p[url]=' . $_productUrl . '&p[images][0]=' . $_productImageUrl . '&p[title]=' . $_productName . '&p[summary]=' . urlencode(trim($_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description'))); ?>
         <a href="<?php echo 'http://www.facebook.com/sharer.php?s=100&' . $_u; ?>" target="_blank" title="<?php echo $this->__('Share on Facebook') ?>" class=" link-facebook ">
-        <li class=" col-lg-1 col-md-1 col-sm-1 col-xs-1 facebk"></li>
+        <li class=" col-lg-1 facebk"></li>
         </a>
 
 
 
         <a  href="<?php echo 'http://twitter.com/home?status=' . $_productName . '+' . $_productUrl; ?>" target="_blank" title="<?php echo $this->__('Share on Twitter') ?>" class="link-twitter">
-        <li class="col-lg-1  col-md-1 col-sm-1 col-xs-1 twtr">
+        <li class="col-lg-1 twtr">
 
         </li>
         </a>
 
 </div>
 </div>
+

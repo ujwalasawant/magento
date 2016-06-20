@@ -41,7 +41,7 @@
     $_category  = $this->getCurrentCategory();
     $_imgHtml   = '';
     if ($_imgUrl = $_category->getImageUrl()) {
-        $_imgHtml = '<p class="category-image" ><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'" width="935px" height="335px"  /></p>';
+        $_imgHtml = '<p class="category-image" ><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'"   /></p>';
         $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
 		
     }   
@@ -68,10 +68,9 @@
     <?php if($_imgUrl): ?>
         <?php echo $_imgHtml ?>
     <?php endif; ?>
-
 </div>
 </div>
-<div class="col-lg-12 text-center " >
+<div class="col-lg-12 text-center " style="margin: 0px; padding: 0px;" >
 
 
     <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
@@ -98,3 +97,4 @@
 
 
 </div>
+

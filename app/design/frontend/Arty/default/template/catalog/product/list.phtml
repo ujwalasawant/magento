@@ -47,7 +47,6 @@
 
     <?php echo $this->getToolbarHtml() ?>
 
-
     <?php
     $_productCollection = $this->getLoadedProductCollection();
     $_helper = $this->helper('catalog/output');
@@ -60,7 +59,7 @@
     <!--<span class='st_email' displayText='Email'></span> -->
 
     <div class="">
-        <div class="pin "><!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <div class="pin"><!-- Go to www.addthis.com/dashboard to customize your tools -->
 
 
             <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
@@ -84,7 +83,7 @@
                                     echo "<span title='Moved to favorites' class='favoritesbtnS'/> ";
                                 else
                                     //add product to wishlist
-                                    echo "<a class='favoritesbtnF' title='Add to Favorites' href='" . $this->helper('wishlist')->getAddUrl($_product) . "'></a>";; ?>
+                                    echo "<a class='favoritesbtnF' title='Add to Favorites' href='" . $this->helper('wishlist')->getAddUrl($_product) . "'></a>"; ?>
 
 
 
@@ -152,17 +151,20 @@
                             </div>
 
 
-                            <div class="product-info lightborder paddngLeft">
+                            <div class="product-info lightborder ">
 
                                 <ul class="list-unstyled ">
-                                    <li class="text-left">
-                                        <b> <a href="<?php echo $_product->getProductUrl() ?>" class="blackColor"
-                                               title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                                    <li class="text-left paddngLeft">
+                                        <b>  <a href="<?php echo $_product->getProductUrl() ?>" class="blackColor"
+                                                title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
                                                 <?php $id = $_product->getId();
                                                 echo "(" . $id . ")" ?>
-                                            </a></b>
+                                            </a> </b>
+
                                     </li>
-                                   
+                                    <li class="text-left blackColor paddngLeft"> <?php  $_vendorName = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor()) ?>
+                                        <b> <?php echo  $_vendorName->getVendorName() ?> </b>
+                                    </li>
 
                                     <?php
                                     // Provides extra blocks on which to hang some features for products in the list
@@ -177,13 +179,84 @@
                                         }
                                     }
                                     ?>
+                                    <li class="paddngLeft">
+                                        <div class="text-left blackColor">
+                                            <?php echo $this->getChildHtml('product_type_data') ?>
+                                            <?php
+                                            //   $product = Mage::getModel('catalog/product')->load($this->getProduct()->getId());
+                                            $attributes = $_product->getAttributes();
+
+                                            foreach ($attributes as $attribute) {
+                                                if ($attribute->getIsVisibleOnFront() && $attribute->getIsUserDefined()) {
+                                                    $value = $attribute->getFrontend()->getValue($_product);
+                                                    if (strlen($value) && $_product->hasData($attribute->getAttributeCode())) {
+                                                        $data[$attribute->getAttributeCode()] = array(
+
+                                                            'label' => $attribute->getFrontend()->getLabel(),
+                                                            'value' => $value  //$product->getData($attribute->getAttributeCode())
+
+                                                        );
+
+
+                                                        ?>
+                                                        <ul class="list-unstyled">
+                                                            <li>
+
+                                                                <?php
+                                                                $_linkname=explode('_',$attribute->getAttributeCode());
+                                                                if($_linkname[0]=='material')
+                                                                {
+                                                                    echo $data[$attribute->getAttributeCode()]['label']. ":". " " ;
+                                                                    echo $data[$attribute->getAttributeCode()]['value'];
+
+                                                                }
+                                                                ?>
+
+                                                                <?php
+                                                                $_linkname=explode('_',$attribute->getAttributeCode());
+                                                                if($_linkname[0]=='type')
+                                                                {
+                                                                    echo $data[$attribute->getAttributeCode()]['label']. ":". " " ;
+                                                                    echo $data[$attribute->getAttributeCode()]['value'];
+
+                                                                }
+                                                                ?>
+
+                                                                <?php
+                                                                $_linkname=explode('_',$attribute->getAttributeCode());
+                                                                if($_linkname[0]=='dimensions')
+                                                                {
+                                                                    echo $data[$attribute->getAttributeCode()]['label']. ":". " " ;
+                                                                    echo $data[$attribute->getAttributeCode()]['value'];
+
+                                                                }
+                                                                ?>
+                                                                <?php
+                                                                $_linkname=explode('_',$attribute->getAttributeCode());
+                                                                if($_linkname[0]=='size')
+                                                                {
+                                                                    echo $data[$attribute->getAttributeCode()]['label']. ":". " " ;
+                                                                    echo $data[$attribute->getAttributeCode()]['value'];
+
+                                                                }
+                                                                ?>
+                                                            </li>
+                                                        </ul>
+                                                        <?php
+                                                    }
+                                                }
+                                            }
+                                            ?>
+
+                                        </div>
+                                    </li>
                                     <li class="text-right paddingRight">
                                         <div class="product-price ">
 
-                                            <?php echo $this->getPriceHtml($_product, true) ?>
-                                            <?php if ($_product->getRatingSummary()): ?>
-                                                <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
-                                            <?php endif; ?>
+                                            <b> <?php echo $this->getPriceHtml($_product, true) ?>
+                                                <?php if ($_product->getRatingSummary()): ?>
+                                                    <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                                <?php endif; ?> </b>
                                         </div>
                                     </li>
 

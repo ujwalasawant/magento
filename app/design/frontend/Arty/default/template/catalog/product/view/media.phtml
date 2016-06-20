@@ -37,20 +37,20 @@
     $_helper = $this->helper('catalog/output');
 ?>
 
-    <div class="product-image product-image-zoom lightborder" >
+    <div class="product-image product-image-zoom lightborder"  >
         <div class="product-image-gallery">
             <img id="image-main"
-                 class="gallery-image visible img-responsive"
+                 class="gallery-image visible "
                  src="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>"
                  alt="<?php echo $this->escapeHtml($this->getImageLabel()) ?>"
-                 title="<?php echo $this->escapeHtml($this->getImageLabel());  ?>" width="100%"  />
+                 title="<?php echo $this->escapeHtml($this->getImageLabel()); ?>" width="100%" />
 
             <?php $i=0; foreach ($this->getGalleryImages() as $_image): ?>
                 <?php if ($this->isGalleryImageVisible($_image)): ?>
                     <img id="image-<?php echo $i; ?>"
                          class="gallery-image"
                          src="<?php echo $this->getGalleryImageUrl($_image); ?>"
-                         data-zoom-image="<?php echo  $this->getGalleryImageUrl($_image);  ?>" width="100%" />
+                         data-zoom-image="<?php echo  $this->getGalleryImageUrl($_image); ?>" width="100%" />
                 <?php endif; ?>
                 <?php $i++; endforeach; ?>
         </div>
@@ -65,7 +65,7 @@
                         <li>
                             <a class="thumb-link" href="#" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>" data-image-index="<?php echo $i; ?>">
                                 <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(75); ?>"
-                                     width="75" height="75" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
+                                      alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" width="100%"/>
                             </a>
                         </li>
                     <?php endif; ?>

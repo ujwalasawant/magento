@@ -38,7 +38,7 @@ $_swatchOuterWidth = $_dimHelper->getOuterWidth(Mage_ConfigurableSwatches_Helper
 $_swatchOuterHeight = $_dimHelper->getOuterHeight(Mage_ConfigurableSwatches_Helper_Swatchdimensions::AREA_LAYER);
 ?>
 
-<ol class="list-unstyled oddclass" >
+<ol class="list-unstyled oddclass">
     <?php foreach ($this->getItems() as $_item): ?>
         <?php
         $_hasItems = ($_item->getCount() > 0);
@@ -49,7 +49,7 @@ $_swatchOuterHeight = $_dimHelper->getOuterHeight(Mage_ConfigurableSwatches_Help
         $_linkCss = 'height:' . $_swatchOuterHeight . 'px; ' . ((!$_hasImage) ? 'min-' : '') . 'width:' . $_swatchOuterWidth . 'px;';
         $_lineHeight = $_swatchOuterHeight + 2;
         ?>
-        <li <?php if ($_hasImage){ echo ' style="line-height: ' . $_lineHeight . 'px;"'; } ?> >
+        <li<?php if ($_hasImage){ echo ' style="line-height: ' . $_lineHeight . 'px;"'; } ?>>
             <?php if ($_hasItems): ?>
             <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>" class="<?php echo $_linkClass ?>">
                 <?php else: ?>

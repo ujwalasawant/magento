@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout>
+	<adminhtml_sales_order_view>
+		<reference name="order_info">
+			<action method="setTemplate">
+				<template>onebyone/sales/order/view/info.phtml</template>
+			</action>
+			<!--<block type="adminhtml/sales_order_view_tab_info" name="order_tab_info" template="onebyone/sales/order/view/tab/info.phtml">
+			</block>-->
+		</reference>
+	</adminhtml_sales_order_view>
+	
+	<onebyone_adminhtml_ship200_getmapp>
+        <reference name="content">
+            <block type="onebyone/adminhtml_ship200" name="ship200" />
+        </reference>
+    </onebyone_adminhtml_ship200_getmapp>
+	
+</layout>

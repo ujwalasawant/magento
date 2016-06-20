@@ -92,12 +92,6 @@
                 <params/>
                 <if>lt IE 9</if>
             </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/owl.carousel.js</name>
-                <params/>
-                <if>lt IE 9</if>
-            </action>
             <!-- Removing the styles.css -->
             <action method="removeItem">
                 <type>skin_css</type>
@@ -112,10 +106,6 @@
             <action method="addItem">
                 <type>skin_css</type>
                 <stylesheet>css/styles.css</stylesheet>
-            </action>
-            <action method="addItem">
-                <type>skin_css</type>
-                <stylesheet>css/owl.carousel.css</stylesheet>
             </action>
         </reference>
 
@@ -253,7 +243,6 @@
         </reference>
     </PRODUCT_TYPE_configurable>
     <catalog_product_view>
-
         <reference name="head">
             <action method="addItem">
                 <type>skin_js</type>
@@ -379,9 +368,6 @@
             <action method="insert">
                 <child>catalog.leftnav</child>
             </action>
-
-
-
         </reference>
         <reference name="content">
             <action method="unsetChild">
@@ -392,9 +378,7 @@
                 <child>category.products</child>
             </action>
 
-            <action method="unsetChild">
-                <name>product_list_toolbar</name>
-            </action>
+
         </reference>
     </catalog_category_layered>
     <!--<catalog_category_layered>
@@ -518,7 +502,13 @@
 
     <!-- registration block (sneha) -->
 
-
+    <sales_email_order_items>
+        <reference name="items">
+            <action method="setTemplate">
+                <template>email/order/items.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_items>
 
     <catalogsearch_result_index translate="label">
         <label>Quick Search Form</label>

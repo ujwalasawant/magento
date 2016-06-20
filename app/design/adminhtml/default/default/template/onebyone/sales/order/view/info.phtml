@@ -1,0 +1,511 @@
+<?php
+
+/**
+
+ * Magento
+
+ *
+
+ * NOTICE OF LICENSE
+
+ *
+
+ * This source file is subject to the Academic Free License (AFL 3.0)
+
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+
+ * It is also available through the world-wide-web at this URL:
+
+ * http://opensource.org/licenses/afl-3.0.php
+
+ * If you did not receive a copy of the license and are unable to
+
+ * obtain it through the world-wide-web, please send an email
+
+ * to license@magentocommerce.com so we can send you a copy immediately.
+
+ *
+
+ * DISCLAIMER
+
+ *
+
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+
+ * versions in the future. If you wish to customize Magento for your
+
+ * needs please refer to http://www.magentocommerce.com for more information.
+
+ *
+
+ * @category    design
+
+ * @package     default_default
+
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+
+ */
+
+?>
+
+<style>
+
+.btn.return {
+
+  padding-left: 10px !important;
+
+}
+
+.btn.return span {
+
+  padding-left: 25px;
+
+}
+
+.btn.ship {
+
+  padding-left: 15px !important;
+
+}
+
+.btn.ship span {
+
+  padding-left: 35px;
+
+}
+
+</style>
+
+<?php $_order = $this->getOrder();
+
+$shipping_address = $_order->getShippingAddress();
+
+//Zend_Debug::dump($_order->getData());
+
+?>
+
+
+
+
+
+<?php
+
+	
+
+	//// Ship200 Integration Code Start ///
+
+	 
+
+		$shipService = Mage::getStoreConfig('onebyone/info/carrier'); // !Full list of codes: http://www.ship200.com/carrier_service_codes.html
+		//$Mappingsetting = unserialize(Mage::getStoreConfig('onebyone/info/shippingmapping'));	
+		
+		#$shipService=$Mappingsetting[$_order->getShippingMethod()];	
+		
+		//Zend_Debug::dump($shipService);
+		
+		$appkey = Mage::getStoreConfig('onebyone/info/appkey');
+
+		$postbackUrl=Mage::getUrl('onebyone/index/postback');
+
+		$postbackUrl.="?id=".$appkey;
+
+
+		// Set you custom Carrier service selection, like examples below
+
+		//if($_order->getShippingMethod()   == "flatrate_flatrate"){$shipService = "Fedex-01";}
+		//if($_order->getShippingMethod()    == "freeshipping_freeshipping"){$shipService = "Fedex-05";}
+
+	 
+
+	
+
+	
+
+
+
+	?>
+
+	 <script src="https://secure.ship200.com/html/js/b_ship200.js"></script>   
+
+	   
+
+	  <script>
+
+	    var ship200Address = [
+
+	 
+
+			'<?php echo addslashes($shipping_address->getFirstname()) ?> &nbsp; <?php echo addslashes($shipping_address->getLastname()) ?>', //0 Name
+
+			'<?php echo addslashes($shipping_address->getCompany()) ?>',    //1 Company Name
+
+			'<?php echo addslashes($shipping_address->getStreet(1)) ?>',        //2 Address Line 1
+
+			'<?php echo addslashes($shipping_address->getStreet(2)) ?>',        //3 Address Line 2
+
+			'<?php echo addslashes($shipping_address->getCity()) ?>',        //4 City
+
+			'<?php echo addslashes($shipping_address->getRegion()) ?>',        //5 State
+
+			'<?php echo addslashes($shipping_address->getPostcode()) ?>',        //6 Zip
+
+			'<?php echo addslashes($shipping_address->getCountryId()) ?>',        //7 Country
+
+			'<?php echo addslashes($shipping_address->getTelephone()) ?>',        //8 Phone
+
+	 
+
+			'order number: <?php echo $_order->getIncrementId() ?>',        //9 Refference (will be printed on the label)
+
+			'<?php echo addslashes($_order->getGrandTotal()) ?>',        //10 Declared Value
+
+			'<?php echo addslashes(round($_order->getWeight(), 2)) ?>',        //11 Weight
+
+			'lb',        //12 Weight Units (lb or oz): valid values are 'lb' or 'oz'
+
+			'',        //13 Dimensions Length
+
+			'',        //14 Dimensions Width
+
+			'',        //15 Dimensions Height
+
+	 
+
+			'<?php echo $shipService ?>',        //16 Default Carrier Service, example 'USPS-01', 'Fedex-01', 'UPS-03-S', etc. !Full list of codes: http://secure.ship200.com/html/images/help/service_codes
+
+	 
+
+			'<?php echo $_order->getIncrementId() ?>',        //17 Key (usually order number) for sending tracking number back, if set the url below is required, example '349001'
+
+			'<?php echo $postbackUrl;?>'        //18 URL for sending tracking back, example 'http://www.yourdomain.com/admin-folder/ship200_postback.php?id=yourKey123'
+
+	    ];
+
+	    var ship200URL='';
+
+	    for (var i in ship200Address) {
+
+		if(i != 18)
+
+		     ship200Address[i]=ship200Address[i].replace(/[^a-z0-9., '-]/gi,'');
+
+	      ship200URL += ship200Address[i]+'}{';    
+
+	    }
+
+	    function open_ship200(){ myWindow=window.open('https://secure.ship200.com/shipping.php?action=new_label&shipto='+ship200URL,'ship200','width='+ship200Width+',height='+ship200Height+',scrollbars=yes'); myWindow.focus();}
+
+	    function open_ship200_return(){ myWindow=window.open('https://secure.ship200.com/shipping.php?action=new_label&print_return=1&shipto='+ship200URL,'ship200','width='+ship200Width+',height='+ship200Height+',scrollbars=yes'); myWindow.focus();}
+
+	 </script>
+
+
+
+
+
+
+
+<?php
+
+$orderAdminDate = $this->formatDate($_order->getCreatedAtDate(), 'medium', true);
+
+$orderStoreDate = $this->formatDate($_order->getCreatedAtStoreDate(), 'medium', true);
+
+?>
+
+
+
+
+
+
+
+<div class="box-left">
+
+    <!--Order Information-->
+
+    <div class="entry-edit">
+
+        <?php if ($_order->getEmailSent()):
+
+            $_email = Mage::helper('sales')->__('the order confirmation email was sent');
+
+        else:
+
+            $_email = Mage::helper('sales')->__('the order confirmation email is not sent');
+
+        endif; ?>
+
+        <div class="entry-edit-head">
+
+        <?php if ($this->getNoUseOrderLink()): ?>
+
+            <h4 class="icon-head head-account"><?php echo Mage::helper('sales')->__('Order # %s', $_order->getRealOrderId()) ?> (<?php echo $_email ?>)</h4>
+
+        <?php else: ?>
+
+            <a href="<?php echo $this->getViewUrl($_order->getId()) ?>"><?php echo Mage::helper('sales')->__('Order # %s', $_order->getRealOrderId()) ?></a>
+
+            <strong>(<?php echo $_email ?>)</strong>
+
+        <?php endif; ?>
+
+        </div>
+
+        <div class="fieldset">
+
+            <table cellspacing="0" class="form-list">
+
+            <tr>
+
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Order Date') ?></label></td>
+
+                <td class="value"><strong><?php echo $orderAdminDate ?></strong></td>
+
+            </tr>
+
+            <?php if ($orderAdminDate != $orderStoreDate):?>
+
+            <tr>
+
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Order Date (%s)', $_order->getCreatedAtStoreDate()->getTimezone()) ?></label></td>
+
+                <td class="value"><strong><?php echo $orderStoreDate ?></strong></td>
+
+            </tr>
+
+            <?php endif;?>
+
+            <tr>
+
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Order Status') ?></label></td>
+
+                <td class="value"><strong><span id="order_status"><?php echo $_order->getStatusLabel() ?></span></strong></td>
+
+            </tr>
+
+            <tr>
+
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Purchased From') ?></label></td>
+
+                <td class="value"><strong><?php echo $this->getOrderStoreName() ?></strong></td>
+
+            </tr>
+
+            <?php if($_order->getRelationChildId()): ?>
+
+            <tr>
+
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Link to the New Order') ?></label></td>
+
+                <td class="value"><a href="<?php echo $this->getViewUrl($_order->getRelationChildId()) ?>">
+
+                    <?php echo $_order->getRelationChildRealId() ?>
+
+                </a></td>
+
+            </tr>
+
+            <?php endif; ?>
+
+            <?php if($_order->getRelationParentId()): ?>
+
+            <tr>
+
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Link to the Previous Order') ?></label></td>
+
+                <td class="value"><a href="<?php echo $this->getViewUrl($_order->getRelationParentId()) ?>">
+
+                    <?php echo $_order->getRelationParentRealId() ?>
+
+                </a></td>
+
+            </tr>
+
+            <?php endif; ?>
+
+            <?php if($_order->getRemoteIp() && $this->shouldDisplayCustomerIp()): ?>
+
+            <tr>
+
+                <td class="label"><label><?php echo Mage::helper('sales')->__('Placed from IP') ?></label></td>
+
+                <td class="value"><strong><?php echo $_order->getRemoteIp(); echo ($_order->getXForwardedFor())?' (' . $this->escapeHtml($_order->getXForwardedFor()) . ')':''; ?></strong></td>
+
+            </tr>
+
+            <?php endif; ?>
+
+            <?php if($_order->getGlobalCurrencyCode() != $_order->getBaseCurrencyCode()): ?>
+
+            <tr>
+
+                <td class="label"><label><?php echo Mage::helper('sales')->__('%s / %s rate:', $_order->getGlobalCurrencyCode(), $_order->getBaseCurrencyCode()) ?></label></td>
+
+                <td class="value"><strong><?php echo $_order->getBaseToGlobalRate() ?></strong></td>
+
+            </tr>
+
+            <?php endif; ?>
+
+            <?php if($_order->getBaseCurrencyCode() != $_order->getOrderCurrencyCode()): ?>
+
+            <tr>
+
+                <td class="label"><label><?php echo Mage::helper('sales')->__('%s / %s rate:', $_order->getOrderCurrencyCode(), $_order->getBaseCurrencyCode()) ?></label></td>
+
+                <td class="value"><strong><?php echo $_order->getBaseToOrderRate() ?></strong></td>
+
+            </tr>
+
+            <?php endif; ?>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="box-right">
+
+    <!--Account Information-->
+
+    <div class="entry-edit">
+
+        <div class="entry-edit-head">
+
+            <h4 class="icon-head head-account"><?php echo Mage::helper('sales')->__('Account Information') ?></h4>
+
+            <div class="tools"><?php echo $this->getAccountEditLink()?></div>
+
+        </div>
+
+        <div class="fieldset">
+
+            <div class="hor-scroll">
+
+                <table cellspacing="0" class="form-list">
+
+                <tr>
+
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Customer Name') ?></label></td>
+
+                    <td class="value">
+
+                    <?php if ($_customerUrl=$this->getCustomerViewUrl()) : ?>
+
+                        <a href="<?php echo $_customerUrl ?>" target="_blank"><strong><?php echo $this->escapeHtml($_order->getCustomerName()) ?></strong></a>
+
+                    <?php else: ?>
+
+                        <strong><?php echo $this->escapeHtml($_order->getCustomerName()) ?></strong>
+
+                    <?php endif; ?>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Email') ?></label></td>
+
+                    <td class="value"><a href="mailto:<?php echo $_order->getCustomerEmail() ?>"><strong><?php echo $_order->getCustomerEmail() ?></strong></a></td>
+
+                </tr>
+
+                <?php if ($_groupName = $this->getCustomerGroupName()) : ?>
+
+                <tr>
+
+                    <td class="label"><label><?php echo Mage::helper('sales')->__('Customer Group') ?></label></td>
+
+                    <td class="value"><strong><?php echo $_groupName ?></strong></td>
+
+                </tr>
+
+                <?php endif; ?>
+
+                <?php foreach ($this->getCustomerAccountData() as $data):?>
+
+                <tr>
+
+                    <td class="label"><label><?php echo $data['label'] ?></label></td>
+
+                    <td class="value"><strong><?php echo $data['value'] ?></strong></td>
+
+                </tr>
+
+                <?php endforeach;?>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="clear"></div>
+
+
+
+<div class="box-left">
+
+    <!--Billing Address-->
+
+    <div class="entry-edit">
+
+        <div class="entry-edit-head">
+
+            <h4 class="icon-head head-billing-address"><?php echo Mage::helper('sales')->__('Billing Address') ?></h4>
+
+            <div class="tools"><?php echo $this->getAddressEditLink($_order->getBillingAddress())?></div>
+
+        </div>
+
+        <fieldset>
+
+            <address><?php echo $_order->getBillingAddress()->getFormated(true) ?></address>
+
+        </fieldset>
+
+    </div>
+
+</div>
+
+<?php if (!$this->getOrder()->getIsVirtual()): ?>
+
+<div class="box-right">
+
+    <!--Shipping Address-->
+
+    <div class="entry-edit">
+
+        <div class="entry-edit-head">
+
+            <h4 class="icon-head head-shipping-address"><?php echo Mage::helper('sales')->__('Shipping Address') ?></h4>
+
+            <div class="tools"><?php echo $this->getAddressEditLink($_order->getShippingAddress())?></div>
+
+        </div>
+
+        <fieldset>
+
+            <address><?php echo $_order->getShippingAddress()->getFormated(true) ?></address>
+
+        </fieldset>
+
+    </div>
+
+</div>
+
+<div class="clear"></div>
+
+<?php endif; ?>
+

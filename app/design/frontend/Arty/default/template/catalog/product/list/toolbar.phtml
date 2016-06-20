@@ -32,15 +32,14 @@
  */
 ?>
 
-<div class="text-right" style="padding-right: 10%;">
-    <?php if ($this->getCollection()->getSize()): ?>
+<?php if ($this->getCollection()->getSize()): ?>
 
 
         <?php if ($this->isExpanded()): ?>
 
-            <div>
 
-                <select id="selectS"  onchange="setLocation(this.value)">
+
+                <select class="shopby1 col-lg-offset-9 col-md-offset-9"  id="selectS"  onchange="setLocation(this.value)">
 
 
 
@@ -72,13 +71,18 @@
                         value="<?php echo $this->getOrderUrl('entity_id', 'asc') ?>"<?php if ($this->isOrderCurrent('entity_id') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
                         Oldest Products
                     </option>
-                </select>
 
-            </div>
+                    <option value="<?php echo $this->getOrderUrl('news_from_date','desc') ?>"<?php if($this->isOrderCurrent('news_from_date') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                     Newest
+                </option>
+
+                </select>
+</span>
+
 
         <?php endif; ?>
+  <?php echo $this->getPagerHtml() ?>
+<?php endif ?>
 
-    <?php endif ?>
 
 
-</div>

@@ -16,24 +16,23 @@
     <div class="easytabs-ul-wrapper">
         <ul class="easytabs">
             <?php foreach ($tabs as $_index => $_tab) : ?>
-                <li >
+                <li>
                     <a href="#product_tabs_<?php echo $_tab['alias'] ?>"
-                        class="easytabs-anchor easytabs-a easytabs-a-tab tabLink"
+                        class="easytabs-anchor easytabs-a easytabs-a-tab"
                     ><?php echo $this->__($_tab['title']); ?></a>
                 </li>
             <?php endforeach; ?>
         </ul>
     </div>
-    <div class="padder easytabs-content-wrapper" >
+    <div class="padder easytabs-content-wrapper">
         <?php foreach ($tabs as $_index => $_tab) : ?>
             <a href="#product_tabs_<?php echo $_tab['alias'] ?>"
-                class="easytabs-anchor easytabs-a easytabs-a-accordion">
-
-                <?php echo $this->__($_tab['title']); ?></a>
+                class="easytabs-anchor easytabs-a easytabs-a-accordion"
+            ><?php echo $this->__($_tab['title']); ?></a>
             <div class="easytabs-content"  id="product_tabs_<?php echo $_tab['alias'] ?>_contents"
                 style="display:none">
                 <?php echo $_tab['child_html']; ?>
-            </div>
+                </div>
         <?php endforeach; ?>
     </div>
 

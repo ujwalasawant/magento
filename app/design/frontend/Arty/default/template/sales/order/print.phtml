@@ -24,7 +24,7 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div class="row container" xmlns="http://www.w3.org/1999/html">
+<div class="row container">
 <div class="col-lg-12">
 <?php $_order = $this->getOrder() ?>
 <h1><?php echo $this->__('Order #%s', $_order->getRealOrderId()) ?></h1>
@@ -45,7 +45,7 @@
         <address><?php echo $_order->getBillingAddress()->format('html') ?></address>
     </div>
     </div>
-    </hr>
+    <hr>
 <?php if (!$_order->getIsVirtual()): ?>
 
 
@@ -58,9 +58,9 @@
         <h2><?php echo $this->__('Payment Method') ?></h2>
         <?php echo $this->getPaymentInfoHtml() ?>
     </div>
-</hr>
-</div>
 
+</div>
+   
 <div class="container">
 <h2><?php echo $this->__('Items Ordered') ?></h2>
 <table class="data-table" id="my-orders-table">
@@ -93,3 +93,4 @@
 </div>
 <script type="text/javascript">decorateTable('my-orders-table', {'tbody' : ['odd', 'even'], 'tbody tr' : ['first', 'last']})</script>
 <script type="text/javascript">window.print();</script>
+

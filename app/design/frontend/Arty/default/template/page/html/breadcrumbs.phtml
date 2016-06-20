@@ -26,16 +26,16 @@
 ?>
 
 
-
+<br/>
 <?php if($crumbs && is_array($crumbs)): ?>
 <div class="breadcrumbs">
     <ul>
         <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
 
             <?php if($_crumbInfo['link']): ?>
-               <strong > <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->escapeHtml($_crumbInfo['title']) ?>"><?php echo $this->escapeHtml($_crumbInfo['label']) ?></a> </strong>
+               <strong> <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->escapeHtml($_crumbInfo['title']) ?>"><?php echo  $this->escapeHtml($_crumbInfo['label']) ?></a> </strong>
             <?php elseif($_crumbInfo['last']): ?>
-        <strong>  <a> <?php echo $this->escapeHtml($_crumbInfo['label']) ?></a> </strong>
+                <strong><a> <?php echo $this->escapeHtml($_crumbInfo['label']) ?> </a> </strong>
             <?php else: ?>
                 <?php echo $this->escapeHtml($_crumbInfo['label']) ?>
             <?php endif; ?>
@@ -48,5 +48,6 @@
   
 </div>
 <?php endif; ?>
+
 
 
