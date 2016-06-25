@@ -24,7 +24,8 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-
+<?php echo $this->getLayout()->createBlock('newproducts/newproducts')->setTemplate('magehit/newproducts/newproductsblock.phtml')->toHtml(); ?>
+<?php echo $this->getLayout()->createBlock('bestseller/bestseller')->setTemplate('magehit/bestseller/bestsellerblock.phtml')->toHtml(); ?>
 
 <?php $_helper = Mage::helper('catalog/category') ?>
 <?php $_categories = $_helper->getStoreCategories() ?>

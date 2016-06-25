@@ -144,7 +144,7 @@ Load this update on every page when customer is logged out
             <action method="addLink" translate="label title" module="customer"><label>Log In</label><url helper="customer/getLoginUrl"/><title>Log In</title><prepare/><urlParams/><position>100</position></action>
            <!-- <action method="addLink" translate="label title" module="customer"><label>Sign Up</label><url helper="customer/getRegisterUrl"/><title>Sign Up</title><prepare/><urlParams/><position>100</position></action>-->
           
- <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
+         <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
                 <name>My Favorites</name>
                 <path>wishlist/</path>
                 <label>My Favorites</label>
@@ -170,6 +170,11 @@ Layout for customer login page
         </reference>
         <reference name="content">
             <block type="customer/form_login" name="customer_form_login" template="customer/form/login.phtml"/>
+
+
+                <block type="sociallogin/logindefault" name="magehit_sociallogin_html"></block>
+
+
         </reference>
     </customer_account_login>
 
@@ -371,8 +376,69 @@ Customer account pages, rendered for all tabs in dashboard
                 <action method="addLink" translate="label" module="wishlist" ifconfig="wishlist/general/active">
                     <name>MyStuff_wishlist</name>
                     <path>wishlist/</path>
-                    <label>My Favorites</label>
+                    <label>My Wishlist</label>
                 </action>
+                <action method="addLink" translate="label" module="sociallogin"
+
+                        ifconfig="magehit/magehit_sociallogin_facebook/enabled">
+
+                    <name>magehit_sociallogin_facebook</name>
+
+                    <path>mhsociallogin/account/facebook</path>
+
+                    <label>Facebook Information</label>
+
+                </action>
+
+                <action method="addLink" translate="label" module="sociallogin"
+
+                        ifconfig="magehit/magehit_sociallogin_google/enabled">
+
+                    <name>magehit_sociallogin_google</name>
+
+                    <path>mhsociallogin/account/google</path>
+
+                    <label>Google Information</label>
+
+                </action>
+
+                <action method="addLink" translate="label" module="sociallogin"
+
+                        ifconfig="magehit/magehit_sociallogin_twitter/enabled">
+
+                    <name>magehit_sociallogin_twitter</name>
+
+                    <path>mhsociallogin/account/twitter</path>
+
+                    <label>Twitter Information</label>
+
+                </action>
+
+
+                <action method="addLink" translate="label" module="sociallogin"
+
+                        ifconfig="magehit/magehit_sociallogin_linkedin/enabled">
+
+                    <name>magehit_sociallogin_linkedin</name>
+
+                    <path>mhsociallogin/account/linkedin</path>
+
+                    <label>Linkedin Information</label>
+
+                </action>
+
+                <action method="addLink" translate="label" module="sociallogin"
+
+                        ifconfig="magehit/magehit_sociallogin_instagram/enabled">
+
+                    <name>magehit_sociallogin_instagram</name>
+
+                    <path>mhsociallogin/account/instagram</path>
+
+                    <label>Instagram Information</label>
+
+                </action>
+
 
 
             </block>
@@ -389,6 +455,11 @@ Customer account pages, rendered for all tabs in dashboard
 Customer account home dashboard layout
 -->
 
+
+
+    <!--
+Customer account address book
+-->
     <customer_account_index translate="label">
         <label>Customer My Account Dashboard</label>
         <update handle="customer_account"/>
@@ -397,6 +468,17 @@ Customer account home dashboard layout
             <action method="setTemplate">
                 <template>page/2columns-left.phtml</template>
             </action>
+        </reference>
+
+    </customer_account_index>
+
+    <customer_address_index translate="label">
+        <label>Customer My Account Address Book</label>
+        <!-- Mage_Customer -->
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="customer/address_edit" name="customer_address_edit" template="customer/address/edit.phtml"/>
+            <block type="customer/address_book" name="address_book" template="customer/address/book.phtml"/>
         </reference>
         <reference name="my.account.wrapper">
             <block type="sales/order_history" name="sales.order.history">
@@ -408,20 +490,6 @@ Customer account home dashboard layout
 
         </reference>
 
-    </customer_account_index>
-
-    <!--
-Customer account address book
--->
-
-    <customer_address_index translate="label">
-        <label>Customer My Account Address Book</label>
-        <!-- Mage_Customer -->
-        <update handle="customer_account"/>
-        <reference name="my.account.wrapper">
-            <block type="customer/address_edit" name="customer_address_edit" template="customer/address/edit.phtml"/>
-            <block type="customer/address_book" name="address_book" template="customer/address/book.phtml"/>
-        </reference>
     </customer_address_index>
 
     <!--

@@ -1,4 +1,4 @@
-<ul class="list-unstyled  paddngLeft">
+<ul class="list-unstyled  paddngLeft" style="font-size: 16px">
     <?php
     $obj = new Mage_Catalog_Block_Navigation();
     $storeCategories = $obj->getStoreCategories();
@@ -7,7 +7,7 @@
 
     foreach ($storeCategories as $_category):
         ?>
-        <li class="list-unstyled rowspan ">
+        <li class="list-unstyled rowspan " style="font-size: 14px">
             <?php $catid = $_category->getId(); ?>
             <?php if ($catid === $currentCategoryId): ?>
 

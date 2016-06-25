@@ -1,0 +1,72 @@
+.socials-login {
+    word-spacing: 8px;
+    margin: 0px 0 11px 0 !important;
+    text-align: center;
+    border: 1px solid #58ACFA;
+    padding: 7px;
+}
+.magehit-sociallogin-account .col-1 {
+    float:left;
+}
+.magehit-sociallogin-account .col-2 {
+    float:left;
+    padding-left:10px;
+}
+.magehit-sociallogin-account h4{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+.socials-login  legend{color:#4a4a4a;  font-size:20px;font-weight:normal;}
+.socials-login  .desc{text-align: center;word-spacing:0px !important;margin-bottom:10px}
+.socials-login a, .magehit-sociallogin-account a{  margin-bottom: 10px;
+  background-image: url("../images/social-sprite.png");
+  background-color: transparent;
+  background-repeat: no-repeat;}
+
+.socials-login .magehit-btn-facebook-login , .magehit-sociallogin-account .magehit-btn-facebook-login{
+  background-position: -11px -9px; 
+  width: 73px;
+  height: 76px;
+  display: inline-block;
+  text-indent: -999em;
+  cursor: pointer;}
+/*.socials-login .magehit-btn-facebook-login:hover , .magehit-sociallogin-account .magehit-btn-facebook-login:hover{background-position:-381px -55px;}*/
+
+.socials-login .magehit-btn-google-login, .magehit-sociallogin-account .magehit-btn-google-login{
+  background-position: -326px -9px; 
+  width: 73px;
+  height: 76px;
+  display: inline-block;
+  text-indent: -999em;
+  cursor: pointer;
+}
+/*.socials-login .magehit-btn-google-login:hover , .magehit-sociallogin-account .magehit-btn-google-login:hover{background-position:-109px -55px;}*/
+
+.socials-login .magehit-btn-twitter-login, .magehit-sociallogin-account .magehit-btn-twitter-login{
+  background-position: -116px -114px; 
+  width: 73px;
+  height: 76px;
+  display: inline-block;
+  text-indent: -999em;
+  cursor: pointer;
+}
+/*.socials-login .magehit-btn-twitter-login:hover, .magehit-sociallogin-account .magehit-btn-twitter-login:hover{background-position:-272px -54px;}*/
+
+.socials-login .magehit-btn-linkedin-login, .magehit-sociallogin-account .magehit-btn-linkedin-login{
+  background-position: -536px -114px; 
+  width: 73px;
+  height: 76px;
+  display: inline-block;
+  text-indent: -999em;
+  cursor: pointer;
+}
+/*.socials-login .magehit-btn-linkedin-login:hover, .magehit-sociallogin-account .magehit-btn-linkedin-login:hover{background-position:-436px -55px;}*/
+
+.socials-login .magehit-btn-instagram-login, .magehit-sociallogin-account .magehit-btn-instagram-login{
+  background-position: -432px -9px; 
+  width: 73px;
+  height: 76px;
+  display: inline-block;
+  text-indent: -999em;
+  cursor: pointer;
+}

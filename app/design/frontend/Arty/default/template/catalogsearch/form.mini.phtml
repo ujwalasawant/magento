@@ -29,14 +29,28 @@ $catalogSearchHelper =  $this->helper('catalogsearch');
 ?>
 
 <form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+   <div class="hidden-sm hidden-xs visible-lg visible-md">
     <div class="input-box" >
         <label for="search"><?php echo $this->__('Search:') ?></label>
-        <input id="search" type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>"  maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" placeholder="<?php echo $this->__('Search entire store here...') ?>" />
+        <input class="addresssppaddng" id="search" type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>"  maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" placeholder="<?php echo $this->__('Search entire store here...') ?>" />
         <button type="submit" title="<?php echo $this->__('Search') ?>" class="button searchbtn-icon"><span><span><?php echo $this->__('Search') ?></span></span></button>
     </div>
 
     <div id="search_autocomplete" class="search-autocomplete"></div>
+   </div>
+
+<div class="hidden-lg hidden-md visible-sm visible-xs">
+    <div class="input-box display-inline" >
+        <label style="float: :left" for="search"><?php echo $this->__('Search:') ?></label>
+        <input class="addresssppaddng" id="search" type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>"  maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" placeholder="<?php echo $this->__('Search entire store here...') ?>" />
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button searchbtn-iconsm"><span><span><?php echo $this->__('Search') ?></span></span></button>
+    </div>
+</div>
+
+
     <script type="text/javascript">
+
+
         //<![CDATA[
         var searchForm = new Varien.searchForm('search_mini_form', 'search', '');
         searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');

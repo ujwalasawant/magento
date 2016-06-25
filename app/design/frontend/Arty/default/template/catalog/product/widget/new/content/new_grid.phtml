@@ -241,33 +241,6 @@ if (count($_subcategories) > 0) {
                         </div>
 
 
-                        <div class="row product-owner lightborder ">
-                            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-5 ">
-
-                                <a href="<?php echo
-                                Mage::helper('umicrosite')->getVendorBaseUrl($_product->getUdropshipVendor()) ?>">
-                                    <?php $_vendor = Mage::helper('udropship')->getVendor($_product->getUdropshipVendor())->getFileUrl('propic') ?>
-                                    <img class="img img-responsive "
-                                         src="<?php echo $_vendor; ?>"
-                                         height="500" weight="500"
-                                    />
-                                </a>
-                            </div>
-
-                            <div class="col-lg-5 col-lg-offset-4">
-                                <?php //echo $this->getReviewsSummaryHtml($_product, 'short')
-                                ?>
-                                <?php
-
-                                $this->_reviewsHelperBlock = $this->getLayout()->createBlock('review/helper');
-
-
-                                echo $this->_reviewsHelperBlock->getSummaryHtml($product, false, false);
-
-                                ?>
-                            </div>
-
-                        </div>
                         </ul>
 
                         </div>

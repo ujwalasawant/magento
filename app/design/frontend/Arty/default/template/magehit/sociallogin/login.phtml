@@ -1,0 +1,20 @@
+<?php if(Mage::helper('sociallogin')->getEnabled()): ?>
+<fieldset class="socials-login">
+    <legend><?php echo Mage::helper('sociallogin')->getTitle(); ?></legend>
+    <?php if($this->_googleEnabled()): ?>
+        <?php echo Mage::app()->getLayout()->createBlock('sociallogin/google_button')->toHtml() ?>
+    <?php endif; ?>
+    <?php if($this->_facebookEnabled()): ?>
+        <?php echo Mage::app()->getLayout()->createBlock('sociallogin/facebook_button')->toHtml() ?>
+    <?php endif; ?>
+    <?php if($this->_twitterEnabled()): ?>
+        <?php echo Mage::app()->getLayout()->createBlock('sociallogin/twitter_button')->toHtml() ?>
+    <?php endif; ?>
+     <?php if($this->_linkedinEnabled()): ?>
+        <?php echo Mage::app()->getLayout()->createBlock('sociallogin/linkedin_button')->toHtml() ?>
+    <?php endif; ?>
+    <?php if($this->_instagramEnabled()): ?>
+        <?php echo Mage::app()->getLayout()->createBlock('sociallogin/instagram_button')->toHtml() ?>
+    <?php endif; ?>
+</fieldset>
+<?php endif; ?>

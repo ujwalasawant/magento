@@ -61,8 +61,17 @@
                         <?php  if($i%4==0 ){ $j=1; } ?>
                         <div class="col-sm-3  ">
                             <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
-                                <img class="img-responsive lightborder" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(265)?>" width="180" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" />
+                                <img class="img-responsive lightborder" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(265)?>" width="250" alt="<?php echo $this->stripTags($_product->getName(), null, true) ?>" />
                             </a>
+
+                                <a
+                                    class="upsellproductfont "
+                                    href="<?php echo $_product->getProductUrl() ?>"><?php echo $_product->getName() ?></a>
+
+                           <span
+                               class="priceblack upsellproductfont hidden-xs"><?php echo $this->getPriceHtml($_product, true) ?></span>
+
+
                         </div>
                         <?php $j++;?>
 

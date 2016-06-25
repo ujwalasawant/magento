@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Magehit_Bestseller>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Magehit_Bestseller>
+  </modules>
+</config>

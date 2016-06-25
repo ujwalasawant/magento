@@ -99,6 +99,9 @@
 
 
                         </div>
+                        <?php if(Mage::helper('core')->isModuleEnabled('Magehit_Sociallogin')):
+                            echo Mage::app()->getLayout()->createBlock('sociallogin/login')->toHtml();
+                        endif; ?>
                         <div class="col-lg-5 col-md-6 text-center hidden-sm hidden-xs reglgF">
                             <?php echo $this->__(' Explore treasures of arts and crafts with blissful experience. ')?>
 				 <div class="text-center rowspan">
@@ -124,6 +127,7 @@
         </div>
     </div>
 </div>
+
     <div>
 </form>
 

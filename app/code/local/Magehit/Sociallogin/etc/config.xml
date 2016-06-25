@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Magehit_Sociallogin>
+            <version>0.1.1</version>
+        </Magehit_Sociallogin>
+
+    </modules>
+
+    <default>
+
+        <magehit>
+            <config>
+                <enabled>1</enabled>
+                
+                <title>OR LOGIN WITH SOCIAL</title>
+                
+                <default_position>1</default_position>
+                
+                <short_code>
+                    <![CDATA[<?php 
+                        if(Mage::helper('core')->isModuleEnabled('Magehit_Sociallogin')):
+                            echo Mage::app()->getLayout()->createBlock('sociallogin/login')->toHtml();
+                        endif;
+                    ?>]]>
+                </short_code>
+                
+            </config>
+        
+            <magehit_sociallogin_google>
+
+                <enabled>0</enabled>
+
+            </magehit_sociallogin_google>
+
+            <magehit_sociallogin_facebook>
+
+                <enabled>0</enabled>
+
+            </magehit_sociallogin_facebook>	    
+
+            <magehit_sociallogin_twitter>
+
+                <enabled>0</enabled>
+
+            </magehit_sociallogin_twitter>	    	    
+
+        </magehit>
+
+    </default>
+
+    <frontend>
+
+        <layout>
+
+            <updates>
+
+                <Magehit_Sociallogin>
+
+                    <file>magehit_sociallogin.xml</file>
+
+                </Magehit_Sociallogin>
+
+            </updates>
+
+        </layout>
+        
+        <translate>
+            <modules>
+                <Magehit_Sociallogin>
+                    <files>
+                        <default>Magehit_Sociallogin.csv</default>
+                    </files>
+                </Magehit_Sociallogin>
+            </modules>
+        </translate>
+
+    </frontend>    
+
+    <global>
+
+        <models>
+
+            <sociallogin>
+
+                <class>Magehit_Sociallogin_Model</class>
+
+            </sociallogin>
+
+        </models>
+
+        <blocks>
+
+            <sociallogin>
+
+                <class>Magehit_Sociallogin_Block</class>
+
+            </sociallogin>            
+
+        </blocks>
+
+        <helpers>
+
+            <sociallogin>
+
+                <class>Magehit_Sociallogin_Helper</class>
+
+            </sociallogin>
+
+        </helpers>
+
+        <resources>
+
+            <magehit_sociallogin_setup>
+
+                <setup>
+
+                    <module>Magehit_Sociallogin</module>
+
+                    <class>Magehit_Sociallogin_Model_Mysql4_Setup</class>
+
+                </setup>
+
+            </magehit_sociallogin_setup>
+
+        </resources>        
+
+    </global>
+
+    <frontend>
+
+        <routers>
+
+            <magehit_sociallogin>
+
+                <use>standard</use>
+
+                <args>
+
+                    <module>Magehit_Sociallogin</module>
+
+                    <frontName>mhsociallogin</frontName>
+
+                </args>
+
+            </magehit_sociallogin>
+
+        </routers>  
+
+    </frontend> 
+
+	 <adminhtml>
+
+        <acl>
+
+            <resources>
+
+				<all>
+					 <title>Allow Everything</title>
+				</all>
+                <admin>
+
+                    <children>
+
+                        <system>
+
+                            <children>
+
+                                <config>
+
+                                    <children>
+
+                                        <magehit>
+
+                                            <title>Social Login</title>
+
+                                        </magehit>
+
+                                    </children>
+
+                                </config>
+
+                            </children>
+
+                        </system>
+
+                    </children>
+		
+                </admin>
+				
+            </resources>
+
+        </acl>
+
+    </adminhtml>   
+
+</config>
+

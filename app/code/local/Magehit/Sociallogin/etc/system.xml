@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <magehit translate="label">
+            <label>Magehit</label>
+            <sort_order>100</sort_order>
+        </magehit>
+    </tabs>
+	
+    <sections>
+
+        <magehit>
+
+			<label>Social Login</label>
+
+            <tab>magehit</tab>
+
+            <frontend_type>text</frontend_type>
+
+            <sort_order>100</sort_order>
+
+            <show_in_default>1</show_in_default>
+
+            <show_in_website>1</show_in_website>
+
+            <show_in_store>1</show_in_store>
+
+            <groups>
+                <config translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>                        
+                        <enabled translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <title>
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+                        </title>
+                        <default_position>
+                            <label>Display Position Default</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[
+                                    Select <strong>Yes</strong> to display default in login page, register page, checkout page. Or you can use <strong>short code</strong> below and copy to anywhere for display: <br/>
+                                    <strong>if(Mage::helper('core')->isModuleEnabled('Magehit_Sociallogin')): <br/>
+                                        echo Mage::app()->getLayout()->createBlock('sociallogin/login')->toHtml();<br/>
+                                    endif;</strong>    
+                                ]]>
+                            </comment> 
+                        </default_position>
+                    </fields>
+                </config>
+            
+            
+                <magehit_sociallogin_google translate="label" module="sociallogin">
+
+                    <label>Social Login Google Options</label>
+
+                    <frontend_type>text</frontend_type>
+
+                    <sort_order>120</sort_order>
+
+                    <show_in_default>1</show_in_default>
+
+                    <show_in_website>1</show_in_website>
+
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+
+                        <enabled translate="label">
+
+                            <label>Enabled</label>
+
+                            <frontend_type>select</frontend_type>
+
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+
+                            <sort_order>10</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                        </enabled>
+
+                        <client_id translate="label" module="sociallogin">
+
+                            <label>Google API Client ID</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>20</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_id>
+
+                        <client_secret translate="label" module="sociallogin">
+
+                            <label>Google API Client Secret</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>30</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_secret>
+
+                    </fields>
+
+                </magehit_sociallogin_google>
+
+                <magehit_sociallogin_facebook translate="label" module="sociallogin">
+
+                    <label>Social Login Facebook Options</label>
+
+                    <frontend_type>text</frontend_type>
+
+                    <sort_order>130</sort_order>
+
+                    <show_in_default>1</show_in_default>
+
+                    <show_in_website>1</show_in_website>
+
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+
+                        <enabled translate="label">
+
+                            <label>Enabled</label>
+
+                            <frontend_type>select</frontend_type>
+
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+
+                            <sort_order>10</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                        </enabled>
+
+                        <client_id translate="label" module="sociallogin">
+
+                            <label>Facebook App ID</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>20</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_id>
+
+                        <client_secret translate="label" module="sociallogin">
+
+                            <label>Facebook App Secret</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>30</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_secret>
+
+                    </fields>
+
+                </magehit_sociallogin_facebook>
+
+                <magehit_sociallogin_twitter translate="label" module="sociallogin">
+
+                    <label>Social Login Twitter Options</label>
+
+                    <frontend_type>text</frontend_type>
+
+                    <sort_order>140</sort_order>
+
+                    <show_in_default>1</show_in_default>
+
+                    <show_in_website>1</show_in_website>
+
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+
+                        <enabled translate="label">
+
+                            <label>Enabled</label>
+
+                            <frontend_type>select</frontend_type>
+
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+
+                            <sort_order>10</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                        </enabled>
+
+                        <client_id translate="label" module="sociallogin">
+
+                            <label>Consumer Key</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>20</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_id>
+
+                        <client_secret translate="label" module="sociallogin">
+
+                            <label>Consumer Secret</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>30</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_secret>
+
+                    </fields>
+
+                </magehit_sociallogin_twitter>
+
+                <magehit_sociallogin_linkedin translate="label" module="sociallogin">
+
+                    <label>Social Login Linkedin Options</label>
+
+                    <frontend_type>text</frontend_type>
+
+                    <sort_order>160</sort_order>
+
+                    <show_in_default>1</show_in_default>
+
+                    <show_in_website>1</show_in_website>
+
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+
+                        <enabled translate="label">
+
+                            <label>Enabled</label>
+
+                            <frontend_type>select</frontend_type>
+
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+
+                            <sort_order>10</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                        </enabled>
+
+                        <client_id translate="label" module="sociallogin">
+
+                            <label>Consumer Key</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>20</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_id>
+
+                        <client_secret translate="label" module="sociallogin">
+
+                            <label>Consumer Secret</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>30</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_secret>
+
+                    </fields>
+
+                </magehit_sociallogin_linkedin>
+                
+                <magehit_sociallogin_instagram translate="label" module="sociallogin">
+
+                    <label>Social Login Instagram Options</label>
+
+                    <frontend_type>text</frontend_type>
+
+                    <sort_order>180</sort_order>
+
+                    <show_in_default>1</show_in_default>
+
+                    <show_in_website>1</show_in_website>
+
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+
+                        <enabled translate="label">
+
+                            <label>Enabled</label>
+
+                            <frontend_type>select</frontend_type>
+
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+
+                            <sort_order>10</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                        </enabled>
+
+                        <client_id translate="label" module="sociallogin">
+
+                            <label>Instagram API Client ID</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>20</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_id>
+
+                        <client_secret translate="label" module="sociallogin">
+
+                            <label>Instagram API Client Secret</label>
+
+                            <frontend_type>text</frontend_type>
+
+                            <sort_order>30</sort_order>
+
+                            <show_in_default>1</show_in_default>
+
+                            <show_in_website>1</show_in_website>
+
+                            <show_in_store>1</show_in_store>
+
+                            <depends><enabled>1</enabled></depends>
+
+                            <validate>required-entry</validate>
+
+                        </client_secret>
+
+                    </fields>
+
+                </magehit_sociallogin_instagram>                                
+
+            </groups>
+
+        </magehit>
+
+    </sections>
+
+</config>
+

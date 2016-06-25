@@ -28,104 +28,116 @@
  */
 ?>
 <div class="" >
-<div class="header-language-background">
-    <div class="header-language-container">
+    <div class="header-language-background">
+        <div class="header-language-container" id="toplinks">
 
-        <div class="col-lg-4 col-lg-offset-8 col-md-4 col-md-offset-8 col-sm-4 col-sm-offset-8 col-xs-12  " style="float: right">
-            <?php echo $this->getChildHtml('topbar_cmslinks') ?>
-            <ul class="list-inline float">
-                <?php if ($this->helper('customer')->isLoggedIn()): ?>
-                    <li>
-                        <a title="<?php echo $this->__('My Account') ?>"
-                           href="<?php echo Mage::getUrl('customer/account') ?>">   <?php echo $this->__('My Account') ?>     </a>
-                    </li>
-                    <li>
-                        <a title="Log Out"
-                           href="<?php echo Mage::getUrl('customer/account/logout') ?>">     <?php echo $this->__('Logout') ?></a>
-                    </li>
-                <?php else: ?>
+            <div class="col-lg-4 col-lg-offset-8 col-md-4 col-md-offset-8 col-sm-4 col-sm-offset-8 " style="float:right; padding-left:4%">
+                <?php echo $this->getChildHtml('topbar_cmslinks') ?>
+                <ul class="list-inline float">
+                    <?php if ($this->helper('customer')->isLoggedIn()): ?>
+                        <li>
+                            <a title="<?php echo $this->__('My Account') ?>"
+                               href="<?php echo Mage::getUrl('customer/account') ?>">   <?php echo $this->__('My Account') ?>     </a>
+                        </li>
+                        <li>
+                            <a title="Log Out"
+                               href="<?php echo Mage::getUrl('customer/account/logout') ?>">     <?php echo $this->__('Logout') ?></a>
+                        </li>
+                    <?php else: ?>
 
-                    <li>
-                        <?php echo $this->getChildHtml('customer_form_register') ?>
-                    </li>
+                        <li>
+                            <?php echo $this->getChildHtml('customer_form_register') ?>
+                        </li>
 
-                    <li>
-                        <?php echo $this->getChildHtml('header_customer_form_mini_login') ?>
+                        <li>
+                            <?php echo $this->getChildHtml('header_customer_form_mini_login') ?>
 
-                    </li>
+                        </li>
 
 
-                <?php endif; ?>
-            </ul>
+                    <?php endif; ?>
+                </ul>
+            </div>
+            <p class="welcome-msg"
+               style="display: none"><?php echo $this->getChildHtml('welcome') ?><?php echo $this->getAdditionalHtml() ?></p>
         </div>
-        <p class="welcome-msg"
-           style="display: none"><?php echo $this->getChildHtml('welcome') ?><?php echo $this->getAdditionalHtml() ?></p>
-    </div>
-</div>
-
-<div id="header">
-
-
-    <div >
-
-        <a class="logo" id="logo" href="<?php echo $this->getUrl('') ?>" >
-            <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
-            <img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small"/>
-
-        </a>
-
     </div>
 
+    <div id="header">
 
-    <div id="iconS" class="col-lg-2 col-md-3 pull-right Smallicons" >
-        <div class="float padding-bottomHd" id="searchId" >
-             <a href="#header-nav" data-target-element="#header-nav" onclick="wpMenuButtonToggle()" class="skip-link skip-nav" style="width:100%">
+        <div id="withSerachbar">
+        <div >
+
+            <a class="logo" id="logo" href="<?php echo $this->getUrl('') ?>" >
+                <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
+                <img src="<?php echo $this->getLogoSrcSmall() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="small"/>
+
+            </a>
+
+        </div>
+
+
+        <div id="iconS" class="col-lg-2 col-md-3 pull-right Smallicons" >
+            <div class="float padding-bottomHd" id="searchId" >
+                <a href="#header-nav" data-target-element="#header-nav" onclick="wpMenuButtonToggle()" class="skip-link skip-nav" style="width:100%">
+                    <span class="icon"></span>
+
+                </a>
+            </div>
+            <div class="float padding-bottomHd" id="searchId" >
+               <a href="#" id="searchbutton" class="skip-link skip-searchs visible-sm visible-xs" >
+                   <span class="icon"></span>
+                </a>
+
+
+            </div>
+            <div class="float padding-bottomHd"  >
+                <a  href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account"
+                   class="skip-link skip-account">
                  <span class="icon"></span>
-                 
-            </a>
-        </div>
-        <div class="float padding-bottomHd" id="searchId" >
-            <a href="#header-search" class="skip-link skip-searchs hidden-lg hidden-md visible-sm visible-xs" >
-               <span class="icon"></span>
-               
-            </a>
-        </div>
-        <div class="float padding-bottomHd">
-            <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account"
-               class="skip-link skip-account">
-                <span class="icon"></span>
-              <!--  <span ><?php echo $this->__('Account') ?> </span>-->
+                </a>
 
-            </a>
+                <div id="header-account" class="skip-content col-lg-3 col-md-4 col-sm-3 pull-right lightborder">
+                    <?php echo $this->getChildHtml('topLinks') ?>
+                </div>
+            </div>
 
-            <div id="header-account" class="skip-content col-lg-3 col-md-4 col-sm-3 pull-right lightborder">
-                <?php echo $this->getChildHtml('topLinks') ?>
+            <div class="float padding-bottomHd header-minicart"><?php echo $this->getChildHtml('minicart_head'); ?>
             </div>
         </div>
 
-        <div class="float padding-bottomHd header-minicart"><?php echo $this->getChildHtml('minicart_head'); ?>
-        </div>
-    </div>
+
+        <!-- Navigation -->
 
 
-    <!-- Navigation -->
+        <!-- Search>-->
+        <div id="header-search" class="skip-content header-searchwidth hidden-sm hidden-xs">
 
-
-        <!-- Search -->
-        <div id="header-search" class="skip-content header-searchwidth">
             <?php echo $this->getChildHtml('topSearch') ?>
-        </div>
+        </div
         <!-- Account -->
 
-</div>
-    <img class="show img img-responsive" src="<?php echo $this->getSkinUrl('images/smallHeader1.png') ?>" width="100%"
+    </div>
+        <div id="withoutSerachbar" class="hide">
+            <div class="row"></div>
+            <div class="col-sm-2 col-xs-2">
+            <button  id="backbtn" class="btn-previous" style="float:left" >
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </button>
+            </div>
+            <div class="col-sm-10 col-xs-10">
+            <?php echo $this->getChildHtml('topSearch') ?>
+            </div>
+        </div>
+    </div>
+    <img class="show img img-responsive" id="borderimg" style="top:100%" src="<?php echo $this->getSkinUrl('images/smallHeader1.png') ?>" width="100%"
          height="5px"/>
 
     <nav id="header-nav" class="skip-content css3-shadow">
-        <nav id="nav" >
+        <nav id="nav">
             <?php echo $this->getChildHtml('topMenu') ?>
         </nav>
-    </div>
+</div>
 
 </div>
 <!-- <a href="<?php // echo $this->getUrl('wishlist') ?>">Wishlist</a> -->
@@ -137,11 +149,38 @@
 
 
 <script>
+
     jQuery(document).ready(function () {
         var elementPosition = jQuery('#header').offset();
 
+        jQuery('#searchbutton').on('click', function(event) {
+            jQuery('#withSerachbar').addClass('hide');
+            jQuery('#withSerachbar').removeClass('show');
+            jQuery('#toplinks').addClass('hide');
+            jQuery('#toplinks').removeClass('show');
+            jQuery('#withoutSerachbar').removeClass('hide');
+
+            jQuery('#withoutSerachbar').addClass('show');
+            jQuery('#borderimg').addClass('borderimgmargintop');
+
+        });
+
+        jQuery('#backbtn').on('click', function(event) {
+
+            jQuery('#withSerachbar').removeClass('hide');
+            jQuery('#withSerachbar').addClass('show');
+
+            jQuery('#toplinks').removeClass('hide');
+            jQuery('#toplinks').addClass('show');
 
 
+            jQuery('#withoutSerachbar').removeClass('show');
+            jQuery('#withoutSerachbar').addClass('hide');
+
+
+            jQuery('#borderimg').removeClass('borderimgmargintop');
+
+        });
         if (jQuery(window).width() > 980 && jQuery(window).height()>=200) {
             jQuery(window).scroll(function () {
                 if (jQuery(window).scrollTop() > elementPosition.top) {
@@ -150,7 +189,7 @@
                     jQuery('#header').addClass('fixed').show();
                     jQuery('#logo').addClass('logoSmaller').show();
                     jQuery('#header-nav').addClass('fix').show();
-  jQuery('#iconS').addClass('Smallicon').show();
+                    jQuery('#iconS').addClass('Smallicon').show();
 
                     jQuery('#imgheaderf').removeClass('hidden').addClass('show');
                 }
@@ -160,15 +199,15 @@
                     jQuery('#logo').removeClass('logoSmaller').show();
                     jQuery('#header-search').removeClass('header-searchwidthf');
                     jQuery('#header-search').addClass('header-searchwidth');
- 		    jQuery('#header-nav').removeClass('fix').show();
-jQuery('#iconS').removeClass('Smallicon').show();
+                    jQuery('#header-nav').removeClass('fix').show();
+                    jQuery('#iconS').removeClass('Smallicon').show();
                 }
             });
         }
         else
         {
             jQuery('#header').removeClass('fixed');
-           // jQuery('#header-nav').removeClass('fix').show();
+            // jQuery('#header-nav').removeClass('fix').show();
 
         }
     });

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+
+    <default>
+
+        <reference name="head">
+            
+            <action method="addItem" ifconfig="magehit/config/enabled">
+
+                <type>skin_css</type>
+
+                <name>magehit_sociallogin/css/styles.css</name>
+
+            </action>
+
+        </reference>
+    
+    </default>
+    
+    
+    <customer_account_login>
+    
+
+
+    </customer_account_login>
+    
+    <customer_account_create>        
+
+        <reference name="content">
+
+            <block type="sociallogin/logindefault" before="customer_form_register" name="magehit_sociallogin_html"></block>
+
+        </reference>        
+
+    </customer_account_create>
+    
+    <checkout_onepage_index>
+
+        <reference name="content">
+
+            <block type="sociallogin/logindefault" name="magehit_sociallogin_html"></block>
+
+        </reference>
+
+    </checkout_onepage_index>
+
+    <customer_account>
+
+
+
+    </customer_account>
+
+
+
+    <magehit_sociallogin_account_google translate="label">
+
+        <label>Customer My Account Google SocialLogin</label>
+
+        <update handle="customer_account"/>
+
+        <reference name="head">
+
+            <action method="setTitle" translate="title" module="sociallogin">
+
+                <title>Google SocialLogin</title>
+
+            </action>
+
+            <action method="addItem">
+
+                <type>skin_css</type>
+
+                <name>magehit_sociallogin/css/styles.css</name>
+
+            </action>
+
+        </reference>
+
+        <reference name="my.account.wrapper">
+
+            <block type="sociallogin/google_account" name="magehit_sociallogin_google_account">
+
+                <block type="sociallogin/google_button" name="magehit_sociallogin_account_google_button" />
+
+            </block>
+
+        </reference>
+
+        <reference name="customer_account_navigation">
+
+            <action method="setActive" module="sociallogin">
+
+                <path>mhsociallogin/account/google</path>
+
+            </action>
+
+        </reference>
+
+    </magehit_sociallogin_account_google>
+
+
+
+   <magehit_sociallogin_account_facebook translate="label">
+
+        <label>Customer My Account Facebook SocialLogin</label>
+
+        <update handle="customer_account"/>
+
+        <reference name="head">
+
+            <action method="setTitle" translate="title" module="sociallogin">
+
+                <title>Facebook SocialLogin</title>
+
+            </action>
+
+            <action method="addItem">
+
+                <type>skin_css</type>
+
+                <name>magehit_sociallogin/css/styles.css</name>
+
+            </action>
+
+        </reference>
+
+        <reference name="my.account.wrapper">
+
+            <block type="sociallogin/facebook_account" name="magehit_sociallogin_facebook_account">
+
+                <block type="sociallogin/facebook_button" name="magehit_sociallogin_account_facebook_button" />
+
+            </block>
+
+        </reference>
+
+        <reference name="customer_account_navigation">
+
+            <action method="setActive" module="sociallogin">
+
+                <path>mhsociallogin/account/facebook</path>
+
+            </action>
+
+        </reference>
+
+    </magehit_sociallogin_account_facebook>
+
+
+
+   <magehit_sociallogin_account_twitter translate="label">
+
+        <label>Customer My Account Twitter SocialLogin</label>
+
+        <update handle="customer_account"/>
+
+        <reference name="head">
+
+            <action method="setTitle" translate="title" module="sociallogin">
+
+                <title>Twitter SocialLogin</title>
+
+            </action>
+
+            <action method="addItem">
+
+                <type>skin_css</type>
+
+                <name>magehit_sociallogin/css/styles.css</name>
+
+            </action>
+
+        </reference>
+
+        <reference name="my.account.wrapper">
+
+            <block type="sociallogin/twitter_account" name="magehit_sociallogin_twitter_account">
+
+                <block type="sociallogin/twitter_button" name="magehit_sociallogin_account_twitter_button" />
+
+            </block>
+
+        </reference>
+
+        <reference name="customer_account_navigation">
+
+            <action method="setActive" module="sociallogin">
+
+                <path>mhsociallogin/account/twitter/</path>
+
+            </action>
+
+        </reference>
+
+    </magehit_sociallogin_account_twitter>
+	
+	
+	<magehit_sociallogin_account_linkedin translate="label">
+
+        <label>Customer My Account Linkedin SocialLogin</label>
+
+        <update handle="customer_account"/>
+
+        <reference name="head">
+
+            <action method="setTitle" translate="title" module="sociallogin">
+
+                <title>Linkedin SocialLogin</title>
+
+            </action>
+
+            <action method="addItem">
+
+                <type>skin_css</type>
+
+                <name>magehit_sociallogin/css/styles.css</name>
+
+            </action>
+
+        </reference>
+
+        <reference name="my.account.wrapper">
+
+            <block type="sociallogin/linkedin_account" name="magehit_sociallogin_linkedin_account">
+
+                <block type="sociallogin/linkedin_button" name="magehit_sociallogin_account_linkedin_button" />
+
+            </block>
+
+        </reference>
+
+        <reference name="customer_account_navigation">
+
+            <action method="setActive" module="sociallogin">
+
+                <path>mhsociallogin/account/linkedin</path>
+
+            </action>
+
+        </reference>
+
+    </magehit_sociallogin_account_linkedin>
+    
+    
+    <magehit_sociallogin_account_instagram translate="label">
+
+        <label>Customer My Account Instagram SocialLogin</label>
+
+        <update handle="customer_account"/>
+
+        <reference name="head">
+
+            <action method="setTitle" translate="title" module="sociallogin">
+
+                <title>Instagram SocialLogin</title>
+
+            </action>
+
+            <action method="addItem">
+
+                <type>skin_css</type>
+
+                <name>magehit_sociallogin/css/styles.css</name>
+
+            </action>
+
+        </reference>
+
+        <reference name="my.account.wrapper">
+
+            <block type="sociallogin/instagram_account" name="magehit_sociallogin_instagram_account">
+
+                <block type="sociallogin/instagram_button" name="magehit_sociallogin_account_instagram_button" />
+
+            </block>
+
+        </reference>
+
+        <reference name="customer_account_navigation">
+
+            <action method="setActive" module="sociallogin">
+
+                <path>mhsociallogin/account/instagram</path>
+
+            </action>
+
+        </reference>
+
+    </magehit_sociallogin_account_instagram>
+</layout>

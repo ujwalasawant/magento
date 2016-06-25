@@ -31,28 +31,63 @@
  * @see Mage_Catalog_Block_Layer_State
  */
 ?>
-
+<?php $obj = new Mage_Catalog_Block_Navigation(); ?>
+<?php $_current_category=$obj->getCurrentCategory()->getUrlPath(); ?>
+<?php $subs = $obj->getCurrentCategory()->getAllChildren(true); ?>
 <?php $_filters = $this->getActiveFilters() ?>
 <?php if(!empty($_filters)): ?>
-    <div class="currently">
-        <p class="block-subtitle"><?php echo $this->__('Currently Shopping by:') ?></p>
-        <ol class=" list-unstyled">
-            <?php foreach ($_filters as $_filter): ?>
-                <li>
-                    <span class="label" style="color: #DF3D5C;"><?php echo $this->__($_filter->getName()) ?>:</span> <span class="value" ><?php echo $this->stripTags($_filter->getLabel()) ?></span>
-                    <?php
-                    $clearLinkUrl = $_filter->getClearLinkUrl();
-                    if ($clearLinkUrl):
-                        ?>
-                        <a  class="btn-previous" href="<?php echo $_filter->getRemoveUrl() ?>" title="<?php echo $this->__('Previous') ?>"><?php echo $this->__('Previous') ?></a>
-                        <a  class="btn-remove" title="<?php echo $this->escapeHtml($_filter->getFilter()->getClearLinkText()) ?>" href="<?php echo $clearLinkUrl ?>"><?php echo $this->escapeHtml($_filter->getFilter()->getClearLinkText()) ?></a>
-                    <?php else: ?>
-                        <a  class="btn-remove" style="color: black" href="<?php echo $_filter->getRemoveUrl() ?>" title="<?php echo $this->__('Remove This Item') ?>">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
+<div class="state">
+    <p class="block-subtitle"><?php echo $this->__('Currently Shopping by:') ?></p>
+    <dl>
+        <?php foreach ($_filters as $_filter): ?>
+        <dd>
+            <ol>
+                <?php $attributemodel=$_filter->filter->_data["attribute_model"]; ?>    // getting attribute model that has all filter options in it from currently active filter
+                <?php $attroptions=$attributemodel->getSource()->getAllOptions();?>   // getting attribute options (filters) from attribute model
+                <?php $_categ= Mage::getModel('catalog/category');?>   // object  containing all categories and their information
+
+                <?php foreach($subs as $cat_id): ?>
+                    <?php $_categ->load($cat_id)?>           //get the subcategory you need
+                    <?php $collection = $_categ->getProductCollection(); ?>  //get the product collection (object containing all product information)
+                    <?php $collection->addAttributeToSelect('color')?>   // get the desired attribute
+                <?php endforeach; ?>
+                <?php foreach($attroptions as $attr): ?>   // get value and label of each attribute
+                <?php $count=0; ?>
+                <?php if($attr["value"]!=""): ?>
+                <?php $val=$attr["value"] ?>
+                <?php $collection->addFieldToFilter(array(array('attribute'=>'themes','gt'=>10)))?>  // collection of attribute values and labels for all values
+                //greater then 10 (in this case attribute values range was 18-39)
+                <?php $proddata=$collection->getData() ?>  // get product data for all attribute values
+                <?php if($attr["label"]!= $this->stripTags($_filter->getLabel())): ?>  // make a nice looking label
+                <?php foreach($proddata as $prod):?>
+                <?php if($prod["type_id"]=="configurable"): ?>    // in this store all products were configurable
+                <?php $split=split(",", $prod["color"]);?>     // get the attribute values that correspond with one product (a product may have more
+                // then one attribute value and they're separated by commas that's why we split the string with "," as deliminator)
+                                    <?php foreach($split as $color): ?>  //check out how many products have the same attribute value
+                                        <?php if($color==$attr["value"]): ?>
+                                            <?php $count++;?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+
+                                <?php endif;?>
+
+                            <?php endforeach; ?>
+
+                            <?php if($count>0):?>  // check if any product has that attribute value
+                                <li><a href="<?php echo $this->getUrl('').$_current_category ?>?color=<?php echo $attr["value"]?>" ><?php echo  $attr["label"]; ?></a></li>  // if not currently active filter make a link
+                            <?php endif; ?>
+
+                        <?php else:?>
+                            <li class="current"> <?php echo $this->stripTags($_filter->getLabel()); ?></li>  // if currently active filter write out the label
+                        <?php endif;?>
                     <?php endif; ?>
-                </li>
-            <?php endforeach; ?>
-        </ol>
-    </div>
+                <?php endforeach;  ?>
+
+                <?php endforeach; ?> // ending the first for loop (foreach($filters as $filter))
+            </ol>
+
+        </dd>
+    </dl>
+    <a class="all" style="float:right;" href="<?php echo $this->getClearUrl()?>">All</a>    // show all products, return from current state back to category view
+</div>
 <?php endif; ?>

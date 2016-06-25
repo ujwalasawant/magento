@@ -55,7 +55,7 @@
 
             <div class="row leftpaddng10">
 
-                <div>n
+                <div>
                     <div class="row">
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
                             <h5>
@@ -86,10 +86,20 @@
                                 <img class="img img-responsive" src="<?php  echo $_vendor; ?>" width="100"
                                      height="100"/>
                             </a>
+
                         </div>
                     </div>
                     <div>
                         <?php echo $this->getChildHtml('alert_urls') ?>
+                        <?php $wishlist = Mage::getModel('wishlist/item')->load($_product->getId(), 'product_id');
+                        if ($wishlist->getId())
+                            //product is added
+                            echo "<span title='Moved to favorites' class='favoritesbtnS'>Moved to Favorites</span> ";
+                        else
+                            //add product to wishlist
+                            echo "<a class='favoritesbtnF' title='Add to Favorites' href='" . $this->helper('wishlist')->getAddUrl($_product) . "'>Add to Favorites</a> "; ?>
+
+
                     </div>
                     <div class="pdpfont">
                         <?php echo $this->getChildHtml('product_type_data') ?>
@@ -354,7 +364,7 @@
                     href="<?php echo $_item->getProductUrl() ?>"></a>
             </h5>
                     <span
-                        class="priceblack upsellproductfont hidden-xs"><?php echo $this->getPriceHtml($_item, true) ?></span>
+                        class="priceblack upsellproductfont hidden-xs"><?php echo $_item->getPriceHtml($_item, true) ?></span>
 
 
         </div>

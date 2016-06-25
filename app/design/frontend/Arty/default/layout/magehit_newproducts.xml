@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>magehit_newproducts/css/owl.carousel.css</stylesheet>
+            </action>
+			<action method="addCss">
+                <stylesheet>magehit_newproducts/css/owl.theme.css</stylesheet>
+            </action>
+			<action method="addCss">
+                <stylesheet>magehit_newproducts/css/owl.transitions.css</stylesheet>
+            </action>
+       
+            <action method="addItem" ifconfig="newproducts/genneral_setting/jqueryinclude">
+                <type>skin_js</type>
+                <name>magehit_newproducts/js/jquery-1.10.2.min.js</name>
+                <params/>
+                <if/>
+            </action>
+			<action method="addItem">
+                <type>skin_js</type>
+                <name>magehit_newproducts/js/noconflict.js</name>
+            </action>
+			<action method="addItem">
+                <type>skin_js</type>
+                <name>magehit_newproducts/js/owl.carousel.js</name>
+            </action>
+        </reference>
+        
+		<reference name="right">
+            <block type="newproducts/newproducts" name="right.newproducts" as="right_newproducts" before="++" template="magehit/newproducts/vertical_newproductsblock.phtml" />
+        </reference>
+    </default>
+    <!-- <cms_index_index>
+        <reference name="content">
+            <block type="newproducts/newproducts" name="newproducts" as="newproducts"  template="magehit_newproducts/newproductsblock.phtml" />
+        </reference>
+    </cms_index_index> -->
+</layout> 

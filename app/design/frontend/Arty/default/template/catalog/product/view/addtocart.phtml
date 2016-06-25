@@ -26,20 +26,34 @@
 ?>
 <?php $_product = $this->getProduct(); ?>
 <?php $buttonTitle = $this->__('Add to Cart'); ?>
-<?php if($_product->isSaleable()): ?>
+<?php if ($_product->isSaleable()): ?>
     <div class=" row ">
-    <div class="col-lg-5 " >
+        <div class="col-lg-5 ">
 
-        <div class="">
-        <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="addtocart1 " onclick="productAddToCartForm.submit(this)"></button>
-        <?php echo $this->getChildHtml('', true, true) ?>
+            <div class="">
+                <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button"
+                        class="addtocart1 " onclick="productAddToCartForm.submit(this)"></button>
+                <?php echo $this->getChildHtml('', true, true) ?>
+            </div>
+            <div class="">
+                <button type="button" title="Buy Now" class="buynw"
+                        onclick="setcheckoutLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"></button>
+                <?php echo $this->getChildHtml('', true, true) ?>
+            </div>
+            <div>
+                <?php $wishlist = Mage::getModel('wishlist/item')->load($_product->getId(), 'product_id');
+                if ($wishlist->getId())
+                    //product is added
+                    echo "<span title='Moved to favorites' class='button wishList' style='color:black ;margin-top: 5px;
+padding-top: 15px;'>Wishlisted</span> ";
+                else
+                    //add product to wishlist
+                    echo " <a class='button wishList vcenter' style='color:black ;margin-top: 5px;
+padding-top: 15px;' title='Add to Favorites' href='" . $this->helper('wishlist')->getAddUrl($_product) . "'> <span class=' glyphicon glyphicon-plus'/>Wishlist </a> "; ?>
+
+            </div>
         </div>
-        <div class="">
-        <button type="button" title="Buy Now" class="buynw" onclick="setcheckoutLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"></button>
-        <?php echo $this->getChildHtml('', true, true) ?>
-        </div>
-    </div>
-      <!--  <div class="col-lg-5">
+        <!--  <div class="col-lg-5">
           <p> 
 		<?php /* echo "Delivery Detail :" ;
 			$productatt = $_product->getAttributeText('dispatch_time');
@@ -47,7 +61,7 @@
                         {
                             echo " ".$productatt ."<br/>" ;
                         }*/
-			?></p>
+        ?></p>
 
             <p><?php // echo "Fast Forward :";?></p>
 

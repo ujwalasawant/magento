@@ -7059,6 +7059,10 @@ button.close {
   float: left !important;
 }
 
+.borderimgmargintop
+{
+  margin-top: 15%;
+}
 .hide {
   display: none !important;
 }
@@ -10816,7 +10820,7 @@ a.skip-link {
  */
 @media only screen and (max-width: 770px) {
   .skip-link.skip-active {
-    background: #EDEDED;
+
     color: inherit;
   }
 
@@ -11187,6 +11191,15 @@ a.skip-link {
   background-position: 4px;
 }
 
+.search-boxx .icon
+{
+  border: black;
+  background: none;
+  background-image: url("../images/search%20-icon.jpg");
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 4px;
+}
 .fix
 {
   position: fixed;
@@ -11215,7 +11228,7 @@ a.skip-link {
   #header-search {
     display: block;
     position: absolute;
-    right: 24%;
+    right: 29%;
     width: 500px;
     padding: 0;
 
@@ -11371,7 +11384,20 @@ box-shadow: inset 1px 0px 10px -1px rgba(0,0,0,0.22);
   background-repeat: no-repeat;
 }
 
-
+.searchbtn-iconsm
+{
+  text-indent: -9999px;
+  position: absolute;
+  top: 25px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: none;
+  background-image: url("../images/search%20-icon.jpg");
+  background-size: 23px 23px;
+  background-repeat: no-repeat;
+}
 #search_mini_form .search-button:hover:before {
   opacity: 0.8;
 }
@@ -11402,8 +11428,6 @@ box-shadow: inset 1px 0px 10px -1px rgba(0,0,0,0.22);
     float: none;
     width: auto;
     vertical-align: top;
-    display: inline-block;
-    padding: 0 10px;
     text-transform: uppercase;
   }
 
@@ -12009,6 +12033,17 @@ width: 70px;
 
 .buynw {
   background: url(../images/by%20now.png);
+  background-repeat: no-repeat;
+  opacity: 1;
+  outline: none;
+  background-size: 100% 100%;
+  width: 105px;
+  height: 40px;
+  border: none;
+}
+
+.wishList{
+  background: url(../images/wishlist.png);
   background-repeat: no-repeat;
   opacity: 1;
   outline: none;

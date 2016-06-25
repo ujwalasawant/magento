@@ -1,0 +1,48 @@
+<div class="magehit-sociallogin-account">
+    <div class="page-title">
+        <h4><?php echo $this->__('Instagram Information') ?></h4>
+    </div>
+    <?php
+        $instagramId = $this->_getInstagramId();
+        $website = $this->_getWebsite();
+        $username = $this->_getUsername();
+        $fullname = $this->_getFullName();
+        $picture = $this->_getPicture();
+    ?>
+
+    <div class="col3-set">
+        <div class="box">
+            <div class="box-content">
+                <div class="col-1">
+                    <?php if(!empty($picture)): ?>
+                    <p>
+                        <img src="<?php echo $picture; ?>" alt="<?php echo $this->htmlEscape($username); ?>" />
+                    </p>
+                    <?php endif; ?>
+                </div>
+                <div class="col-2">
+                    <?php if(!empty($username)): ?>
+                    <p>
+                        <?php printf($this->__('User Name: %s', '<strong>'.$username.'</strong>')) ?>
+                    </p>
+                    <?php endif; ?>
+                    <?php if(!empty($fullname)): ?>
+                    <p>
+                        <?php printf($this->__('Full Name: %s', '<strong>'.$fullname.'</strong>')) ?>
+                    </p>
+                    <?php endif; ?>
+                    <?php if(!empty($instagramId)): ?>
+                    <p>
+                        <?php printf($this->__('Instagram #: %s', '<strong>'.$instagramId.'</strong>')) ?>
+                    </p>
+                    <?php endif; ?>
+                    <?php if(!empty($website)): ?>
+                    <p>
+                        <?php printf($this->__('Website: %s', '<strong>'.$website.'</strong>')) ?>
+                    </p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

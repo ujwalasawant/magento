@@ -29,18 +29,19 @@ $_item = $this->getItem();
 $isVisibleProduct = $_item->getProduct()->isVisibleInSiteVisibility();
 $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage_Catalog_Model_Product_Attribute_Source_Msrp_Type::TYPE_BEFORE_ORDER_CONFIRM);
 ?>
+
 <table class="table table-bordered" xmlns="http://www.w3.org/1999/html">
     <tr class="container">
         <div class="row">
             <!-- 1st column -->
-            <div class="col-lg-2 col-md-2 col-sm-2 product-cart-image vcenter cartpddng" >
+            <div class="col-lg-2 col-md-2 col-sm-2 product-cart-image vcenter " >
 
                 <?php if ($this->hasProductUrl()): ?>
                 <a href="<?php echo $this->getProductUrl() ?>"
                    title="<?php echo $this->escapeHtml($this->getProductName()) ?>"
                    class="product-image">
                     <?php endif; ?>
-                    <img src="<?php echo $this->getProductThumbnail()->resize(180); ?>"
+                    <img src="<?php echo $this->getProductThumbnail()->resize(165); ?>"
                          alt="<?php echo $this->escapeHtml($this->getProductName()) ?>"/>
                     <?php if ($this->hasProductUrl()): ?>
                 </a>
@@ -251,7 +252,18 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <!-- 5th column -->
         <div class="col-lg-2 col-md-2 col-sm-2 vcenter text-center">
             <?php
-            echo "Shipping Charges: " . Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getShippingAmount();
+          //  echo "Shipping Charges: " . Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getShippingAmount();
+
+            $printLabel = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getShippingAmount();
+           // echo $printLabel;
+
+            if($printLabel === 0){
+                echo " Free ";
+            }
+            else {
+                echo $printLabel;
+            }
+
             ?>
 
         </div>
