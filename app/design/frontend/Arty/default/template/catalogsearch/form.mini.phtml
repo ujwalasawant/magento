@@ -27,9 +27,9 @@
 /* @var $catalogSearchHelper Mage_Catalogsearch_Helper_Data */
 $catalogSearchHelper =  $this->helper('catalogsearch');
 ?>
-
+<div class="hidden-sm hidden-xs visible-lg visible-md">
 <form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
-   <div class="hidden-sm hidden-xs visible-lg visible-md">
+
     <div class="input-box" >
         <label for="search"><?php echo $this->__('Search:') ?></label>
         <input class="addresssppaddng" id="search" type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>"  maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" placeholder="<?php echo $this->__('Search entire store here...') ?>" />
@@ -37,17 +37,27 @@ $catalogSearchHelper =  $this->helper('catalogsearch');
     </div>
 
     <div id="search_autocomplete" class="search-autocomplete"></div>
-   </div>
+    <script type="text/javascript">
+
+
+        //<![CDATA[
+        var searchForm = new Varien.searchForm('search_mini_form', 'search', '');
+        searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
+        //]]>
+    </script>
+</form>
+</div>
 
 <div class="hidden-lg hidden-md visible-sm visible-xs">
+<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+
     <div class="input-box display-inline" >
         <label style="float: :left" for="search"><?php echo $this->__('Search:') ?></label>
         <input class="addresssppaddng" id="search" type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" value="<?php echo $catalogSearchHelper->getEscapedQueryText() ?>"  maxlength="<?php echo $catalogSearchHelper->getMaxQueryLength();?>" placeholder="<?php echo $this->__('Search entire store here...') ?>" />
         <button type="submit" title="<?php echo $this->__('Search') ?>" class="button searchbtn-iconsm"><span><span><?php echo $this->__('Search') ?></span></span></button>
     </div>
-</div>
 
-
+    <div id="search_autocomplete" class="search-autocomplete"></div>
     <script type="text/javascript">
 
 
@@ -58,3 +68,4 @@ $catalogSearchHelper =  $this->helper('catalogsearch');
     </script>
 </form>
 
+</div>

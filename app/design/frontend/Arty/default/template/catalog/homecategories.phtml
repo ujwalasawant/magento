@@ -7,22 +7,22 @@
 
     foreach ($storeCategories as $_category):
         ?>
-        <li class="list-unstyled rowspan " style="font-size: 14px">
+        <li class="list-unstyled rowspan " style="font-size: 16px">
             <?php $catid = $_category->getId(); ?>
             <?php if ($catid === $currentCategoryId): ?>
 
                 <?php echo $_category->getName(); ?>
                 <?php $categoryChildren = $_category->getChildren(); ?>
                 <?php if ($categoryChildren->count()) : ?>
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled" >
 
                         <?php foreach ($categoryChildren as $_categoryChild) : ?>
                             <?php $_categoryChildModel = Mage::getModel('catalog/category')->load($_categoryChild->getId()); ?>
                             <?php $categoryGrandchildren = $_categoryChild->getChildren(); ?>
-                            <li class="">
+                            <li class="" >
                                 <?php
                                 $currentCategoryId === $_categoryChild->getId() ? $bold = "style=\"font-weight:bold\"" : $bold = '';
-                                echo '<a class="catanchor" href="' . $_categoryChildModel->getUrl() . '"' . $bold . '>' . $_categoryChild->getName() . '(' . $_categoryChildModel->getProductCollection()->count() . ')</a>';
+                                echo '<a  style="font-size: 14px;" class="catanchor" href="' . $_categoryChildModel->getUrl() . '"' . $bold . '>' . $_categoryChild->getName() . '(' . $_categoryChildModel->getProductCollection()->count() . ')</a>';
                                 ?>
                             </li>
                             <?php if ($categoryGrandchildren->count()) : ?>

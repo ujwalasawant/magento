@@ -26,7 +26,8 @@
 
 ?>
 <form id="loginForm" method="post" class="form-horizontal" action="<?php echo $this->getPostActionUrl() ?>">
-    <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+
+    <?php echo $this->getBlockHtml('formkey'); ?>
 <p class="text-center">
     <a href="" data-toggle="modal" data-target="#loginModal">Login</a>
 </p>

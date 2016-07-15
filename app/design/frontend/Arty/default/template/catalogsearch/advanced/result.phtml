@@ -42,7 +42,8 @@
             <?php if(@$searchCriterias[$side]): ?>
                 <ul>
                     <?php foreach($searchCriterias[$side] as $criteria): ?>
-                        <li><strong><?php echo $this->escapeHtml($this->helper('catalog')->__($criteria['name'])); ?>:</strong> <?php echo $this->escapeHtml($criteria['value']); ?></li>
+
+                        <li><strong><?php echo "hgfghf". $this->escapeHtml($this->helper('catalog')->__($criteria['name'])); ?>:</strong> <?php echo $this->escapeHtml($criteria['value']); ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>

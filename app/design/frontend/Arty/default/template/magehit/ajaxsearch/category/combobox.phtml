@@ -1,0 +1,6 @@
+<select name="category" class="ajaxsearch-category-select" style="height:<?php echo Mage::getStoreConfig('ajax_search/general/searchfieldheight'); ?>px !important;">
+    <option value=""><?php echo $this->__('All') ?></option>
+    <?php foreach ($this->getCategoryCollection() as $_category) : ?>
+        <option value="<?php echo $_category->getId() ?>"><?php echo $_category->getName() ?></option>
+    <?php endforeach; ?>
+</select>

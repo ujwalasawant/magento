@@ -1413,7 +1413,7 @@ html {
 }
 
 body {
-  font-family: avgardn, sans-serif;
+  font-family: Arial;
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
@@ -7063,6 +7063,11 @@ button.close {
 {
   margin-top: 15%;
 }
+.toplinksininline
+{
+  float:right; padding-left:4%
+}
+
 .hide {
   display: none !important;
 }
@@ -10827,6 +10832,29 @@ a.skip-link {
   .skip-link.skip-active span {
     color: inherit;
   }
+  .logo {
+    display: block;
+    float: left;
+
+    min-width: 100px;
+    min-height: 44px;
+    text-align: center;
+    padding: 0px;
+
+  }
+  .logo {
+    display: block;
+    float: left;
+    width: 140px;
+    min-width: 100px;
+    min-height: 30px;
+    text-align: center;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+  }
 }
 /* -------------------------------------------- *
  * Skip Link - Icon
@@ -11186,7 +11214,7 @@ a.skip-link {
   border: 0;
   background: none;
   background-image: url("../images/search%20-icon.jpg");
-  background-size: 30px;
+  background-size: 24px;
   background-repeat: no-repeat;
   background-position: 4px;
 }
@@ -11325,6 +11353,7 @@ a.skip-link {
     width: 50%;
     margin:0 0 0 15%;
   }
+
 }
 @media only screen and (max-width: 1023px) {
   .header-searchwidth {
@@ -11338,7 +11367,7 @@ a.skip-link {
   position: absolute;
   padding-top: 0;
   width: 90%;
- top:10px;
+ top:2px;
 }
 
 #search_mini_form label {
@@ -11388,7 +11417,7 @@ box-shadow: inset 1px 0px 10px -1px rgba(0,0,0,0.22);
 {
   text-indent: -9999px;
   position: absolute;
-  top: 25px;
+  top: 5px;
   right: 0;
   width: 40px;
   height: 40px;
@@ -11398,6 +11427,13 @@ box-shadow: inset 1px 0px 10px -1px rgba(0,0,0,0.22);
   background-size: 23px 23px;
   background-repeat: no-repeat;
 }
+
+.backbtnimg
+{
+  background-image: url("../images/backbtn.png");
+  background-repeat: no-repeat;
+}
+
 #search_mini_form .search-button:hover:before {
   opacity: 0.8;
 }

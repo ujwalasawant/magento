@@ -95,20 +95,18 @@
                                        <textarea class="themeborder textarea <?php echo $fieldRequiredClass; ?> <?php echo $fieldFrontendClass ;?>" cols="15" rows="2" title="<?php echo $this->__($frontEndLabel); ?>" name="<?php echo $attribute->getAttributeCode(); ?>" id="<?php echo $attribute->getAttributeCode(); ?>"><?php echo $fieldValue; ?></textarea>
                                      
                                    <?php elseif($attribute->getFrontendInput()== 'date'):?>
+                                   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+                                       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                                       <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+                                       <script>
+                                           $(document).ready(function() {
+                                               var attid=
+                                               $("#<?php echo $attribute->getAttributeCode(); ?>").datepicker();
+                                           });
+                                       </script>
                                     <input type="text"  class="themeborder statusW input-text <?php echo $fieldRequiredClass; ?> " title="<?php echo $this->__($frontEndLabel); ?>" value="<?php echo $this->helper('clarion_customerattribute/customerattribute')->getFormattedDate($fieldValue); ?>" id="<?php echo $attribute->getAttributeCode(); ?>" name="<?php echo $attribute->getAttributeCode(); ?>">
-                                    <img style="" title="Select Date" id="<?php echo $attribute->getAttributeCode(); ?>_trig" class="v-middle" alt="" src="<?php echo $this->getSkinUrl('images/clarion/customerattribute/grid-cal.gif') ?>">
-                                        <script type="text/javascript">
-                                        //&lt;![CDATA[
-                                            Calendar.setup({
-                                                inputField: "<?php echo $attribute->getAttributeCode(); ?>",
-                                                ifFormat: "%m-%d-%Y",
-                                                showsTime: false,
-                                                button: "<?php echo $attribute->getAttributeCode(); ?>_trig",
-                                                align: "Bl",
-                                                singleClick : true
-                                            });
-                                        //]]&gt;
-                                        </script>
+
                                      
                                     <?php elseif($attribute->getFrontendInput()== 'boolean'):?>
                                     <select class="themeborder"  id="<?php echo $attribute->getAttributeCode(); ?>" name="<?php echo $attribute->getAttributeCode(); ?>" title="<?php echo $this->__($frontEndLabel); ?>"<?php if ($attribute->getIsRequired()):?> class="themeborder validate-select required-entry "<?php endif; ?> >
